@@ -15,7 +15,7 @@ function four_mode_overlap(p1, p2, p3, p4, l1, l2, l3, l4, w1, w2, w3, w4)
     2π * sol.u
 end
 
-four_mode_overlap(0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1) ≈ 2 / √π
+@assert four_mode_overlap(0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1) ≈ 2 / √π
 ##
 p1s = 0:10
 p2s = 0:10
@@ -34,5 +34,39 @@ with_theme(theme_latexfonts()) do
     end
     Colorbar(fig[:, end + 1]; colorrange, colormap)
     save("Plots/covariance_entries.png", fig)
+    fig
+end
+##
+ps = 0:10
+ws = [√3 1; 1/√3 1/√5]
+titles = ["w=√3"  "w=1"; "w=1/√3"  "w=1/√5"]
+
+overlaps = [four_mode_overlap(p, p, 0, 0, 1, 1, 1, 1, w, w, 1, 1) for p in ps, w in ws]
+
+with_theme(theme_latexfonts()) do
+    fig = Figure(size=(800, 600))
+    for n ∈ axes(overlaps, 3), m ∈ axes(overlaps, 2)
+        ax = Axis(fig[m, n], xlabel="p", ylabel=L"R_{pp}", title=titles[m, n], xticks=ps)
+        ylims!(ax, 0, maximum(overlaps) * 1.05)
+        barplot!(ax, ps, overlaps[:, m, n])
+    end
+    save("Plots/covariance_entries_diagonal.png", fig)
+    fig
+end
+##
+ps = 0:10
+ws = [√3 1; 1/√3 1/√5]
+titles = ["w=√3"  "w=1"; "w=1/√3"  "w=1/√5"]
+
+overlaps = [four_mode_overlap(p, p+1, 0, 0, 1, 1, 1, 1, w, w, 1, 1) for p in ps, w in ws]
+
+with_theme(theme_latexfonts()) do
+    fig = Figure(size=(800, 600))
+    for n ∈ axes(overlaps, 3), m ∈ axes(overlaps, 2)
+        ax = Axis(fig[m, n], xlabel="p", ylabel=L"R_{p,p+1}", title=titles[m, n], xticks=ps)
+        ylims!(ax, 0, maximum(overlaps) * 1.05)
+        barplot!(ax, ps, overlaps[:, m, n])
+    end
+    save("Plots/covariance_entries_off_diagonal.png", fig)
     fig
 end
