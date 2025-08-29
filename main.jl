@@ -20,9 +20,9 @@ lengths = (L, L)
 N = 256
 Δr = L / N
 ΔV = Δr^2
-rs = StepRangeLen(0, Δr, N)
+rs = StepRangeLen(0, Δr, N) .- (N ÷ 2) * Δr
 
-_u0 = lg(rs .- N * Δr / 2, rs .- N * Δr / 2, l=1) |> cu
+_u0 = lg(rs, rs, l=1)
 u0 = stack(_u0 for _ ∈ 1:10^2)
 
 ħ = 1f0
@@ -35,7 +35,7 @@ param = (; L, N, Δr, ΔV, ħ, m, g)
 
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
 alg = StrangSplitting()
-tspan = (0, 0.5f0)
+tspan = (0, 1f0)
 nsaves = 1
 dt = 1f-2
 
@@ -44,6 +44,6 @@ ts, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
 
 visualize(abs2.(sol[1][:, :, 1]))
 
-I = dropdims(mean(map((x, y) -> real(x .* conj(y)), sol[1], sol[2]), dims=3), dims=(3, 4))
+I = dropdims(mean(map((x, y) -> real(x .* y), sol[1], sol[2]), dims=3), dims=(3, 4))
 
 visualize(I)
