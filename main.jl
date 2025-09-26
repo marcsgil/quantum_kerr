@@ -1,43 +1,45 @@
 using GeneralizedGrossPitaevskii, StructuredLight, CairoMakie, CUDA
 
 function dispersion(k, param)
-    factor = param.ħ / (2 * param.m)
-    @SVector [factor * (k[1]^2 + k[2]^2), -factor * (k[1]^2 + k[2]^2)]
+    factor = (k[1]^2 + k[2]^2) / (2 * param.k)
+    @SVector [factor, -factor]
 end
 
 function nonlinearity(u, param)
-    factor = param.g * u[1] * u[2] / param.ħ / param.ΔV
+    factor = param.G * u[1] * u[2]
     @SVector [factor, -factor]
 end
 
 function position_noise_func(u, r, param)
-    factor = √(im * param.g / param.ħ)
+    factor = √(im * param.G)
     @SVector [factor * u[1], -conj(factor) * u[2]]
 end
 
-L = 10f0
+L = 5f-3
 lengths = (L, L)
 N = 256
-Δr = L / N
-ΔV = Δr^2
-rs = StepRangeLen(0, Δr, N) .- (N ÷ 2) * Δr
+dr = L / N
+dA = dr^2
+rs = LinRange(-L / 2, L / 2 - dr, N)
 
-_u0 = lg(rs, rs, l=1)
+_u0 = lg(rs, rs, l=1, w = 1f-3)
 u0 = stack(_u0 for _ ∈ 1:10^2)
 
-ħ = 1f0
-m = 1f0
-g = -1f-2
+λ = 633f-9
+k = 2π / λ
+g = -1f-5
+
+G = g / k / dr^2
 
 U0 = (u0, conj(u0))
 noise_prototype = similar.(U0, Float32)
-param = (; L, N, Δr, ΔV, ħ, m, g)
+param = (; k, G)
 
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
 alg = StrangSplitting()
-tspan = (0, 1f0)
+tspan = (0, 4f-2)
 nsaves = 1
-dt = 1f-2
+dt = 5f-3
 
 
 ts, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
