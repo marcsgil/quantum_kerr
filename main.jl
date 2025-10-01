@@ -40,10 +40,15 @@ prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_no
 alg = StrangSplitting()
 tspan = (0, 2f-2)
 nsaves = 1
-dt = 2f-4
+dt = 2f-5
 
 
 ts, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
+
+
+U0[1]
+
+sol[1]
 ##
 save_animation(abs2.(sol[1]), "test.mp4")
 ##
@@ -53,8 +58,33 @@ intensity = dropdims(mean(map((x, y) -> real(x .* y), sol[1], sol[2]), dims=3), 
 
 visualize(intensity)
 ##
+_u0 = lg(rs, rs, l=1, w=1f-3)
+u0 = stack(_u0 for _ ∈ 1:128) |> cu
+U0 = (u0, conj(u0))
+prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
+
 v = lg(rs, rs, l=1, w=1f-3) |> cu
+v1 = lg(rs, rs, l=0, w=1f-3) |> cu
+v2 = lg(rs, rs, l=2, w=1f-3) |> cu
 
-projection(v, v, dA)
+observables = (
+    (α, β) -> expval_annihilation(α, β, v, dA),
+    (α, β) -> correlation(α, β, v1, v2, dA)
+)
 
-correlation(U0..., v, v, dA)
+ts, observables_vals = step_evolution(prob, 2f-2, observables; dt, nsaves=128)
+
+with_theme(theme_latexfonts()) do 
+    fig = Figure()
+    ax = Axis(fig[1, 1])
+    lines!(ax, ts, real.(observables_vals[1, :]), label="Re")
+    lines!(ax, ts, imag.(observables_vals[1, :]), label="Im")
+    fig
+end
+
+with_theme(theme_latexfonts()) do 
+    fig = Figure()
+    ax = Axis(fig[1, 1])
+    lines!(ax, ts, real.(observables_vals[2, :]), label="Re")
+    fig
+end
