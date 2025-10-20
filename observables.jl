@@ -18,13 +18,13 @@ function expval_creation_annihilation(α, β, v1, v2, dA)
     mapreduce((α, β) -> (v1 ⋅ α) * (conjv2 ⋅ β) * dA^2, +, eachslice(α, dims=3), eachslice(β, dims=3)) / size(α, 3)
 end
 
-function expval_creation_creation(α, β, v1, v2, dA)
+function expval_annihilation_annihilation(α, β, v1, v2, dA)
     mapreduce(α -> (v1 ⋅ α) * (v2 ⋅ α) * dA^2, +, eachslice(α, dims=3)) / size(α, 3)
 end
 
 function correlation(α, β, v1, v2, dA)
     projection(v1, v2, dA) + real(
-        expval_creation_creation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_annihilation(α, β, v2, dA)
+        expval_annihilation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_annihilation(α, β, v2, dA)
         +
         expval_creation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_creation(α, β, v2, dA)
     )
