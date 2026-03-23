@@ -2,3 +2,13 @@ test.mp4
 Plots/
 .vscode/
 Manifest.toml
+
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+mainNotes.bib

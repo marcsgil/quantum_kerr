@@ -23,7 +23,7 @@ function expval_annihilation_annihilation(α, β, v1, v2, dA)
 end
 
 function correlation(α, β, v1, v2, dA)
-    projection(v1, v2, dA) + real(
+    projection(v1, v2, dA) / 2 + real(
         expval_annihilation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_annihilation(α, β, v2, dA)
         +
         expval_creation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_creation(α, β, v2, dA)

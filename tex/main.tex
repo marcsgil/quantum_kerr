@@ -1,0 +1,321 @@
+\documentclass[%
+ reprint,
+ amsmath,amssymb,
+ aps,
+pra,
+onecolumn,
+]{revtex4-2}
+
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{physics}
+\usepackage{hyperref}% add hypertext capabilities
+
+
+\begin{document}
+
+
+\title{Quantum Kerr OAM}
+
+\author{Ann Author}
+ \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
+\author{Second Author}%
+ \email{Second.Author@institution.edu}
+\affiliation{%
+ Authors' institution and/or address\\
+ This line break forced with \textbackslash\textbackslash
+}%
+
+\collaboration{MUSO Collaboration}%\noaffiliation
+
+\author{Charlie Author}
+ \homepage{http://www.Second.institution.edu/~Charlie.Author}
+\affiliation{
+ Second institution and/or address\\
+ This line break forced% with \\
+}%
+\affiliation{
+ Third institution, the second for Charlie Author
+}%
+\author{Delta Author}
+\affiliation{%
+ Authors' institution and/or address\\
+ This line break forced with \textbackslash\textbackslash
+}%
+
+\collaboration{CLEO Collaboration}%\noaffiliation
+
+\date{\today}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+\begin{abstract}
+An article usually includes an abstract, a concise summary of the work
+covered at length in the main body of the article. 
+\end{abstract}
+
+%\keywords{Suggested keywords}%Use showkeys class option if keyword
+                              %display desired
+\maketitle
+
+%\tableofcontents
+
+\section{Theory}
+
+Consider a bosonic quantum field $\mathcal{E}(\mathbf{r})$ satisfying the commutation relations
+\begin{equation}
+    \label{eq:commutation_relations}
+    \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)} = \delta^{(2)}(\mathbf{r}_1 - \mathbf{r}_2).
+\end{equation}
+In the above equation and in what follows, $\mathbf{r} = (x, y)$ is the transverse coordinate. We will assume that the field is propagating along the $z$ direction, and satisfies the Heisenberg equation of motion
+\begin{equation}
+    \label{eq:heisenberg_equation}
+    2ik \partial_z \mathcal{E}(\mathbf{r}, z) + \nabla^2 \mathcal{E}(\mathbf{r}, z) = -g \mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E}^2 (\mathbf{r}, z).
+\end{equation}
+Let us decompose $\mathcal{E} = \mathcal{E}_0 + \delta\mathcal{E}$ where $\mathcal{E}_0$ is the solution of
+\begin{equation}
+    2ik \partial_z \mathcal{E}_0(\mathbf{r}, z) + \nabla^2 \mathcal{E}_0(\mathbf{r}, z) = 0, \ \ \ \mathcal{E}_0(\mathbf{r}, 0) = \mathcal{E}(\mathbf{r}, 0).
+\end{equation}
+Let $u$ be a solution of the paraxial wave equation $2ik \partial_z u(\mathbf{r}, z) + \nabla^2 u(\mathbf{r}, z) = 0$. Then, the anihilation operator corresponding to mode $u$ is given by
+\begin{equation}
+    a_u(z) = \int u^*(\mathbf{r}, z) \mathcal{E}(\mathbf{r}, z) d\mathbf{r} = a_{u,0} + \delta a_u(z)
+\end{equation}
+where 
+\begin{equation}
+    a_{u,0} = \int u^*(\mathbf{r}, z) \mathcal{E}_0(\mathbf{r}, z) d\mathbf{r}
+\end{equation}
+is independent of $z$ (take a $z$ derivative, use de equations of motion and integrate by parts) and
+\begin{equation}
+    \delta a_u(z) = \int u^*(\mathbf{r}, z) \delta\mathcal{E}(\mathbf{r}, z) d\mathbf{r}    
+\end{equation}
+
+Our initial state will be a coherent one:
+\begin{equation}
+    \ket{\alpha, u} = D(\alpha, u) \ket{0} = \exp\left(\alpha a_{u, 0}^\dagger - \alpha^* a_{u, 0}\right) \ket{0}.
+\end{equation}
+This state is an eigenvector of the free field:
+\begin{equation}
+    \mathcal{E}_0(\mathbf{r}, z) \ket{\alpha, u} = \alpha u(\mathbf{r}, z) \ket{\alpha, u}
+\end{equation}
+
+The variation $\delta \mathcal{E}$ satisfies
+\begin{equation}
+    2ik \partial_z \delta \mathcal{E}(\mathbf{r}, z) + \nabla^2 \delta\mathcal{E}(\mathbf{r}, z) = -g \mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E}^2 (\mathbf{r}, z).
+\end{equation}
+Evaluating this at $z=0$ gives us
+\begin{equation}
+    2ik \partial_z \delta \mathcal{E}(\mathbf{r}, 0) = -g \mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0)
+\end{equation}
+from which we obtain the Taylor expansion
+\begin{equation}
+    \delta \mathcal{E}(\mathbf{r}, z) \approx \frac{igz}{2k} \mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0) \approx \frac{igz}{2k}\mathcal{E}_0^\dagger(\mathbf{r}, z) \mathcal{E}^2_0 (\mathbf{r}, z)
+\end{equation}
+
+For the complete field we then have
+\begin{equation}
+    \mathcal{E}(\mathbf{r}, z) \approx \mathcal{E}_0(\mathbf{r}, z) + \frac{igz}{2k}\mathcal{E}_0^\dagger(\mathbf{r}, z) \mathcal{E}^2_0 (\mathbf{r}, z)
+\end{equation}
+This expression will be the basis of our further developments.
+
+\subsection{Expectation value of field}
+
+Taking expectation values, we arrive at
+\begin{equation}
+    \expval{\mathcal{E}(\mathbf{r}, z)} \approx \alpha u(\mathbf{r}, z) +  \frac{igz \abs{\alpha}^2 \alpha}{2k} \abs{u(\mathbf{r}, z)}^2 u(\mathbf{r}, z) .
+\end{equation}
+The expectation value of the annihilation operator $a_v$ corresponding to a spatial mode $v$ is then
+\begin{equation}
+    \label{eq:expval_anihilation}
+    \expval{a_v} = \alpha \braket{v}{u}  + \frac{igz \abs{\alpha}^2 \alpha}{2k} \braket{v, u}{u, u}
+\end{equation}
+In the above expression we have introduced the first spatial overlap
+\begin{equation}
+    \braket{v}{u} = \int v^*(\mathbf{r},z) u(\mathbf{r},z) d\mathbf{r}
+\end{equation}
+and the second spatial overlap
+\begin{equation}
+    \braket{v_1, v_2}{u_1, u_2} = \int v_1^*(\mathbf{r},z) v_2^*(\mathbf{r},z) u_1(\mathbf{r},z) u_2(\mathbf{r},z) d\mathbf{r} .
+\end{equation}
+
+When $u = u_{0l}$ is a Laguerre-Gaussian mode with radial order $p=0$ and topological charge $l$, we have that
+\begin{equation}
+    \abs{u_{0l}(\mathbf{r}, z)} u_{0l}^2(\mathbf{r}, z) = \sum_{q=0}^{\abs{l}} C_{ql} \overline{u}_{ql}(\mathbf{r}, z)
+\end{equation}
+where $\overline{u}_{ql}$ are Laguerre-Gaussian modes with a reduced waist. Therefore, one may write
+\begin{equation}
+    \expval{a_v} = \alpha \braket{v}{u_{0,l}}  + \frac{igz \abs{\alpha}^2 \alpha}{2k} \sum_{q=0}^{\abs{l}} C_{ql} \braket{v}{\overline{u}_{ql}}
+\end{equation}
+
+In particular, when $v = \overline{u}_{ql}$, we the have that
+\begin{equation}
+    \expval{a_{\overline{u}_{ql}}} = \begin{cases}
+        \alpha \braket{\overline{u}_{ql}}{u_{0,l}}+ \dfrac{igz \abs{\alpha}^2 \alpha C_{ql}}{2k} & q \le \abs{l} \\
+        \alpha \braket{\overline{u}_{ql}}{u_{0,l}}  & q > \abs{l}
+    \end{cases} .
+\end{equation}
+
+\subsection{Expectation value of number}
+
+The product of the field at two points is
+\begin{equation}
+    \mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z) \approx \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \delta\mathcal{E}(\mathbf{r}_2, z) + \delta\mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z)
+\end{equation}
+where we have only kept terms linear in $\delta \mathcal{E}$.
+
+Close to $z = 0$, we have that
+\begin{equation}
+    \begin{aligned}
+        \mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z) \approx \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \frac{igz}{2k} \left[ \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}_0^\dagger(\mathbf{r}_2, z) \mathcal{E}^2_0 (\mathbf{r}_2, z) - \mathcal{E}_0^\dagger(\mathbf{r}_1, z)^2 \mathcal{E}_0 (\mathbf{r}_1, z) \mathcal{E}_0 (\mathbf{r}_2, z) \right]
+    \end{aligned}
+\end{equation}
+Evaluating this at our initial state gives us
+\begin{equation}
+    \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} \approx \abs{\alpha}^2 u^*(\mathbf{r}_1,z) u(\mathbf{r}_2,z)\left\{ 1 + \frac{igz\abs{\alpha}^2}{2k} \left[ \abs{u(\mathbf{r}_2, z)}^2 - \abs{u(\mathbf{r}_1, z)}^2 \right]   \right\}
+\end{equation}
+
+The number operator of mode $v$ can be written in terms of this:
+\begin{equation}
+    n_v = a^\dagger_v a_v = \int v(\mathbf{r}_1) v^*(\mathbf{r}_2) \mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z) d\mathbf{r}_1 d\mathbf{r}_ 2 
+\end{equation}
+The expectation value is then
+\begin{equation}
+    \expval{n_v} \approx \abs{\alpha \braket{v}{u}}^2 + \frac{gz \abs{\alpha}^4}{k} \Im \braket{v}{u} \braket{u, u}{u,v} \approx \abs{\expval{a_v}}^2.
+\end{equation}
+When both $u$ and $v$ are arbitrary Laguerre-Gaussian modes (any $p,l,w$), we have that  $\Im \braket{v}{u} \braket{u, u}{u,v} = 0$, so there is no first order correction to the occupation number.
+
+\subsection{Quadratures}
+
+Let us define the quadrature associated to the spatial mode $v$ as
+\begin{equation}
+    \begin{aligned}
+        X_v &= \frac{1}{\sqrt{2}} \int_{\mathbb{R}^2} v^*(\mathbf{r}) \mathcal{E}(\mathbf{r}) + v(\mathbf{r})\mathcal{E}^\dagger(\mathbf{r}) d\mathbf{r} \\ &= \frac{a_v + a^\dagger_v}{\sqrt{2}}
+    \end{aligned}
+\end{equation}
+We then have the commutation relation
+\begin{equation}
+    \comm{X_{v_1}}{X_{v_2}} = i \Im \braket{v_1}{v_2},
+\end{equation}
+which leads to the uncertainty principle
+\begin{equation}
+    \Delta X^2_{v_1} \Delta X^2_{v_2} \ge \frac{\abs{\Im \braket{v_1}{v_2}}^2}{4}.
+\end{equation}
+One could also introduce the complementary quadrature $P(v) = X(-iv)$ so that
+\begin{equation}
+    \comm{X_{v_1}}{P_{v_2}} = i \Re \braket{v_1}{v_2}
+\end{equation}
+and
+\begin{equation}
+    \Delta X^2_{v_1} \Delta P^2_{v_2} \ge \frac{\abs{\Re \braket{v_1}{v_2}}^2}{4}.
+\end{equation}
+
+We are interested in observables of the form
+\begin{equation}
+    \label{eq:quadrature_correlation}
+    C(v_1, v_2) = \expval{X_{v_1}X_{v_2}} - \expval{X_{v_1}}\expval{X_{v_2}} = \frac{\braket{v_1}{v_2}}{2} + \Re \left[ \expval{a_{v_1}a_{v_2}} - \expval{a_{v_1}} \expval{a_{v_2}} + \expval{a_{v_2}^\dagger a_{v_1}} - \expval{a_{v_2}^\dagger} \expval{a_{v_1}}\right] .
+\end{equation}
+
+For the Kerr system, we have 
+\begin{equation}
+    \begin{aligned}
+        \expval{a_{v_2}^\dagger a_{v_1}} &= \int v_2(\mathbf{r}_2) v_1^*(\mathbf{r}_1) \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z) \mathcal{E}(\mathbf{r}_1, z)} d\mathbf{r}_1 d\mathbf{r}_2 \\ &\approx \abs{\alpha}^2 \braket{v_1}{u}\braket{u}{v_2} + \frac{gz \abs{\alpha}^4}{k}\Im \braket{v_1}{u} \braket{u, u}{u,v_2} \\ &\approx \expval{a_{v_2}^\dagger} \expval{a_{v_1}}
+    \end{aligned}
+\end{equation}
+So the last two terms in \eqref{eq:quadrature_correlation} do not contribute. On the other hand, we have that
+\begin{equation}
+    \begin{aligned}
+        \mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z) &\approx \mathcal{E}_0(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \mathcal{E}_0(\mathbf{r}_1, z) \delta\mathcal{E}(\mathbf{r}_2, z) + \delta\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) \\ &\approx \mathcal{E}_0(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \frac{igz}{2k} \left[ \mathcal{E}_0(\mathbf{r}_1, z)\mathcal{E}_0^\dagger(\mathbf{r}_2, z) \mathcal{E}^2_0 (\mathbf{r}_2, z) + \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}^2_0 (\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) \right] \\ &= \mathcal{E}_0(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \frac{igz}{2k} \left[ \mathcal{E}_0^\dagger(\mathbf{r}_2, z) \mathcal{E}_0(\mathbf{r}_1, z)\mathcal{E}^2_0 (\mathbf{r}_2, z) + \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}^2_0 (\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \delta(\mathbf{r}_1 - \mathbf{r}_2) \mathcal{E}^2_0 (\mathbf{r}_2, z) \right]
+    \end{aligned}
+\end{equation}
+
+The appearance of the delta function here is important, because now
+\begin{equation}
+    \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} \approx \alpha^2u(\mathbf{r}_1,z) u(\mathbf{r}_2,z) \left[ 1 + \frac{igz \abs{\alpha}^2}{2k} \left[ \abs{u(\mathbf{r}_2, z)}^2 + \abs{u(\mathbf{r}_1, z)}^2 \right] \right] + \frac{igz \alpha^2}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) u^2 (\mathbf{r}_2, z) 
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        \expval{a_{v_1} a_{v_2}} &= \int v^*_1(\mathbf{r}_1) v_2^*(\mathbf{r}_2) \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} d\mathbf{r}_1 d\mathbf{r}_2 \\ &\approx \alpha^2 \braket{v_1}{u}\braket{v_2}{v_1} + \frac{igz \abs{\alpha}^2 \alpha^2}{2k} \left( \braket{v_1}{u} \braket{v_2, u}{u,u} + \braket{v_2}{u} \braket{v_1, u}{u,u} \right) + \frac{igz \alpha^2}{2k} \braket{v_1,v_2}{u,u} \\ &\approx \expval{a_{v_2}} \expval{a_{v_1}} + \frac{igz \alpha^2}{2k} \braket{v_1,v_2}{u,u}
+    \end{aligned}
+\end{equation}
+
+We then finally get that
+\begin{equation}
+    C(v_1, v_2) \approx \frac{\braket{v_1}{v_2}}{2} - \frac{gz\alpha^2}{2k}\Im \braket{v_1,v_2}{u,u},
+\end{equation}
+where we have chosen to measure phases with respect to the input state ($\Im \alpha = 0$).
+
+Let us the calculate the matrix $C_{jk} = \expval{Z_jZ_k} - \expval{Z_j}\expval{Z_k}$ with $Z = X_{v_1}, P_{v_1},X_{v_2},P_{v_2}$, in this order. We have that
+\begin{equation}
+    C = \begin{pmatrix}
+        C(v_1, v_1) & C(v_1, -iv_1) & C(v_1, v_2) & C(v_1, -iv_2) \\
+        C(-iv_1, v_1) & C(-iv_1, -iv_1) & C(-iv_1, v_2) & C(-iv_1, -iv_2) \\
+        C(v_2, v_1) & C(v_2, -iv_1) & C(v_2, v_2) & C(v_2, -iv_2) \\
+        C(-iv_2, v_1) & C(-iv_2, -iv_1) & C(-iv_2, v_2) & C(-iv_2, -iv_2) \\
+    \end{pmatrix}
+\end{equation}
+We now assume that $\braket{v_1}{v_2} = 0$. We then have $C = C_0 + \delta C$ where
+\begin{equation}
+    C_0 = \frac{1}{2}\begin{pmatrix}
+        1 & -i & 0 & 0 \\
+        i & 1 & 0 & 0 \\
+        0 & 0 & 1 & -i \\
+        0 & 0 & i & 1 \\
+    \end{pmatrix}; \ \ \ \delta C = \frac{gz\alpha^2}{2k}\begin{pmatrix}
+        -\Im \braket{v_1,v_1}{u,u} & -\Re \braket{v_1,v_1}{u,u} & -\Im \braket{v_1,v_2}{u,u} & -\Re \braket{v_1,v_2}{u,u} \\
+        -\Re \braket{v_1,v_1}{u,u} & \Im \braket{v_1,v_1}{u,u} & - \Re \braket{v_1,v_2}{u,u} & \Im \braket{v_1,v_2}{u,u} \\
+        -\Im \braket{v_1,v_2}{u,u} & -\Re \braket{v_1,v_2}{u,u} & -\Im \braket{v_2,v_2}{u,u} & -\Re \braket{v_1,v_1}{u,u}\\
+        -\Re \braket{v_1,v_2}{u,u} & \Im \braket{v_1,v_2}{u,u} & -\Re \braket{v_1,v_1}{u,u} & \Im \braket{v_2,v_2}{u,u} \\
+    \end{pmatrix}
+\end{equation}
+
+At this point, it becomes clear that the overlaps of the form $\braket{v_1,v_2}{u,u}$ are the ones that dominate this sort of process. On the other hand, the generation of radial orders comes from the properties of the different overlap $\braket{v,u}{u,u}$, which appears in \eqref{eq:expval_anihilation}. It is therefore hard to see any special implication of the selection rules here.
+
+Let us restrict our attention to vortices: $u(\mathbf{r}) = u_r(r)e^{il\phi}; v_j(\mathbf{r}) = v_{j,r}(r)e^{il_j\phi + \pi/4}$ where the radial functions are real valued. We further assume that $l_1 + l_2 = 2l$. Then, all the real terms in $\delta C$ disappear and we get
+\begin{equation}
+    \delta C = \frac{gz\alpha^2}{2k}\begin{pmatrix}
+        -R_{11} \delta_{l_1,l_2} & 0 & -R_{12} & 0 \\
+        -0 & R_{11} \delta_{l_1,l_2} & 0 & R_{12}\\
+        -R_{12} & 0 & -R_{22} \delta_{l_1,l_2} & 0\\
+        0 & R_{12} & 0 & R_{22} \delta_{l_1,l_2} \\
+    \end{pmatrix}, \ \ \ R_{jk} = 2\pi \int_0^{\infty} v_{r,j}(r) v_{r, k}(r) u^2_r(r) dr
+\end{equation}
+
+When $l_1 \ne l_2$, the variance in each mode does not change, but we see correlations between the quadratures of different modes induced by $R_{12}$. When $l_1 = l_2$, we also see maximum squeezing along $X_{v_j}$ and antisqueezing along $P_{v_j}$.
+
+The EPR correlations are given by
+\begin{equation}
+    \expval{\Delta (X_{v_1} \pm X_{v_2})^2} + \expval{\Delta(P_{v_1} \mp P_{v_2})^2} = 2\mp \frac{gz\alpha^2}{k} R_{12}
+\end{equation}
+Then, the state is entangled according to the Duan criterion \cite{duan2000inseparability}.
+
+\section{Numerical Considerations}
+
+Note that, according to \eqref{eq:commutation_relations}, the field $\mathcal{E}(\mathbf{r})$ has dimensions of $1/\sqrt{\text{area}}$. Therefore, by dimensional analysis on eq. \eqref{eq:heisenberg_equation}, we have that $g$ is dimensionless. 
+
+In order to put the equation in a more convenient form, we introduce the dimensionless coordinate $\tilde{\mathbf{r}} = \mathbf{r}/w_0$ where $w_0$ is the waist of the input beam. We also introduce the dimensionless propagation distance $\tilde{z} = z/z_R$ where $z_R = kw_0^2/2$ is the Rayleigh range. Finally, we introduce the rescaled field $\tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = \sqrt{\Delta A} \mathcal{E}(\mathbf{r}, z)$, where $\Delta A$ is the area of a pixel in the numerical grid. In terms of these variables, the commutation relations read
+\begin{equation}
+    \comm{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})}{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})^\dagger} \approx \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'},
+\end{equation}
+while the equation of motion reads
+\begin{equation}
+    i \partial_{\tilde{z}} \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = - \frac{1}{4} \tilde{\nabla}^2 \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) -\frac{g}{4 \Delta \tilde{A}} \tilde{\mathcal{E}}^\dagger(\tilde{\mathbf{r}}, \tilde{z}) \tilde{\mathcal{E}}^2 (\tilde{\mathbf{r}}, \tilde{z})
+\end{equation}
+where $\Delta \tilde{A} = \Delta A/w_0^2$ is the area of a pixel in the rescaled coordinates.
+
+In the positive $P$ representation, the field $\tilde{\mathcal{E}}$ is represented by two independent complex stochastic fields $\psi_1$ and $\psi_2$ satisfying the stochastic equations (compare with \cite{PhysRevLett.98.120402})
+\begin{equation}
+    \begin{aligned}
+        i \partial_{\tilde{z}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_1(\tilde{\mathbf{r}}, \tilde{z}) -\frac{g}{4 \Delta \tilde{A}} \psi_2(\tilde{\mathbf{r  }}, \tilde{z}) \psi_1^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{\frac{ig}{4\Delta \tilde{A}}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \xi_1(\tilde{\mathbf{r}}, \tilde{z}) \\
+        -i \partial_{\tilde{z}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_2(\tilde{\mathbf{r}}, \tilde{z}) -\frac{g}{4 \Delta \tilde{A}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \psi_2^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{\frac{ig}{4\Delta \tilde{A}}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) \xi_2(\tilde{\mathbf{r}}, \tilde{z})
+    \end{aligned}
+\end{equation}
+where $\xi_1$ and $\xi_2$ are independent real Gaussian white noises with zero mean and correlations
+\begin{equation}
+    \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = 0, \ \ \ \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = \delta_{jk} \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'} \delta_{\tilde{z}, \tilde{z}'}
+\end{equation}
+For a coherent initial state in the mode $u$, we have that $\psi_1(\tilde{\mathbf{r}}, 0) = \alpha u(\tilde{\mathbf{r}}, 0)$ and $\psi_2(\tilde{\mathbf{r}}, 0) = \alpha^* u^*(\tilde{\mathbf{r}}, 0)$. 
+
+\bibliography{refs}% Produces the bibliography via BibTeX.
+
+\end{document}
+%
+% ****** End of file apssamp.tex ******
