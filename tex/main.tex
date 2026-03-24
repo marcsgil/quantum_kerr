@@ -211,7 +211,7 @@ and
 We are interested in observables of the form
 \begin{equation}
     \label{eq:quadrature_correlation}
-    C(v_1, v_2) = \expval{X_{v_1}X_{v_2}} - \expval{X_{v_1}}\expval{X_{v_2}} = \frac{\braket{v_1}{v_2}}{2} + \Re \left[ \expval{a_{v_1}a_{v_2}} - \expval{a_{v_1}} \expval{a_{v_2}} + \expval{a_{v_2}^\dagger a_{v_1}} - \expval{a_{v_2}^\dagger} \expval{a_{v_1}}\right] .
+    C(v_1, v_2) = \frac{1}{2}\expval{\{X_{v_1},X_{v_2}\}} - \expval{X_{v_1}}\expval{X_{v_2}} = \Re \left[\frac{\braket{v_1}{v_2}}{2} +  \expval{a_{v_1}a_{v_2}} - \expval{a_{v_1}} \expval{a_{v_2}} + \expval{a_{v_2}^\dagger a_{v_1}} - \expval{a_{v_2}^\dagger} \expval{a_{v_1}}\right] .
 \end{equation}
 
 For the Kerr system, we have 
@@ -239,11 +239,11 @@ The appearance of the delta function here is important, because now
 
 We then finally get that
 \begin{equation}
-    C(v_1, v_2) \approx \frac{\braket{v_1}{v_2}}{2} - \frac{gz\alpha^2}{2k}\Im \braket{v_1,v_2}{u,u},
+    C(v_1, v_2) \approx \Re \frac{\braket{v_1}{v_2}}{2} - \frac{gz\alpha^2}{2k}\Im \braket{v_1,v_2}{u,u},
 \end{equation}
 where we have chosen to measure phases with respect to the input state ($\Im \alpha = 0$).
 
-Let us the calculate the matrix $C_{jk} = \expval{Z_jZ_k} - \expval{Z_j}\expval{Z_k}$ with $Z = X_{v_1}, P_{v_1},X_{v_2},P_{v_2}$, in this order. We have that
+Let us the calculate the matrix $C_{jk} = \frac{1}{2}\expval{\{Z_j,Z_k\}} - \expval{Z_j}\expval{Z_k}$ with $Z = X_{v_1}, P_{v_1},X_{v_2},P_{v_2}$, in this order. We have that
 \begin{equation}
     C = \begin{pmatrix}
         C(v_1, v_1) & C(v_1, -iv_1) & C(v_1, v_2) & C(v_1, -iv_2) \\
@@ -255,10 +255,10 @@ Let us the calculate the matrix $C_{jk} = \expval{Z_jZ_k} - \expval{Z_j}\expval{
 We now assume that $\braket{v_1}{v_2} = 0$. We then have $C = C_0 + \delta C$ where
 \begin{equation}
     C_0 = \frac{1}{2}\begin{pmatrix}
-        1 & -i & 0 & 0 \\
-        i & 1 & 0 & 0 \\
-        0 & 0 & 1 & -i \\
-        0 & 0 & i & 1 \\
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
     \end{pmatrix}; \ \ \ \delta C = \frac{gz\alpha^2}{2k}\begin{pmatrix}
         -\Im \braket{v_1,v_1}{u,u} & -\Re \braket{v_1,v_1}{u,u} & -\Im \braket{v_1,v_2}{u,u} & -\Re \braket{v_1,v_2}{u,u} \\
         -\Re \braket{v_1,v_1}{u,u} & \Im \braket{v_1,v_1}{u,u} & - \Re \braket{v_1,v_2}{u,u} & \Im \braket{v_1,v_2}{u,u} \\

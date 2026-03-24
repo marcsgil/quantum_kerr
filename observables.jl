@@ -23,10 +23,10 @@ function expval_annihilation_annihilation(α, β, v1, v2, dA)
 end
 
 function correlation(α, β, v1, v2, dA)
-    projection(v1, v2, dA) / 2 + real(
-        expval_annihilation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_annihilation(α, β, v2, dA)
-        +
-        expval_creation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_creation(α, β, v2, dA)
+    real(projection(v1, v2, dA) / 2 +
+         expval_annihilation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_annihilation(α, β, v2, dA)
+         +
+         expval_creation_annihilation(α, β, v1, v2, dA) - expval_annihilation(α, β, v1, dA) * expval_creation(α, β, v2, dA)
     )
 end
 
@@ -35,7 +35,7 @@ function step_evolution(prob::GrossPitaevskiiProblem, tmax, observables; dt, nsa
 
     ΔT = tmax / nsaves
     ts = (1:nsaves) .* ΔT
-    observables_vals = Matrix{ComplexF64}(undef, length(observables), nsaves + 1)
+    observables_vals = Matrix{eltype(dt)}(undef, length(observables), nsaves + 1)
 
     for (j, obs) in enumerate(observables)
         observables_vals[j, 1] = obs(prob.u0...)
@@ -49,10 +49,24 @@ function step_evolution(prob::GrossPitaevskiiProblem, tmax, observables; dt, nsa
             x_old .= x_new
         end
 
-        for (j, obs) in enumerate(observables)
-            observables_vals[j, i+1] = obs(sol...)
-        end
+        # for (j, obs) in enumerate(observables)
+        #     observables_vals[j, i+1] = obs(sol...)
+        # end
+
+        observables_vals[:, i+1] .= map(obs -> obs(sol...), observables)
     end
 
     (0:nsaves) .* ΔT, observables_vals
+end
+
+function duan_criterion(X1_2, X1P1, P1_2, X2_2, X2P2, P2_2, sign)
+    @. X1_2 + 2 * sign * X1P1 + P1_2 + X2_2 - 2 * sign * X2P2 + P2_2
+end
+
+function diagonalize_correlation(X2, P2, XP)
+    λ₊ = @. (X2 + P2) / 2 + sqrt(((X2 - P2) / 2)^2 + XP^2)
+    λ₋ = @. (X2 + P2) / 2 - sqrt(((X2 - P2) / 2)^2 + XP^2)
+    θ = @. atan(λ₋ - X2, XP)
+
+    λ₊, λ₋, θ
 end
