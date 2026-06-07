@@ -16,17 +16,17 @@ function position_noise_func(u, r, param)
     @SVector [factor * u[1], -conj(factor) * u[2]]
 end
 
-L = 8f0
+L = 8e0
 lengths = (L, L)
 N = 256
 dr = L / N
 dA = dr^2
 rs = LinRange(-L / 2, L / 2 - dr, N)
-α = 10f0
+α = 10e0
 
-u0 = lg(rs, rs, l=0) |> cu
+u0 = lg(rs, rs, l=0) |> CuArray
 
-g_eff = 4f-3
+g_eff = 4e-3
 G = g_eff / (4 * dA)
 
 U0 = (α * u0, conj(α * u0))
@@ -35,22 +35,22 @@ param = (; G)
 
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
 alg = StrangSplitting()
-tspan = (0, 1f-2)
+tspan = (0, 1e-2)
 nsaves = 128
 dt = tspan[end] / 128
-
+##
 ts, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
 
 save_animation(Array(abs2.(sol[1])), "test.mp4")
 ##
-u0_many = stack(u0 for _ ∈ 1:128) |> cu
+u0_many = stack(u0 for _ ∈ 1:128) |> CuArray
 U0 = (α * u0_many, conj(α * u0_many))
-noise_prototype = similar.(U0, Float32)
+noise_prototype = similar.(U0, Float64)
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
 
-v = cis(π / 4) * lg(rs, rs, l=0) |> cu
-v1 = cis(π / 4) * lg(rs, rs, l=1) |> cu
-v2 = cis(π / 4) * lg(rs, rs, l=-1) |> cu
+v = cis(π / 4) * lg(rs, rs, l=0) |> CuArray
+v1 = cis(π / 4) * lg(rs, rs, l=1) |> CuArray
+v2 = cis(π / 4) * lg(rs, rs, l=-1) |> CuArray
 
 observables = (
     (α, β) -> expval_annihilation(α, β, v, dA),

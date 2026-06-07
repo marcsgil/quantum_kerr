@@ -36,16 +36,16 @@ function step_evolution(prob::GrossPitaevskiiProblem, tmax, observables; dt, nsa
     ΔT = tmax / nsaves
     ts = (1:nsaves) .* ΔT
     observables_vals = Matrix{ComplexF64}(undef, length(observables), nsaves + 1)
+    iter = GeneralizedGrossPitaevskii.init(prob, alg, (0, ΔT); dt, nsaves=1, save_start=false, show_progress=false)
 
     for (j, obs) in enumerate(observables)
         observables_vals[j, 1] = obs(prob.u0...)
     end
 
     @showprogress for (i, T) in enumerate(ts)
-        tspan = (T - ΔT, T)
-        sol = solve(prob, alg, tspan; dt, nsaves=1, save_start=false, show_progress=false)[2]
+        sol = GeneralizedGrossPitaevskii.solve!(iter)[2]
 
-        for (x_old, x_new) in zip(prob.u0, sol)
+        for (x_old, x_new) in zip(iter.u, sol)
             x_old .= x_new
         end
 
