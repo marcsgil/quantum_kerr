@@ -54,3 +54,29 @@ function step_evolution(prob::GrossPitaevskiiProblem, tmax, observables, params;
 
     (0:nsaves) .* ΔT, observables_vals
 end
+
+function raw_observables(α, β, V)
+    N = size(α, 3)
+
+    α = reshape(α, :, N)
+    β = reshape(β, :, N)
+
+    Vα = V' * α
+    Vβ = transpose(V) * β
+
+    mean_Vα = dropdims(mean(Vα, dims=2), dims=2)
+    mean_Vβ = dropdims(mean(Vβ, dims=2), dims=2)
+
+
+    ΔaV² = mean(Vα .^ 2, dims=2) - mean_Vα .^ 2
+    ΔaVᵈaV = mean(Vα .* Vβ, dims=2) - mean_Vα .* mean_Vβ
+    vec(vcat(ΔaV², ΔaVᵈaV))
+end
+
+function compose_raw(raw)
+    raw = Array(raw)
+    ΔX² = @. 0.5 + real(raw[1, :] + raw[4, :])
+    ΔP² = @. 0.5 + real(-raw[1, :] + raw[4, :])
+    duan = @. 2 + real(raw[2, :] + raw[5, :] - raw[3, :] + raw[6, :])
+    ΔX², ΔP², duan
+end
