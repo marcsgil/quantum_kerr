@@ -1,4 +1,4 @@
-using LinearAlgebra, GeneralizedGrossPitaevskii, ProgressMeter
+using LinearAlgebra, GeneralizedGrossPitaevskii, ProgressMeter, Reactant
 
 function projection(u, v, dA)
     (u ⋅ v) * dA
@@ -30,28 +30,26 @@ function correlation(α, β, v1, v2, dA)
     )
 end
 
-function step_evolution(prob::GrossPitaevskiiProblem, tmax, observables; dt, nsaves)
+function step_evolution(prob::GrossPitaevskiiProblem, tmax, observables, params; dt, nsaves)
+    CUDA.GC.gc()
+    CUDA.reclaim()
     alg = StrangSplitting()
 
     ΔT = tmax / nsaves
-    ts = (1:nsaves) .* ΔT
-    observables_vals = Matrix{ComplexF64}(undef, length(observables), nsaves + 1)
     iter = GeneralizedGrossPitaevskii.init(prob, alg, (0, ΔT); dt, nsaves=1, save_start=false, show_progress=false)
 
-    for (j, obs) in enumerate(observables)
-        observables_vals[j, 1] = obs(prob.u0...)
-    end
+    prototype = observables(Reactant.to_rarray(prob.u0)..., params)
+    observables_vals = similar(prototype, length(prototype), nsaves + 1)
+    observables_vals[:, 1] .= prototype
 
-    @showprogress for (i, T) in enumerate(ts)
-        sol = GeneralizedGrossPitaevskii.solve!(iter)[2]
+    @showprogress for slice ∈ eachslice((@view observables_vals[:, 2:end]), dims=2)
+        sol = dropdims.(GeneralizedGrossPitaevskii.solve!(iter)[2], dims=4)
 
         for (x_old, x_new) in zip(iter.u, sol)
             x_old .= x_new
         end
 
-        for (j, obs) in enumerate(observables)
-            observables_vals[j, i+1] = obs(sol...)
-        end
+        slice .= observables(Reactant.to_rarray(sol)..., params)
     end
 
     (0:nsaves) .* ΔT, observables_vals

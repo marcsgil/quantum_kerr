@@ -1,4 +1,4 @@
-using GeneralizedGrossPitaevskii, StructuredLight, CairoMakie, CUDA, Statistics
+using GeneralizedGrossPitaevskii, StructuredLight, CairoMakie, CUDA, Statistics, Reactant
 includet("observables.jl")
 
 function dispersion(k, param)
@@ -18,13 +18,13 @@ end
 
 L = 8e0
 lengths = (L, L)
-N = 256
+N = 128
 dr = L / N
 dA = dr^2
 rs = LinRange(-L / 2, L / 2 - dr, N)
 α = 10e0
 
-u0 = lg(rs, rs, l=0) |> CuArray
+u0 = lg(rs, rs, l=0)
 
 g_eff = 4e-3
 G = g_eff / (4 * dA)
@@ -43,29 +43,52 @@ ts, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
 
 save_animation(Array(abs2.(sol[1])), "test.mp4")
 ##
-u0_many = stack(u0 for _ ∈ 1:128) |> CuArray
+u0_many = stack(u0 for _ ∈ 1:1024) |> CuArray
 U0 = (α * u0_many, conj(α * u0_many))
 noise_prototype = similar.(U0, Float64)
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
 
-v = cis(π / 4) * lg(rs, rs, l=0) |> CuArray
-v1 = cis(π / 4) * lg(rs, rs, l=1) |> CuArray
-v2 = cis(π / 4) * lg(rs, rs, l=-1) |> CuArray
+v = cis(π / 4) * lg(rs, rs, l=0)
+v1 = cis(π / 4) * lg(rs, rs, l=1)
+v2 = cis(π / 4) * lg(rs, rs, l=-1)
 
-observables = (
-    (α, β) -> expval_annihilation(α, β, v, dA),
-    (α, β) -> correlation(α, β, v, v, dA),
-    (α, β) -> correlation(α, β, -im * v, -im * v, dA),
-    (α, β) -> correlation(α, β, v1, v1, dA),
-    (α, β) -> correlation(α, β, v1, v2, dA),
-    (α, β) -> correlation(α, β, v2, v2, dA),
-    (α, β) -> correlation(α, β, -im * v1, -im * v1, dA),
-    (α, β) -> correlation(α, β, -im * v1, -im * v2, dA),
-    (α, β) -> correlation(α, β, -im * v2, -im * v2, dA),
-)
+v₊ = v1 + v2
+v₋ = v1 - v2
 
-ts, observables_vals = step_evolution(prob, tspan[end], observables; dt, nsaves=64)
+V = hcat(vec.((v, v₊, v₋))...) * dA
 
+function observables(α, β, V)
+    N = size(α, 3)
+
+    α = reshape(α, :, N)
+    β = reshape(β, :, N)
+
+    Vα = V' * α
+    Vβ = transpose(V) * β
+
+    mean_Vα = dropdims(mean(Vα, dims=2), dims=2)
+    mean_Vβ = dropdims(mean(Vβ, dims=2), dims=2)
+
+
+    ΔaV² = mean(Vα .^ 2, dims=2) - mean_Vα .^ 2
+    ΔaVᵈaV = mean(Vα .* Vβ, dims=2) - mean_Vα .* mean_Vβ
+    vec(vcat(ΔaV², ΔaVᵈaV))
+end
+
+rV = Reactant.to_rarray(V)
+rU0 = Reactant.to_rarray.(U0)
+
+f = @compile observables(rU0..., rV)
+##
+ts, observables_vals = step_evolution(prob, tspan[end], f, rV; dt, nsaves=32)
+observables_vals = Array(observables_vals)
+
+prototype = f(Reactant.to_rarray(prob.u0)..., rV)
+
+duan = @. 2 + real( observables_vals[2, :] + observables_vals[5, :] - observables_vals[3, :] + observables_vals[6, :] )
+
+
+##
 with_theme(theme_latexfonts()) do
     fig = Figure()
     ax = Axis(fig[1, 1])
@@ -81,7 +104,7 @@ with_theme(theme_latexfonts()) do
     fig
 end
 ##
-duan = observables_vals[4, :] + observables_vals[6, :] + 2 * real.(observables_vals[5, :]) + observables_vals[7, :] + observables_vals[9, :] - 2 * real.(observables_vals[8, :])
+# duan = observables_vals[4, :] + observables_vals[6, :] + 2 * real.(observables_vals[5, :]) + observables_vals[7, :] + observables_vals[9, :] - 2 * real.(observables_vals[8, :])
 
 R12 = imag.(sum(conj.(v1 .* v2) .* u0 .^ 2) * dA)
 
