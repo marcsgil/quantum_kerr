@@ -39,17 +39,16 @@ function step_evolution(prob::GrossPitaevskiiProblem, tmax, observables, params;
     iter = GeneralizedGrossPitaevskii.init(prob, alg, (0, ΔT); dt, nsaves=1, save_start=false, show_progress=false)
 
     prototype = observables(Reactant.to_rarray(prob.u0)..., params)
-    observables_vals = similar(prototype, length(prototype), nsaves + 1)
-    observables_vals[:, 1] .= prototype
+    observables_vals = [prototype for _ ∈ 0:nsaves]
 
-    @showprogress for slice ∈ eachslice((@view observables_vals[:, 2:end]), dims=2)
+    @showprogress for n ∈ 2:nsaves+1
         sol = dropdims.(GeneralizedGrossPitaevskii.solve!(iter)[2], dims=4)
 
         for (x_old, x_new) in zip(iter.u, sol)
             x_old .= x_new
         end
 
-        slice .= observables(Reactant.to_rarray(sol)..., params)
+        observables_vals[n] = observables(Reactant.to_rarray(sol)..., params)
     end
 
     (0:nsaves) .* ΔT, observables_vals
@@ -67,16 +66,34 @@ function raw_observables(α, β, V)
     mean_Vα = dropdims(mean(Vα, dims=2), dims=2)
     mean_Vβ = dropdims(mean(Vβ, dims=2), dims=2)
 
+    G = dropdims(mean(Vα .* Vβ, dims=2), dims=2) - mean_Vα .* mean_Vβ
 
-    ΔaV² = mean(Vα .^ 2, dims=2) - mean_Vα .^ 2
-    ΔaVᵈaV = mean(Vα .* Vβ, dims=2) - mean_Vα .* mean_Vβ
-    vec(vcat(ΔaV², ΔaVᵈaV))
+    v0α = view(Vα, 1, :)
+    v1α = view(Vα, 2, :)
+    v2α = view(Vα, 3, :)
+
+    f00 = mean(v0α .^ 2, dims=1) - view(mean_Vα, 1:1) .^ 2
+    f12 = mean(v1α .* v2α, dims=1) - view(mean_Vα, 2:2) .* view(mean_Vα, 3:3)
+
+    vcat(f00, f12, G)
 end
+
+select_angle(ϕ) = ϕ > 0 ? (ϕ - π) / 2 : (ϕ + π) / 2
 
 function compose_raw(raw)
-    raw = Array(raw)
-    ΔX² = @. 0.5 + real(raw[1, :] + raw[4, :])
-    ΔP² = @. 0.5 + real(-raw[1, :] + raw[4, :])
-    duan = @. 2 + real(raw[2, :] + raw[5, :] - raw[3, :] + raw[6, :])
-    ΔX², ΔP², duan
+    f00, f12, g00, g11, g22 = eachslice(stack(Array.(raw)), dims=1)
+ 
+    λ₊ = @. 0.5 + real(g00) + abs(f00)
+    λ₋ = @. 0.5 + real(g00) - abs(f00)
+    duan = @. 2 * (1 + real(g11 + g22)) - 4abs(f12)
+
+    ϕ_sq = @. select_angle(angle(f00))
+    ϕ_duan = @. select_angle(angle(f00))
+
+    ϕ_sq[1] = NaN
+    ϕ_duan[1] = NaN
+
+    λ₊, λ₋, duan, ϕ_sq, ϕ_duan
 end
+
+decibels(P, P0 = one(P) / 2) = 10 * log10(P / P0)

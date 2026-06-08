@@ -35,7 +35,7 @@ param = (; G)
 
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
 alg = StrangSplitting()
-tspan = (0, 8e-2)
+tspan = (0, 4e-2)
 nsaves = 128
 dt = tspan[end] / 128
 ##
@@ -48,37 +48,52 @@ U0 = (α * u0_many, conj(α * u0_many))
 noise_prototype = similar.(U0, Float64)
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
 
-v = cis(π / 4) * lg(rs, rs, l=0)
-v1 = cis(π / 4) * lg(rs, rs, l=1)
-v2 = cis(π / 4) * lg(rs, rs, l=-1)
+v = lg(rs, rs, l=0)
+v1 = lg(rs, rs, l=1)
+v2 = lg(rs, rs, l=-1)
 
-v₊ = v1 + v2
-v₋ = v1 - v2
+V = hcat(vec.((v, v1, v2))...) * dA
 
-V = hcat(vec.((v, v₊, v₋))...) * dA
+CUDA.reclaim()
+CUDA.GC.gc()
 
 rV = Reactant.to_rarray(V)
 rU0 = Reactant.to_rarray.(U0)
 
 f = @compile raw_observables(rU0..., rV)
-##
-ts, observables_vals = step_evolution(prob, tspan[end], f, rV; dt, nsaves=32)
-ΔX², ΔP², duan = compose_raw(observables_vals)
 
-R12 = imag.(sum(conj.(v1 .* v2) .* u0 .^ 2) * dA)
+ts, observables_vals = step_evolution(prob, tspan[end], f, rV; dt, nsaves=32)
+
+λ₊, λ₋, duan, ϕ_sq, ϕ_duan = compose_raw(observables_vals)
+
+
+R12 = -real.(sum(conj.(v1 .* v2) .* u0 .^ 2) * dA)
 
 with_theme(theme_latexfonts()) do
-    fig = Figure(; fontsize=18, size=(1200,400))
+    fig = Figure(; fontsize=18, size=(1200,600))
 
-    ax1 = Axis(fig[1,1], ylabel = "Quadrature Variance", xlabel=L"z/z_R")
-    lines!(ax1, ts, ΔX², label = L"\Delta X^2", linewidth=4)
-    lines!(ax1, ts, ΔP², label = L"\Delta P^2", linewidth=4)
+    ax1 = Axis(fig[1,1], ylabel = "Quadrature Variance (dB)")
+    lines!(ax1, ts, decibels.(λ₊), label = L"\lambda_+", linewidth=4)
+    lines!(ax1, ts, decibels.(λ₋), label = L"\lambda_-", linewidth=4)
     axislegend(ax1, position=:lt)
+    hidexdecorations!(ax1, ticks=false, grid=false)
 
-    ax2 = Axis(fig[1, 2], ylabel=L"\langle \Delta (X_1 \pm X_2) + \Delta (P_1 \mp P_2)\rangle", xlabel=L"z/z_R")
-    lines!(ax2, ts, real.(duan), label="Positive P", linewidth=4)
-    hlines!(ax2, [2], label="Duan bound", linestyle=:dash, color=:red, linewidth=4)
-    lines!(ax2, ts, 2 .+ ts .* R12 * g_eff * α^2, label="Linear Theory", linestyle=:dot, linewidth=4, color=:green)
+    ax2 = Axis(fig[1, 2], ylabel=L"D / D_0")
+    lines!(ax2, ts, real.(duan) / 2, label="Positive P", linewidth=4)
+    lines!(ax2, ts, 1 .+ ts .* R12 * g_eff * α^2/2, label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
     axislegend(ax2, position=:lb)
+    hidexdecorations!(ax2, ticks=false, grid=false)
+
+    ax3 = Axis(fig[2, 1], ylabel = "Squeezing angle", xlabel=L"z/z_R", yticks = ([-π/2, -π/4, 0, π/4, π/2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
+    scatter!(ax3, ts, ϕ_sq)
+    ylims!(ax3, -π/2, π/2)
+
+    ax4 = Axis(fig[2, 2], ylabel = "Optimal Duan angle", xlabel=L"z/z_R", yticks = ([-π/2, -π/4, 0, π/4, π/2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
+    scatter!(ax4, ts, ϕ_duan)
+    ylims!(ax4, -π/2, π/2)
+
+    linkxaxes!(ax1, ax3)
+    linkxaxes!(ax2, ax4)
+
     fig
 end

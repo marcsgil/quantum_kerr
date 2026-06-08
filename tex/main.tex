@@ -60,14 +60,121 @@ covered at length in the main body of the article.
 
 %\tableofcontents
 
-\section{Theory}
+\section{Spatially Structured Bosonic Field}
 
 Consider a bosonic quantum field $\mathcal{E}(\mathbf{r})$ satisfying the commutation relations
 \begin{equation}
     \label{eq:commutation_relations}
-    \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)} = \delta^{(2)}(\mathbf{r}_1 - \mathbf{r}_2).
+    \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)} = \delta^{(2)}(\mathbf{r}_1 - \mathbf{r}_2), \ \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}(\mathbf{r}_2)} = \comm{\mathcal{E}^\dagger(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)} = 0\ 
 \end{equation}
-In the above equation and in what follows, $\mathbf{r} = (x, y)$ is the transverse coordinate. We will assume that the field is propagating along the $z$ direction, and satisfies the Heisenberg equation of motion
+In the above equation and in what follows, $\mathbf{r} = (x, y)$ is the transverse coordinate.
+
+One can introduce ladder operators $a_v, a_v^\dagger$ associated with the spatial mode $v$ by the expression
+\begin{equation}
+    a(v) = \int_{\mathbb{R}^2} v^*(\mathbf{r}) \mathcal{E}(\mathbf{r}) d\mathbf{r}.
+\end{equation}
+
+We then have
+\begin{equation}
+    \comm{a(v_1)}{a(v_2)^\dagger} = \int_{\mathbb{R}^2} v_1^*(\mathbf{r}) v_2(\mathbf{r}) d\mathbf{r} =\braket{v_1}{v_2},
+\end{equation}
+while $\comm{a(v_1)}{a(v_2)} = \comm{a(v_1)^\dagger}{a(v_2)^\dagger} = 0$.
+
+Let us define the quadrature associated to the spatial mode $v$ as
+\begin{equation}
+    \begin{aligned}
+        X(v) &= \frac{1}{\sqrt{2}} \int_{\mathbb{R}^2} v^*(\mathbf{r}) \mathcal{E}(\mathbf{r}) + v(\mathbf{r})\mathcal{E}^\dagger(\mathbf{r}) d\mathbf{r} \\ &= \frac{a(v) + a(v)^\dagger}{\sqrt{2}}
+    \end{aligned}
+\end{equation}
+We then have the commutation relation
+\begin{equation}
+    \comm{X(v_1)}{X(v_2)} = i \Im \braket{v_1}{v_2},
+\end{equation}
+which leads to the uncertainty principle
+\begin{equation}
+    \Delta X(v_1)^2 \Delta X(v_2)^2 \ge \frac{\abs{\Im \braket{v_1}{v_2}}^2}{4}.
+\end{equation}
+One could also introduce the complementary quadrature $P(v) = X(-iv)$ so that
+\begin{equation}
+    \comm{X_{v_1}}{P_{v_2}} = i \Re \braket{v_1}{v_2}
+\end{equation}
+and
+\begin{equation}
+    \Delta X(v_1)^2 \Delta P(v_2)^2 \ge \frac{\abs{\Re \braket{v_1}{v_2}}^2}{4}.
+\end{equation}
+
+We are interested in observables of the form
+\begin{equation}
+    \label{eq:quadrature_correlation}
+    C(v_1, v_2) = \frac{1}{2}\expval{\acomm{X(v_1)}{X(v_2)}} - \expval{X(v_1)}\expval{X(v_2)} =  \Re\left[ \frac{\braket{v_1}{v_2}}{2} + f(v_1, v_2) + g(v_1, v_2) \right],
+\end{equation}
+where we have defined
+\begin{equation}
+    \begin{aligned}
+        f(v_1, v_2) &= \expval{a(v_1)a(v_2)} - \expval{a(v_1)} \expval{a(v_2)} \\
+        g(v_1, v_2) &= \expval{a(v_2)^\dagger a(v_1)} - \expval{a(v_2)^\dagger} \expval{a(v_1)} 
+    \end{aligned} .
+\end{equation}
+
+This formulation is useful because $f$ and $g$ are normally ordered expectation values, which can be directly obtained from stochastic simulations in the positive P representation. Furthermore, this representation also makes it easier to perform linear combinations of the modes, which will be useful later. These combinations will be based on the properties
+\begin{equation}
+    \begin{aligned}
+        f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3) \\
+        f(v_1, v_2) &= f(v_2, v_1) \\
+        g(v_1, v_2 + \lambda v_3) &= g(v_1, v_2) + \lambda g(v_1, v_3) \\
+        g(v_1, v_2) &= g(v_2, v_1)^*
+    \end{aligned}
+\end{equation}
+which are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)$ is linear.
+
+\subsection{One mode correlation}
+
+Let us analyze the correlation matrix $\sigma_{jk} = \frac{1}{2}\expval{\acomm{Z_j}{Z_k}} - \expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $g(v,v) \in \mathbb{R}$, so we get
+\begin{equation}
+    \sigma = \begin{pmatrix}
+        \frac{1}{2} + g(v,v) & 0 \\
+        0 & \frac{1}{2} + g(v,v)
+    \end{pmatrix} + \begin{pmatrix}
+        \Re f(v, v) & -\Im f(v,v) \\
+        -\Im f(v,v) & -\Re f(v, v)
+    \end{pmatrix} .
+\end{equation}
+
+Notice that $f(e^{i\phi}v, e^{i\phi}v) = e^{-i2\phi} f(v, v)$. Therefore, we can diagonalize $\sigma$ by choosing $\phi = [\arg f(v, v) \pm \pi]/ 2$. We then get eigenvalues
+\begin{equation}
+    \lambda_{\pm} = \frac{1}{2} + g(v, v) \pm \abs{f(v, v)} .
+\end{equation}
+We then see that the quadrature rotated along the axis $\phi$ has minimum variance of $\lambda_-$, while the one rotated along the axis $\phi + \pi/2$ has maximum variance $\lambda_+$. Furthermore, we have squeezing if $\abs{f(v, v)} > g(v, v)$.
+
+\subsection{Duan Criterion}
+
+Consider two orthonormal states $v_1, v_2$, i.e., $\braket{v_j}{v_k} = \delta_{jk}$. The Duan criterion states that if
+\begin{equation}
+    D = \expval{\Delta \left[X(v_1) + X(v_2)\right]^2} + \expval{\Delta\left[P(v_1) - P(v_2)\right]^2} < 2,
+\end{equation}
+then the states are entangled.
+
+Let us define $v_\pm = v_1 \pm v_2$. We then have
+\begin{equation}
+    D = \expval{\Delta X(v_+)^2} + \expval{\Delta P(v_-)^2}.
+\end{equation}
+Although $v_{\pm}$ is not normalized, \eqref{eq:quadrature_correlation} still holds. We then obtain
+\begin{equation}
+    \begin{aligned}
+        D &= 2 + g(v_+, v_+) + g(v_-, v_-) + \Re \left[f(v_+, v_+) - f(v_-, v_-) \right] \\ 
+        &= 2\left[1 + g(v_1, v_1) + g(v_2, v_2)\right] + 4 \Re f(v_1, v_2)
+    \end{aligned}
+\end{equation}
+
+Once again, we can maximize the possible violation by rotating the quadrature of the modes, say, $v_2$ by an angle $\phi = \left[\arg f(v_1, v_2) \pm \pi\right] / 2$. We get an optimal possible violation of
+\begin{equation}
+    D_{\text{opt}} = 2\left[1 + g(v_1, v_1) + g(v_2, v_2)\right] - 4 \abs{f(v_1, v_2)}
+\end{equation}
+
+
+\section{The Kerr System}
+
+ We will assume that the field is propagating along the $z$ direction, and satisfies the Heisenberg equation of motion
 \begin{equation}
     \label{eq:heisenberg_equation}
     2ik \partial_z \mathcal{E}(\mathbf{r}, z) + \nabla^2 \mathcal{E}(\mathbf{r}, z) = -g \mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E}^2 (\mathbf{r}, z).
@@ -185,35 +292,6 @@ When both $u$ and $v$ are arbitrary Laguerre-Gaussian modes (any $p,l,w$), we ha
 
 \subsection{Quadratures}
 
-Let us define the quadrature associated to the spatial mode $v$ as
-\begin{equation}
-    \begin{aligned}
-        X_v &= \frac{1}{\sqrt{2}} \int_{\mathbb{R}^2} v^*(\mathbf{r}) \mathcal{E}(\mathbf{r}) + v(\mathbf{r})\mathcal{E}^\dagger(\mathbf{r}) d\mathbf{r} \\ &= \frac{a_v + a^\dagger_v}{\sqrt{2}}
-    \end{aligned}
-\end{equation}
-We then have the commutation relation
-\begin{equation}
-    \comm{X_{v_1}}{X_{v_2}} = i \Im \braket{v_1}{v_2},
-\end{equation}
-which leads to the uncertainty principle
-\begin{equation}
-    \Delta X^2_{v_1} \Delta X^2_{v_2} \ge \frac{\abs{\Im \braket{v_1}{v_2}}^2}{4}.
-\end{equation}
-One could also introduce the complementary quadrature $P(v) = X(-iv)$ so that
-\begin{equation}
-    \comm{X_{v_1}}{P_{v_2}} = i \Re \braket{v_1}{v_2}
-\end{equation}
-and
-\begin{equation}
-    \Delta X^2_{v_1} \Delta P^2_{v_2} \ge \frac{\abs{\Re \braket{v_1}{v_2}}^2}{4}.
-\end{equation}
-
-We are interested in observables of the form
-\begin{equation}
-    \label{eq:quadrature_correlation}
-    C(v_1, v_2) = \expval{X_{v_1}X_{v_2}} - \expval{X_{v_1}}\expval{X_{v_2}} = \frac{\braket{v_1}{v_2}}{2} + \Re \left[ \expval{a_{v_1}a_{v_2}} - \expval{a_{v_1}} \expval{a_{v_2}} + \expval{a_{v_2}^\dagger a_{v_1}} - \expval{a_{v_2}^\dagger} \expval{a_{v_1}}\right] .
-\end{equation}
-
 For the Kerr system, we have 
 \begin{equation}
     \begin{aligned}
@@ -313,6 +391,16 @@ where $\xi_1$ and $\xi_2$ are independent real Gaussian white noises with zero m
     \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = 0, \ \ \ \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = \delta_{jk} \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'} \delta_{\tilde{z}, \tilde{z}'}
 \end{equation}
 For a coherent initial state in the mode $u$, we have that $\psi_1(\tilde{\mathbf{r}}, 0) = \alpha u(\tilde{\mathbf{r}}, 0)$ and $\psi_2(\tilde{\mathbf{r}}, 0) = \alpha^* u^*(\tilde{\mathbf{r}}, 0)$. 
+
+The main quantities we are interested, $f$, and $g$, are then expressed as
+\begin{equation}
+    f(v_1, v_2) = \int_{\mathbb{R}^2 \times \mathbb{R}^2} v_1^*(\mathbf{r}_1) v_2^*(\mathbf{r}_2) \expval{\psi_1(\mathbf{r}_1) \psi_1(\mathbf{r}_2)} d \mathbf{r}_1 d \mathbf{r}_2 
+\end{equation}
+
+\begin{equation}
+    g(v_1, v_2) = \int_{\mathbb{R}^2 \times \mathbb{R}^2} v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2) \expval{\psi_1(\mathbf{r}_1) \psi_2(\mathbf{r}_2)} d \mathbf{r}_1 d \mathbf{r}_2 
+\end{equation}
+
 
 \bibliography{refs}% Produces the bibliography via BibTeX.
 
