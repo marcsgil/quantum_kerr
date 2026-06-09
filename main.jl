@@ -26,8 +26,8 @@ rs = LinRange(-L / 2, L / 2 - dr, N)
 
 u0 = lg(rs, rs, l=0)
 
-g_eff = 4e-3
-G = g_eff / (4 * dA)
+g = -4e-3
+G = g / (4 * dA)
 
 U0 = (α * u0, conj(α * u0))
 noise_prototype = similar.(U0, Float32)
@@ -39,7 +39,7 @@ tspan = (0, 4e-2)
 nsaves = 128
 dt = tspan[end] / 128
 ##
-ts, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
+zs, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
 
 save_animation(Array(abs2.(sol[1])), "test.mp4")
 ##
@@ -62,34 +62,39 @@ rU0 = Reactant.to_rarray.(U0)
 
 f = @compile raw_observables(rU0..., rV)
 
-ts, observables_vals = step_evolution(prob, tspan[end], f, rV; dt, nsaves=32)
+zs, observables_vals = step_evolution(prob, tspan[end], f, rV; dt, nsaves=32)
 
 λ₊, λ₋, duan, ϕ_sq, ϕ_duan = compose_raw(observables_vals)
 
 
-R12 = -real.(sum(conj.(v1 .* v2) .* u0 .^ 2) * dA)
+R12 = sum(conj.(v1 .* v2) .* u0 .^ 2) * dA
+R00 = sum(conj.(v .* v) .* u0 .^ 2) * dA
+
+D_opt_linear = @. 2 - zs * abs(g * α^2 * R12)
+λ₋_linear = @. 0.5 - zs * abs(g * α^2 * R00) / 4
+
 
 with_theme(theme_latexfonts()) do
     fig = Figure(; fontsize=18, size=(1200,600))
 
     ax1 = Axis(fig[1,1], ylabel = "Quadrature Variance (dB)")
-    lines!(ax1, ts, decibels.(λ₊), label = L"\lambda_+", linewidth=4)
-    lines!(ax1, ts, decibels.(λ₋), label = L"\lambda_-", linewidth=4)
-    axislegend(ax1, position=:lt)
+    lines!(ax1, zs, decibels.(λ₋), label = L"\lambda_-", linewidth=4)
+    lines!(ax1, zs, decibels.(λ₋_linear), label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
+    axislegend(ax1, position=:lb)
     hidexdecorations!(ax1, ticks=false, grid=false)
 
-    ax2 = Axis(fig[1, 2], ylabel=L"D / D_0")
-    lines!(ax2, ts, real.(duan) / 2, label="Positive P", linewidth=4)
-    lines!(ax2, ts, 1 .+ ts .* R12 * g_eff * α^2/2, label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
+    ax2 = Axis(fig[1, 2], ylabel=L"D_{\text{opt}} / D_0")
+    lines!(ax2, zs, real.(duan) / 2, label="Positive P", linewidth=4)
+    lines!(ax2, zs, D_opt_linear / 2, label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
     axislegend(ax2, position=:lb)
     hidexdecorations!(ax2, ticks=false, grid=false)
 
     ax3 = Axis(fig[2, 1], ylabel = "Squeezing angle", xlabel=L"z/z_R", yticks = ([-π/2, -π/4, 0, π/4, π/2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
-    scatter!(ax3, ts, ϕ_sq)
+    scatter!(ax3, zs, ϕ_sq)
     ylims!(ax3, -π/2, π/2)
 
     ax4 = Axis(fig[2, 2], ylabel = "Optimal Duan angle", xlabel=L"z/z_R", yticks = ([-π/2, -π/4, 0, π/4, π/2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
-    scatter!(ax4, ts, ϕ_duan)
+    scatter!(ax4, zs, ϕ_duan)
     ylims!(ax4, -π/2, π/2)
 
     linkxaxes!(ax1, ax3)
