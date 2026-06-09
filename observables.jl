@@ -36,7 +36,7 @@ function raw_observables(α, β, V)
     mean_Vα = dropdims(mean(Vα, dims=2), dims=2)
     mean_Vβ = dropdims(mean(Vβ, dims=2), dims=2)
 
-    G = dropdims(mean(Vα .* Vβ, dims=2), dims=2) - mean_Vα .* mean_Vβ
+    H = dropdims(mean(Vα .* Vβ, dims=2), dims=2) - mean_Vα .* mean_Vβ
 
     v0α = view(Vα, 1, :)
     v1α = view(Vα, 2, :)
@@ -45,17 +45,17 @@ function raw_observables(α, β, V)
     f00 = mean(v0α .^ 2, dims=1) - view(mean_Vα, 1:1) .^ 2
     f12 = mean(v1α .* v2α, dims=1) - view(mean_Vα, 2:2) .* view(mean_Vα, 3:3)
 
-    vcat(f00, f12, G)
+    vcat(f00, f12, H)
 end
 
 select_angle(ϕ) = ϕ > 0 ? (ϕ - π) / 2 : (ϕ + π) / 2
 
 function compose_raw(raw)
-    f00, f12, g00, g11, g22 = eachslice(stack(Array.(raw)), dims=1)
+    f00, f12, h00, h11, h22 = eachslice(stack(Array.(raw)), dims=1)
  
-    λ₊ = @. 0.5 + real(g00) + abs(f00)
-    λ₋ = @. 0.5 + real(g00) - abs(f00)
-    duan = @. 2 * (1 + real(g11 + g22)) - 4abs(f12)
+    λ₊ = @. 0.5 + real(h00) + abs(f00)
+    λ₋ = @. 0.5 + real(h00) - abs(f00)
+    duan = @. 2 * (1 + real(h11 + h22)) - 4abs(f12)
 
     ϕ_sq = @. select_angle(angle(f00))
     ϕ_duan = @. select_angle(angle(f12))

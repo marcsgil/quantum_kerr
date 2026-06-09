@@ -106,13 +106,13 @@ and
 We are interested in observables of the form
 \begin{equation}
     \label{eq:quadrature_correlation}
-    C(v_1, v_2) = \frac{1}{2}\expval{\acomm{X(v_1)}{X(v_2)}} - \expval{X(v_1)}\expval{X(v_2)} =  \Re\left[ \frac{\braket{v_1}{v_2}}{2} + f(v_1, v_2) + g(v_1, v_2) \right],
+    C(v_1, v_2) = \frac{1}{2}\expval{\acomm{X(v_1)}{X(v_2)}} - \expval{X(v_1)}\expval{X(v_2)} =  \Re\left[ \frac{\braket{v_1}{v_2}}{2} + f(v_1, v_2) + h(v_1, v_2) \right],
 \end{equation}
 where we have defined
 \begin{equation}
     \begin{aligned}
         f(v_1, v_2) &= \expval{a(v_1)a(v_2)} - \expval{a(v_1)} \expval{a(v_2)} \\
-        g(v_1, v_2) &= \expval{a(v_2)^\dagger a(v_1)} - \expval{a(v_2)^\dagger} \expval{a(v_1)} 
+        h(v_1, v_2) &= \expval{a(v_2)^\dagger a(v_1)} - \expval{a(v_2)^\dagger} \expval{a(v_1)} 
     \end{aligned} .
 \end{equation}
 
@@ -121,7 +121,7 @@ In terms of the fields, the required quantities are written as
     f(v_1, v_2) = \int v_1^*(\mathbf{r}_2) v_2^*(\mathbf{r}_1) F(\mathbf{r}_1, \mathbf{r}_2) d\mathbf{r}_1 d\mathbf{r}_2; \ \ \ F(\mathbf{r}_1, \mathbf{r}_2) = \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} - \expval{\mathcal{E}(\mathbf{r}_1)}\expval{\mathcal{E}(\mathbf{r}_2)}
 \end{equation}
 \begin{equation}
-    g(v_1, v_2) = \int v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2) G(\mathbf{r}_1, \mathbf{r}_2) d\mathbf{r}_1 d\mathbf{r}_2; \ \ \ G(\mathbf{r}_1, \mathbf{r}_2) = \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z) \mathcal{E}(\mathbf{r}_1, z)} - \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z)} \expval{\mathcal{E}(\mathbf{r}_1, z)}
+    h(v_1, v_2) = \int v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2) H(\mathbf{r}_1, \mathbf{r}_2) d\mathbf{r}_1 d\mathbf{r}_2; \ \ \ H(\mathbf{r}_1, \mathbf{r}_2) = \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z) \mathcal{E}(\mathbf{r}_1, z)} - \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z)} \expval{\mathcal{E}(\mathbf{r}_1, z)}
 \end{equation}
 
 This formulation is useful because $f$ and $g$ are normally ordered expectation values, which can be directly obtained from stochastic simulations in the positive P representation. Furthermore, this representation also makes it easier to perform linear combinations of the modes, which will be useful later. These combinations will be based on the properties
@@ -129,19 +129,19 @@ This formulation is useful because $f$ and $g$ are normally ordered expectation 
     \begin{aligned}
         f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3) \\
         f(v_1, v_2) &= f(v_2, v_1) \\
-        g(v_1, v_2 + \lambda v_3) &= g(v_1, v_2) + \lambda g(v_1, v_3) \\
-        g(v_1, v_2) &= g(v_2, v_1)^*
+        h(v_1, v_2 + \lambda v_3) &= h(v_1, v_2) + \lambda h(v_1, v_3) \\
+        h(v_1, v_2) &= h(v_2, v_1)^*
     \end{aligned}
 \end{equation}
 which are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)$ is linear.
 
 \subsection{One mode correlation}
 
-Let us analyze the correlation matrix $\sigma_{jk} = \frac{1}{2}\expval{\acomm{Z_j}{Z_k}} - \expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $g(v,v) \in \mathbb{R}$, so we get
+Let us analyze the correlation matrix $\sigma_{jk} = \frac{1}{2}\expval{\acomm{Z_j}{Z_k}} - \expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $h(v,v) \in \mathbb{R}$, so we get
 \begin{equation}
     \sigma = \begin{pmatrix}
-        \frac{1}{2} + g(v,v) & 0 \\
-        0 & \frac{1}{2} + g(v,v)
+        \frac{1}{2} + h(v,v) & 0 \\
+        0 & \frac{1}{2} + h(v,v)
     \end{pmatrix} + \begin{pmatrix}
         \Re f(v, v) & -\Im f(v,v) \\
         -\Im f(v,v) & -\Re f(v, v)
@@ -150,9 +150,9 @@ Let us analyze the correlation matrix $\sigma_{jk} = \frac{1}{2}\expval{\acomm{Z
 
 Notice that $f(e^{i\phi}v, e^{i\phi}v) = e^{-i2\phi} f(v, v)$. Therefore, we can diagonalize $\sigma$ by choosing $\phi = [\arg f(v, v) \pm \pi]/ 2$. We then get eigenvalues
 \begin{equation}
-    \lambda_{\pm} = \frac{1}{2} + g(v, v) \pm \abs{f(v, v)} .
+    \lambda_{\pm} = \frac{1}{2} + h(v, v) \pm \abs{f(v, v)} .
 \end{equation}
-We then see that the quadrature rotated along the axis $\phi$ has minimum variance of $\lambda_-$, while the one rotated along the axis $\phi + \pi/2$ has maximum variance $\lambda_+$. Furthermore, we have squeezing if $\abs{f(v, v)} > g(v, v)$.
+We then see that the quadrature rotated along the axis $\phi$ has minimum variance of $\lambda_-$, while the one rotated along the axis $\phi + \pi/2$ has maximum variance $\lambda_+$. Furthermore, we have squeezing if $\abs{f(v, v)} > h(v, v)$.
 
 \subsection{Duan Criterion}
 
@@ -169,14 +169,14 @@ Let us define $v_\pm = v_1 \pm v_2$. We then have
 Although $v_{\pm}$ is not normalized, \eqref{eq:quadrature_correlation} still holds. We then obtain
 \begin{equation}
     \begin{aligned}
-        D &= 2 + g(v_+, v_+) + g(v_-, v_-) + \Re \left[f(v_+, v_+) - f(v_-, v_-) \right] \\ 
-        &= 2\left[1 + g(v_1, v_1) + g(v_2, v_2)\right] + 4 \Re f(v_1, v_2)
+        D &= 2 + h(v_+, v_+) + h(v_-, v_-) + \Re \left[f(v_+, v_+) - f(v_-, v_-) \right] \\ 
+        &= 2\left[1 + h(v_1, v_1) + h(v_2, v_2)\right] + 4 \Re f(v_1, v_2)
     \end{aligned}
 \end{equation}
 
 Once again, we can maximize the possible violation by rotating the quadrature of the modes, say, $v_2$ by an angle $\phi = \left[\arg f(v_1, v_2) \pm \pi\right] / 2$. We get an optimal possible violation of
 \begin{equation}
-    D_{\text{opt}} = 2\left[1 + g(v_1, v_1) + g(v_2, v_2)\right] - 4 \abs{f(v_1, v_2)}
+    D_{\text{opt}} = 2\left[1 + h(v_1, v_1) + h(v_2, v_2)\right] - 4 \abs{f(v_1, v_2)}
 \end{equation}
 
 
@@ -288,7 +288,7 @@ Evaluating this at our initial state gives us
         \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} &\approx \abs{\alpha}^2 u^*(\mathbf{r}_1,0) u(\mathbf{r}_2, 0)\left\{ 1 - \frac{igz\abs{\alpha}^2}{2k} \left[ \abs{u(\mathbf{r}_2, 0)}^2 - \abs{u(\mathbf{r}_1, 0)}^2 \right]   \right\} \\ &\approx \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z)} \expval{\mathcal{E}(\mathbf{r}_2, z)}
     \end{aligned}
 \end{equation}
-where the last approximate inequality comes from direct comparison with \eqref{eq:exp_val_field}. In particular, this shows that, for any $v_1$ and $v_2$, we have $G(\mathbf{r}_1, \mathbf{r}_2) \approx 0$.
+where the last approximate inequality comes from direct comparison with \eqref{eq:exp_val_field}. In particular, this shows that, for any $v_1$ and $v_2$, we have $H(\mathbf{r}_1, \mathbf{r}_2) \approx 0$.
 
 We can also use this to write the expectation value of the number operator:
 \begin{equation}
