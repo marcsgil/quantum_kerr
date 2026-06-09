@@ -30,7 +30,7 @@ g = -4e-3
 G = g / (4 * dA)
 
 U0 = (α * u0, conj(α * u0))
-noise_prototype = similar.(U0, Float32)
+noise_prototype = similar.(U0, Float64)
 param = (; G)
 
 prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
@@ -67,18 +67,18 @@ zs, observables_vals = step_evolution(prob, tspan[end], f, rV; dt, nsaves=32)
 λ₊, λ₋, duan, ϕ_sq, ϕ_duan = compose_raw(observables_vals)
 
 
-R12 = sum(conj.(v1 .* v2) .* u0 .^ 2) * dA
-R00 = sum(conj.(v .* v) .* u0 .^ 2) * dA
+R12 = (v1 .* v2) ⋅ (u0 .^ 2) * dA
+R00 = (v .^ 2) ⋅ (u0 .^ 2) * dA
 
 D_opt_linear = @. 2 - zs * abs(g * α^2 * R12)
 λ₋_linear = @. 0.5 - zs * abs(g * α^2 * R00) / 4
 
 
 with_theme(theme_latexfonts()) do
-    fig = Figure(; fontsize=18, size=(1200,600))
+    fig = Figure(; fontsize=18, size=(1200, 600))
 
-    ax1 = Axis(fig[1,1], ylabel = "Quadrature Variance (dB)")
-    lines!(ax1, zs, decibels.(λ₋), label = L"\lambda_-", linewidth=4)
+    ax1 = Axis(fig[1, 1], ylabel="Quadrature Variance (dB)")
+    lines!(ax1, zs, decibels.(λ₋), label=L"\lambda_-", linewidth=4)
     lines!(ax1, zs, decibels.(λ₋_linear), label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
     axislegend(ax1, position=:lb)
     hidexdecorations!(ax1, ticks=false, grid=false)
@@ -89,13 +89,13 @@ with_theme(theme_latexfonts()) do
     axislegend(ax2, position=:lb)
     hidexdecorations!(ax2, ticks=false, grid=false)
 
-    ax3 = Axis(fig[2, 1], ylabel = "Squeezing angle", xlabel=L"z/z_R", yticks = ([-π/2, -π/4, 0, π/4, π/2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
+    ax3 = Axis(fig[2, 1], ylabel="Squeezing angle", xlabel=L"z/z_R", yticks=([-π / 2, -π / 4, 0, π / 4, π / 2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
     scatter!(ax3, zs, ϕ_sq)
-    ylims!(ax3, -π/2, π/2)
+    ylims!(ax3, -π / 2, π / 2)
 
-    ax4 = Axis(fig[2, 2], ylabel = "Optimal Duan angle", xlabel=L"z/z_R", yticks = ([-π/2, -π/4, 0, π/4, π/2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
+    ax4 = Axis(fig[2, 2], ylabel="Optimal Duan angle", xlabel=L"z/z_R", yticks=([-π / 2, -π / 4, 0, π / 4, π / 2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
     scatter!(ax4, zs, ϕ_duan)
-    ylims!(ax4, -π/2, π/2)
+    ylims!(ax4, -π / 2, π / 2)
 
     linkxaxes!(ax1, ax3)
     linkxaxes!(ax2, ax4)
