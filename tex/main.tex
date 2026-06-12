@@ -208,11 +208,12 @@ is independent of $z$ (take a $z$ derivative, use de equations of motion and int
 
 Our initial state will be a coherent one:
 \begin{equation}
-    \ket{\alpha, u} = D(\alpha, u) \ket{0} = \exp\left(\alpha a_0(u)^\dagger - \alpha^* a_0(u)\right) \ket{0}.
+    \ket{\alpha} = D(\alpha) \ket{0} = \exp\left(a_0(\alpha)^\dagger - \alpha^* a(\alpha)\right) \ket{0}.
 \end{equation}
+Here, $\alpha(\mathbf{r})$ is a non normalized spatial function, with norm $\norm{\alpha}$.
 This state is an eigenvector of the free field:
 \begin{equation}
-    \mathcal{E}_0(\mathbf{r}, z) \ket{\alpha, u} = \alpha u(\mathbf{r}, z) \ket{\alpha, u}
+    \mathcal{E}_0(\mathbf{r}, z) \ket{\alpha} = \alpha(\mathbf{r}, z) \ket{\alpha, u}
 \end{equation}
 
 The variation $\delta \mathcal{E}$ satisfies
@@ -239,32 +240,32 @@ This expression will be the basis of our further developments.
 Taking expectation values, we arrive at
 \begin{equation}
     \label{eq:exp_val_field}
-    \expval{\mathcal{E}(\mathbf{r}, z)} \approx \alpha u(\mathbf{r}, 0) - \frac{igz \abs{\alpha}^2 \alpha}{2k} \abs{u(\mathbf{r}, 0)}^2 u(\mathbf{r}, 0) .
+    \expval{\mathcal{E}(\mathbf{r}, z)} \approx \alpha (\mathbf{r}, 0) - \frac{igz}{2k} \abs{\alpha(\mathbf{r}, 0)}^2 \alpha(\mathbf{r}, 0) .
 \end{equation}
 The expectation value of the annihilation operator $a_v$ corresponding to a spatial mode $v$ is then
 \begin{equation}
     \label{eq:expval_anihilation}
-    \expval{a_v} = \alpha \braket{v}{u}  - \frac{igz \abs{\alpha}^2 \alpha}{2k} \braket{v, u}{u, u}
+    \expval{a_v} = \braket{v}{\alpha }  - \frac{igz}{2k} \braket{v, \alpha}{\alpha, \alpha}
 \end{equation}
 In the above expression we have introduced the second spatial overlap
 \begin{equation}
     \braket{v_1, v_2}{u_1, u_2} = \int v_1^*(\mathbf{r},z) v_2^*(\mathbf{r},z) u_1(\mathbf{r},z) u_2(\mathbf{r},z) d\mathbf{r} .
 \end{equation}
 
-When $u = u_{0l}$ is a Laguerre-Gaussian mode with radial order $p=0$ and topological charge $l$, we have that
+When $\alpha = \norm{\alpha}u_{0l}$ is a Laguerre-Gaussian mode with radial order $p=0$ and topological charge $l$, we have that
 \begin{equation}
     \abs{u_{0l}(\mathbf{r}, z)} u_{0l}^2(\mathbf{r}, z) = \sum_{q=0}^{\abs{l}} C_{ql} \overline{u}_{ql}(\mathbf{r}, z)
 \end{equation}
 where $\overline{u}_{ql}$ are Laguerre-Gaussian modes with a reduced waist. Therefore, one may write
 \begin{equation}
-    \expval{a_v} = \alpha \braket{v}{u_{0,l}}  - \frac{igz \abs{\alpha}^2 \alpha}{2k} \sum_{q=0}^{\abs{l}} C_{ql} \braket{v}{\overline{u}_{ql}}
+    \expval{a_v} = \norm{\alpha} \braket{v}{u_{0,l}}  - \frac{igz \norm{\alpha}^3}{2k} \sum_{q=0}^{\abs{l}} C_{ql} \braket{v}{\overline{u}_{ql}}
 \end{equation}
 
-In particular, when $v = \overline{u}_{ql}$, we the have that
+In particular, when $v = \overline{u}_{ql}$, we have that
 \begin{equation}
     \expval{a_{\overline{u}_{ql}}} = \begin{cases}
-        \alpha \braket{\overline{u}_{ql}}{u_{0,l}} - \dfrac{igz \abs{\alpha}^2 \alpha C_{ql}}{2k} & q \le \abs{l} \\
-        \alpha \braket{\overline{u}_{ql}}{u_{0,l}}  & q > \abs{l}
+        \norm{\alpha} \braket{\overline{u}_{ql}}{u_{0,l}} - \dfrac{igz \norm{\alpha}^3 C_{ql}}{2k} & q \le \abs{l} \\
+        \norm{\alpha}\braket{\overline{u}_{ql}}{u_{0,l}}  & q > \abs{l}
     \end{cases} .
 \end{equation}
 
@@ -285,16 +286,16 @@ Close to $z = 0$, we have that
 Evaluating this at our initial state gives us
 \begin{equation}
     \begin{aligned}
-        \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} &\approx \abs{\alpha}^2 u^*(\mathbf{r}_1,0) u(\mathbf{r}_2, 0)\left\{ 1 - \frac{igz\abs{\alpha}^2}{2k} \left[ \abs{u(\mathbf{r}_2, 0)}^2 - \abs{u(\mathbf{r}_1, 0)}^2 \right]   \right\} \\ &\approx \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z)} \expval{\mathcal{E}(\mathbf{r}_2, z)}
+        \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} &\approx \alpha^*(\mathbf{r}_1,0) \alpha(\mathbf{r}_2, 0)\left\{ 1 - \frac{igz}{2k} \left[ \abs{\alpha(\mathbf{r}_2, 0)}^2 - \abs{\alpha(\mathbf{r}_1, 0)}^2 \right]   \right\} \\ &\approx \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z)} \expval{\mathcal{E}(\mathbf{r}_2, z)}
     \end{aligned}
 \end{equation}
 where the last approximate inequality comes from direct comparison with \eqref{eq:exp_val_field}. In particular, this shows that, for any $v_1$ and $v_2$, we have $H(\mathbf{r}_1, \mathbf{r}_2) \approx 0$.
 
 We can also use this to write the expectation value of the number operator:
 \begin{equation}
-    \expval{n(v)} = \expval{a^\dagger(v) a(v)} \approx \abs{\expval{a(v)}}^2 \approx \abs{\alpha \braket{v}{u}}^2 + \frac{gz \abs{\alpha}^4}{k} \Im \braket{v}{u} \braket{u, u}{u,v} 
+    \expval{n(v)} = \expval{a^\dagger(v) a(v)} \approx \abs{\expval{a(v)}}^2 \approx \abs{\braket{v}{\alpha}}^2 + \frac{gz}{k} \Im \braket{v}{\alpha} \braket{\alpha, \alpha}{\alpha,v} 
 \end{equation}
-When both $u$ and $v$ are arbitrary Laguerre-Gaussian modes (any $p,l,w$), we have that  $\Im \braket{v}{u} \braket{u, u}{u,v} = 0$, so there is no first order correction to the occupation number.
+When both $\alpha$ and $v$ are arbitrary Laguerre-Gaussian modes (any $p,l,w$), we have that  $\Im \braket{\alpha}{u} \braket{\alpha, \alpha}{\alpha,v} = 0$, so there is no first order correction to the occupation number.
 
 The other two point field function is
 \begin{equation}
@@ -306,30 +307,30 @@ The other two point field function is
 The appearance of the delta function here is important, because now
 \begin{equation}
     \begin{aligned}
-        \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} &\approx \alpha^2u(\mathbf{r}_1,z) u(\mathbf{r}_2,z) \left[ 1 - \frac{igz \abs{\alpha}^2}{2k} \left[ \abs{u(\mathbf{r}_2, z)}^2 + \abs{u(\mathbf{r}_1, z)}^2 \right] \right] - \frac{igz \alpha^2}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) u^2 (\mathbf{r}_2, z) \\ & \approx \expval{\mathcal{E}(\mathbf{r}_1, z)} \expval{\mathcal{E}(\mathbf{r}_2, z)} - \frac{igz \alpha^2}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) u^2 (\mathbf{r}_2, z)
+        \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} &\approx \alpha(\mathbf{r}_1,z) \alpha(\mathbf{r}_2,z) \left[ 1 - \frac{igz }{2k} \left[ \abs{\alpha(\mathbf{r}_2, z)}^2 + \abs{\alpha(\mathbf{r}_1, z)}^2 \right] \right] - \frac{igz }{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z) \\ & \approx \expval{\mathcal{E}(\mathbf{r}_1, z)} \expval{\mathcal{E}(\mathbf{r}_2, z)} - \frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z)
     \end{aligned}
 \end{equation}
 
 Therefore, we may conclude that
 \begin{equation}
-    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz \alpha^2}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) u^2 (\mathbf{r}_2, z)
+    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z)
 \end{equation}
 and
 \begin{equation}
-    f(v_1, v_2) \approx -\frac{igz \alpha^2}{2k} \braket{v_1,v_2}{u,u} .
+    f(v_1, v_2) \approx -\frac{igz}{2k} \braket{v_1,v_2}{\alpha, \alpha} .
 \end{equation}
 
 This leads us to a minimum quadrature variance for mode $v$ of
 \begin{equation}
-    \lambda_- = \frac{1}{2} - \frac{z}{2k} \abs{g\alpha^2\braket{v,v}{u,u}}
+    \lambda_- = \frac{1}{2} - \frac{z}{2k} \abs{g\braket{v,v}{\alpha, \alpha}}
 \end{equation}
 and an optimal Duan parameter for modes $v_1$ and $v_2$ of
 \begin{equation}
-    D_{\text{opt}} = 2 - \frac{2z}{k} \abs{g\alpha^2\braket{v_1,v_2}{u,u}}.
+    D_{\text{opt}} = 2 - \frac{2z}{k} \abs{g\braket{v_1,v_2}{\alpha, \alpha}}.
 \end{equation}
-The corresponding angles are $\phi_{\text{squeezing}} = (-\pi/2 \pm \pi + \arg g\alpha^2\braket{v,v}{u,u}) / 2$ and $\phi_{\text{duan}} = (-\pi/2 \pm \pi + \arg g\alpha^2\braket{v_1,v_2}{u,u}) / 2$
+The corresponding angles are $\phi_{\text{squeezing}} = (-\pi/2 \pm \pi + \arg g \braket{v,v}{\alpha,\alpha}) / 2$ and $\phi_{\text{duan}} = (-\pi/2 \pm \pi + \arg g\braket{v_1,v_2}{\alpha,\alpha}) / 2$
 
-At this point, it becomes clear that the overlaps of the form $\braket{v_1,v_2}{u,u}$ are the ones that dominate this sort of process. On the other hand, the generation of radial orders comes from the properties of the different overlap $\braket{v,u}{u,u}$, which appears in \eqref{eq:expval_anihilation}. It is therefore hard to see any special implication of the selection rules here.
+At this point, it becomes clear that the overlaps of the form $\braket{v_1,v_2}{\alpha,\alpha}$ are the ones that dominate this sort of process. On the other hand, the generation of radial orders comes from the properties of the different overlap $\braket{v,\alpha}{\alpha,\alpha}$, which appears in \eqref{eq:expval_anihilation}. It is therefore hard to see any special implication of the selection rules here.
 
 Consider the case where all the involved modes are vortices: $u(\mathbf{r}) = u_r(r)e^{il_u\phi}$ and similarly for the $v$ functions. We have squeezing if $l_v = l_u$ and we have entanglement if $l_{v_1} + l_{v_2} = 2l_u$. If all the radial functions are positive, as is the case for $LG_{0,0}$ and $LG_{0,\pm1}$, and $\alpha$ is positive, then the optimal angles are both $\text{sign}(g)\pi / 4$. 
 
@@ -359,7 +360,86 @@ where $\xi_1$ and $\xi_2$ are independent real Gaussian white noises with zero m
 \begin{equation}
     \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = \delta_{jk} \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'} \delta_{\tilde{z}, \tilde{z}'}
 \end{equation}
-For a coherent initial state in the mode $u$, we have that $\psi_1(\tilde{\mathbf{r}}, 0) = \alpha u(\tilde{\mathbf{r}}, 0)$ and $\psi_2(\tilde{\mathbf{r}}, 0) = \alpha^* u^*(\tilde{\mathbf{r}}, 0)$. 
+For a coherent initial state in the mode $u$, we have that $\psi_1(\tilde{\mathbf{r}}, 0) = \alpha(\tilde{\mathbf{r}}, 0)$ and $\psi_2(\tilde{\mathbf{r}}, 0) = \alpha^*(\tilde{\mathbf{r}}, 0)$. 
+
+\section{Purely nonlinear approach}
+
+Let us make a modification to our equations of motion where
+\begin{equation}
+    2ik \partial_z \mathcal{E}(\mathbf{r}, z) = \int_{\mathbb{R}^2}g(\mathbf{s})\mathcal{E}^\dagger(\mathbf{r} - \mathbf{s}, z) \mathcal{E} (\mathbf{r} - \mathbf{s}, z) d\mathbf{s} \ \mathcal{E} (\mathbf{r}, z).
+\end{equation}
+
+In this form, the equation has a constant of motion $\mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E} (\mathbf{r}, z)$, which leads us to the exact solution
+\begin{equation}
+    \begin{aligned}
+        \mathcal{E}(\mathbf{r}, z) &= \exp \left[-\frac{iz}{2k}\int_{\mathbb{R}^2}g(\mathbf{s})\mathcal{E}^\dagger(\mathbf{r} - \mathbf{s}, 0) \mathcal{E} (\mathbf{r} - \mathbf{s}, 0) d\mathbf{s} \right] \mathcal{E} (\mathbf{r}, 0) \\ &= : \exp \left[\int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k} - 1 \right)\mathcal{E}^\dagger(\mathbf{r} - \mathbf{s}, 0) \mathcal{E} (\mathbf{r} - \mathbf{s}, 0) d\mathbf{s} \right] : \mathcal{E} (\mathbf{r}, 0)
+    \end{aligned}
+\end{equation}
+
+In the last line, we used an important result known as the normal ordering theorem \cite{PhysRevA.42.4102, Blow:91}. This allows us to simply calculate the expectation value for the field in an initial coherent state:
+
+\begin{equation}
+    \label{eq:exp_val_field_just_nl}
+    \expval{\mathcal{E}(\mathbf{r}, z)} =  \exp \left[\int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k} - 1 \right)\abs{\alpha(\mathbf{r} - \mathbf{s}, 0)}^2 d\mathbf{s} \right] u(\mathbf{r}, 0)
+\end{equation}
+
+We see that \eqref{eq:exp_val_field} is then a first order approximation of \eqref{eq:exp_val_field_just_nl} with $g(\mathbf{s}) = g_0 \delta(\mathbf{s})$. Nonetheless, we see that we get singularities in the full expression when using this form of $g$. Let us then choose $g$ as proportional to an approximation of the delta function.  For definiteness, let us define
+\begin{equation}
+    \delta_0(x,a) = \frac{\Theta(a/2-\abs{x})}{a},
+\end{equation}
+which approximates the delta distribution as $a \to 0$. Here, $\Theta(x)$ is the step function. Let us denote $\delta_0(\mathbf{r}, a) = \delta_0(x, a) \delta_0(y, a)$. We then choose $g(\mathbf{s}) = g_0 \delta_0(\mathbf{s})$.
+
+We will usually make the approximation that the support of the response function $g$ is much smaller than the characteristic distances of the mode $\alpha$. We can then make the approximation
+
+\begin{equation}
+    \expval{\mathcal{E}(\mathbf{r}, z)} =  \exp \left[G(z) \abs{\alpha(\mathbf{r}, 0)}^2\right] \alpha(\mathbf{r}, 0)
+\end{equation}
+where
+\begin{equation}
+    G(z) = \int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k} - 1 \right) d\mathbf{s} = a^2 \left(e^{-izg_0/2ka^2} - 1 \right)
+\end{equation}
+Notice then that, in the general case, this is quite dependent on the value of $a$. Nonetheless, when $z\abs{g_0}/2ka^2 \ll 1$, we get
+\begin{equation}
+    G(z) \approx -\frac{izg_0}{2k},
+\end{equation}
+which is independent of $a$. 
+
+Following the result of \cite{Blow:91} we can calculate
+\begin{equation}
+    \label{eq:first_expression_F}
+    \begin{aligned}
+        F(\mathbf{r}_1, \mathbf{r}_2) \approx & \alpha(\mathbf{r}_1, 0) \alpha(\mathbf{r}_2, 0) \exp\left[ G(z)( \abs{\alpha(\mathbf{r}_1)}^2 + \abs{\alpha(\mathbf{r}_2)^2} ) \right] \\ &\times \left[ e^{-ig(\mathbf{r}_1 - \mathbf{r}_2)z / 2k + \abs{\alpha(\mathbf{r}_1)}^2 G_1(\mathbf{r_1} - \mathbf{r}_2)} - 1 \right]
+    \end{aligned} 
+\end{equation}
+where
+\begin{equation}
+    \begin{aligned}
+        G_1(\mathbf{r}, z) &= \frac{1}{2} \int_{\mathbb{R}^2} (e^{-izg(\mathbf{s}-\mathbf{r})} - 1) (e^{-izg(\mathbf{s})} - 1) d\mathbf{s} \\ &= \frac{a^4(e^{-i g_0 z / 2ka^2 } - 1)^2}{2}\delta_1(\mathbf{r}, a) \\ &\approx -\frac{(g_0 z / 2k)^2}{2}\delta_1(\mathbf{r}, a)
+    \end{aligned}
+\end{equation}
+where we have defined
+\begin{equation}
+    \delta_1(x, a) = \frac{(a - \abs{x}) \Theta(a - \abs{x})}{a^2}
+\end{equation}
+as another approximation of the delta function. 
+
+Notice, then, that, for modes with variation on a scale much larger than $a$, the second line of \eqref{eq:first_expression_F} is essentially proportional to $\delta(\mathbf{r}_1 - \mathbf{r}_2)$, and we may write
+\begin{equation}
+    F(\mathbf{r}_1, \mathbf{r}_2) \approx \alpha(\mathbf{r}_1, z)^2 \overline{F}(\mathbf{r}_1, a) \delta(\mathbf{r}_1 - \mathbf{r}_2)
+\end{equation}
+where 
+\begin{equation}
+    \alpha(\mathbf{r},z) = \alpha(\mathbf{r}, 0)e^{-ig_0 z\abs{\alpha(\mathbf{r}, 0)}^2 / 2k}
+\end{equation}
+is the evolved field under the classical Kerr interaction and
+\begin{equation}
+    \overline{F}(\mathbf{r}, a) = \int_{\mathbb{R}^2}  \left\{\exp\left[-i \frac{g_0 z}{2k}\delta_0(\mathbf{s}, a) -\frac{1}{2}\left(\frac{g_0 z}{2k} \right)^2\delta_1(\mathbf{s}, a) \abs{\alpha(\mathbf{r})}^2 \right] - 1 \right\}d\mathbf{s}
+\end{equation}
+In general, this function presents a strong dependency on $a$. Nonetheless, if we also assume that $z^2\abs{g_0}^2\abs{\alpha(\mathbf{r})}^2/4k^2a^2 \ll 1$, then we may expand the exponential in a Taylor series and we get
+\begin{equation}
+    \overline{F}(\mathbf{r}, a) = -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right],
+\end{equation}
+which does not depend on $a$.
 
 
 \bibliography{refs}% Produces the bibliography via BibTeX.

@@ -22,18 +22,19 @@ N = 128
 dr = L / N
 dA = dr^2
 rs = LinRange(-L / 2, L / 2 - dr, N)
-α = 10e0
+α = 4000e0
 
 u0 = lg(rs, rs, l=0)
 
-g = -4e-3
+g = -4e-7
 G = g / (4 * dA)
+
 
 U0 = (α * u0, conj(α * u0))
 noise_prototype = similar.(U0, Float64)
 param = (; G)
 
-prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
+prob = GrossPitaevskiiProblem(U0, lengths; nonlinearity, position_noise_func, noise_prototype, param)
 alg = StrangSplitting()
 tspan = (0, 4e-2)
 nsaves = 128
@@ -43,10 +44,10 @@ zs, sol = solve(prob, alg, tspan; dt, nsaves, save_start=false)
 
 save_animation(Array(abs2.(sol[1])), "test.mp4")
 ##
-u0_many = stack(u0 for _ ∈ 1:1024) |> CuArray
+u0_many = stack(u0 for _ ∈ 1:512) |> CuArray
 U0 = (α * u0_many, conj(α * u0_many))
 noise_prototype = similar.(U0, Float64)
-prob = GrossPitaevskiiProblem(U0, lengths; dispersion, nonlinearity, position_noise_func, noise_prototype, param)
+prob = GrossPitaevskiiProblem(U0, lengths;  nonlinearity, position_noise_func, noise_prototype, param)
 
 v = lg(rs, rs, l=0)
 v1 = lg(rs, rs, l=1)
@@ -73,6 +74,8 @@ R00 = (v .^ 2) ⋅ (u0 .^ 2) * dA
 D_opt_linear = @. 2 - zs * abs(g * α^2 * R12)
 λ₋_linear = @. 0.5 - zs * abs(g * α^2 * R00) / 4
 
+# R_angle = [sum(abs2.(v).^2 .* cis.(-g * α^2 * z * abs2.(v))) * dA for z ∈ zs] .|> angle
+
 
 with_theme(theme_latexfonts()) do
     fig = Figure(; fontsize=18, size=(1200, 600))
@@ -92,6 +95,7 @@ with_theme(theme_latexfonts()) do
     ax3 = Axis(fig[2, 1], ylabel="Squeezing angle", xlabel=L"z/z_R", yticks=([-π / 2, -π / 4, 0, π / 4, π / 2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
     scatter!(ax3, zs, ϕ_sq)
     ylims!(ax3, -π / 2, π / 2)
+    # lines!(ax3, zs, @. -π/4 - 130 * G * zs / 2)
 
     ax4 = Axis(fig[2, 2], ylabel="Optimal Duan angle", xlabel=L"z/z_R", yticks=([-π / 2, -π / 4, 0, π / 4, π / 2], [L"-π/2", L"-π/4", L"0", L"π/4", L"π/2"]))
     scatter!(ax4, zs, ϕ_duan)
