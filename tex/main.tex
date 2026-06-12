@@ -439,8 +439,33 @@ In general, this function presents a strong dependency on $a$. Nonetheless, if w
 \begin{equation}
     \overline{F}(\mathbf{r}, a) = -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right],
 \end{equation}
-which does not depend on $a$.
+which does not depend on $a$. Substituting this result, we obtain
+\begin{equation}
+    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right] \alpha(\mathbf{r}_1, z)^2  \delta(\mathbf{r}_1 - \mathbf{r}_2)
+\end{equation}
+and
+\begin{equation}
+    f(v_1, v_2) = -i\frac{g_0z}{2k}\braket{v_1, v_2}{\alpha(z), \alpha(z)} - \left( \frac{g_0z}{2k} \right)^2\braket{v_1, v_2, \alpha(z)}{\alpha(z), \alpha(z), \alpha(z)}
+\end{equation}
 
+Once again, following \cite{Blow:91}, we calculate
+\begin{equation}
+    H(\mathbf{r}_1, \mathbf{r}_2) = \alpha^*(\mathbf{r}_1, z) \alpha(\mathbf{r}_2, z)(e^{\abs{\alpha(\mathbf{r}_1)}^2G_2(\mathbf{r_1} - \mathbf{r}_2)} - 1)
+\end{equation}
+where
+\begin{equation}
+    G_2(\mathbf{r}) = a^4 \abs{e^{ig_0z/2ka^2} - 1}^2\delta_1(\mathbf{r}, a) \approx \left(\frac{g_0z}{2k}\right)^2\delta_1(\mathbf{r}, a)
+\end{equation}
+Therefore,
+\begin{equation}
+    H(\mathbf{r}_1, \mathbf{r}_2) \approx  \left( \frac{g_0z}{2k} \right)^2 \abs{\alpha(\mathbf{r}_1, z)}^4 \delta(\mathbf{r}_1-\mathbf{r}_2)
+\end{equation}
+and
+\begin{equation}
+    h(v_1, v_2) = \left(\frac{g_0z}{2k}\right)^2\braket{v_1, \alpha(z), \alpha(z)}{v_2, \alpha(z), \alpha(z)}
+\end{equation}
+
+Notice that $h(v, v) \ge 0$, so it reduces both squeezing and the violation of Duan's inequality.
 
 \bibliography{refs}% Produces the bibliography via BibTeX.
 
