@@ -52,7 +52,7 @@ select_angle(ϕ) = ϕ > 0 ? (ϕ - π) / 2 : (ϕ + π) / 2
 
 function compose_raw(raw)
     f00, f12, h00, h11, h22 = eachslice(stack(Array.(raw)), dims=1)
- 
+
     λ₊ = @. 0.5 + real(h00) + abs(f00)
     λ₋ = @. 0.5 + real(h00) - abs(f00)
     duan = @. 2 * (1 + real(h11 + h22)) - 4abs(f12)
@@ -66,4 +66,4 @@ function compose_raw(raw)
     λ₊, λ₋, duan, ϕ_sq, ϕ_duan
 end
 
-decibels(P, P0 = one(P) / 2) = 10 * log10(P / P0)
+decibels(P, P0=one(P) / 2) = P > 0 ? 10 * log10(P / P0) : oftype(P0, NaN)

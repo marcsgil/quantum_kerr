@@ -22,21 +22,21 @@ N = 128
 dr = L / N
 dA = dr^2
 rs = LinRange(-L / 2, L / 2 - dr, N)
-α = 4000e0
+α = 1e2
 
-u0 = lg(rs, rs, l=0)
+u0 = α * lg(rs, rs, l=0)
 
-g = -4e-7
+g = 4e-7
 G = g / (4 * dA)
 
 
-U0 = (α * u0, conj(α * u0))
+U0 = (u0, conj(u0))
 noise_prototype = similar.(U0, Float64)
 param = (; G)
 
 prob = GrossPitaevskiiProblem(U0, lengths; nonlinearity, position_noise_func, noise_prototype, param)
 alg = StrangSplitting()
-tspan = (0, 4e-2)
+tspan = (0, 0.1)
 nsaves = 128
 dt = tspan[end] / 128
 ##
@@ -76,19 +76,18 @@ D_opt_linear = @. 2 - zs * abs(g * α^2 * R12)
 
 # R_angle = [sum(abs2.(v).^2 .* cis.(-g * α^2 * z * abs2.(v))) * dA for z ∈ zs] .|> angle
 
-
 with_theme(theme_latexfonts()) do
     fig = Figure(; fontsize=18, size=(1200, 600))
 
     ax1 = Axis(fig[1, 1], ylabel="Quadrature Variance (dB)")
     lines!(ax1, zs, decibels.(λ₋), label=L"\lambda_-", linewidth=4)
-    lines!(ax1, zs, decibels.(λ₋_linear), label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
+    # lines!(ax1, zs, decibels.(λ₋_linear), label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
     axislegend(ax1, position=:lb)
     hidexdecorations!(ax1, ticks=false, grid=false)
 
     ax2 = Axis(fig[1, 2], ylabel=L"D_{\text{opt}} / D_0")
     lines!(ax2, zs, real.(duan) / 2, label="Positive P", linewidth=4)
-    lines!(ax2, zs, D_opt_linear / 2, label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
+    # lines!(ax2, zs, D_opt_linear / 2, label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
     axislegend(ax2, position=:lb)
     hidexdecorations!(ax2, ticks=false, grid=false)
 
