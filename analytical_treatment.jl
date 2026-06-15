@@ -60,8 +60,8 @@ angles_squeezing = map(z -> angle_squeezing(z, v, α, g, dA), zs)
 # R12 = abs((v1 .* v2) ⋅ (α .^ 2) * dA)
 # R00 = abs((v .^ 2) ⋅ (α .^ 2) * dA)
 
-duans_linear = @. 2 - zs * abs(g * R12)
-λ₋_linear = @. 0.5 - zs * abs(g * R00) / 4
+# duans_linear = @. 2 - zs * abs(g * R12)
+# λ₋_linear = @. 0.5 - zs * abs(g * R00) / 4
 
 with_theme(theme_latexfonts()) do
     fig = Figure(; fontsize=18, size=(1200, 700))
@@ -82,7 +82,7 @@ with_theme(theme_latexfonts()) do
     # lims = ax2.finallimits[]
     # lines!(ax2, zs, duans_linear / 2, label="Linear Theory", linestyle=:dot, linewidth=4, color=:black)
     # ylims!(ax2, lims.origin[2], lims.origin[2] + lims.widths[2])
-    
+
     for l ∈ 1:6
         v1 = lg(rs, rs, l=l)
         v2 = lg(rs, rs, l=-l)
@@ -93,7 +93,7 @@ with_theme(theme_latexfonts()) do
         lines!(ax2, zs, real.(duans) / 2, label=L"l = \pm %$l", linewidth=4)
         scatter!(ax4, zs, angles_duan)
     end
-    
+
     # axislegend(ax2, position=:rt)
     Legend(fig[1, 3], ax2)
     hidexdecorations!(ax2, ticks=false, grid=false)
@@ -102,12 +102,37 @@ with_theme(theme_latexfonts()) do
     scatter!(ax3, zs, angles_squeezing)
     ylims!(ax3, -π / 2, π / 2)
 
-    
-    
+
+
     ylims!(ax4, -π / 2, π / 2)
 
     linkxaxes!(ax1, ax3)
     linkxaxes!(ax2, ax4)
+
+    fig
+end
+##
+
+zs = LinRange(0, 0.02, 64)
+with_theme(theme_latexfonts()) do
+    fig = Figure(; fontsize=18, size=(1000, 700))
+
+    lmax = 3
+    for l ∈ 0:lmax
+        ax = Axis(fig[l ÷ 2, l % 2], xlabel = L"z/z_r", ylabel="VLF Criterion", title=L"l_1 = %$l")
+
+        v1 = lg(rs, rs, l=l)
+
+        for pmax ∈ 1:10
+            v2 = sum(lg(rs, rs; p, l = -l) for p ∈ 1:pmax) / √pmax
+            duans = map(z -> duan(z, v1, v2, α, g, dA), zs)
+            lines!(ax, zs, real.(duans) / 2, label=L"p_{\text{max}} = %$pmax", linewidth=4)
+        end
+
+        if l == lmax
+            Legend(fig[:, -1], ax)
+        end
+    end
 
     fig
 end
