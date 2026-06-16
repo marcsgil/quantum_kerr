@@ -1,3 +1,5 @@
+# Based on P Hyllus and J Eisert 2006 New J. Phys. 8 51
+
 using JuMP, Clarabel, LinearAlgebra
 
 function build_σ(n)
