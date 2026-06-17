@@ -13,9 +13,7 @@ function build_σ(n)
 end
 
 function fullyWit(γ, ns)
-    @assert length(ns) == 2 "The program only works for bipartite systems right now"
     n = sum(ns)
-    na = ns[1]
     @assert size(γ, 1) == 2n
     @assert size(γ, 2) == 2n
 
@@ -29,8 +27,12 @@ function fullyWit(γ, ns)
 
     @constraint(model, tr(im * σ * X2) == -1)
 
-    @constraint(model, real.(X1[1:2na, 1:2na]) .== real.(X2[1:2na, 1:2na]))
-    @constraint(model, real.(X1[2na+1:2n, 2na+1:2n]) .== real.(X2[2na+1:2n, 2na+1:2n]))
+    start = 1
+    for m ∈ ns
+        stop = start + 2m - 1
+        @constraint(model, real.(X1[start:stop, start:stop]) .== real.(X2[start:stop, start:stop]))
+        start = stop + 1
+    end
 
     optimize!(model)
 
@@ -52,6 +54,8 @@ r = 0.1
 ns = [1, 1]
 
 witness_val, Z = fullyWit(γ, ns)
+
+Z
 ##
 
 γ = [2 0 0 0 1 0 0 0;

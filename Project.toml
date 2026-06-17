@@ -2,6 +2,7 @@
 CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 Clarabel = "61c947e1-3e6d-4ee4-985a-eec8c727bd6e"
+Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
 FastGaussQuadrature = "442a2c76-b920-505d-bb47-c5924d526838"
 GeneralizedGrossPitaevskii = "1c32f1f8-fc12-41ee-a188-d96e58f04b51"
 Integrals = "de52edbc-65ea-441a-8357-d3a637375a31"
