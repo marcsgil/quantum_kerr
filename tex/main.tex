@@ -16,35 +16,12 @@ onecolumn,
 \begin{document}
 
 
-\title{Quantum Kerr OAM}
+\title{Chiral relations for entanglement in quantum self phase modulation}
 
-\author{Ann Author}
- \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
-\author{Second Author}%
- \email{Second.Author@institution.edu}
-\affiliation{%
- Authors' institution and/or address\\
- This line break forced with \textbackslash\textbackslash
-}%
-
-\collaboration{MUSO Collaboration}%\noaffiliation
-
-\author{Charlie Author}
- \homepage{http://www.Second.institution.edu/~Charlie.Author}
-\affiliation{
- Second institution and/or address\\
- This line break forced% with \\
-}%
-\affiliation{
- Third institution, the second for Charlie Author
-}%
-\author{Delta Author}
-\affiliation{%
- Authors' institution and/or address\\
- This line break forced with \textbackslash\textbackslash
-}%
-
-\collaboration{CLEO Collaboration}%\noaffiliation
+\author{M. Gil de Oliveira}
+\email{marcosgil@id.uff.br}
+\author{A. Z. Khoury}
+\affiliation{Instituto de F\'{i}sica, Universidade Federal Fluminense, 24210-346 Niter\'{o}i, RJ, Brazil}
 
 \date{\today}% It is always \today, today,
              %  but any date may be explicitly specified
@@ -106,7 +83,7 @@ and
 We are interested in observables of the form
 \begin{equation}
     \label{eq:quadrature_correlation}
-    C(v_1, v_2) = \frac{1}{2}\expval{\acomm{X(v_1)}{X(v_2)}} - \expval{X(v_1)}\expval{X(v_2)} =  \Re\left[ \frac{\braket{v_1}{v_2}}{2} + f(v_1, v_2) + h(v_1, v_2) \right],
+    \Gamma(v_1, v_2) = \frac{1}{2}\expval{\acomm{X(v_1)}{X(v_2)}} - \expval{X(v_1)}\expval{X(v_2)} =  \Re\left[ \frac{\braket{v_1}{v_2}}{2} + f(v_1, v_2) + h(v_1, v_2) \right],
 \end{equation}
 where we have defined
 \begin{equation}
@@ -137,9 +114,9 @@ which are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)
 
 \subsection{One mode correlation}
 
-Let us analyze the correlation matrix $\sigma_{jk} = \frac{1}{2}\expval{\acomm{Z_j}{Z_k}} - \expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $h(v,v) \in \mathbb{R}$, so we get
+Let us analyze the correlation matrix $\gamma_{jk} = \frac{1}{2}\expval{\acomm{Z_j}{Z_k}} - \expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $h(v,v) \in \mathbb{R}$, so we get
 \begin{equation}
-    \sigma = \begin{pmatrix}
+    \gamma = \begin{pmatrix}
         \frac{1}{2} + h(v,v) & 0 \\
         0 & \frac{1}{2} + h(v,v)
     \end{pmatrix} + \begin{pmatrix}
@@ -148,7 +125,7 @@ Let us analyze the correlation matrix $\sigma_{jk} = \frac{1}{2}\expval{\acomm{Z
     \end{pmatrix} .
 \end{equation}
 
-Notice that $f(e^{i\phi}v, e^{i\phi}v) = e^{-i2\phi} f(v, v)$. Therefore, we can diagonalize $\sigma$ by choosing $\phi = [\arg f(v, v) \pm \pi]/ 2$. We then get eigenvalues
+Notice that $f(e^{i\phi}v, e^{i\phi}v) = e^{-i2\phi} f(v, v)$. Therefore, we can diagonalize $\gamma$ by choosing $\phi = [\arg f(v, v) \pm \pi]/ 2$. We then get eigenvalues
 \begin{equation}
     \lambda_{\pm} = \frac{1}{2} + h(v, v) \pm \abs{f(v, v)} .
 \end{equation}
@@ -158,25 +135,25 @@ We then see that the quadrature rotated along the axis $\phi$ has minimum varian
 
 Consider two orthonormal states $v_1, v_2$, i.e., $\braket{v_j}{v_k} = \delta_{jk}$. The Duan criterion \cite{duan2000inseparability} states that if
 \begin{equation}
-    D = \expval{\Delta \left[X(v_1) + X(v_2)\right]^2} + \expval{\Delta\left[P(v_1) - P(v_2)\right]^2} < 2,
+    D = \frac{1}{2}\expval{ \left[\Delta X(v_1) + \Delta X(v_2)\right]^2} + \frac{1}{2}\expval{\left[\Delta P(v_1) - \Delta P(v_2)\right]^2} < 1,
 \end{equation}
 then the states are entangled.
 
-Let us define $v_\pm = v_1 \pm v_2$. We then have
+Let us define $v_\pm = (v_1 \pm v_2) / \sqrt{2}$. We then have
 \begin{equation}
     D = \expval{\Delta X(v_+)^2} + \expval{\Delta P(v_-)^2}.
 \end{equation}
-Although $v_{\pm}$ is not normalized, \eqref{eq:quadrature_correlation} still holds. We then obtain
+Applying \eqref{eq:quadrature_correlation} we obtain
 \begin{equation}
     \begin{aligned}
-        D &= 2 + h(v_+, v_+) + h(v_-, v_-) + \Re \left[f(v_+, v_+) - f(v_-, v_-) \right] \\ 
-        &= 2\left[1 + h(v_1, v_1) + h(v_2, v_2)\right] + 4 \Re f(v_1, v_2)
+        D &= 1 + h(v_+, v_+) + h(v_-, v_-) + \Re \left[f(v_+, v_+) - f(v_-, v_-) \right] \\ 
+        &= 1 + h(v_1, v_1) + h(v_2, v_2) + 2 \Re f(v_1, v_2)
     \end{aligned}
 \end{equation}
 
-Once again, we can maximize the possible violation by rotating the quadrature of the modes, say, $v_2$ by an angle $\phi = \left[\arg f(v_1, v_2) \pm \pi\right] / 2$. We get an optimal possible violation of
+Once again, we can maximize the possible violation by rotating the quadrature of the modes, say, $v_1$ by an angle $\phi = \left[\arg f(v_1, v_2) \pm \pi\right] / 2$. We get an optimal possible violation of
 \begin{equation}
-    D_{\text{opt}} = 2\left[1 + h(v_1, v_1) + h(v_2, v_2)\right] - 4 \abs{f(v_1, v_2)}
+    D_{\text{opt}} = 1 + h(v_1, v_1) + h(v_2, v_2) - 2 \abs{f(v_1, v_2)}
 \end{equation}
 
 
@@ -208,7 +185,7 @@ is independent of $z$ (take a $z$ derivative, use de equations of motion and int
 
 Our initial state will be a coherent one:
 \begin{equation}
-    \ket{\alpha} = D(\alpha) \ket{0} = \exp\left(a_0(\alpha)^\dagger - \alpha^* a(\alpha)\right) \ket{0}.
+    \ket{\alpha} = D(\alpha) \ket{0} = \exp\left(a(\alpha)^\dagger - a(\alpha)\right) \ket{0}.
 \end{equation}
 Here, $\alpha(\mathbf{r})$ is a non normalized spatial function, with norm $\norm{\alpha}$.
 This state is an eigenvector of the free field:
@@ -313,11 +290,14 @@ The appearance of the delta function here is important, because now
 
 Therefore, we may conclude that
 \begin{equation}
-    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z)
+    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z),
+\end{equation}
+\begin{equation}
+    f(v_1, v_2) \approx -\frac{igz}{2k} \braket{v_1,v_2}{\alpha, \alpha},
 \end{equation}
 and
 \begin{equation}
-    f(v_1, v_2) \approx -\frac{igz}{2k} \braket{v_1,v_2}{\alpha, \alpha} .
+    \Gamma(v_1, v_2) = \frac{\Re\braket{v_1}{v_2}}{2} + \frac{gz}{2k}\Im \braket{v_1,v_2}{\alpha, \alpha}
 \end{equation}
 
 This leads us to a minimum quadrature variance for mode $v$ of
@@ -326,13 +306,61 @@ This leads us to a minimum quadrature variance for mode $v$ of
 \end{equation}
 and an optimal Duan parameter for modes $v_1$ and $v_2$ of
 \begin{equation}
-    D_{\text{opt}} = 2 - \frac{2z}{k} \abs{g\braket{v_1,v_2}{\alpha, \alpha}}.
+    D_{\text{opt}} = 1 - \frac{z}{k} \abs{g\braket{v_1,v_2}{\alpha, \alpha}}.
 \end{equation}
 The corresponding angles are $\phi_{\text{squeezing}} = (-\pi/2 \pm \pi + \arg g \braket{v,v}{\alpha,\alpha}) / 2$ and $\phi_{\text{duan}} = (-\pi/2 \pm \pi + \arg g\braket{v_1,v_2}{\alpha,\alpha}) / 2$
 
-At this point, it becomes clear that the overlaps of the form $\braket{v_1,v_2}{\alpha,\alpha}$ are the ones that dominate this sort of process. On the other hand, the generation of radial orders comes from the properties of the different overlap $\braket{v,\alpha}{\alpha,\alpha}$, which appears in \eqref{eq:expval_anihilation}. It is therefore hard to see any special implication of the selection rules here.
+At this point, it becomes clear that the overlaps of the form $\braket{v_1,v_2}{\alpha,\alpha}$ are the ones that dominate this sort of process.
 
 Consider the case where all the involved modes are vortices: $u(\mathbf{r}) = u_r(r)e^{il_u\phi}$ and similarly for the $v$ functions. We have squeezing if $l_v = l_u$ and we have entanglement if $l_{v_1} + l_{v_2} = 2l_u$. If all the radial functions are positive, as is the case for $LG_{0,0}$ and $LG_{0,\pm1}$, and $\alpha$ is positive, then the optimal angles are both $\text{sign}(g)\pi / 4$. 
+
+\subsection{Selection Rules for two-mode entanglement in the first order treatment}
+
+Consider the case where the input mode is $u(\mathbf{r}) = LG_{0,l}(\mathbf{r})$, where
+\begin{equation}
+    LG_{pl}(\mathbf{r}; w) = (-1)^p\frac{\mathcal{N}_{pl}}{w}\!
+		\left(\frac{2r^2}{w^2}\right)^{\abs{l} / 2}
+		L_{p}^{\abs{l}}\left(\frac{2r^2}{w^2}\right)
+		e^{-r^2/w^2 + il\phi}
+\end{equation}
+is a Laguerre-Gaussian mode at the waist plane with radial order $p$, topological charge $l$ and waist $w$. The normalization constant is
+\begin{equation}
+    \mathcal{N}_{pl} = \sqrt{\frac{2}{\pi}}\sqrt{\frac{p!}{(p+|l|)!}}
+\end{equation}
+Furthermore, let $v_2 \propto LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l$. Now, define $l_1 = 2l-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
+\begin{equation}
+    \begin{aligned}
+        v_2^*(\mathbf{r}) u^2(\mathbf{r}) &\propto \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2}{w_2w^2} \left(\frac{2r^2}{w_2^2}\right)^{\abs{l_2} / 2} \left(\frac{2r^2}{w^2}\right)^{\abs{l}} e^{-r^2/w_1^2 + il_1\phi} \\ &= \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2 w_1^{2\abs{l} + \abs{l_2}}}{w_2^{\abs{l_2}+1}w^{2\abs{l} + 2}} \left(\frac{2r^2}{w_1^2}\right)^{\abs{l_1} / 2} \left(\frac{2r^2}{w_1^2}\right)^{p_{\text{max}}} e^{-r^2/w_1^2 + il_1\phi}
+    \end{aligned}
+\end{equation}
+where we have defined
+\begin{equation}
+    p_{\text{max}} = \frac{1}{2}(2\abs{l} + \abs{l_2} - \abs{2l - l_2}) = \begin{cases}
+        0, & ll_2 \le 0 \\
+        \min(2\abs{l}, \abs{l_2}), & ll_2 > 0
+    \end{cases}
+\end{equation}
+
+Then, by expanding the monomial that is raised to the power of $p_{\text{max}}$ in terms of Laguerre polynomials, we get
+\begin{equation}
+    v_2^*(\mathbf{r}) u^2(\mathbf{r}) = \frac{1}{w^2} \sum_{p=0}^{p_{\text{max}}} C_{p}LG_{pl_1}(\mathbf{r}; w_1)
+\end{equation}
+where
+\begin{equation}
+    C_p = \frac{p_{\text{max}}!\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2 w_1^{2\abs{l} + \abs{l_2} + 1}}{\mathcal{N}_{pl_1}w_2^{\abs{l_2}+1}w^{2\abs{l}}} \binom{p_{\text{max}} + \abs{l_1}}{p_{\text{max}} - p}
+\end{equation}
+
+Therefore, setting $v_1 = e^{i\phi}LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogonal to $v_2$, and considering the two mode subsystem formed by $v_1, v_2$, we get an optimal Duan violation of
+\begin{equation}
+    D_{\text{opt}} = \begin{cases}
+        1 - \dfrac{z \norm{\alpha}^2 C_p}{kw^2}, & p \le p_{\text{max}} \\
+        1, & p > p_{\text{max}}
+    \end{cases}
+\end{equation}
+
+Therefore, when $p \le p_{\text{max}}$, we have bipartite entanglement in this two-mode subsystem.
+
+\subsection{Multimode entanglement}
 
 
 \section{Numerical Considerations}
