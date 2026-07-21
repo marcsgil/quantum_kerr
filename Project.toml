@@ -1,12 +1,11 @@
 [deps]
-CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 Clarabel = "61c947e1-3e6d-4ee4-985a-eec8c727bd6e"
+Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
 EntanglementWitnesses = "3f03c6a9-c838-4a0c-931d-442f5915aa95"
 FastGaussQuadrature = "442a2c76-b920-505d-bb47-c5924d526838"
 GeneralizedGrossPitaevskii = "1c32f1f8-fc12-41ee-a188-d96e58f04b51"
 Integrals = "de52edbc-65ea-441a-8357-d3a637375a31"
 JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
 ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
-Reactant = "3c362404-f566-11ee-1572-e11a4b42c853"
 StructuredLight = "13204c95-a6e5-4c09-8c7b-ee09b09e0944"
