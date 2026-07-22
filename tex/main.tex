@@ -83,7 +83,7 @@ and
 We are interested in observables of the form
 \begin{equation}
     \label{eq:quadrature_correlation}
-    \Gamma(v_1, v_2) = \frac{1}{2}\expval{\acomm{X(v_1)}{X(v_2)}} - \expval{X(v_1)}\expval{X(v_2)} =  \Re\left[ \frac{\braket{v_1}{v_2}}{2} + f(v_1, v_2) + h(v_1, v_2) \right],
+    \Gamma(v_1, v_2) = \expval{\acomm{\Delta X(v_1)}{\Delta X(v_2)}} =  \Re\left[ \braket{v_1}{v_2} + 2f(v_1, v_2) + 2h(v_1, v_2) \right],
 \end{equation}
 where we have defined
 \begin{equation}
@@ -101,7 +101,7 @@ In terms of the fields, the required quantities are written as
     h(v_1, v_2) = \int v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2) H(\mathbf{r}_1, \mathbf{r}_2) d\mathbf{r}_1 d\mathbf{r}_2; \ \ \ H(\mathbf{r}_1, \mathbf{r}_2) = \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z) \mathcal{E}(\mathbf{r}_1, z)} - \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z)} \expval{\mathcal{E}(\mathbf{r}_1, z)}
 \end{equation}
 
-This formulation is useful because $f$ and $g$ are normally ordered expectation values, which can be directly obtained from stochastic simulations in the positive P representation. Furthermore, this representation also makes it easier to perform linear combinations of the modes, which will be useful later. These combinations will be based on the properties
+This formulation is useful because $f$ and $g$ are normally ordered expectation values, which can be more easily calculated. Furthermore, this representation also makes it easier to perform linear combinations of the modes, which will be useful later. These combinations will be based on the properties
 \begin{equation}
     \begin{aligned}
         f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3) \\
@@ -114,12 +114,12 @@ which are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)
 
 \subsection{One mode correlation}
 
-Let us analyze the correlation matrix $\gamma_{jk} = \frac{1}{2}\expval{\acomm{Z_j}{Z_k}} - \expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $h(v,v) \in \mathbb{R}$, so we get
+Let us analyze the correlation matrix $\gamma_{jk} = \expval{\acomm{Z_j}{Z_k}} - 2\expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $h(v,v) \in \mathbb{R}$, so we get
 \begin{equation}
     \gamma = \begin{pmatrix}
-        \frac{1}{2} + h(v,v) & 0 \\
-        0 & \frac{1}{2} + h(v,v)
-    \end{pmatrix} + \begin{pmatrix}
+       1 + 2h(v,v) & 0 \\
+        0 & 1 + 2h(v,v)
+    \end{pmatrix} + 2\begin{pmatrix}
         \Re f(v, v) & -\Im f(v,v) \\
         -\Im f(v,v) & -\Re f(v, v)
     \end{pmatrix} .
@@ -127,7 +127,7 @@ Let us analyze the correlation matrix $\gamma_{jk} = \frac{1}{2}\expval{\acomm{Z
 
 Notice that $f(e^{i\phi}v, e^{i\phi}v) = e^{-i2\phi} f(v, v)$. Therefore, we can diagonalize $\gamma$ by choosing $\phi = [\arg f(v, v) \pm \pi]/ 2$. We then get eigenvalues
 \begin{equation}
-    \lambda_{\pm} = \frac{1}{2} + h(v, v) \pm \abs{f(v, v)} .
+    \lambda_{\pm} = 1 + 2h(v, v) \pm 2\abs{f(v, v)} .
 \end{equation}
 We then see that the quadrature rotated along the axis $\phi$ has minimum variance of $\lambda_-$, while the one rotated along the axis $\phi + \pi/2$ has maximum variance $\lambda_+$. Furthermore, we have squeezing if $\abs{f(v, v)} > h(v, v)$.
 
@@ -293,22 +293,31 @@ Therefore, we may conclude that
     F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z),
 \end{equation}
 \begin{equation}
-    f(v_1, v_2) \approx -\frac{igz}{2k} \braket{v_1,v_2}{\alpha, \alpha},
+    f(v_1, v_2) \approx -\frac{igz}{2k} \braket{v_1,v_2}{\alpha, \alpha}.
+\end{equation}
+
+It will be useful to put this result in a dimensionless form. First, let us assume the input mode has a well define beam spot size $w$, and a Rayleigh range $z_R = kw^2/2$. By defining 
+\begin{equation}
+    Z = \frac{gz \norm{\alpha}^2}{4z_R}
+\end{equation}
+and $u(\mathbf{r}) = w\alpha(\mathbf{r}) / \norm{\alpha}$ we get
+\begin{equation}
+    f(v_1, v_2) \approx -iZ \braket{v_1,v_2}{u, u}
 \end{equation}
 and
 \begin{equation}
-    \Gamma(v_1, v_2) = \frac{\Re\braket{v_1}{v_2}}{2} + \frac{gz}{2k}\Im \braket{v_1,v_2}{\alpha, \alpha}
+    \Gamma(v_1, v_2) = \Re\braket{v_1}{v_2} + 2Z\Im \braket{v_1,v_2}{\alpha, \alpha}
 \end{equation}
 
 This leads us to a minimum quadrature variance for mode $v$ of
 \begin{equation}
-    \lambda_- = \frac{1}{2} - \frac{z}{2k} \abs{g\braket{v,v}{\alpha, \alpha}}
+    \lambda_- = 1 -  \abs{2Z\braket{v,v}{u, u}}
 \end{equation}
 and an optimal Duan parameter for modes $v_1$ and $v_2$ of
 \begin{equation}
-    D_{\text{opt}} = 1 - \frac{z}{k} \abs{g\braket{v_1,v_2}{\alpha, \alpha}}.
+    D_{\text{opt}} = 1 -  \abs{2Z\braket{v_1,v_2}{u, u}}.
 \end{equation}
-The corresponding angles are $\phi_{\text{squeezing}} = (-\pi/2 \pm \pi + \arg g \braket{v,v}{\alpha,\alpha}) / 2$ and $\phi_{\text{duan}} = (-\pi/2 \pm \pi + \arg g\braket{v_1,v_2}{\alpha,\alpha}) / 2$
+The corresponding angles are $\phi_{\text{squeezing}} = (-\pi/2 \pm \pi + \arg Z \braket{v,v}{\alpha,\alpha}) / 2$ and $\phi_{\text{duan}} = (-\pi/2 \pm \pi + \arg Z\braket{v_1,v_2}{\alpha,\alpha}) / 2$
 
 At this point, it becomes clear that the overlaps of the form $\braket{v_1,v_2}{\alpha,\alpha}$ are the ones that dominate this sort of process.
 
@@ -316,7 +325,7 @@ Consider the case where all the involved modes are vortices: $u(\mathbf{r}) = u_
 
 \subsection{Selection Rules for two-mode entanglement in the first order treatment}
 
-Consider the case where the input mode is $u(\mathbf{r}) = LG_{0,l}(\mathbf{r})$, where
+Consider the case where the input mode is $\alpha(\mathbf{r}) = \norm{\alpha}LG_{0,l}(\mathbf{r})$, where
 \begin{equation}
     LG_{pl}(\mathbf{r}; w) = (-1)^p\frac{\mathcal{N}_{pl}}{w}\!
 		\left(\frac{2r^2}{w^2}\right)^{\abs{l} / 2}
@@ -330,7 +339,7 @@ is a Laguerre-Gaussian mode at the waist plane with radial order $p$, topologica
 Furthermore, let $v_2 \propto LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l$. Now, define $l_1 = 2l-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
 \begin{equation}
     \begin{aligned}
-        v_2^*(\mathbf{r}) u^2(\mathbf{r}) &\propto \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2}{w_2w^2} \left(\frac{2r^2}{w_2^2}\right)^{\abs{l_2} / 2} \left(\frac{2r^2}{w^2}\right)^{\abs{l}} e^{-r^2/w_1^2 + il_1\phi} \\ &= \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2 w_1^{2\abs{l} + \abs{l_2}}}{w_2^{\abs{l_2}+1}w^{2\abs{l} + 2}} \left(\frac{2r^2}{w_1^2}\right)^{\abs{l_1} / 2} \left(\frac{2r^2}{w_1^2}\right)^{p_{\text{max}}} e^{-r^2/w_1^2 + il_1\phi}
+        v_2^*(\mathbf{r}) u^2(\mathbf{r}) &\propto \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2}{w_2} \left(\frac{2r^2}{w_2^2}\right)^{\abs{l_2} / 2} \left(\frac{2r^2}{w^2}\right)^{\abs{l}} e^{-r^2/w_1^2 + il_1\phi} \\ &= \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2 w_1^{2\abs{l} + \abs{l_2}}}{w_2^{\abs{l_2}+1}w^{2\abs{l}}} \left(\frac{2r^2}{w_1^2}\right)^{\abs{l_1} / 2} \left(\frac{2r^2}{w_1^2}\right)^{p_{\text{max}}} e^{-r^2/w_1^2 + il_1\phi}
     \end{aligned}
 \end{equation}
 where we have defined
@@ -343,7 +352,7 @@ where we have defined
 
 Then, by expanding the monomial that is raised to the power of $p_{\text{max}}$ in terms of Laguerre polynomials, we get
 \begin{equation}
-    v_2^*(\mathbf{r}) u^2(\mathbf{r}) = \frac{1}{w^2} \sum_{p=0}^{p_{\text{max}}} C_{p}LG_{pl_1}(\mathbf{r}; w_1)
+    v_2^*(\mathbf{r}) u^2(\mathbf{r}) = \sum_{p=0}^{p_{\text{max}}} C_{p}LG_{pl_1}(\mathbf{r}; w_1)
 \end{equation}
 where
 \begin{equation}
@@ -353,7 +362,7 @@ where
 Therefore, setting $v_1 = e^{i\phi}LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogonal to $v_2$, and considering the two mode subsystem formed by $v_1, v_2$, we get an optimal Duan violation of
 \begin{equation}
     D_{\text{opt}} = \begin{cases}
-        1 - \dfrac{z \norm{\alpha}^2 C_p}{kw^2}, & p \le p_{\text{max}} \\
+        1 - 2C_p Z, & p \le p_{\text{max}} \\
         1, & p > p_{\text{max}}
     \end{cases}
 \end{equation}
@@ -362,33 +371,7 @@ Therefore, when $p \le p_{\text{max}}$, we have bipartite entanglement in this t
 
 \subsection{Multimode entanglement}
 
-
-\section{Numerical Considerations}
-
-Note that, according to \eqref{eq:commutation_relations}, the field $\mathcal{E}(\mathbf{r})$ has dimensions of $1/\sqrt{\text{area}}$. Therefore, by dimensional analysis on eq. \eqref{eq:heisenberg_equation}, we have that $g$ is dimensionless. 
-
-In order to put the equation in a more convenient form, we introduce the dimensionless coordinate $\tilde{\mathbf{r}} = \mathbf{r}/w_0$ where $w_0$ is the waist of the input beam. We also introduce the dimensionless propagation distance $\tilde{z} = z/z_R$ where $z_R = kw_0^2/2$ is the Rayleigh range. Finally, we introduce the rescaled field $\tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = \sqrt{\Delta A} \mathcal{E}(\mathbf{r}, z)$, where $\Delta A$ is the area of a pixel in the numerical grid. In terms of these variables, the commutation relations read
-\begin{equation}
-    \comm{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})}{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})^\dagger} \approx \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'},
-\end{equation}
-while the equation of motion reads
-\begin{equation}
-    i \partial_{\tilde{z}} \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = - \frac{1}{4} \tilde{\nabla}^2 \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) +\frac{g}{4 \Delta \tilde{A}} \tilde{\mathcal{E}}^\dagger(\tilde{\mathbf{r}}, \tilde{z}) \tilde{\mathcal{E}}^2 (\tilde{\mathbf{r}}, \tilde{z})
-\end{equation}
-where $\Delta \tilde{A} = \Delta A/w_0^2$ is the area of a pixel in the rescaled coordinates.
-
-In the positive $P$ representation, the field $\tilde{\mathcal{E}}$ is represented by two independent complex stochastic fields $\psi_1$ and $\psi_2$ satisfying the stochastic equations (compare with \cite{PhysRevLett.98.120402})
-\begin{equation}
-    \begin{aligned}
-        i \partial_{\tilde{z}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_1(\tilde{\mathbf{r}}, \tilde{z}) + \frac{g}{4 \Delta \tilde{A}} \psi_2(\tilde{\mathbf{r  }}, \tilde{z}) \psi_1^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{\frac{ig}{4\Delta \tilde{A}}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \xi_1(\tilde{\mathbf{r}}, \tilde{z}) \\
-        -i \partial_{\tilde{z}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_2(\tilde{\mathbf{r}}, \tilde{z}) + \frac{g}{4 \Delta \tilde{A}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \psi_2^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{-\frac{ig}{4\Delta \tilde{A}}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) \xi_2(\tilde{\mathbf{r}}, \tilde{z})
-    \end{aligned}
-\end{equation}
-where $\xi_1$ and $\xi_2$ are independent real Gaussian white noises with zero mean and correlations
-\begin{equation}
-    \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = \delta_{jk} \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'} \delta_{\tilde{z}, \tilde{z}'}
-\end{equation}
-For a coherent initial state in the mode $u$, we have that $\psi_1(\tilde{\mathbf{r}}, 0) = \alpha(\tilde{\mathbf{r}}, 0)$ and $\psi_2(\tilde{\mathbf{r}}, 0) = \alpha^*(\tilde{\mathbf{r}}, 0)$. 
+\appendix
 
 \section{Purely nonlinear approach}
 
@@ -457,7 +440,7 @@ Notice, then, that, for modes with variation on a scale much larger than $a$, th
 \end{equation}
 where 
 \begin{equation}
-    \alpha(\mathbf{r},z) = \alpha(\mathbf{r}, 0)e^{-ig_0 z\abs{\alpha(\mathbf{r}, 0)}^2 / 2k}
+    \alpha(\mathbf{r},z) = \alpha(\mathbf{r}, 0)e^{-ig_0 z\abs{\alpha(\mathbf{r}, 0)}^2 / 2k} = \alpha(\mathbf{r}, 0)e^{-i Z\abs{u(\mathbf{r}, 0)}^2 / 4} 
 \end{equation}
 is the evolved field under the classical Kerr interaction and
 \begin{equation}
@@ -469,11 +452,13 @@ In general, this function presents a strong dependency on $a$. Nonetheless, if w
 \end{equation}
 which does not depend on $a$. Substituting this result, we obtain
 \begin{equation}
-    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right] \alpha(\mathbf{r}_1, z)^2  \delta(\mathbf{r}_1 - \mathbf{r}_2)
+    \begin{aligned}
+        F(\mathbf{r}_1, \mathbf{r}_2) &\approx -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right] \alpha(\mathbf{r}_1, z)^2  \delta(\mathbf{r}_1 - \mathbf{r}_2) \\&= -Z\left[i + Z \abs{u(\mathbf{r})}^2\right] u(\mathbf{r}_1, z)^2  \delta(\mathbf{r}_1 - \mathbf{r}_2)
+    \end{aligned}
 \end{equation}
 and
 \begin{equation}
-    f(v_1, v_2) = -i\frac{g_0z}{2k}\braket{v_1, v_2}{\alpha(z), \alpha(z)} - \left( \frac{g_0z}{2k} \right)^2\braket{v_1, v_2, \alpha(z)}{\alpha(z), \alpha(z), \alpha(z)}
+    f(v_1, v_2) = -iZ\braket{v_1, v_2}{u(z), u(z)} -Z^2\braket{v_1, v_2, u(z)}{u(z), u(z), u(z)}
 \end{equation}
 
 Once again, following \cite{Blow:91}, we calculate
@@ -486,14 +471,45 @@ where
 \end{equation}
 Therefore,
 \begin{equation}
-    H(\mathbf{r}_1, \mathbf{r}_2) \approx  \left( \frac{g_0z}{2k} \right)^2 \abs{\alpha(\mathbf{r}_1, z)}^4 \delta(\mathbf{r}_1-\mathbf{r}_2)
+    \begin{aligned}
+        H(\mathbf{r}_1, \mathbf{r}_2) &\approx \left( \frac{g_0z}{2k} \right)^2 \abs{\alpha(\mathbf{r}_1, z)}^4 \delta(\mathbf{r}_1-\mathbf{r}_2) \\
+        &= Z^2 \abs{u(\mathbf{r}_1, z)}^4 \delta(\mathbf{r}_1-\mathbf{r}_2)
+    \end{aligned}
 \end{equation}
 and
 \begin{equation}
-    h(v_1, v_2) = \left(\frac{g_0z}{2k}\right)^2\braket{v_1, \alpha(z), \alpha(z)}{v_2, \alpha(z), \alpha(z)}
+    h(v_1, v_2) = Z^2\braket{v_1, u(z), u(z)}{v_2, u(z), u(z)}
 \end{equation}
 
 Notice that $h(v, v) \ge 0$, so it reduces both squeezing and the violation of Duan's inequality.
+
+\section{Numerical Considerations}
+
+Note that, according to \eqref{eq:commutation_relations}, the field $\mathcal{E}(\mathbf{r})$ has dimensions of $1/\sqrt{\text{area}}$. Therefore, by dimensional analysis on eq. \eqref{eq:heisenberg_equation}, we have that $g$ is dimensionless. 
+
+In order to put the equation in a more convenient form, we introduce the dimensionless coordinate $\tilde{\mathbf{r}} = \mathbf{r}/w_0$ where $w_0$ is the waist of the input beam. We also introduce the dimensionless propagation distance $\tilde{z} = z/z_R$ where $z_R = kw_0^2/2$ is the Rayleigh range. Finally, we introduce the rescaled field $\tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = \sqrt{\Delta A} \mathcal{E}(\mathbf{r}, z)$, where $\Delta A$ is the area of a pixel in the numerical grid. In terms of these variables, the commutation relations read
+\begin{equation}
+    \comm{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})}{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})^\dagger} \approx \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'},
+\end{equation}
+while the equation of motion reads
+\begin{equation}
+    i \partial_{\tilde{z}} \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = - \frac{1}{4} \tilde{\nabla}^2 \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) +\frac{g}{4 \Delta \tilde{A}} \tilde{\mathcal{E}}^\dagger(\tilde{\mathbf{r}}, \tilde{z}) \tilde{\mathcal{E}}^2 (\tilde{\mathbf{r}}, \tilde{z})
+\end{equation}
+where $\Delta \tilde{A} = \Delta A/w_0^2$ is the area of a pixel in the rescaled coordinates.
+
+In the positive $P$ representation, the field $\tilde{\mathcal{E}}$ is represented by two independent complex stochastic fields $\psi_1$ and $\psi_2$ satisfying the stochastic equations (compare with \cite{PhysRevLett.98.120402})
+\begin{equation}
+    \begin{aligned}
+        i \partial_{\tilde{z}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_1(\tilde{\mathbf{r}}, \tilde{z}) + \frac{g}{4 \Delta \tilde{A}} \psi_2(\tilde{\mathbf{r  }}, \tilde{z}) \psi_1^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{\frac{ig}{4\Delta \tilde{A}}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \xi_1(\tilde{\mathbf{r}}, \tilde{z}) \\
+        -i \partial_{\tilde{z}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_2(\tilde{\mathbf{r}}, \tilde{z}) + \frac{g}{4 \Delta \tilde{A}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \psi_2^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{-\frac{ig}{4\Delta \tilde{A}}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) \xi_2(\tilde{\mathbf{r}}, \tilde{z})
+    \end{aligned}
+\end{equation}
+where $\xi_1$ and $\xi_2$ are independent real Gaussian white noises with zero mean and correlations
+\begin{equation}
+    \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = \delta_{jk} \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'} \delta_{\tilde{z}, \tilde{z}'}
+\end{equation}
+For a coherent initial state in the mode $u$, we have that $\psi_1(\tilde{\mathbf{r}}, 0) = \alpha(\tilde{\mathbf{r}}, 0)$ and $\psi_2(\tilde{\mathbf{r}}, 0) = \alpha^*(\tilde{\mathbf{r}}, 0)$. 
+
 
 \bibliography{refs}% Produces the bibliography via BibTeX.
 
