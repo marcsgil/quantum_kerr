@@ -29,6 +29,7 @@ with_theme(theme) do
         u = lg(rs, rs, l=l₀)
 
         ax = Axis(fig[Tuple(n)...], xlabel=L"Z", ylabel="Optimal Witness", title=L"l_0 = %$l₀, l_2 = %$l₂")
+        Z = nothing
 
         for p ∈ 0:3
             v2 = lg(rs, rs, l=l₂) * √dA
@@ -41,10 +42,12 @@ with_theme(theme) do
             end
             lines!(ax, zs, wits; label=L"p = %$p")
         end
+        display(Z)
 
         if Tuple(n) == size(ls)
             Legend(fig[:, end+1], ax)
         end
     end
+    save("Plots/optimal_two_modes.pdf", fig)
     fig
 end

@@ -2,7 +2,7 @@ using CairoMakie, StructuredLight
 
 include("analytical_correlations.jl")
 
-Zs = LinRange(0, 2, 16)
+Zs = LinRange(0, 2, 32)
 
 theme = merge(
     theme_latexfonts(),
@@ -38,5 +38,6 @@ with_theme(theme) do
             Legend(fig[:, end+1], ax)
         end
     end
+    save("Plots/duan.pdf", fig)
     fig
 end

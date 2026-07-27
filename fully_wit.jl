@@ -18,7 +18,7 @@ theme = merge(
 with_theme(theme) do
     fig = Figure()
 
-    l₀ = 0
+    l₀ = 2
     l₂ = 1
     l₁ = 2l₀ - l₂
 
@@ -39,5 +39,6 @@ with_theme(theme) do
         end
     end
     Legend(fig[:, end+1], ax)
+    save("Plots/fully_wit.pdf", fig)
     fig
 end

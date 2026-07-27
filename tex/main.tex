@@ -37,6 +37,8 @@ covered at length in the main body of the article.
 
 %\tableofcontents
 
+\section{Introduction}
+
 \section{Spatially Structured Bosonic Field}
 
 Consider a bosonic quantum field $\mathcal{E}(\mathbf{r})$ satisfying the commutation relations
@@ -153,6 +155,7 @@ Applying \eqref{eq:quadrature_correlation} we obtain
 
 Once again, we can maximize the possible violation by rotating the quadrature of the modes, say, $v_1$ by an angle $\phi = \left[\arg f(v_1, v_2) \pm \pi\right] / 2$. We get an optimal possible violation of
 \begin{equation}
+    \label{eq:optimized_duan}
     D_{\text{opt}} = 1 + h(v_1, v_1) + h(v_2, v_2) - 2 \abs{f(v_1, v_2)}
 \end{equation}
 
@@ -362,14 +365,77 @@ where
 Therefore, setting $v_1 = e^{i\phi}LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogonal to $v_2$, and considering the two mode subsystem formed by $v_1, v_2$, we get an optimal Duan violation of
 \begin{equation}
     D_{\text{opt}} = \begin{cases}
-        1 - 2C_p Z, & p \le p_{\text{max}} \\
+        1 - 2C_p \abs{Z}, & p \le p_{\text{max}} \\
         1, & p > p_{\text{max}}
     \end{cases}
 \end{equation}
 
 Therefore, when $p \le p_{\text{max}}$, we have bipartite entanglement in this two-mode subsystem.
 
-\subsection{Multimode entanglement}
+\begin{figure}
+    \label{fig:duan}
+    \centering
+    \includegraphics[width=\linewidth]{../Plots/duan.pdf}
+    \caption{Duan Criterion Violation}
+\end{figure}
+
+In Fig. \ref{fig:duan} we show the violation of the Duan criterion as a function of $Z$ for a few different combinations of $l_0$ and $l_2$. The selection rules can be clearly observed here: in all cases, the modes with $p > p_{\text{max}}$ fail to violate the entanglement criterion (which does not mean absence of entanglement).
+
+\subsection{Multipartite entanglement}
+
+The paper \cite{hyllus2006optimal} introduces a generalized class of entanglement witnesses $\mathcal{Z}$ such that $\Tr \mathcal{Z} \gamma < 1$ implies that the state $\rho$ corresponding to a correlation matrix $\gamma$ is entangled (in a sense made more precise later), while $\Tr \mathcal{Z} \gamma > 1$ for some separable state. The Duan criterion is a special case of a witness $\mathcal{Z}$ such that
+\begin{equation}
+    \mathcal{Z} = \frac{1}{4}\begin{pmatrix}
+        1 & 0 & 1 & 0 \\
+        0 & 1 & 0 & -1 \\
+        1 & 0 & 1 & 0 \\
+        0 & -1 & 0 & 1 
+    \end{pmatrix}.
+\end{equation}
+
+Multipartite entanglement is a subtle topic, because separabillity becomes more complicated once there are more than two parties. To handle this, \cite{hyllus2006optimal} introduces two witnesses types:
+
+\begin{itemize}
+    \item Witness for entanglement with respect to a given partition. Here, one fixes a partition and asks whether the state is separable according to this partition. There is a numerical routine called FullyWit that finds the optimal $\mathcal{Z}$ for a given state, in the sense that the violation $1 - \Tr \mathcal{Z} \gamma$ is maximized.
+    \item Witness for genuine multipartite entanglement. Suppose that now we have many parties and we want to decide if the state is separable with respect to these parties. One could then check individually all of the bipartitions with the previous method. For example, if we have three parties $A$, $B$ and $C$, one could check individually the bipartitions $AB|C$, $AC|B$ and $A|BC$. This is actually sufficient for pure states, but, for mixed ones, we could write a state as a mixture of biseparable ones, say $\rho = \frac{1}{3} \rho_{AB|C} + \frac{1}{3} \rho_{AC|B} + \frac{1}{3} \rho_{A|BC}$. The full state $\rho$ is not separable with respect to any bipartition, but its individual constituents are. We then say that a state is genuine multipartite entangled if it cannot be written as a convex sum of bipartite separable states. The reference \cite{hyllus2006optimal} also introduces a routine, MultiWit, that finds an optimized witness for genuine multipartite entanglement.
+\end{itemize}
+
+Now we employ these types of optimal entanglement witnesses for our Kerr system.
+
+\begin{figure}
+    \label{fig:optimal_two_modes}
+    \centering
+    \includegraphics[width=\linewidth]{../Plots/optimal_two_modes.pdf}
+    \caption{Violation of the optimized witness in the bipartite case.}
+\end{figure}
+
+In Fig. \ref{fig:optimal_two_modes} we consider the same setup as in Fig. \ref{fig:duan}, but use the optimized witness. We do not see a large difference with respect to \ref{fig:duan}, which shows that the optimization over the angles used to arrive at \eqref{eq:optimized_duan} already carries us a long way.
+
+\begin{figure}
+    \label{fig:fully_wit}
+    \centering
+    \includegraphics[width=0.6\linewidth]{../Plots/fully_wit.pdf}
+    \caption{Violation of the optimized witness for bipartite entanglement over multiple modes.}
+\end{figure}
+
+Now we turn to more parties. We set $l_0 = 1$ and $l_2 = 2$, corresponding to the bottom left plot of figures \ref{fig:duan} and \ref{fig:optimal_two_modes}. Furthermore, we define the parties as $A = LG_{0, 2}(w_2=w)$, $B = LG_{0, -1}(w_1)$, $C = LG_{1, -1}(w_1)$ and $D = LG_{2, -1}(w_1)$. According to the previous results, we only had entanglement between $A|B$ and $A|C$, while there were inconclusive results when considering $A|C$. In Fig. \ref{fig:fully_wit} we use the FullyWit routine to find optimized witnesses for the all the bipartitions of these four modes. The lines seem to cluster in three groups
+\begin{itemize}
+    \item $ACD|B$, $AC|BD$, $AD|BC$ and $A|BCD$ show the highest violation. These share the fact that $A$ and $B$ belong to different parties, suggesting that these share, in some sense, more entanglement.
+    \item $ABD|C$ and $AB|CD$ show an intermediate violation, still maintaining a linear start. Here, $A$ and $B$ belong to the same party, while $C$ is in the other one. 
+    \item $ABC|D$ shows the smallest violation, starting with a quadratic fall. Here, all the modes that were bipartite entangled sit on the same party.
+\end{itemize}
+
+
+\begin{figure}
+    \label{fig:multi_wit}
+    \centering
+    \includegraphics[width=0.6\linewidth]{../Plots/multi_wit.pdf}
+    \caption{Violation of the optimized witness for genuine multipartite entanglement.}
+\end{figure}
+
+Finally, we turn to the genuine multipartite case. In Fig. \ref{fig:multi_wit}, we show the witness for sets of the form $\{LG_{0, 1}(w_2 = w)\} \cup \{LG_{p, 3}(w_2 = w) \ \vert \ p \le P\}$, with $P$ varying from $0$ to $3$, while maintaining $l_0 = 2$. We once again see that the selection rule derived in the two mode case holds: we see a much stronger violation for the sets with $P \le p_{\text{max}} = 1$. However, although the $P=0$ case seems linear, $P=1$ seems more quadratic, although this is just visual.
+
+\section{Conclusion}
 
 \appendix
 
@@ -482,34 +548,6 @@ and
 \end{equation}
 
 Notice that $h(v, v) \ge 0$, so it reduces both squeezing and the violation of Duan's inequality.
-
-\section{Numerical Considerations}
-
-Note that, according to \eqref{eq:commutation_relations}, the field $\mathcal{E}(\mathbf{r})$ has dimensions of $1/\sqrt{\text{area}}$. Therefore, by dimensional analysis on eq. \eqref{eq:heisenberg_equation}, we have that $g$ is dimensionless. 
-
-In order to put the equation in a more convenient form, we introduce the dimensionless coordinate $\tilde{\mathbf{r}} = \mathbf{r}/w_0$ where $w_0$ is the waist of the input beam. We also introduce the dimensionless propagation distance $\tilde{z} = z/z_R$ where $z_R = kw_0^2/2$ is the Rayleigh range. Finally, we introduce the rescaled field $\tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = \sqrt{\Delta A} \mathcal{E}(\mathbf{r}, z)$, where $\Delta A$ is the area of a pixel in the numerical grid. In terms of these variables, the commutation relations read
-\begin{equation}
-    \comm{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})}{\tilde{\mathcal{E}}(\tilde{\mathbf{r}})^\dagger} \approx \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'},
-\end{equation}
-while the equation of motion reads
-\begin{equation}
-    i \partial_{\tilde{z}} \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) = - \frac{1}{4} \tilde{\nabla}^2 \tilde{\mathcal{E}}(\tilde{\mathbf{r}}, \tilde{z}) +\frac{g}{4 \Delta \tilde{A}} \tilde{\mathcal{E}}^\dagger(\tilde{\mathbf{r}}, \tilde{z}) \tilde{\mathcal{E}}^2 (\tilde{\mathbf{r}}, \tilde{z})
-\end{equation}
-where $\Delta \tilde{A} = \Delta A/w_0^2$ is the area of a pixel in the rescaled coordinates.
-
-In the positive $P$ representation, the field $\tilde{\mathcal{E}}$ is represented by two independent complex stochastic fields $\psi_1$ and $\psi_2$ satisfying the stochastic equations (compare with \cite{PhysRevLett.98.120402})
-\begin{equation}
-    \begin{aligned}
-        i \partial_{\tilde{z}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_1(\tilde{\mathbf{r}}, \tilde{z}) + \frac{g}{4 \Delta \tilde{A}} \psi_2(\tilde{\mathbf{r  }}, \tilde{z}) \psi_1^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{\frac{ig}{4\Delta \tilde{A}}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \xi_1(\tilde{\mathbf{r}}, \tilde{z}) \\
-        -i \partial_{\tilde{z}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) &= - \frac{1}{4} \tilde{\nabla}^2 \psi_2(\tilde{\mathbf{r}}, \tilde{z}) + \frac{g}{4 \Delta \tilde{A}} \psi_1(\tilde{\mathbf{r}}, \tilde{z}) \psi_2^2 (\tilde{\mathbf{r}}, \tilde{z}) + \sqrt{-\frac{ig}{4\Delta \tilde{A}}} \psi_2(\tilde{\mathbf{r}}, \tilde{z}) \xi_2(\tilde{\mathbf{r}}, \tilde{z})
-    \end{aligned}
-\end{equation}
-where $\xi_1$ and $\xi_2$ are independent real Gaussian white noises with zero mean and correlations
-\begin{equation}
-    \expval{\xi_j(\tilde{\mathbf{r}}, \tilde{z}) \xi_k(\tilde{\mathbf{r}}', \tilde{z}')} = \delta_{jk} \delta_{\tilde{\mathbf{r}}, \tilde{\mathbf{r}}'} \delta_{\tilde{z}, \tilde{z}'}
-\end{equation}
-For a coherent initial state in the mode $u$, we have that $\psi_1(\tilde{\mathbf{r}}, 0) = \alpha(\tilde{\mathbf{r}}, 0)$ and $\psi_2(\tilde{\mathbf{r}}, 0) = \alpha^*(\tilde{\mathbf{r}}, 0)$. 
-
 
 \bibliography{refs}% Produces the bibliography via BibTeX.
 
