@@ -3,14 +3,14 @@
  amsmath,amssymb,
  aps,
 pra,
-onecolumn,
+twocolumn,
 ]{revtex4-2}
 
 \usepackage{graphicx}% Include figure files
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
 \usepackage{physics}
-\usepackage{hyperref}% add hypertext capabilities
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}% add hypertext capabilities
 
 
 \begin{document}
@@ -44,11 +44,16 @@ covered at length in the main body of the article.
 Consider a bosonic quantum field $\mathcal{E}(\mathbf{r})$ satisfying the commutation relations
 \begin{equation}
     \label{eq:commutation_relations}
-    \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)} = \delta^{(2)}(\mathbf{r}_1 - \mathbf{r}_2), \ \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}(\mathbf{r}_2)} = \comm{\mathcal{E}^\dagger(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)} = 0\ 
+    \begin{aligned}
+        \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)}
+        &= \delta^{(2)}(\mathbf{r}_1 - \mathbf{r}_2), \\
+        \comm{\mathcal{E}(\mathbf{r}_1)}{\mathcal{E}(\mathbf{r}_2)}
+        &= \comm{\mathcal{E}^\dagger(\mathbf{r}_1)}{\mathcal{E}^\dagger(\mathbf{r}_2)} = 0.
+    \end{aligned}
 \end{equation}
 In the above equation and in what follows, $\mathbf{r} = (x, y)$ is the transverse coordinate.
 
-One can introduce ladder operators $a_v, a_v^\dagger$ associated with the spatial mode $v$ by the expression
+One can introduce ladder operators $a(v), a^\dagger(v)$ associated with the spatial mode $v$ by the expression
 \begin{equation}
     a(v) = \int_{\mathbb{R}^2} v^*(\mathbf{r}) \mathcal{E}(\mathbf{r}) d\mathbf{r}.
 \end{equation}
@@ -73,9 +78,9 @@ which leads to the uncertainty principle
 \begin{equation}
     \Delta X(v_1)^2 \Delta X(v_2)^2 \ge \frac{\abs{\Im \braket{v_1}{v_2}}^2}{4}.
 \end{equation}
-One could also introduce the complementary quadrature $P(v) = X(-iv)$ so that
+One could also introduce the complementary quadrature $P(v) = X(iv)$ so that
 \begin{equation}
-    \comm{X_{v_1}}{P_{v_2}} = i \Re \braket{v_1}{v_2}
+    \comm{X(v_1)}{P(v_2)} = i \Re \braket{v_1}{v_2}
 \end{equation}
 and
 \begin{equation}
@@ -85,7 +90,11 @@ and
 We are interested in observables of the form
 \begin{equation}
     \label{eq:quadrature_correlation}
-    \Gamma(v_1, v_2) = \expval{\acomm{\Delta X(v_1)}{\Delta X(v_2)}} =  \Re\left[ \braket{v_1}{v_2} + 2f(v_1, v_2) + 2h(v_1, v_2) \right],
+    \begin{aligned}
+        \Gamma(v_1, v_2)
+        &= \expval{\acomm{\Delta X(v_1)}{\Delta X(v_2)}} \\
+        &= \Re\left[\braket{v_1}{v_2} + 2f(v_1, v_2) + 2h(v_1, v_2)\right].
+    \end{aligned}
 \end{equation}
 where we have defined
 \begin{equation}
@@ -97,13 +106,28 @@ where we have defined
 
 In terms of the fields, the required quantities are written as
 \begin{equation}
-    f(v_1, v_2) = \int v_1^*(\mathbf{r}_2) v_2^*(\mathbf{r}_1) F(\mathbf{r}_1, \mathbf{r}_2) d\mathbf{r}_1 d\mathbf{r}_2; \ \ \ F(\mathbf{r}_1, \mathbf{r}_2) = \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} - \expval{\mathcal{E}(\mathbf{r}_1)}\expval{\mathcal{E}(\mathbf{r}_2)}
+    \begin{aligned}
+        f(v_1, v_2)
+        &= \int v_1^*(\mathbf{r}_2) v_2^*(\mathbf{r}_1)
+           F(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2, \\
+        F(\mathbf{r}_1, \mathbf{r}_2)
+        &= \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)}
+           - \expval{\mathcal{E}(\mathbf{r}_1)}\expval{\mathcal{E}(\mathbf{r}_2)}.
+    \end{aligned}
 \end{equation}
 \begin{equation}
-    h(v_1, v_2) = \int v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2) H(\mathbf{r}_1, \mathbf{r}_2) d\mathbf{r}_1 d\mathbf{r}_2; \ \ \ H(\mathbf{r}_1, \mathbf{r}_2) = \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z) \mathcal{E}(\mathbf{r}_1, z)} - \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z)} \expval{\mathcal{E}(\mathbf{r}_1, z)}
+    \begin{aligned}
+        h(v_1, v_2)
+        &= \int v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2)
+           H(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2, \\
+        H(\mathbf{r}_1, \mathbf{r}_2)
+        &= \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z) \mathcal{E}(\mathbf{r}_1, z)} \\
+        &\quad - \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z)}
+           \expval{\mathcal{E}(\mathbf{r}_1, z)}.
+    \end{aligned}
 \end{equation}
 
-This formulation is useful because $f$ and $g$ are normally ordered expectation values, which can be more easily calculated. Furthermore, this representation also makes it easier to perform linear combinations of the modes, which will be useful later. These combinations will be based on the properties
+This formulation is useful because $f$ and $h$ are normally ordered expectation values, which can be more easily calculated. Furthermore, this representation also makes it easier to perform linear combinations of the modes, which will be useful later. These combinations will be based on the properties
 \begin{equation}
     \begin{aligned}
         f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3) \\
@@ -116,28 +140,28 @@ which are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)
 
 \subsection{One mode correlation}
 
-Let us analyze the correlation matrix $\gamma_{jk} = \expval{\acomm{Z_j}{Z_k}} - 2\expval{Z_j}\expval{Z_k}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. We observe that $h(v,v) \in \mathbb{R}$, so we get
+Let us analyze the covariance matrix $\gamma_{jk} = \expval{\acomm{\Delta Z_j}{\Delta Z_k}}$ where $\mathbf{Z} = \left( X(v), P(v) \right)$. With our quadrature normalization, the vacuum variance is $1/2$. We therefore express quadrature variances in shot-noise units (SNU), defining $V_{\mathrm{SNU}}(Q) = 2\expval{(\Delta Q)^2}$, so that the vacuum variance is one and the eigenvalues of $\gamma$ are directly the quadrature variances in SNU. We observe that $h(v,v) \in \mathbb{R}$, so we get
 \begin{equation}
-    \gamma = \begin{pmatrix}
-       1 + 2h(v,v) & 0 \\
-        0 & 1 + 2h(v,v)
-    \end{pmatrix} + 2\begin{pmatrix}
-        \Re f(v, v) & -\Im f(v,v) \\
-        -\Im f(v,v) & -\Re f(v, v)
-    \end{pmatrix} .
+    \begin{aligned}
+        \gamma &= \begin{pmatrix} 1 + 2h(v,v) & 0 \\ 0 & 1 + 2h(v,v) \end{pmatrix} \\
+        &\quad + 2\begin{pmatrix} \Re f(v,v) & \Im f(v,v) \\ \Im f(v,v) & -\Re f(v,v) \end{pmatrix}.
+    \end{aligned}
 \end{equation}
 
 Notice that $f(e^{i\phi}v, e^{i\phi}v) = e^{-i2\phi} f(v, v)$. Therefore, we can diagonalize $\gamma$ by choosing $\phi = [\arg f(v, v) \pm \pi]/ 2$. We then get eigenvalues
 \begin{equation}
     \lambda_{\pm} = 1 + 2h(v, v) \pm 2\abs{f(v, v)} .
 \end{equation}
-We then see that the quadrature rotated along the axis $\phi$ has minimum variance of $\lambda_-$, while the one rotated along the axis $\phi + \pi/2$ has maximum variance $\lambda_+$. Furthermore, we have squeezing if $\abs{f(v, v)} > h(v, v)$.
+We then see that the quadrature rotated along the axis $\phi$ has minimum variance $\lambda_-$ in SNU, while the one rotated along the axis $\phi + \pi/2$ has maximum variance $\lambda_+$ in SNU. Furthermore, we have squeezing if $\abs{f(v, v)} > h(v, v)$.
 
 \subsection{Duan Criterion}
 
 Consider two orthonormal states $v_1, v_2$, i.e., $\braket{v_j}{v_k} = \delta_{jk}$. The Duan criterion \cite{duan2000inseparability} states that if
 \begin{equation}
-    D = \frac{1}{2}\expval{ \left[\Delta X(v_1) + \Delta X(v_2)\right]^2} + \frac{1}{2}\expval{\left[\Delta P(v_1) - \Delta P(v_2)\right]^2} < 1,
+    \begin{aligned}
+        D &= \frac{1}{2}\expval{\left[\Delta X(v_1) + \Delta X(v_2)\right]^2} \\
+        &\quad + \frac{1}{2}\expval{\left[\Delta P(v_1) - \Delta P(v_2)\right]^2} < 1.
+    \end{aligned}
 \end{equation}
 then the states are entangled.
 
@@ -148,12 +172,13 @@ Let us define $v_\pm = (v_1 \pm v_2) / \sqrt{2}$. We then have
 Applying \eqref{eq:quadrature_correlation} we obtain
 \begin{equation}
     \begin{aligned}
-        D &= 1 + h(v_+, v_+) + h(v_-, v_-) + \Re \left[f(v_+, v_+) - f(v_-, v_-) \right] \\ 
+        D &= 1 + h(v_+, v_+) + h(v_-, v_-) \\
+        &\quad + \Re\left[f(v_+, v_+) - f(v_-, v_-)\right] \\
         &= 1 + h(v_1, v_1) + h(v_2, v_2) + 2 \Re f(v_1, v_2)
     \end{aligned}
 \end{equation}
 
-Once again, we can maximize the possible violation by rotating the quadrature of the modes, say, $v_1$ by an angle $\phi = \left[\arg f(v_1, v_2) \pm \pi\right] / 2$. We get an optimal possible violation of
+Once again, we can maximize the possible violation by rotating the quadrature of one of the modes, say, $v_1$ by an angle $\phi = \arg f(v_1, v_2) \pm \pi$. We get an optimal possible violation of
 \begin{equation}
     \label{eq:optimized_duan}
     D_{\text{opt}} = 1 + h(v_1, v_1) + h(v_2, v_2) - 2 \abs{f(v_1, v_2)}
@@ -173,7 +198,7 @@ Let us decompose $\mathcal{E} = \mathcal{E}_0 + \delta\mathcal{E}$ where $\mathc
 \begin{equation}
     2ik \partial_z \mathcal{E}_0(\mathbf{r}, z) + \nabla^2 \mathcal{E}_0(\mathbf{r}, z) = 0, \ \ \ \mathcal{E}_0(\mathbf{r}, 0) = \mathcal{E}(\mathbf{r}, 0).
 \end{equation}
-Let $u$ be a solution of the paraxial wave equation $2ik \partial_z u(\mathbf{r}, z) + \nabla^2 u(\mathbf{r}, z) = 0$. Then, the anihilation operator corresponding to mode $u$ is given by
+Let $u$ be a solution of the paraxial wave equation $2ik \partial_z u(\mathbf{r}, z) + \nabla^2 u(\mathbf{r}, z) = 0$. Then, the annihilation operator corresponding to mode $u$ is given by
 \begin{equation}
     a(u, z) = \int u^*(\mathbf{r}, z) \mathcal{E}(\mathbf{r}, z) d\mathbf{r} = a_0(u) + \delta a(u, z)
 \end{equation}
@@ -181,7 +206,7 @@ where
 \begin{equation}
     a_0(u) = \int u^*(\mathbf{r}, z) \mathcal{E}_0(\mathbf{r}, z) d\mathbf{r}
 \end{equation}
-is independent of $z$ (take a $z$ derivative, use de equations of motion and integrate by parts) and
+is independent of $z$ (take a $z$ derivative, use the equations of motion, and integrate by parts) and
 \begin{equation}
     \delta a(u, z) = \int u^*(\mathbf{r}, z) \delta\mathcal{E}(\mathbf{r}, z) d\mathbf{r}    
 \end{equation}
@@ -190,13 +215,13 @@ Our initial state will be a coherent one:
 \begin{equation}
     \ket{\alpha} = D(\alpha) \ket{0} = \exp\left(a(\alpha)^\dagger - a(\alpha)\right) \ket{0}.
 \end{equation}
-Here, $\alpha(\mathbf{r})$ is a non normalized spatial function, with norm $\norm{\alpha}$.
+Here, $\alpha(\mathbf{r})$ is a not-necessarily-normalized spatial function, with norm $\norm{\alpha}$.
 This state is an eigenvector of the free field:
 \begin{equation}
-    \mathcal{E}_0(\mathbf{r}, z) \ket{\alpha} = \alpha(\mathbf{r}, z) \ket{\alpha, u}
+    \mathcal{E}_0(\mathbf{r}, z) \ket{\alpha} = \alpha(\mathbf{r}, z) \ket{\alpha}
 \end{equation}
 
-The variation $\delta \mathcal{E}$ satisfies
+Because $\mathcal{E}_0(\mathbf{r},0)=\mathcal{E}(\mathbf{r},0)$, the variation satisfies $\delta\mathcal{E}(\mathbf{r},0)=0$. It then obeys
 \begin{equation}
     2ik \partial_z \delta \mathcal{E}(\mathbf{r}, z) + \nabla^2 \delta\mathcal{E}(\mathbf{r}, z) = g \mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E}^2 (\mathbf{r}, z).
 \end{equation}
@@ -209,97 +234,157 @@ from which we obtain the Taylor expansion
     \delta \mathcal{E}(\mathbf{r}, z) \approx -\frac{igz}{2k} \mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0)
 \end{equation}
 
-For the complete field we then have
+For the complete field, using the same Taylor expansion about $z=0$, we then have
 \begin{equation}
-    \mathcal{E}(\mathbf{r}, z) \approx \mathcal{E}_0(\mathbf{r}, 0) - \frac{igz}{2k}\mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0)
+    \mathcal{E}(\mathbf{r}, z) \approx \mathcal{E}_0(\mathbf{r}, z) - \frac{igz}{2k}\mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0) + O(z^2)
 \end{equation}
-This expression will be the basis of our further developments.
+This expression will be the basis of our further developments. It treats the free diffraction exactly, while evaluating the nonlinear source at the input plane. It is therefore a short-distance approximation: within terms that already carry an explicit factor of $z$, freely propagated fields may be replaced by their values at $z=0$, since the resulting difference is of order $z^2$.
 
 \subsection{Expectation value of field}
 
 Taking expectation values, we arrive at
 \begin{equation}
     \label{eq:exp_val_field}
-    \expval{\mathcal{E}(\mathbf{r}, z)} \approx \alpha (\mathbf{r}, 0) - \frac{igz}{2k} \abs{\alpha(\mathbf{r}, 0)}^2 \alpha(\mathbf{r}, 0) .
+    \expval{\mathcal{E}(\mathbf{r}, z)} \approx \alpha (\mathbf{r}, z) - \frac{igz}{2k} \abs{\alpha(\mathbf{r}, 0)}^2 \alpha(\mathbf{r}, 0) + O(z^2).
 \end{equation}
-The expectation value of the annihilation operator $a_v$ corresponding to a spatial mode $v$ is then
+The expectation value of the annihilation operator $a(v)$ corresponding to a spatial mode $v$ is then
 \begin{equation}
-    \label{eq:expval_anihilation}
-    \expval{a_v} = \braket{v}{\alpha }  - \frac{igz}{2k} \braket{v, \alpha}{\alpha, \alpha}
+    \label{eq:expval_annihilation}
+    \begin{aligned}
+        \expval{a(v,z)} &= \braket{v(z)}{\alpha(z)} \\
+        &\quad - \frac{igz}{2k} \braket{v(0), \alpha(0)}{\alpha(0), \alpha(0)} + O(z^2)
+    \end{aligned}
 \end{equation}
-In the above expression we have introduced the second spatial overlap
+In the above expression we have introduced the higher order spatial overlap
 \begin{equation}
-    \braket{v_1, v_2}{u_1, u_2} = \int v_1^*(\mathbf{r},z) v_2^*(\mathbf{r},z) u_1(\mathbf{r},z) u_2(\mathbf{r},z) d\mathbf{r} .
+    \braket{v_1,\ldots,v_n}{u_1,\ldots,u_n}
+    = \int_{\mathbb{R}^2} \prod_{j=1}^{n} v_j^*(\mathbf{r},z)u_j(\mathbf{r},z)\,d\mathbf{r}.
 \end{equation}
 
 When $\alpha = \norm{\alpha}u_{0l}$ is a Laguerre-Gaussian mode with radial order $p=0$ and topological charge $l$, we have that
 \begin{equation}
-    \abs{u_{0l}(\mathbf{r}, z)} u_{0l}^2(\mathbf{r}, z) = \sum_{q=0}^{\abs{l}} C_{ql} \overline{u}_{ql}(\mathbf{r}, z)
+    \abs{u_{0l}(\mathbf{r}, 0)}^2 u_{0l}(\mathbf{r}, 0) = \sum_{q=0}^{\abs{l}} C_{ql} \overline{u}_{ql}(\mathbf{r}, 0)
 \end{equation}
 where $\overline{u}_{ql}$ are Laguerre-Gaussian modes with a reduced waist. Therefore, one may write
 \begin{equation}
-    \expval{a_v} = \norm{\alpha} \braket{v}{u_{0,l}}  - \frac{igz \norm{\alpha}^3}{2k} \sum_{q=0}^{\abs{l}} C_{ql} \braket{v}{\overline{u}_{ql}}
+    \begin{aligned}
+        \expval{a(v,z)} &= \norm{\alpha} \braket{v(z)}{u_{0,l}(z)} \\
+        &\quad - \frac{igz \norm{\alpha}^3}{2k} \sum_{q=0}^{\abs{l}} C_{ql}
+        \braket{v(0)}{\overline{u}_{ql}(0)} + O(z^2)
+    \end{aligned}
 \end{equation}
 
 In particular, when $v = \overline{u}_{ql}$, we have that
 \begin{equation}
-    \expval{a_{\overline{u}_{ql}}} = \begin{cases}
-        \norm{\alpha} \braket{\overline{u}_{ql}}{u_{0,l}} - \dfrac{igz \norm{\alpha}^3 C_{ql}}{2k} & q \le \abs{l} \\
-        \norm{\alpha}\braket{\overline{u}_{ql}}{u_{0,l}}  & q > \abs{l}
-    \end{cases} .
+    \begin{aligned}
+        \expval{a(\overline{u}_{ql},z)}
+        &= \norm{\alpha} \braket{\overline{u}_{ql}(z)}{u_{0,l}(z)} \\
+        &\quad - \begin{cases}
+            \dfrac{igz \norm{\alpha}^3 C_{ql}}{2k}, & q \le \abs{l}, \\
+            0, & q > \abs{l},
+        \end{cases}
+        + O(z^2).
+    \end{aligned}
 \end{equation}
 
 \subsection{Correlation functions}
 
+For compactness, let $\mathcal{E}_j(z)=\mathcal{E}(\mathbf{r}_j,z)$ and $\alpha_j(z)=\alpha(\mathbf{r}_j,z)$.
+
 One of the two point field function is
 \begin{equation}
-    \mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z) \approx \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \delta\mathcal{E}(\mathbf{r}_2, z) + \delta\mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z)
+    \begin{aligned}
+        \mathcal{E}^\dagger(\mathbf{r}_1,z)&\mathcal{E}(\mathbf{r}_2,z)
+        \approx \mathcal{E}_0^\dagger(\mathbf{r}_1,z)\mathcal{E}_0(\mathbf{r}_2,z) \\
+        &+ \mathcal{E}_0^\dagger(\mathbf{r}_1,z)\delta\mathcal{E}(\mathbf{r}_2,z)
+        + \delta\mathcal{E}^\dagger(\mathbf{r}_1,z)\mathcal{E}_0(\mathbf{r}_2,z).
+    \end{aligned}
 \end{equation}
 where we have only kept terms linear in $\delta \mathcal{E}$.
 
 Close to $z = 0$, we have that
 \begin{equation}
     \begin{aligned}
-        \mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z) \approx \mathcal{E}_0^\dagger(\mathbf{r}_1, 0) \mathcal{E}_0(\mathbf{r}_2, 0) - \frac{igz}{2k} \left[ \mathcal{E}_0^\dagger(\mathbf{r}_1, 0) \mathcal{E}_0^\dagger(\mathbf{r}_2, 0) \mathcal{E}^2_0 (\mathbf{r}_2, 0) - \mathcal{E}_0^\dagger(\mathbf{r}_1, 0)^2 \mathcal{E}_0 (\mathbf{r}_1, 0) \mathcal{E}_0 (\mathbf{r}_2, 0) \right]
+        \mathcal{E}^\dagger(\mathbf{r}_1,z)&\mathcal{E}(\mathbf{r}_2,z)
+        \approx \mathcal{E}_0^\dagger(\mathbf{r}_1,z)\mathcal{E}_0(\mathbf{r}_2,z) \\
+        &\quad - \frac{igz}{2k}\left[
+            \mathcal{E}_0^\dagger(\mathbf{r}_1,0)\mathcal{E}_0^\dagger(\mathbf{r}_2,0)\mathcal{E}_0^2(\mathbf{r}_2,0)
+            \right. \\
+        &\qquad\left.{}- \mathcal{E}_0^\dagger(\mathbf{r}_1,0)^2\mathcal{E}_0(\mathbf{r}_1,0)\mathcal{E}_0(\mathbf{r}_2,0)
+        \right]
     \end{aligned}
 \end{equation}
 Evaluating this at our initial state gives us
 \begin{equation}
     \begin{aligned}
-        \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} &\approx \alpha^*(\mathbf{r}_1,0) \alpha(\mathbf{r}_2, 0)\left\{ 1 - \frac{igz}{2k} \left[ \abs{\alpha(\mathbf{r}_2, 0)}^2 - \abs{\alpha(\mathbf{r}_1, 0)}^2 \right]   \right\} \\ &\approx \expval{\mathcal{E}^\dagger(\mathbf{r}_1, z)} \expval{\mathcal{E}(\mathbf{r}_2, z)}
+        \expval{\mathcal{E}_1^\dagger(z)\mathcal{E}_2(z)}
+        &\approx \alpha_1^*(z)\alpha_2(z) \\
+        &\quad - \frac{igz}{2k}\alpha_1^*(0)\alpha_2(0)
+        \left[\abs{\alpha_2(0)}^2-\abs{\alpha_1(0)}^2\right] \\
+        &\approx \expval{\mathcal{E}_1^\dagger(z)}
+        \expval{\mathcal{E}_2(z)} + O(z^2)
     \end{aligned}
 \end{equation}
-where the last approximate inequality comes from direct comparison with \eqref{eq:exp_val_field}. In particular, this shows that, for any $v_1$ and $v_2$, we have $H(\mathbf{r}_1, \mathbf{r}_2) \approx 0$.
+where the last approximation follows by direct comparison with \eqref{eq:exp_val_field}. In particular, this shows that $H(\mathbf{r}_1, \mathbf{r}_2) = O(z^2)$ and, therefore, $h(v_1, v_2) = O(z^2)$ for any $v_1$ and $v_2$.
 
 We can also use this to write the expectation value of the number operator:
 \begin{equation}
-    \expval{n(v)} = \expval{a^\dagger(v) a(v)} \approx \abs{\expval{a(v)}}^2 \approx \abs{\braket{v}{\alpha}}^2 + \frac{gz}{k} \Im \braket{v}{\alpha} \braket{\alpha, \alpha}{\alpha,v} 
+    \begin{aligned}
+        \expval{n(v)} &= \expval{a^\dagger(v)a(v)} \\
+        &\approx \abs{\expval{a(v)}}^2 \\
+        &\approx \abs{\braket{v(z)}{\alpha(z)}}^2 \\
+        &\quad + \frac{gz}{k}\Im\Bigl[
+        \braket{\alpha(0)}{v(0)} \\
+        &\qquad\qquad \times
+        \braket{v(0),\alpha(0)}{\alpha(0),\alpha(0)}\Bigr]
+        + O(z^2).
+    \end{aligned}
 \end{equation}
-When both $\alpha$ and $v$ are arbitrary Laguerre-Gaussian modes (any $p,l,w$), we have that  $\Im \braket{\alpha}{u} \braket{\alpha, \alpha}{\alpha,v} = 0$, so there is no first order correction to the occupation number.
+When both $\alpha$ and $v$ are arbitrary Laguerre-Gaussian modes (any $p,l,w$) at the common input waist plane, the overlap product appearing above is real, so there is no first-order correction to the occupation number.
 
 The other two point field function is
 \begin{equation}
     \begin{aligned}
-        \mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z) &\approx \mathcal{E}_0(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \mathcal{E}_0(\mathbf{r}_1, z) \delta\mathcal{E}(\mathbf{r}_2, z) + \delta\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) \\ &\approx \mathcal{E}_0(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) - \frac{igz}{2k} \left[ \mathcal{E}_0(\mathbf{r}_1, z)\mathcal{E}_0^\dagger(\mathbf{r}_2, z) \mathcal{E}^2_0 (\mathbf{r}_2, z) + \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}^2_0 (\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) \right] \\ &= \mathcal{E}_0(\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) - \frac{igz}{2k} \left[ \mathcal{E}_0^\dagger(\mathbf{r}_2, z) \mathcal{E}_0(\mathbf{r}_1, z)\mathcal{E}^2_0 (\mathbf{r}_2, z) + \mathcal{E}_0^\dagger(\mathbf{r}_1, z) \mathcal{E}^2_0 (\mathbf{r}_1, z) \mathcal{E}_0(\mathbf{r}_2, z) + \delta(\mathbf{r}_1 - \mathbf{r}_2) \mathcal{E}^2_0 (\mathbf{r}_2, z) \right]
+        \mathcal{E}(\mathbf{r}_1,z)\mathcal{E}(\mathbf{r}_2,z)
+        &\approx \mathcal{E}_0(\mathbf{r}_1,z)\mathcal{E}_0(\mathbf{r}_2,z)
+        + \mathcal{E}_0(\mathbf{r}_1,z)\delta\mathcal{E}(\mathbf{r}_2,z) \\
+        &\quad + \delta\mathcal{E}(\mathbf{r}_1,z)\mathcal{E}_0(\mathbf{r}_2,z) \\
+        &\approx \mathcal{E}_0(\mathbf{r}_1,z)\mathcal{E}_0(\mathbf{r}_2,z) \\
+        &\quad - \frac{igz}{2k}\left[\mathcal{E}_0(\mathbf{r}_1,0)\mathcal{E}_0^\dagger(\mathbf{r}_2,0)\mathcal{E}_0^2(\mathbf{r}_2,0)\right. \\
+        &\qquad\left.{}+ \mathcal{E}_0^\dagger(\mathbf{r}_1,0)\mathcal{E}_0^2(\mathbf{r}_1,0)\mathcal{E}_0(\mathbf{r}_2,0)\right] \\
+        &= \mathcal{E}_0(\mathbf{r}_1,z)\mathcal{E}_0(\mathbf{r}_2,z) \\
+        &\quad - \frac{igz}{2k}\left[\mathcal{E}_0^\dagger(\mathbf{r}_2,0)\mathcal{E}_0(\mathbf{r}_1,0)\mathcal{E}_0^2(\mathbf{r}_2,0)\right. \\
+        &\qquad{}+ \mathcal{E}_0^\dagger(\mathbf{r}_1,0)\mathcal{E}_0^2(\mathbf{r}_1,0)\mathcal{E}_0(\mathbf{r}_2,0) \\
+        &\qquad\left.{}+ \delta(\mathbf{r}_1-\mathbf{r}_2)\mathcal{E}_0^2(\mathbf{r}_2,0)\right] + O(z^2)
     \end{aligned}
 \end{equation}
 
 The appearance of the delta function here is important, because now
 \begin{equation}
     \begin{aligned}
-        \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)} &\approx \alpha(\mathbf{r}_1,z) \alpha(\mathbf{r}_2,z) \left[ 1 - \frac{igz }{2k} \left[ \abs{\alpha(\mathbf{r}_2, z)}^2 + \abs{\alpha(\mathbf{r}_1, z)}^2 \right] \right] - \frac{igz }{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z) \\ & \approx \expval{\mathcal{E}(\mathbf{r}_1, z)} \expval{\mathcal{E}(\mathbf{r}_2, z)} - \frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z)
+        \expval{\mathcal{E}_1(z)\mathcal{E}_2(z)}
+        &\approx \alpha_1(z)\alpha_2(z) \\
+        &\quad - \frac{igz}{2k}\alpha_1(0)\alpha_2(0)
+        \left(\abs{\alpha_2(0)}^2+\abs{\alpha_1(0)}^2\right) \\
+        &\quad - \frac{igz}{2k}\delta(\mathbf{r}_1-\mathbf{r}_2)
+        \alpha_2^2(0) \\
+        &\approx \expval{\mathcal{E}_1(z)}\expval{\mathcal{E}_2(z)} \\
+        &\quad - \frac{igz}{2k}\delta(\mathbf{r}_1-\mathbf{r}_2)\alpha_2^2(z)
+        + O(z^2)
     \end{aligned}
 \end{equation}
 
 Therefore, we may conclude that
 \begin{equation}
-    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, z),
+    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, 0) + O(z^2)
 \end{equation}
+and
 \begin{equation}
-    f(v_1, v_2) \approx -\frac{igz}{2k} \braket{v_1,v_2}{\alpha, \alpha}.
+    f(v_1, v_2) \approx -\frac{igz}{2k} \braket{v_1(0),v_2(0)}{\alpha(0), \alpha(0)} + O(z^2).
 \end{equation}
+In the remainder of this first-order treatment, we suppress the explicit input-plane arguments in higher-order overlaps.
 
-It will be useful to put this result in a dimensionless form. First, let us assume the input mode has a well define beam spot size $w$, and a Rayleigh range $z_R = kw^2/2$. By defining 
+It will be useful to put this result in a dimensionless form. First, let us assume the input mode has a well-defined beam spot size $w$ and a Rayleigh range $z_R = kw^2/2$. By defining
 \begin{equation}
     Z = \frac{gz \norm{\alpha}^2}{4z_R}
 \end{equation}
@@ -309,24 +394,46 @@ and $u(\mathbf{r}) = w\alpha(\mathbf{r}) / \norm{\alpha}$ we get
 \end{equation}
 and
 \begin{equation}
-    \Gamma(v_1, v_2) = \Re\braket{v_1}{v_2} + 2Z\Im \braket{v_1,v_2}{\alpha, \alpha}
+    \Gamma(v_1, v_2) = \Re\braket{v_1}{v_2} + 2Z\Im \braket{v_1,v_2}{u, u}
 \end{equation}
 
-This leads us to a minimum quadrature variance for mode $v$ of
+This leads us to a minimum quadrature variance in SNU for mode $v$ of
 \begin{equation}
-    \lambda_- = 1 -  \abs{2Z\braket{v,v}{u, u}}
+    \lambda_- = 1 -  2\abs{Z\braket{v,v}{u, u}}
 \end{equation}
 and an optimal Duan parameter for modes $v_1$ and $v_2$ of
 \begin{equation}
-    D_{\text{opt}} = 1 -  \abs{2Z\braket{v_1,v_2}{u, u}}.
+    D_{\text{opt}} = 1 -  2\abs{Z\braket{v_1,v_2}{u, u}}.
 \end{equation}
-The corresponding angles are $\phi_{\text{squeezing}} = (-\pi/2 \pm \pi + \arg Z \braket{v,v}{\alpha,\alpha}) / 2$ and $\phi_{\text{duan}} = (-\pi/2 \pm \pi + \arg Z\braket{v_1,v_2}{\alpha,\alpha}) / 2$
+The corresponding angles are $\phi_{\text{squeezing}} = (-\pi/2 \pm \pi + \arg Z \braket{v,v}{\alpha,\alpha}) / 2$ and $\phi_{\text{duan}} = -\pi/2 \pm \pi + \arg Z\braket{v_1,v_2}{\alpha,\alpha}$.
 
-At this point, it becomes clear that the overlaps of the form $\braket{v_1,v_2}{\alpha,\alpha}$ are the ones that dominate this sort of process.
+Consider the case where all the involved modes are vortices: $u(\mathbf{r}) = u_r(r)e^{il_u\phi}$ and similarly for the $v$ functions. The angular integrals vanish unless $l_v = l_u$ for squeezing and $l_{v_1} + l_{v_2} = 2l_u$ for entanglement. These OAM conditions are therefore necessary selection rules; when they are satisfied, squeezing or entanglement occurs only if the corresponding radial overlap is also nonzero.
 
-Consider the case where all the involved modes are vortices: $u(\mathbf{r}) = u_r(r)e^{il_u\phi}$ and similarly for the $v$ functions. We have squeezing if $l_v = l_u$ and we have entanglement if $l_{v_1} + l_{v_2} = 2l_u$. If all the radial functions are positive, as is the case for $LG_{0,0}$ and $LG_{0,\pm1}$, and $\alpha$ is positive, then the optimal angles are both $\text{sign}(g)\pi / 4$. 
+\subsection{Higher order solutions}
 
-\subsection{Selection Rules for two-mode entanglement in the first order treatment}
+This linearized solution has an obvious flaw if extended to higher $Z$: both $\lambda_-$ and $D_{\text{opt}}$ can get negative, which is nonphysical. Better approximations need to be used if one wants to extend the range of validity. In Appendix \ref{app:no_diffraction} we adapt the method of \cite{Blow:91} for spatial modes, which allows us to find analytic solutions if we ignore diffraction. The expressions are particularly simple:
+\begin{equation}
+    \begin{aligned}
+        f(v_1,v_2) &= -iZ\braket{v_1,v_2}{u(z),u(z)} \\
+        &\quad - Z^2\braket{v_1,v_2,u(z)}{u(z),u(z),u(z)};
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    h(v_1, v_2) = Z^2\braket{v_1, u(z), u(z)}{v_2, u(z), u(z)}.
+\end{equation}
+Here,
+\begin{equation}
+    u(\mathbf{r}, z) = u(\mathbf{r}, 0)e^{-i Z\abs{u(\mathbf{r}, 0)}^2}
+\end{equation}
+is the classical solution for pure self phase modulation (without diffraction).
+
+As better discussed in the appendix, it is first needed to introduce a modified Hamiltonian, that contains a characteristic response distance $a$. Then, a bunch of conditions are imposed so that there results do not depend on the such distance.
+
+When presenting our results in the next sections, we will employ this solution, which agrees with our linearized treatment to the first order.
+
+\textcolor{red}{OBS: There is another possible approximate solution that consists in writing $\mathcal{E}(\mathbf{r}, t) = \alpha(\mathbf{r},z) + \delta \mathcal{E}(\mathbf{r},z)$, where $\alpha(\mathbf{r},z)$ is the classical solution including diffraction. One then linearizes the equations around $\alpha$. This is a Bogoliubov theory. This yields an approximation that includes the diffraction, but it does not provide nice analytical expressions because the classical propagation can only be performed numerically. That is another route we could try.}
+
+\section{Selection Rules for two-mode entanglement in the first order treatment}
 
 Consider the case where the input mode is $\alpha(\mathbf{r}) = \norm{\alpha}LG_{0,l}(\mathbf{r})$, where
 \begin{equation}
@@ -337,12 +444,19 @@ Consider the case where the input mode is $\alpha(\mathbf{r}) = \norm{\alpha}LG_
 \end{equation}
 is a Laguerre-Gaussian mode at the waist plane with radial order $p$, topological charge $l$ and waist $w$. The normalization constant is
 \begin{equation}
-    \mathcal{N}_{pl} = \sqrt{\frac{2}{\pi}}\sqrt{\frac{p!}{(p+|l|)!}}
+    \mathcal{N}_{pl} = \sqrt{\frac{2}{\pi}}\sqrt{\frac{p!}{(p+|l|)!}}.
 \end{equation}
-Furthermore, let $v_2 \propto LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l$. Now, define $l_1 = 2l-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
+Furthermore, let $v_2 = LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l$. Now, define $l_1 = 2l-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
 \begin{equation}
     \begin{aligned}
-        v_2^*(\mathbf{r}) u^2(\mathbf{r}) &\propto \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2}{w_2} \left(\frac{2r^2}{w_2^2}\right)^{\abs{l_2} / 2} \left(\frac{2r^2}{w^2}\right)^{\abs{l}} e^{-r^2/w_1^2 + il_1\phi} \\ &= \frac{\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2 w_1^{2\abs{l} + \abs{l_2}}}{w_2^{\abs{l_2}+1}w^{2\abs{l}}} \left(\frac{2r^2}{w_1^2}\right)^{\abs{l_1} / 2} \left(\frac{2r^2}{w_1^2}\right)^{p_{\text{max}}} e^{-r^2/w_1^2 + il_1\phi}
+        v_2^*(\mathbf{r})u^2(\mathbf{r})
+        &= \frac{\mathcal{N}_{0l_2}\mathcal{N}_{0l}^2}{w_2}
+        \left(\frac{2r^2}{w_2^2}\right)^{\abs{l_2}/2}
+        \left(\frac{2r^2}{w^2}\right)^{\abs{l}}e^{-r^2/w_1^2+il_1\phi} \\
+        &= \frac{\mathcal{N}_{0l_2}\mathcal{N}_{0l}^2w_1^{2\abs{l}+\abs{l_2}}}
+        {w_2^{\abs{l_2}+1}w^{2\abs{l}}}
+        \left(\frac{2r^2}{w_1^2}\right)^{\abs{l_1}/2} \\
+        &\quad\times \left(\frac{2r^2}{w_1^2}\right)^{p_{\text{max}}}e^{-r^2/w_1^2+il_1\phi}
     \end{aligned}
 \end{equation}
 where we have defined
@@ -362,7 +476,7 @@ where
     C_p = \frac{p_{\text{max}}!\mathcal{N}_{0l_2} \mathcal{N}_{0l}^2 w_1^{2\abs{l} + \abs{l_2} + 1}}{\mathcal{N}_{pl_1}w_2^{\abs{l_2}+1}w^{2\abs{l}}} \binom{p_{\text{max}} + \abs{l_1}}{p_{\text{max}} - p}
 \end{equation}
 
-Therefore, setting $v_1 = e^{i\phi}LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogonal to $v_2$, and considering the two mode subsystem formed by $v_1, v_2$, we get an optimal Duan violation of
+Therefore, setting $v_1 = LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogonal to $v_2$, and considering the two mode subsystem formed by $v_1, v_2$, we get an optimal Duan violation of
 \begin{equation}
     D_{\text{opt}} = \begin{cases}
         1 - 2C_p \abs{Z}, & p \le p_{\text{max}} \\
@@ -370,20 +484,20 @@ Therefore, setting $v_1 = e^{i\phi}LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogo
     \end{cases}
 \end{equation}
 
-Therefore, when $p \le p_{\text{max}}$, we have bipartite entanglement in this two-mode subsystem.
+Therefore, for nonzero $Z$ within the first-order regime, when $p \le p_{\text{max}}$ we have bipartite entanglement in this two-mode subsystem. This selection rule was derived only for the two-mode Duan criterion and does not, by itself, imply a multipartite selection rule.
 
-\begin{figure}
-    \label{fig:duan}
+\begin{figure*}
     \centering
     \includegraphics[width=\linewidth]{../Plots/duan.pdf}
-    \caption{Duan Criterion Violation}
-\end{figure}
+    \caption{Duan Criterion Value}
+    \label{fig:duan}
+\end{figure*}
 
 In Fig. \ref{fig:duan} we show the violation of the Duan criterion as a function of $Z$ for a few different combinations of $l_0$ and $l_2$. The selection rules can be clearly observed here: in all cases, the modes with $p > p_{\text{max}}$ fail to violate the entanglement criterion (which does not mean absence of entanglement).
 
 \subsection{Multipartite entanglement}
 
-The paper \cite{hyllus2006optimal} introduces a generalized class of entanglement witnesses $\mathcal{Z}$ such that $\Tr \mathcal{Z} \gamma < 1$ implies that the state $\rho$ corresponding to a correlation matrix $\gamma$ is entangled (in a sense made more precise later), while $\Tr \mathcal{Z} \gamma > 1$ for some separable state. The Duan criterion is a special case of a witness $\mathcal{Z}$ such that
+The paper \cite{hyllus2006optimal} introduces a generalized class of entanglement witnesses $\mathcal{Z}$. For a specified separability class, a witness is a real, symmetric, positive semidefinite matrix satisfying $\Tr \mathcal{Z} \gamma_{\mathrm{sep}} \geq 1$ for every covariance matrix $\gamma_{\mathrm{sep}}$ of a state in that class. Therefore, if $\Tr \mathcal{Z} \gamma < 1$, every state with covariance matrix $\gamma$ lies outside the specified separability class. A value greater than or equal to one is inconclusive and does not establish separability. The Duan criterion is a special case of a witness $\mathcal{Z}$ such that
 \begin{equation}
     \mathcal{Z} = \frac{1}{4}\begin{pmatrix}
         1 & 0 & 1 & 0 \\
@@ -393,55 +507,56 @@ The paper \cite{hyllus2006optimal} introduces a generalized class of entanglemen
     \end{pmatrix}.
 \end{equation}
 
-Multipartite entanglement is a subtle topic, because separabillity becomes more complicated once there are more than two parties. To handle this, \cite{hyllus2006optimal} introduces two witnesses types:
+Multipartite entanglement is a subtle topic, because separability becomes more complicated once there are more than two parties. To handle this, \cite{hyllus2006optimal} introduces two types of witnesses:
 
 \begin{itemize}
-    \item Witness for entanglement with respect to a given partition. Here, one fixes a partition and asks whether the state is separable according to this partition. There is a numerical routine called FullyWit that finds the optimal $\mathcal{Z}$ for a given state, in the sense that the violation $1 - \Tr \mathcal{Z} \gamma$ is maximized.
-    \item Witness for genuine multipartite entanglement. Suppose that now we have many parties and we want to decide if the state is separable with respect to these parties. One could then check individually all of the bipartitions with the previous method. For example, if we have three parties $A$, $B$ and $C$, one could check individually the bipartitions $AB|C$, $AC|B$ and $A|BC$. This is actually sufficient for pure states, but, for mixed ones, we could write a state as a mixture of biseparable ones, say $\rho = \frac{1}{3} \rho_{AB|C} + \frac{1}{3} \rho_{AC|B} + \frac{1}{3} \rho_{A|BC}$. The full state $\rho$ is not separable with respect to any bipartition, but its individual constituents are. We then say that a state is genuine multipartite entangled if it cannot be written as a convex sum of bipartite separable states. The reference \cite{hyllus2006optimal} also introduces a routine, MultiWit, that finds an optimized witness for genuine multipartite entanglement.
+    \item Witness for entanglement with respect to a given partition. Here, one fixes a partition and asks whether the state is separable according to this partition. There is a numerical routine called FullyWit that finds the optimal $\mathcal{Z}$ for a given covariance matrix, in the sense that the violation $1 - \Tr \mathcal{Z} \gamma$ is maximized. A positive violation rules out separability with respect to the selected partition.
+    \item Witness for genuine multipartite entanglement. Suppose that now we have many parties and we want to decide if the state is separable with respect to these parties. One could then check individually all of the bipartitions with the previous method. For example, if we have three parties $A$, $B$ and $C$, one could check individually the bipartitions $AB|C$, $AC|B$ and $A|BC$. This is actually sufficient for pure states, but, for mixed ones, we could write a state as a mixture of biseparable ones, say $\rho = \frac{1}{3} \rho_{AB|C} + \frac{1}{3} \rho_{AC|B} + \frac{1}{3} \rho_{A|BC}$. The full state $\rho$ may not beb separable with respect to any bipartition, but it is still a mixture of separable states. We then say that a state is genuine multipartite entangled if it cannot be written as a convex sum of bipartite separable states. The reference \cite{hyllus2006optimal} also introduces a routine, MultiWit, that finds an optimized witness for genuine multipartite entanglement. A positive violation returned by this routine rules out the entire class of biseparable states and thus certifies genuine multipartite entanglement.
 \end{itemize}
 
 Now we employ these types of optimal entanglement witnesses for our Kerr system.
 
-\begin{figure}
-    \label{fig:optimal_two_modes}
+\begin{figure*}
     \centering
     \includegraphics[width=\linewidth]{../Plots/optimal_two_modes.pdf}
-    \caption{Violation of the optimized witness in the bipartite case.}
-\end{figure}
+    \caption{Optimized witness value in the bipartite case.}
+    \label{fig:optimal_two_modes}
+\end{figure*}
 
-In Fig. \ref{fig:optimal_two_modes} we consider the same setup as in Fig. \ref{fig:duan}, but use the optimized witness. We do not see a large difference with respect to \ref{fig:duan}, which shows that the optimization over the angles used to arrive at \eqref{eq:optimized_duan} already carries us a long way.
+In Fig. \ref{fig:optimal_two_modes} we consider the same setup as in Fig. \ref{fig:duan}, but use the optimized witness. We do not see a large difference with respect to Fig. \ref{fig:duan}, which shows that the optimization over the angles used to arrive at \eqref{eq:optimized_duan} already carries us a long way.
 
 \begin{figure}
-    \label{fig:fully_wit}
     \centering
-    \includegraphics[width=0.6\linewidth]{../Plots/fully_wit.pdf}
-    \caption{Violation of the optimized witness for bipartite entanglement over multiple modes.}
+    \includegraphics[width=\linewidth]{../Plots/fully_wit.pdf}
+    \caption{Optimized witness value for bipartite entanglement over multiple modes.}
+    \label{fig:fully_wit}
 \end{figure}
 
-Now we turn to more parties. We set $l_0 = 1$ and $l_2 = 2$, corresponding to the bottom left plot of figures \ref{fig:duan} and \ref{fig:optimal_two_modes}. Furthermore, we define the parties as $A = LG_{0, 2}(w_2=w)$, $B = LG_{0, -1}(w_1)$, $C = LG_{1, -1}(w_1)$ and $D = LG_{2, -1}(w_1)$. According to the previous results, we only had entanglement between $A|B$ and $A|C$, while there were inconclusive results when considering $A|C$. In Fig. \ref{fig:fully_wit} we use the FullyWit routine to find optimized witnesses for the all the bipartitions of these four modes. The lines seem to cluster in three groups
+Now we turn to more parties. We set $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$. Furthermore, we define the parties as $A = LG_{0, 1}(w_2=w)$, $B = LG_{0, 3}(w_1)$, $C = LG_{1, 3}(w_1)$ and $D = LG_{2, 3}(w_1)$. According to the previous results, we only had entanglement between $A|B$ and $A|C$, while there were inconclusive results when considering $A|D$. In Fig. \ref{fig:fully_wit} we use the FullyWit routine to find optimized witnesses for all the bipartitions of these four modes. The lines seem to cluster in three groups
 \begin{itemize}
-    \item $ACD|B$, $AC|BD$, $AD|BC$ and $A|BCD$ show the highest violation. These share the fact that $A$ and $B$ belong to different parties, suggesting that these share, in some sense, more entanglement.
-    \item $ABD|C$ and $AB|CD$ show an intermediate violation, still maintaining a linear start. Here, $A$ and $B$ belong to the same party, while $C$ is in the other one. 
-    \item $ABC|D$ shows the smallest violation, starting with a quadratic fall. Here, all the modes that were bipartite entangled sit on the same party.
+    \item $ACD|B$, $AC|BD$, $AD|BC$ and $A|BCD$ show the lowest witness values and hence the largest margins below the separability threshold. These share the fact that $A$ and $B$ belong to different parties, giving a stronger second-moment entanglement certification across these partitions.
+    \item $ABD|C$ and $AB|CD$ show intermediate witness values, still maintaining a linear start. Here, $A$ and $B$ belong to the same party, while $C$ is in the other one.
+    \item $ABC|D$ shows the smallest margin below the separability threshold, starting with a quadratic fall. Here, all the modes that were bipartite entangled sit on the same party.
 \end{itemize}
 
 
 \begin{figure}
-    \label{fig:multi_wit}
     \centering
-    \includegraphics[width=0.6\linewidth]{../Plots/multi_wit.pdf}
-    \caption{Violation of the optimized witness for genuine multipartite entanglement.}
+    \includegraphics[width=\linewidth]{../Plots/multi_wit.pdf}
+    \caption{Optimized witness value for genuine multipartite entanglement.}
+    \label{fig:multi_wit}
 \end{figure}
 
-Finally, we turn to the genuine multipartite case. In Fig. \ref{fig:multi_wit}, we show the witness for sets of the form $\{LG_{0, 1}(w_2 = w)\} \cup \{LG_{p, 3}(w_2 = w) \ \vert \ p \le P\}$, with $P$ varying from $0$ to $3$, while maintaining $l_0 = 2$. We once again see that the selection rule derived in the two mode case holds: we see a much stronger violation for the sets with $P \le p_{\text{max}} = 1$. However, although the $P=0$ case seems linear, $P=1$ seems more quadratic, although this is just visual.
+Finally, we turn to the genuine multipartite case. In Fig. \ref{fig:multi_wit}, we show the witness for sets of the form $\{LG_{0, 1}(w_2 = w)\} \cup \{LG_{p, 3}(w_1) \ \vert \ p \le P\}$, with $P$ varying from $0$ to $3$, while maintaining $l_0 = 2$. Although no multipartite selection rule has been derived, the numerical results display a related pattern: the sets with $P \le p_{\text{max}} = 1$ have lower witness values and hence larger margins below the separability threshold. However, although the $P=0$ case seems linear, $P=1$ seems more quadratic, although this is just visual.
 
 \section{Conclusion}
 
 \appendix
 
 \section{Purely nonlinear approach}
+\label{app:no_diffraction}
 
-Let us make a modification to our equations of motion where
+We then make the following modification to our equations of motion:
 \begin{equation}
     2ik \partial_z \mathcal{E}(\mathbf{r}, z) = \int_{\mathbb{R}^2}g(\mathbf{s})\mathcal{E}^\dagger(\mathbf{r} - \mathbf{s}, z) \mathcal{E} (\mathbf{r} - \mathbf{s}, z) d\mathbf{s} \ \mathcal{E} (\mathbf{r}, z).
 \end{equation}
@@ -449,7 +564,13 @@ Let us make a modification to our equations of motion where
 In this form, the equation has a constant of motion $\mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E} (\mathbf{r}, z)$, which leads us to the exact solution
 \begin{equation}
     \begin{aligned}
-        \mathcal{E}(\mathbf{r}, z) &= \exp \left[-\frac{iz}{2k}\int_{\mathbb{R}^2}g(\mathbf{s})\mathcal{E}^\dagger(\mathbf{r} - \mathbf{s}, 0) \mathcal{E} (\mathbf{r} - \mathbf{s}, 0) d\mathbf{s} \right] \mathcal{E} (\mathbf{r}, 0) \\ &= : \exp \left[\int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k} - 1 \right)\mathcal{E}^\dagger(\mathbf{r} - \mathbf{s}, 0) \mathcal{E} (\mathbf{r} - \mathbf{s}, 0) d\mathbf{s} \right] : \mathcal{E} (\mathbf{r}, 0)
+        \mathcal{E}(\mathbf{r},z)
+        &= \exp\left[-\frac{iz}{2k}\int_{\mathbb{R}^2}g(\mathbf{s})
+        \mathcal{E}^\dagger(\mathbf{r}-\mathbf{s},0)\mathcal{E}(\mathbf{r}-\mathbf{s},0)\,d\mathbf{s}\right] \\
+        &\quad\times \mathcal{E}(\mathbf{r},0) \\
+        &= :\exp\left[\int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k}-1\right) \right.\\
+        &\quad \left. \times\mathcal{E}^\dagger(\mathbf{r}-\mathbf{s},0)\mathcal{E}(\mathbf{r}-\mathbf{s},0)\,d\mathbf{s}\right]: \\
+        &\quad\times \mathcal{E}(\mathbf{r},0)
     \end{aligned}
 \end{equation}
 
@@ -457,7 +578,12 @@ In the last line, we used an important result known as the normal ordering theor
 
 \begin{equation}
     \label{eq:exp_val_field_just_nl}
-    \expval{\mathcal{E}(\mathbf{r}, z)} =  \exp \left[\int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k} - 1 \right)\abs{\alpha(\mathbf{r} - \mathbf{s}, 0)}^2 d\mathbf{s} \right] u(\mathbf{r}, 0)
+    \begin{aligned}
+        \expval{\mathcal{E}(\mathbf{r},z)}
+        &= \exp\left[\int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k}-1\right)
+        \abs{\alpha(\mathbf{r}-\mathbf{s},0)}^2\,d\mathbf{s}\right] \\
+        &\quad\times \alpha(\mathbf{r},0)
+    \end{aligned}
 \end{equation}
 
 We see that \eqref{eq:exp_val_field} is then a first order approximation of \eqref{eq:exp_val_field_just_nl} with $g(\mathbf{s}) = g_0 \delta(\mathbf{s})$. Nonetheless, we see that we get singularities in the full expression when using this form of $g$. Let us then choose $g$ as proportional to an approximation of the delta function.  For definiteness, let us define
@@ -473,7 +599,9 @@ We will usually make the approximation that the support of the response function
 \end{equation}
 where
 \begin{equation}
-    G(z) = \int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k} - 1 \right) d\mathbf{s} = a^2 \left(e^{-izg_0/2ka^2} - 1 \right)
+    \begin{aligned}
+        G(z) &= \int_{\mathbb{R}^2}\left(e^{-izg(\mathbf{s})/2k} - 1 \right) d\mathbf{s} \\&= a^2 \left(e^{-izg_0/2ka^2} - 1 \right)
+    \end{aligned}
 \end{equation}
 Notice then that, in the general case, this is quite dependent on the value of $a$. Nonetheless, when $z\abs{g_0}/2ka^2 \ll 1$, we get
 \begin{equation}
@@ -485,20 +613,21 @@ Following the result of \cite{Blow:91} we can calculate
 \begin{equation}
     \label{eq:first_expression_F}
     \begin{aligned}
-        F(\mathbf{r}_1, \mathbf{r}_2) \approx & \alpha(\mathbf{r}_1, 0) \alpha(\mathbf{r}_2, 0) \exp\left[ G(z)( \abs{\alpha(\mathbf{r}_1)}^2 + \abs{\alpha(\mathbf{r}_2)^2} ) \right] \\ &\times \left[ e^{-ig(\mathbf{r}_1 - \mathbf{r}_2)z / 2k + \abs{\alpha(\mathbf{r}_1)}^2 G_1(\mathbf{r_1} - \mathbf{r}_2)} - 1 \right]
+        F(\mathbf{r}_1, \mathbf{r}_2) \approx & \alpha(\mathbf{r}_1, 0) \alpha(\mathbf{r}_2, 0) \exp\left[ G(z)( \abs{\alpha(\mathbf{r}_1)}^2 + \abs{\alpha(\mathbf{r}_2)}^2 ) \right] \\ &\times \left[ e^{-ig(\mathbf{r}_1 - \mathbf{r}_2)z / 2k + \abs{\alpha(\mathbf{r}_1)}^2 G_1(\mathbf{r}_1 - \mathbf{r}_2)} - 1 \right]
     \end{aligned} 
 \end{equation}
 where
 \begin{equation}
     \begin{aligned}
-        G_1(\mathbf{r}, z) &= \frac{1}{2} \int_{\mathbb{R}^2} (e^{-izg(\mathbf{s}-\mathbf{r})} - 1) (e^{-izg(\mathbf{s})} - 1) d\mathbf{s} \\ &= \frac{a^4(e^{-i g_0 z / 2ka^2 } - 1)^2}{2}\delta_1(\mathbf{r}, a) \\ &\approx -\frac{(g_0 z / 2k)^2}{2}\delta_1(\mathbf{r}, a)
+        G_1(\mathbf{r}, z) &= \int_{\mathbb{R}^2} \left(e^{-izg(\mathbf{s}-\mathbf{r})/2k} - 1\right) \left(e^{-izg(\mathbf{s})/2k} - 1\right) d\mathbf{s} \\ &= a^4(e^{-i g_0 z / 2ka^2 } - 1)^2\delta_1(\mathbf{r}, a) \\ &\approx -(g_0 z / 2k)^2\delta_1(\mathbf{r}, a)
     \end{aligned}
 \end{equation}
 where we have defined
 \begin{equation}
     \delta_1(x, a) = \frac{(a - \abs{x}) \Theta(a - \abs{x})}{a^2}
 \end{equation}
-as another approximation of the delta function. 
+Let us use the corresponding two-dimensional function
+$\delta_1(\mathbf{r},a)=\delta_1(x,a)\delta_1(y,a)$, which is another approximation of the delta function.
 
 Notice, then, that, for modes with variation on a scale much larger than $a$, the second line of \eqref{eq:first_expression_F} is essentially proportional to $\delta(\mathbf{r}_1 - \mathbf{r}_2)$, and we may write
 \begin{equation}
@@ -506,13 +635,22 @@ Notice, then, that, for modes with variation on a scale much larger than $a$, th
 \end{equation}
 where 
 \begin{equation}
-    \alpha(\mathbf{r},z) = \alpha(\mathbf{r}, 0)e^{-ig_0 z\abs{\alpha(\mathbf{r}, 0)}^2 / 2k} = \alpha(\mathbf{r}, 0)e^{-i Z\abs{u(\mathbf{r}, 0)}^2 / 4} 
+    \alpha(\mathbf{r},z) = \alpha(\mathbf{r}, 0)e^{-ig_0 z\abs{\alpha(\mathbf{r}, 0)}^2 / 2k} = \alpha(\mathbf{r}, 0)e^{-i Z\abs{u(\mathbf{r}, 0)}^2}
 \end{equation}
 is the evolved field under the classical Kerr interaction and
 \begin{equation}
-    \overline{F}(\mathbf{r}, a) = \int_{\mathbb{R}^2}  \left\{\exp\left[-i \frac{g_0 z}{2k}\delta_0(\mathbf{s}, a) -\frac{1}{2}\left(\frac{g_0 z}{2k} \right)^2\delta_1(\mathbf{s}, a) \abs{\alpha(\mathbf{r})}^2 \right] - 1 \right\}d\mathbf{s}
+    \begin{aligned}
+        \overline{F}(\mathbf{r},a)
+        &= \int_{\mathbb{R}^2}\left\{\exp\left[-i\frac{g_0z}{2k}\delta_0(\mathbf{s},a) \right. \right. \\
+        &\quad \left. \left.- \left(\frac{g_0z}{2k}\right)^2\delta_1(\mathbf{s},a)\abs{\alpha(\mathbf{r})}^2\right]
+        - 1\right\}\,d\mathbf{s}
+    \end{aligned}
 \end{equation}
-In general, this function presents a strong dependency on $a$. Nonetheless, if we also assume that $z^2\abs{g_0}^2\abs{\alpha(\mathbf{r})}^2/4k^2a^2 \ll 1$, then we may expand the exponential in a Taylor series and we get
+In general, this function presents a strong dependency on $a$. We seek instead a scale-separated regime in which $a$ is much smaller than the characteristic transverse scale of $\alpha$, while the response area contains a large mean occupation. In addition to $z\abs{g_0}/2ka^2 \ll 1$ and $z^2\abs{g_0}^2\abs{\alpha(\mathbf{r})}^2/4k^2a^2 \ll 1$, we therefore assume
+\begin{equation}
+    \abs{\alpha(\mathbf{r})}^2a^2 \gg 1,
+\end{equation}
+over the region where the field is appreciable. Expanding the exponential also produces the contact contribution $-\frac{1}{2a^2}(g_0z/2k)^2$, but the last condition makes it negligible compared with the retained term $-(g_0z/2k)^2\abs{\alpha(\mathbf{r})}^2$. Thus the leading expression throughout this range of response widths is
 \begin{equation}
     \overline{F}(\mathbf{r}, a) = -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right],
 \end{equation}
@@ -524,12 +662,15 @@ which does not depend on $a$. Substituting this result, we obtain
 \end{equation}
 and
 \begin{equation}
-    f(v_1, v_2) = -iZ\braket{v_1, v_2}{u(z), u(z)} -Z^2\braket{v_1, v_2, u(z)}{u(z), u(z), u(z)}
+    \begin{aligned}
+        f(v_1,v_2) &= -iZ\braket{v_1,v_2}{u(z),u(z)} \\
+        &\quad - Z^2\braket{v_1,v_2,u(z)}{u(z),u(z),u(z)}.
+    \end{aligned}
 \end{equation}
 
 Once again, following \cite{Blow:91}, we calculate
 \begin{equation}
-    H(\mathbf{r}_1, \mathbf{r}_2) = \alpha^*(\mathbf{r}_1, z) \alpha(\mathbf{r}_2, z)(e^{\abs{\alpha(\mathbf{r}_1)}^2G_2(\mathbf{r_1} - \mathbf{r}_2)} - 1)
+    H(\mathbf{r}_1, \mathbf{r}_2) = \alpha^*(\mathbf{r}_2, z) \alpha(\mathbf{r}_1, z)\left(e^{\abs{\alpha(\mathbf{r}_2)}^2G_2(\mathbf{r}_2 - \mathbf{r}_1)} - 1\right)
 \end{equation}
 where
 \begin{equation}

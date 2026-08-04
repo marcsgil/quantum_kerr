@@ -1,14 +1,15 @@
-using CairoMakie, EntanglementWitnesses, Clarabel, JuMP, Combinatorics
+using CairoMakie, EntanglementWitnesses, Clarabel, JuMP, Combinatorics, StructuredLight
 
 include("analytical_correlations.jl")
 
-zs = LinRange(0, 10, 16)
+zs = LinRange(0, 2, 16)
 wits = similar(zs)
 
 theme = merge(
     theme_latexfonts(),
     Theme(
-        linewidth=4,
+        fontsize=13.333333,
+        linewidth=3,
         palette=(
             color=Makie.to_colormap(:Set2_7),
         ),
@@ -16,15 +17,15 @@ theme = merge(
 )
 
 with_theme(theme) do
-    fig = Figure()
+    fig = Figure(size=(327, 245))
 
     l₀ = 2
     l₂ = 1
     l₁ = 2l₀ - l₂
 
-    u = lg(rs, rs, l=l₀)
+    u = _lg(rs, rs, l=l₀)
 
-    vs = reduce(vcat, [[lg(rs, rs, l=l₂) * √dA], [lg(rs, rs; p, l=l₁, w=1/√3) * √dA for p ∈ 0:2]])
+    vs = reduce(vcat, [[_lg(rs, rs, l=l₂) * √dA], [_lg(rs, rs; p, l=l₁, w=1/√3) * √dA for p ∈ 0:2]])
 
     ax = Axis(fig[1, 1], xlabel=L"Z", ylabel="Optimal Witness")
 

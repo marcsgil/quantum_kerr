@@ -1,4 +1,4 @@
-using CairoMakie, EntanglementWitnesses, Clarabel, JuMP, Combinatorics
+using CairoMakie, EntanglementWitnesses, Clarabel, JuMP, Combinatorics, StructuredLight
 
 include("analytical_correlations.jl")
 
@@ -8,7 +8,8 @@ wits = similar(zs)
 theme = merge(
     theme_latexfonts(),
     Theme(
-        linewidth=4,
+        fontsize=13.333333,
+        linewidth=3,
         palette=(
             color=Makie.to_colormap(:Set2_5),
             linestyle=[:solid]
@@ -21,19 +22,19 @@ ls = [(-1, 1) (0, 1);
     (1, 2) (1, 3)]
 
 with_theme(theme) do
-    fig = Figure(size=(1000, 600))
+    fig = Figure(size=(672, 403))
 
     for n ∈ eachindex(IndexCartesian(), ls)
         l₀, l₂ = ls[n]
         l₁ = 2l₀ - l₂
-        u = lg(rs, rs, l=l₀)
+        u = _lg(rs, rs, l=l₀)
 
         ax = Axis(fig[Tuple(n)...], xlabel=L"Z", ylabel="Optimal Witness", title=L"l_0 = %$l₀, l_2 = %$l₂")
         Z = nothing
 
         for p ∈ 0:3
-            v2 = lg(rs, rs, l=l₂) * √dA
-            v1 = lg(rs, rs, l=l₁, w=1 / √3, p=p) * √dA
+            v2 = _lg(rs, rs, l=l₂) * √dA
+            v1 = _lg(rs, rs, l=l₁, w=1 / √3, p=p) * √dA
             vs = [v1, v2]
             Threads.@threads for n ∈ eachindex(zs, wits)
                 model = Model(Clarabel.Optimizer)
@@ -42,7 +43,6 @@ with_theme(theme) do
             end
             lines!(ax, zs, wits; label=L"p = %$p")
         end
-        display(Z)
 
         if Tuple(n) == size(ls)
             Legend(fig[:, end+1], ax)
