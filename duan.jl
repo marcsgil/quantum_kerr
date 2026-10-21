@@ -3,6 +3,9 @@ using CairoMakie, StructuredLight
 include("analytical_correlations.jl")
 
 Zs = LinRange(0, 2, 32)
+ϵ = 0.0
+nseed = 2
+seed_coefficient = 1 / √nseed
 
 theme = merge(
     theme_latexfonts(),
@@ -31,7 +34,9 @@ with_theme(theme) do
         for p ∈ 0:3
             v2 = _lg(rs, rs, l=l₂) * √dA
             v1 = _lg(rs, rs, l=l₁, w=1 / √3, p=p) * √dA
-            Ds = [duan(Z, u, v1, v2, NoDiffraction()) for Z in Zs]
+            seed = seed_coefficient * (v1 + v2)
+            u_seeded = (u + ϵ * seed) / √(1 + ϵ^2)
+            Ds = [duan((1 + ϵ^2) * Zp, u_seeded, v1, v2, NoDiffraction()) for Zp in Zs]
             lines!(ax, Zs, Ds; label=L"p = %$p")
         end
 
@@ -39,6 +44,7 @@ with_theme(theme) do
             Legend(fig[:, end+1], ax)
         end
     end
+    # Label(fig[0, :], L"\text{Two-mode seeds: } \epsilon = %$ϵ,\quad c_1=c_2=1/\sqrt{%$nseed}")
     save("Plots/duan.pdf", fig)
     fig
 end

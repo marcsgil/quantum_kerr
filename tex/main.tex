@@ -86,7 +86,7 @@ theory of spatial optical modes have been extensively discussed in the literatur
 like to set the relevant concepts and definitions that will be used when dealing with the 
 quantized mode structure of the optical field.
 
-We start by considering the positive frequency component of the quantized electromagnetic field 
+We start by considering the normalized positive frequency component of the quantized electromagnetic field 
 $\mathcal{E}(\mathbf{r})$ satisfying the commutation relations
 %
 \begin{equation}
@@ -109,98 +109,77 @@ One can introduce ladder operators $a(v), a^\dagger(v)$ associated with the spat
 We then have
 %
 \begin{eqnarray}
-    \comm{a(v_1)}{a^\dagger(v_2)} &=& (v_1,v_2) \equiv\int_{\mathbb{R}^2} v_1^*(\mathbf{r}) v_2(\mathbf{r}) d\mathbf{r}\,,
+    \comm{a(v_1)}{a^\dagger(v_2)} &=& (v_1;v_2) \equiv\int_{\mathbb{R}^2} v_1^*(\mathbf{r}) v_2(\mathbf{r}) d\mathbf{r}\,,
     \nonumber\\
     \comm{a(v_1)}{a(v_2)} &=& \comm{a^\dagger(v_1)}{a^\dagger(v_2)} = 0\,.
 \end{eqnarray}
+Note that this construction allows us to deal with partially overlapping or non normalized modes, reducing to the standard form when $(v_1;v_2)=0$ or $(v_1;v_2)=1$ ($v_1=v_2$).
+This feature will be useful when dealing with bi- and multipartite entanglement among the modes coupled in the nonlinear medium.
+
+Given a classical field distribution $\alpha(\mathbf{r})\,$ normalized in such a way that $\abs{\alpha(\mathbf{r})}^2$ represents the photon number per unit area, we may build a coherent state through the expression
 %
-The field quadratures are the conjugate variables to which entanglement criteria are usually 
-applied in the continuous variable context.
-Let us define the conjugate quadratures associated to the spatial mode $v$ as
+\begin{eqnarray}
+    \label{eq:initial-state}
+    \ket{\alpha} = \exp\left[a^\dagger(\alpha) - a(\alpha)\right] \ket{0}\,,
+\end{eqnarray}
+where $\ket{0}$ is the vacuum state. This state is an eigenvector of the field operator,
 %
 \begin{equation}
-    \begin{aligned}
-        X(v) &= \frac{a(v) + a^\dagger(v)}{\sqrt{2}}\,,
-        \nonumber\\
-        P(v) &= X(iv)\,.
-    \end{aligned}
+    \mathcal{E}(\mathbf{r}) \ket{\alpha} = \alpha(\mathbf{r}) \ket{\alpha}\;.
 \end{equation}
-%
-We then have the commutation relations
-%
-\begin{eqnarray}
-    \comm{X(v_1)}{X(v_2)} &=& i \Im (v_1,v_2)\,,
-    \nonumber\\
-    \comm{X(v_1)}{P(v_2)} &=& i \Re (v_1,v_2)\,,
-\end{eqnarray}
-%
-which lead to the uncertainty principle
-%
-\begin{eqnarray}
-    \Delta X(v_1)^2 \Delta X(v_2)^2 &\ge& \frac{\abs{\Im (v_1,v_2)}^2}{4}\,,
-    \nonumber\\
-    \Delta X(v_1)^2 \Delta P(v_2)^2 &\ge& \frac{\abs{\Re (v_1,v_2)}^2}{4}\,.
-\end{eqnarray}
-%
-Note that this construction allows us to deal with partially overlapping modes and 
-they reduce to the standard form when $(v_1,v_2)=0$ or $(v_1,v_2)=1$ ($v_1=v_2$).
-This feature will be useful when dealing with bi- and multipartite entanglement 
-among the modes coupled in the nonlinear medium.
+This is the type of state that will be used as input on the nonlinear medium.
 
-We are interested in observables of the form
-%
+The simplest entanglement criteria for bosonic systems are based on the field quadratures, which may be defined through the formula
+\begin{equation}
+    X(v) = \frac{a(v) + a^\dagger(v)}{\sqrt{2}}\,.
+\end{equation}
+Here, $v$ is the corresponding field mode. The complementary quadrature is simply defined by shifting $v$ by a $\pi/2$ phase: $P(v) = X(iv)$.
+
+The corresponding covariance function is given by
+\begin{equation}
+    \Gamma(v_1, v_2) = \expval{\acomm{\Delta X(v_1)}{\Delta X(v_2)}},
+\end{equation}
+where $\Delta X(v) = X(v) - \expval{X(v)}$ and $\acomm{\bullet}{\bullet}$ denotes the anticommutator. The calculation of this observable is simplified if we express it in terms of the field $\mathcal{E}$. For this, we introduce the normal correlation
+\begin{equation}
+    \label{eq:FHdefinitions}
+    H(\mathbf{r}_1, \mathbf{r}_2)
+        = \expval{\mathcal{E}^\dagger(\mathbf{r}_2) \mathcal{E}(\mathbf{r}_1)}
+        - \expval{\mathcal{E}^\dagger(\mathbf{r}_2)}
+           \expval{\mathcal{E}(\mathbf{r}_1)} \,,
+\end{equation}
+and the anomalous one
+\begin{equation}
+    F(\mathbf{r}_1, \mathbf{r}_2)
+        = \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)}
+           - \expval{\mathcal{E}(\mathbf{r}_1)}\expval{\mathcal{E}(\mathbf{r}_2)}.
+\end{equation}
+
+We may then write
 \begin{equation}
     \label{eq:quadrature_correlation}
     \begin{aligned}
-        \Gamma(v_1, v_2)
-        &= \expval{\acomm{\Delta X(v_1)}{\Delta X(v_2)}} \\
-        &= \Re\left[(v_1,v_2) + 2f(v_1, v_2) + 2h(v_1, v_2)\right]\,,
-    \end{aligned}
-\end{equation}
-%
-where we have defined
-%
-\begin{equation}
-\label{eq:fhdefinitions}
-    \begin{aligned}
-        f(v_1, v_2) &= \expval{a(v_1)a(v_2)} - \expval{a(v_1)} \expval{a(v_2)}\,,
-        \\
-        h(v_1, v_2) &= \expval{a^\dagger(v_2) a(v_1)} - \expval{a^\dagger(v_2)} \expval{a(v_1)}\,. 
-    \end{aligned}
-\end{equation}
-%
-
-In terms of the fields, the required quantities are written as
-%
-\begin{equation}
-    \begin{aligned}
-        f(v_1, v_2)
-        &= \int v_1^*(\mathbf{r}_2) v_2^*(\mathbf{r}_1)
-           F(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2\,,
-           \\
-        h(v_1, v_2)
-        &= \int v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2)
-           H(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2\,, 
+        \Gamma(v_1, v_2) = \Re\left[(v_1; v_2) + 2f(v_1, v_2) + 2h(v_1, v_2)\right],
     \end{aligned}
 \end{equation}
 %
 where
 %
-\begin{eqnarray}
-\label{eq:FHdefinitions}
-        F(\mathbf{r}_1, \mathbf{r}_2)
-        &=& \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)}
-           - \expval{\mathcal{E}(\mathbf{r}_1)}\expval{\mathcal{E}(\mathbf{r}_2)} ,
-        \\
-        H(\mathbf{r}_1, \mathbf{r}_2)
-        &=& \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z) \mathcal{E}(\mathbf{r}_1, z)}
-        - \expval{\mathcal{E}^\dagger(\mathbf{r}_2, z)}
-           \expval{\mathcal{E}(\mathbf{r}_1, z)} \,.
-           \nonumber
-\end{eqnarray}
-%
-This formulation is useful because $f$ and $h$ are normally ordered expectation values, which can be more easily calculated. Furthermore, this representation also makes it easier to perform linear combinations of the modes, which will be useful later. These combinations will be based on the properties
-%
+\begin{equation}
+\label{eq:fhdefinitions}
+    \begin{aligned}
+        h(v_1, v_2) &= \int v_1^*(\mathbf{r}_2) v_2(\mathbf{r}_1)
+           H(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2 \\ &= \expval{a^\dagger(v_2)a(v_1)} - \expval{a(v_2)}^* \expval{a(v_1)}
+    \end{aligned}
+\end{equation}
+and
+\begin{equation}
+    \begin{aligned}
+        f(v_1, v_2) &= \int v_1^*(\mathbf{r}_2) v_2^*(\mathbf{r}_1)
+           F(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2 \\ &= \expval{a(v_1)a(v_2)} - \expval{a(v_1)} \expval{a(v_2)}
+    \end{aligned}
+\end{equation}
+
+We further note the following properties, which simplify the consideration of linear combination of modes:
 \begin{equation}
     \begin{aligned}
         f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3) \\
@@ -209,9 +188,7 @@ This formulation is useful because $f$ and $h$ are normally ordered expectation 
         h(v_1, v_2) &= h(v_2, v_1)^*
     \end{aligned}
 \end{equation}
-%
-which are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)$ is linear. We next 
-use these quantities to express the single- and two-mode quadrature correlations. 
+These are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)$ is linear.
 
 \subsection{Single-mode correlations}
 
@@ -277,8 +254,7 @@ Once again, we can maximize the possible violation by rotating the quadrature of
 
 We now turn to the quantum description of the Kerr dynamics. Let us consider a monochromatic
 light field propagating through a $\chi^{(3)}$ nonlinear medium, undergoing self-phase modulation. 
-The input field is assumed to be initially prepared in a coherent state of a single spatial mode carrying 
-orbital angular momentum. Besides self-phase modulation, the input mode is coupled to the vacuum 
+The input field is assumed to be initially prepared in a coherent state of a spatial mode. Besides self-phase modulation, the input mode is coupled to the vacuum 
 fluctuations of other modes, sharing energy and information through the nonlinear interaction. As we 
 will see, this creates a rich dynamics where energy and information exchange is subjected to 
 selection rules that impose a chiral relation that couples the radial and angular degrees of freedom 
@@ -294,325 +270,166 @@ and satisfies the Heisenberg equation of motion
     2ik \partial_z \mathcal{E}(\mathbf{r}, z) + \nabla^2 \mathcal{E}(\mathbf{r}, z) = g\, \mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E}^2 (\mathbf{r}, z)\,,
 \end{equation}
 %
-where $g$ is the Kerr nonlinear coupling constant. In the classical description, the strong coupling 
-regime can generate highly nonlinear effects, such as chaos, turbulence and filamentation. We will 
-not consider this regime as its quantum description has not been well established in the literature 
-yet and is beyond the scope of the present study. Therefore, we will investigate the field dynamics 
-and the quantum correlations created in small fluctuations around the unperturbed field. Therefore, 
-we consider a weak coupling regime, where a linearized approach to the fluctuations is adopted.
+where $g$ is the Kerr nonlinear coupling constant and $\nabla^2$ denotes the laplacian in the transverse direction. We consider will two distinct approximations starting from the same field decomposition: a short-distance expansion retaining the full fluctuation equation, and a diffraction-free, linearized fluctuation treatment without a Taylor expansion in distance.
 
-Let us decompose the field as $\mathcal{E} = \mathcal{E}_0 + \delta\mathcal{E}\,$, where 
-the unperturbed component $\mathcal{E}_0$ and the variation $\delta\mathcal{E}$ satisfy
-%
-\begin{eqnarray}
-    &&2ik \partial_z \mathcal{E}_0(\mathbf{r}, z) + \nabla^2 \mathcal{E}_0(\mathbf{r}, z) = 0\,,
-    \\
-    &&2ik \partial_z \delta \mathcal{E}(\mathbf{r}, z) + \nabla^2 \delta\mathcal{E}(\mathbf{r}, z) = g \mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E}^2 (\mathbf{r}, z)
-    \nonumber\,.
-\end{eqnarray}
-%
-with initial conditions $\mathcal{E}_0(\mathbf{r}, 0) = \mathcal{E}(\mathbf{r}, 0)$ and  
-$\delta\mathcal{E}(\mathbf{r},0)=0\,$. Evaluating this at $z=0$ gives us
-%
+To start our derivation, let $\alpha_c(\mathbf{r}, z)$ denote the solution of the classical equations of motion
 \begin{equation}
-    2ik \partial_z \delta \mathcal{E}(\mathbf{r}, 0) = g \mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0)\,,
+    2ik \partial_z \alpha_c + \nabla^2 \alpha_c = g\, \abs{\alpha_c}^2 \alpha_c
 \end{equation}
-%
-from which we obtain the Taylor expansion
-%
+under the initial condition $\alpha_c(\mathbf{r}, 0) = \alpha(\mathbf{r})$, where $\ket{\alpha}$ is the input coherent state. Let us also define the fluctuation field
 \begin{equation}
-    \delta \mathcal{E}(\mathbf{r}, z) \approx -\frac{igz}{2k} \mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0)\,.
+    \eta(\mathbf{r}, z) = \mathcal{E}(\mathbf{r}, z) - \alpha_c(\mathbf{r}, z)
 \end{equation}
-%
-For the complete field, using the same Taylor expansion about $z=0$, we then have
-%
-\begin{equation}
-    \label{eq:field-expansion}
-    \mathcal{E}(\mathbf{r}, z) \approx \mathcal{E}_0(\mathbf{r}, z) - \frac{igz}{2k}\mathcal{E}_0^\dagger(\mathbf{r}, 0) \mathcal{E}^2_0 (\mathbf{r}, 0) + O(z^2)\,.
-\end{equation}
-%
-This expression will be the basis of our further developments. It is a short-distance approximation: within terms that already carry an explicit factor of $z$, the free propagation component $\mathcal{E}_0$ may be replaced by its value at $z=0$, since the resulting difference is of order $z^2$.
 
-Note that the same expansion can be applied to the annihilation operator associated with any spatial 
-mode $u\,$, which is a solution of the paraxial wave equation 
-%
+We observe that our initial state has vacuum like properties with respect to $\eta(\mathbf{r}, 0)$. For example, it is annihilated by it:
 \begin{equation}
-    2ik \partial_z u(\mathbf{r}, z) + \nabla^2 u(\mathbf{r}, z) = 0\,.
+    \eta(\mathbf{r}, 0) \ket{\alpha} = 0
 \end{equation}
-%
-Then, the corresponding annihilation operator is given by
-%
-\begin{equation}
-    a(u, z) = \int u^*(\mathbf{r}, z) \mathcal{E}(\mathbf{r}, z) d\mathbf{r} = a_0(u) + \delta a(u, z)\,,
-\end{equation}
-%
-where 
-%
-\begin{equation}
-    a_0(u) = \int u^*(\mathbf{r}, z) \mathcal{E}_0(\mathbf{r}, z) d\mathbf{r}
-\end{equation}
-%
-is independent of $z\,$, as can be easily shown by taking a $z$ derivative, using the equations of motion, and integrating by parts. The fluctuation contribution to the annihilation operator is
-%
-\begin{equation}
-    \delta a(u, z) = \int u^*(\mathbf{r}, z) \delta\mathcal{E}(\mathbf{r}, z) d\mathbf{r}\,.   
-\end{equation}
-%
-As we will see, the expansion of the field variation $\delta\mathcal{E}$ in the LG mode 
-basis determines the appearance of modes that were initially in vacuum state and couple to the input 
-mode through radial and angular (OAM conservation) selection rules. This coupling affects both 
-the mean field behavior as well as quantum entanglement between the mode quadratures.
+Furthermore, any normally ordered monomial containing at least one fluctuation operator has zero expectation value at $z=0$. 
 
-\subsection{Mean field}
-
-We assume the input field to be initially prepared in a coherent state corresponding to a given 
-field distribution $\alpha(\mathbf{r},z)\,$,
-%
-\begin{eqnarray}
-    \label{eq:initial-state}
-    \ket{\alpha} &=& D(\alpha) \ket{0} 
-    \nonumber\\
-    &=& \exp\left(a^\dagger(\alpha) - a(\alpha)\right) \ket{0}\,.
-\end{eqnarray}
-%
-This state is an eigenvector of the free field operator,
-%
+The correlation functions, which are our observables of interest, can also be compactly written in terms of $\eta$:
 \begin{equation}
-    \mathcal{E}_0(\mathbf{r}, z) \ket{\alpha} = \alpha(\mathbf{r}, z) \ket{\alpha}\;.
+\begin{aligned}
+    F(\mathbf r_1,\mathbf r_2;z)&=\langle\eta(\mathbf{r}_1, z)\eta(\mathbf{r}_2, z)\rangle-\langle\eta(\mathbf{r}_1, z)\rangle\langle\eta(\mathbf{r}_2, z)\rangle,\\
+    H(\mathbf r_1,\mathbf r_2;z)&=\langle\eta^\dagger(\mathbf{r}_2, z)\eta(\mathbf{r}_1, z)\rangle-\langle\eta(\mathbf{r}_1, z)\rangle\langle\eta^\dagger(\mathbf{r}_2, z)\rangle.
+\end{aligned}
 \end{equation}
-%
-The mean field behavior is obtained by taking the expectation value of the field 
-expansion given by Eq.\eqref{eq:field-expansion} in the initial state \eqref{eq:initial-state}, 
-which gives
-%
+
+Next, we write the equation of motion
 \begin{equation}
+\label{eq:bg_full_fluctuation}
+    2ik\partial_z\eta+\nabla^2\eta=g\left(2|\alpha_c|^2\eta+\alpha_c^2\eta^\dagger+R\right)
+\end{equation}
+where the nonlinear fluctuation terms are
+\begin{equation}
+    R=\alpha_c^*\eta^2
+            +2\alpha_c\eta^\dagger\eta
+            +\eta^\dagger\eta^2.
+    \label{eq:bg_remainder}
+\end{equation}
+
+We start by considering an approximation where only terms up to $\mathcal{O}(z)$ are retained. From definition, we already have $\expval{\eta(\mathbf{r}, 0)} = 0$. Furthermore, as the equation of motion \eqref{eq:bg_full_fluctuation} contains only normally ordered terms, we also get $\partial_z \expval{\eta(\mathbf{r}, 0)} = 0$, such that
+\begin{equation}
+    \expval{\eta(\mathbf{r}, z)} = \mathcal{O}(z^2),
+\end{equation}
+or, equivalently, 
+\begin{equation}
+    \expval{\mathcal{E}(\mathbf{r}, z)} = \alpha_c(\mathbf{r}, z) + \mathcal{O}(z^2).
     \label{eq:exp_val_field}
-    \expval{\mathcal{E}(\mathbf{r}, z)} \approx \alpha(\mathbf{r}, z) - \frac{igz}{2k} 
-    \abs{\alpha(\mathbf{r}, 0)}^2 \alpha(\mathbf{r}, 0) + O(z^2)\,.
 \end{equation}
-%
-The expectation value of the annihilation operator $a(v)$ corresponding to an arbitrary 
-spatial mode $v$ is then
-%
-\begin{equation}
-    \label{eq:expval_annihilation}
-        \expval{a(v,z)} = (v,\alpha) - \frac{igz}{2k} (v,\alpha\,;\alpha,\alpha) + O(z^2)\,.
-\end{equation}
-%
-In the above expression we have introduced the higher order spatial overlap
-%
-\begin{equation}
-    (v_1,\ldots,v_n\,;\,u_1,\ldots,u_n)
-    = \int_{\mathbb{R}^2} \prod_{j=1}^{n} v_j^*(\mathbf{r},z)u_j(\mathbf{r},z)\,d\mathbf{r}\;.
-\end{equation}
-%
-When the input field is prepared in a single Laguerre-Gaussian mode with radial order $p=0\,$, 
-topological charge $l$ and waist $w\,$, that is $\alpha(\mathbf{r},z) = \alpha\,u_{0l}(\mathbf{r},z)\,$, we have that
-%
-\begin{equation}
-    \abs{u_{0l}(\mathbf{r}, 0)}^2 u_{0l}(\mathbf{r}, 0) = \sum_{q=0}^{\abs{l}} C_{ql} \overline{u}_{ql}(\mathbf{r}, 0)\;,
-\end{equation}
-%
-where $\overline{u}_{ql}$ are Laguerre-Gaussian modes with a reduced waist $\overline{w}=w/\sqrt{3}\,$. 
-Therefore, one may write
-%
-\begin{eqnarray}
-        \expval{a(v,z)} &=& \norm{\alpha} (v,u_{0,l}) - \frac{igz \norm{\alpha}^3}{2k} \sum_{q=0}^{\abs{l}} 
-        C_{ql}\,(v,\overline{u}_{ql}) 
-        \nonumber\\
-        &+& O(z^2)\;.
-\end{eqnarray}
-%
-In particular, when $v = \overline{u}_{ql}$, we have that
-%
-\begin{eqnarray}
-        \expval{a(\overline{u}_{ql},z)}
-        &=& \norm{\alpha} (\overline{u}_{ql},u_{0,l}) 
-        - \begin{cases}
-            \dfrac{igz \norm{\alpha}^3 C_{ql}}{2k}, & q \le \abs{l}, \\
-            0, & q > \abs{l},
-        \end{cases}
-        \nonumber\\
-        &+& O(z^2)\;.
-\end{eqnarray}
-%
-As we can see, we recover our previous result obtained with the classical treatment, 
-which predicts the appearance of radial modes with $0\le p\le \abs{l}$ and the reduced 
-waist $\overline{w}$ \cite{Oliveira2023}. 
 
-\subsection{Correlation functions}
+Now we turn to the correlation functions. For compactness, we write $\eta_{j,z} = \eta(\mathbf{r}_j, z)$. In order to calculate the normal correlation, we differentiate the two-operator average:
+\begin{equation}
+    \left.\partial_z\langle\eta_2^\dagger\eta_1\rangle\right|_0
+       =\langle(\partial_z\eta_2^\dagger)_0\eta_{0,1}\rangle
+         +\langle\eta_{0,2}^\dagger(\partial_z\eta_1)_0\rangle.
+\end{equation}
+Both terms vanish: the first average has a vacuum-annihilating operator on the right, and the second has one on the left.
 
-We will investigate the correlations created in the mode structure of the field transmitted 
-through the nonlinear medium. We start by evaluating two-point field correlation functions to first 
-order in the interaction strength $gz\,$. For compactness, we will adopt the following shorthand, 
-$\mathcal{E}(\mathbf{r}_j,z)\equiv \mathcal{E}_j(z)\,$, 
-$\mathcal{E}_0(\mathbf{r}_j,z)\equiv \mathcal{E}_{0,j}(z)$ and $\alpha(\mathbf{r}_j,z)\equiv \alpha_j(z)\,$. 
-From Eq.\eqref{eq:field-expansion}, we readily obtain
-%
-\begin{eqnarray}
-        \mathcal{E}^\dagger_1(z)\mathcal{E}_2(z)
-        \!&\approx&\! \mathcal{E}_{0,1}^\dagger(z)\mathcal{E}_{0,2}(z) - \frac{igz}{2k}\left[
-            \mathcal{E}_{0,1}^\dagger(0)\mathcal{E}_{0,2}^\dagger(0)\mathcal{E}_{0,2}^2(0)
-            \right. 
-            \nonumber\\
-        &-& \left. \mathcal{E}_{0,1}^{\dagger\,2}(0)\mathcal{E}_{0,1}(0)\mathcal{E}_{0,2}(0)
-        \right]\,.
-\end{eqnarray}
-%
-Evaluating this at our initial state \eqref{eq:initial-state} gives us
-%
-\begin{eqnarray}
-        \expval{\mathcal{E}_1^\dagger(z)\mathcal{E}_2(z)}
-        &\approx& \alpha_1^*(z)\alpha_2(z) 
-        \nonumber\\
-        &-& \frac{igz}{2k}\alpha_1^*(0)\alpha_2(0)
-        \left[\abs{\alpha_2(0)}^2-\abs{\alpha_1(0)}^2\right] 
-        \nonumber\\
-        &\approx& \expval{\mathcal{E}_1(z)}^*
-        \expval{\mathcal{E}_2(z)} + O(z^2)\;,
-\end{eqnarray}
-%
-where the last approximation follows by direct comparison with \eqref{eq:exp_val_field}. In particular, this shows that the covariance 
-and correlation function defined in Eqs.\eqref{eq:fhdefinitions} and \eqref{eq:FHdefinitions} satisfy 
-$H(\mathbf{r}_1, \mathbf{r}_2) = O(z^2)$ and $h(v_1, v_2) = O(z^2)$ for any $v_1$ and $v_2$.
-We can also use this to write the expectation value of the number operator:
-%
-\begin{eqnarray}
-        \expval{n(v)} &=& \expval{a^\dagger(v)a(v)} \approx \abs{\expval{a(v)}}^2 \approx \abs{(v(z),\alpha(z))}^2
-        \nonumber\\
-        &+& \frac{gz}{k}\Im\Bigl[\Big(\alpha(0),v(0)\Big)\,\Big(v(0),\alpha(0);\alpha(0),\alpha(0)\Big)\Bigr]
-        \nonumber\\
-        &+& O(z^2)\;.
-\end{eqnarray}
-%
-When both $\alpha$ and $v$ are arbitrary Laguerre-Gaussian modes (any $p,l,w$) at the common input waist plane, the overlap product appearing above is real, so there is no first-order correction to the occupation number.
+Turning, to the anomalous case, we have that
+\begin{equation}
+\begin{aligned}
+        \left.\partial_z\langle\eta_{1,z}\eta_{2,z}\rangle\right|_0
+       &= \langle(\partial_z\eta_1)_0\eta_{2,0}\rangle
+          +\langle\eta_{1, 0}(\partial_z\eta_2)_0\rangle \\&= \langle\eta_{1, 0}(\partial_z\eta_2)_0\rangle.
+\end{aligned}
+\end{equation}
 
-The other two point field function is
-%
-\begin{eqnarray}
-        \mathcal{E}_1(z)\mathcal{E}_2(z)
-        \!\!&\approx&\!\! \mathcal{E}_{0,1}(z)\mathcal{E}_{0,2}(z) -
-        \frac{igz}{2k}\left[\mathcal{E}_{0,2}^\dagger(0)\mathcal{E}_{0,1}(0)\mathcal{E}_{0,2}^2(0)\right. 
-        \nonumber\\
-        &+&\!\!\left. \mathcal{E}_{0,1}^\dagger(0)\mathcal{E}_{0,1}^2(0)\mathcal{E}_{0,2}(0)+ \delta(\mathbf{r}_1-\mathbf{r}_2)\mathcal{E}_{0,2}^2(0)\right]
-        \nonumber\\
-        &+&\!\! O(z^2)\;.
-\end{eqnarray}
-%
-The appearance of the delta function here is important, because now
-%
+Isolating $\partial_z \eta$ in the equations of motion \eqref{eq:bg_full_fluctuation} and substituting above, we see that almost all the terms are zero, because they contain $\eta$ to the right. The only exception is the term proportional to $\eta^\dagger$, which gives
+\begin{equation}
+    \left.\partial_z\langle\eta_1\eta_2\rangle\right|_0
+       =-\frac{ig}{2k}\alpha^2(\mathbf r_2)
+                     \delta^{(2)}(\mathbf r_1-\mathbf r_2).
+\end{equation}
+
+
+
+Since the mean-subtraction terms do not contribute at first order, the correlations are
+\begin{equation}
+\begin{aligned}
+    F(\mathbf r_1,\mathbf r_2;z)
+      &=-\frac{igz}{2k}\alpha^2(\mathbf r_2)
+             \delta^{(2)}(\mathbf r_1-\mathbf r_2)+O(z^2),\\
+    H(\mathbf r_1,\mathbf r_2;z)&=O(z^2).
+\end{aligned}
+    \label{eq:bg_first_correlations}
+\end{equation}
+Using the spatial overlap notation
+\begin{equation}
+    (v_1,\ldots,v_n;u_1,\ldots,u_n)
+       =\int d^2\mathbf r\,\prod_{j=1}^n v_j^*(\mathbf r)u_j(\mathbf r),
+\end{equation}
+projection onto the modes $v_1$ and $v_2$ gives
+\begin{equation}
+\begin{aligned}
+    f(v_1,v_2)&=-\frac{igz}{2k}(v_1,v_2;\alpha,\alpha)+O(z^2),\\
+    h(v_1,v_2)&=O(z^2).
+\end{aligned}
+\end{equation}
+
+\subsection{Laguerre-Gaussian inputs and dimensionless form}
+
+We will consider coherent Laguerre-Gaussian modes as our input states, with
+\begin{equation}
+    \alpha(\mathbf r,0)=\norm{\alpha}\,LG_{pl}(\mathbf r;w),
+\end{equation}
+where the waist-plane modes are
+\begin{equation}
+    LG_{pl}(\mathbf{r}; w) = (-1)^p\,\frac{\mathcal{N}_{pl}}{w}
+    \left(\frac{2r^2}{w^2}\right)^{|l|/2}
+    L_p^{|l|}\!\left(\frac{2r^2}{w^2}\right)
+    e^{-r^2/w^2+il\phi},
+\end{equation}
+with radial order $p$, topological charge $l$, and normalization constant
+\begin{equation}
+    \mathcal{N}_{pl}=\sqrt{\frac{2}{\pi}}\sqrt{\frac{p!}{(p+|l|)!}}\;.
+\end{equation}
+The waist $w$ sets the natural transverse scale. Let us define the Rayleigh range
+$z_R=kw^2/2$, the nonlinear interaction length $z_{NL}=4z_R/(g\norm{\alpha}^2)$,
+the dimensionless propagation distance $Z=z/z_{NL}=gz\norm{\alpha}^2/(2kw^2)$,
+and the dimensionless input profile $u(\mathbf r)=w\alpha(\mathbf r,0)/\norm{\alpha}$.
+
+Using these definitions, the first-order results take the dimensionless form
 \begin{equation}
     \begin{aligned}
-        \expval{\mathcal{E}_1(z)\mathcal{E}_2(z)}
-        &\approx \expval{\mathcal{E}_1(z)}\expval{\mathcal{E}_2(z)} \\
-        & - \frac{igz}{2k}\delta(\mathbf{r}_1-\mathbf{r}_2)\alpha_2^2(z)
-        + O(z^2)\;.
+        f(v_1,v_2)&\approx-iZ(v_1,v_2;u,u),\\
+        \Gamma(v_1,v_2)&=\Re(v_1;v_2)+2Z\Im(v_1,v_2;u,u),\\
+        \lambda_-&=1-2\left|Z(v,v;u,u)\right|,\\
+        D_{\mathrm{opt}}&=1-2\left|Z(v_1,v_2;u,u)\right|,\\
     \end{aligned}
 \end{equation}
-%
-Therefore, we may conclude that
-%
-\begin{equation}
-    F(\mathbf{r}_1, \mathbf{r}_2) \approx -\frac{igz}{2k} \delta(\mathbf{r}_1 - \mathbf{r}_2) \alpha^2 (\mathbf{r}_2, 0) + O(z^2)\;,
-\end{equation}
-%
-and
-%
-\begin{equation}
-    f(v_1, v_2) \approx -\frac{igz}{2k} \Big(v_1(0),v_2(0);\alpha(0), \alpha(0)\Big) + O(z^2)\,.
-\end{equation}
-%
-In the remainder of this first-order treatment, we suppress the explicit input-plane arguments in higher-order overlaps.
+For the input angular momentum $l_0$, we see that the angular integration requires $l_v=l_0$ for squeezing and $l_{v_1}+l_{v_2}=2l_0$ for entanglement. These OAM conditions are necessary; the corresponding radial overlap must also be nonzero.
 
-It will be useful to define a nonlinear interaction range
-%
-\begin{equation}
-    z_{NL} \equiv \frac{4z_R}{g\norm{\alpha}^2}\,,
-\end{equation}
-%
-the normalized interaction distance $Z=z/z_{NL}$ and the dimensionless field distribution 
-$u(\mathbf{r}) = w\,\alpha(\mathbf{r}) / \norm{\alpha}\,$, so that
-%
-\begin{equation}
-    f(v_1, v_2) \approx -iZ\,(v_1,v_2\,;u,u)\;,
-\end{equation}
-%
-and
-%
-\begin{equation}
-    \Gamma(v_1, v_2) = \Re(v_1,v_2) + 2Z\Im (v_1,v_2\,;u,u)\;.
-\end{equation}
-%
-This leads us to a minimum quadrature variance in SNU for mode $v$ of
-%
-\begin{equation}
-    \lambda_- = 1 -  2\abs{Z\,(v,v\,;u,u)}\;,
-\end{equation}
-%
-and an optimal Duan parameter for modes $v_1$ and $v_2$ of
-%
-\begin{equation}
-    D_{\text{opt}} = 1 -  2\abs{Z\,(v_1,v_2\,;u,u)}\;.
-\end{equation}
-%
-The corresponding angles for squeezing and entanglement are 
-%
-\begin{eqnarray}
-\phi_{\text{sq}} &=& -\frac{\pi}{4} \pm \frac{\pi}{2} +\frac{1}{2} \arg [Z\,(v,v\,;\alpha,\alpha)] \;,
-\nonumber\\
-\phi_{\text{ent}} &=& -\frac{\pi}{2} \pm \pi + \arg [Z\,(v_1,v_2\,;\alpha,\alpha)]\;.
-\end{eqnarray}
-%
+\subsection{Diffraction-free Bogoliubov solution}
 
-Consider the case where all the modes involved are vortices: $u(\mathbf{r}) = u_r(r)e^{il_u\phi}$ and similarly for the $v$ functions. The angular integrals vanish unless $l_v = l_u$ for squeezing and $l_{v_1} + l_{v_2} = 2l_u$ for entanglement. These OAM conditions are therefore necessary selection rules; when they are satisfied, squeezing or entanglement occurs only if the corresponding radial overlap is also nonzero. As we will see, these radial selection rules depend on the relative chirality of the engtangled OAM modes.
-
-\subsection{Higher order solutions}
-
-This linearized solution has an obvious flaw if extended to higher $Z$: both $\lambda_-$ and $D_{\text{opt}}$ can get negative, which is nonphysical. Better approximations need to be used if one wants to extend the range of validity. In Appendix \ref{app:no_diffraction} we adapt the method of \cite{Blow:91} for spatial modes, which allows us to find analytic solutions if diffraction can be neglected. The expressions are particularly simple:
-%
-\begin{eqnarray}
-        f(v_1,v_2) \!\!&=&\!\! -iZ\,\Big(v_1,v_2\,;u(z),u(z)\Big) 
-        \nonumber\\
-        &&\!\! - Z^2 \Big(v_1,v_2,u(z)\,;u(z),u(z),u(z)\Big),
-        \\
-        h(v_1, v_2) \!\!&=&\!\! Z^2\Big(v_1, u(z), u(z)\,;v_2, u(z), u(z)\Big)\,.
-\end{eqnarray}
-%
-Here,
-%
+The first-order expressions describe the initial generation of correlations, but extrapolating them to larger distances can give negative values of $\lambda_-$ or $D_{\mathrm{opt}}$. For finite-distance predictions, we return to the full equation for the same decomposition $\mathcal E=\alpha_c+\eta$ and adopt a different approximation: we neglect diffraction and discard the nonlinear fluctuation terms $R$ in Eq.~\eqref{eq:bg_full_fluctuation}, while retaining the full dependence on propagation distance. This linearization of the fluctuation dynamics is the Bogoliubov approximation, used to describe quantum fluctuations in paraxial propagation through Kerr media~\cite{PhysRevA.92.043802}. Appendix~\ref{app:no_diffraction} solves the diffraction-free Bogoliubov equations without a Taylor expansion in distance. The dimensionless classical field is then
 \begin{equation}
-    u(\mathbf{r}, z) = u(\mathbf{r}, 0)e^{-i Z\abs{u(\mathbf{r}, 0)}^2}
+    u_Z(\mathbf r)=u(\mathbf r)e^{-iZ|u(\mathbf r)|^2},
 \end{equation}
-%
-is the classical solution for pure self phase modulation, without diffraction. This is a good approximation for intense and softly focused 
-input beams, for which the Rayleigh distance is much larger than the interaction region.
-The numerical results presented in the next sections will be based on this solution, which agrees with our linearized treatment to the first order.
+and the mode correlations are
+\begin{equation}
+\begin{aligned}
+    f(v_1,v_2)={}&-iZ(v_1,v_2;u_Z,u_Z)\\
+                &-Z^2(v_1,v_2,u_Z;u_Z,u_Z,u_Z),\\
+    h(v_1,v_2)={}&Z^2(v_1,u_Z,u_Z;v_2,u_Z,u_Z).
+\end{aligned}
+\end{equation}
+These expressions agree with the preceding first-order result and are exact within the diffraction-free linearized fluctuation equations. Their use at finite distance requires negligible diffraction over the interaction region, which is a reasonable approximation for softly focused beams, as well as a small fluctuation backreaction. The numerical results below use these correlations under those assumptions.
 
-
-\section{Selection Rules for two-mode entanglement}
+\section{Selection Rules for Laguerre-Gaussian inputs}
 \label{sec:selection rules}
 
-We now derive the selection rules determining which modes share energy and information in the nonlinear interaction. 
-This information sharing is manifested in bi- and multipartite entanglement among the modes connected by these rules. 
-Beyond the obvious conservation law, orbital angular momentum also affects radial mode coupling through chiral relations 
-between the interacting modes.
+We now specialize to the LG input $\alpha(\mathbf r,0)=\norm{\alpha}\,LG_{0,l_0}(\mathbf r;w)$ and analyze the selection rules for radial and angular mode coupling.
 
-Consider the case where the input field distribution is $\alpha(\mathbf{r}) = \norm{\alpha} LG_{0,l_0}(\mathbf{r})$ and 
-%
-\begin{equation}
-    \!\!LG_{pl_0}(\mathbf{r}; w) \!=\! (-1)^p\,\frac{\mathcal{N}_{pl_0}}{w}\!
-		\left(\frac{2r^2}{w^2}\right)^{\!\!\!\frac{\abs{l_0}}{2}}\!\!\!\!\!
-		L_{p}^{\abs{l_0}}\!\!\left(\frac{2r^2}{w^2}\right)\!
-		e^{-\frac{r^2}{w^2} + il_0\phi} ,
-\end{equation}
-%
-is a Laguerre-Gaussian mode at the waist plane with radial order $p$, topological charge $l_0$ and waist $w$. 
-In this case, $u(\mathbf{r})=w\,LG_{0,l_0}(\mathbf{r})\,$.
-The normalization constant is
-%
-\begin{equation}
-    \mathcal{N}_{pl_0} = \sqrt{\frac{2}{\pi}}\sqrt{\frac{p!}{(p+|l_0|)!}}\;.
-\end{equation}
+Our previous work \cite{Oliveira2023} has shown that, in the classical regime, the first order treatment gives a selection rule for the generation of radial orders up to $\abs{l_0}$. The current quantum treatment clarifies that this was, in fact, a selection rule for the mean field value $\expval{\mathcal{E}}$ given by \eqref{eq:exp_val_field}, whose expression had already appeared on our earlier treatment.
+
+Now that we have developed a quantum theory for the considered process, we may analyze other types of selection rules, this time for bi- and multipartite entanglement. Beyond the obvious conservation law, orbital angular momentum also affects radial mode coupling through chiral relations between the interacting modes, as we will see in the remaining of this section.
+
+\subsection{Two mode entanglement}
+
+
+
+Consider the case where 
 %
 Furthermore, let $v_2 = LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l_0$. Now, define $l_1 = 2l_0-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
 %
@@ -740,199 +557,705 @@ We studied bi- and multipartite entanglement properties in the radial structure 
 with orbital angular momentum beams. The evolution of the mode structure in the nonlinear interaction is governed by chiral 
 selection rules, which dictate the appearance of radial modes with in the mean field. Moreover, we show that the radial structure 
 of other OAM components can exhibit bi- and multipartite entanglement, depending on the relative chirality of the interacting 
-modes. Although the accuracy of the linearized theory is limited, it points in the right direction as we could confirm with an 
-exact solution of the problem in the diffraction free regime. Our results can be investigated by current four-wave mixing and 
+modes. The first-order results are complemented by finite-distance calculations using the diffraction-free Bogoliubov solution, within the regime of negligible diffraction and small fluctuation backreaction. Our results can be investigated by current four-wave mixing and 
 self-phase modulation setups in the softly focused regime, where the Rayleigh distance is much larger than the nonlinear 
 interaction distance. This effect can be useful for building new quantum information platforms, where bi- and multipartite 
 entanglement are controlled by orbital angular momentum.
 
 \appendix
 
-\section{Purely nonlinear approach}
+\section{Diffraction-free Bogoliubov evolution}
 \label{app:no_diffraction}
 
-In this appendix we develop our approach to the nonlinear evolution of the beam structure beyond the linear approximation in the 
-coupling constant $g\,$. This approach is adapted from the one published in Ref. \cite{Blow:91}, where self-phase modulation 
-of optical pulses was investigated. The translation of the method from time to spatial domain is straightforward, provided that 
-diffraction can be neglected. This is a reasonable approximation when the input beam is softly focused and its Rayleigh distance 
-is much larger than the interaction length. As a numerical example, let us take a 780nm optical beam with a 1mm waist. It's 
-Rayleigh distance is then $z_R\approx 4m\,$. If the beam undergoes self-phase modulation in a Rb cell with a few tens of 
-centimeters, our approximation is fairly reasonable.
+The first-order calculation in the main text retains diffraction and all nonlinear fluctuation terms in Eq.~\eqref{eq:bg_full_fluctuation}. Here we start from the same full fluctuation equation and adopt a different approximation: we neglect diffraction over the interaction region and discard the quadratic and cubic fluctuation terms $R$ of Eq.~\eqref{eq:bg_remainder}, while retaining the full dependence on propagation distance. The resulting Bogoliubov equations are solved without expanding in the propagation distance or the accumulated classical nonlinear phase.
 
-When diffraction can be neglected, we may drop the $\nabla_{\perp}^2$ term in Eq.\eqref{eq:heisenberg_equation} and make the 
-following modification to our equation of motion,
-%
+With the same decomposition $\mathcal E=\alpha_c+\eta$ and input $\alpha(\mathbf r)=\alpha_c(\mathbf r,0)$, these equations are
 \begin{equation}
-    2ik \partial_z \mathcal{E}(\mathbf{r}, z) = \left(\int_{\mathbb{R}^2}g(\mathbf{s})\bm{I}(\mathbf{r} - \mathbf{s}, z) d\mathbf{s} \right) \mathcal{E} (\mathbf{r}, z)\;,
+\begin{aligned}
+    2ik\partial_z\alpha_c&=g|\alpha_c|^2\alpha_c,\\
+    2ik\partial_z\eta&=g\left(2|\alpha_c|^2\eta+\alpha_c^2\eta^\dagger\right).
+\end{aligned}
+    \label{eq:nodiff_bog_equations}
 \end{equation}
-%
-where we defined $\bm{I}(\mathbf{r}, z)\equiv\mathcal{E}^{\dagger}(\mathbf{r}, z)\mathcal{E} (\mathbf{r}, z)\,$.
-In this form, the equation has a constant of motion $\bm{I}(\mathbf{r}, z)$, which leads us to the exact solution
-%
+The classical intensity is constant along propagation. Defining
+\begin{equation}
+    I(\mathbf r)=|\alpha(\mathbf r)|^2,
+    \qquad \theta(\mathbf r,z)=\frac{gz}{2k}I(\mathbf r),
+\end{equation}
+we have
+\begin{equation}
+    \alpha_c(\mathbf r,z)=\alpha(\mathbf r)e^{-i\theta(\mathbf r,z)}.
+    \label{eq:nodiff_classical}
+\end{equation}
+
+\subsection{Local fluctuation solution}
+
+Each transverse position evolves independently. Introduce the rotating-frame fluctuation $b(\mathbf r,z)=e^{i\theta(\mathbf r,z)}\eta(\mathbf r,z)$. Suppressing the position argument temporarily, Eq.~\eqref{eq:nodiff_bog_equations} becomes
+\begin{equation}
+    2ik\partial_z b=g\left(Ib+\alpha^2b^\dagger\right).
+\end{equation}
+Together with its conjugate, this gives
+\begin{equation}
+    2ik\partial_z\begin{pmatrix}b\\b^\dagger\end{pmatrix}
+       =gM\begin{pmatrix}b\\b^\dagger\end{pmatrix},
+    \qquad
+    M=\begin{pmatrix}I&\alpha^2\\-\alpha^{*2}&-I\end{pmatrix}.
+\end{equation}
+The matrix is independent of $z$ and satisfies $M^2=0$. Therefore its exponential terminates exactly:
+\begin{equation}
+    \exp\left(-\frac{igz}{2k}M\right)
+       =\mathbb I-\frac{igz}{2k}M.
+\end{equation}
+Returning to $\eta$ and writing $\eta_0(\mathbf r)=\eta(\mathbf r,0)$, we obtain
+\begin{equation}
+\begin{aligned}
+    \eta(\mathbf r,z)=e^{-i\theta}\bigg[&(1-i\theta)\eta_0(\mathbf r)\\
+       &-i\frac{gz}{2k}\alpha^2(\mathbf r)\eta_0^\dagger(\mathbf r)\bigg].
+\end{aligned}
+    \label{eq:nodiff_fluctuation_solution}
+\end{equation}
+Although the rotating-frame coefficients are linear in $z$, this is not a first-order Taylor approximation. It is the exact solution of the diffraction-free linearized fluctuation equations.
+
+Writing $\eta=A\eta_0+B\eta_0^\dagger$, the coefficients are
+\begin{equation}
+    A=e^{-i\theta}(1-i\theta),\qquad
+    B=-i\frac{gz}{2k}\alpha^2e^{-i\theta}.
+\end{equation}
+They obey $|A|^2-|B|^2=1$, so the field commutator is preserved. For the coherent input, $\langle\eta_0\rangle=0$ and hence $\langle\eta(z)\rangle=0$. Thus the mean field equals $\alpha_c$ within this approximation.
+
+\subsection{Field and mode correlations}
+
+The initial fluctuations satisfy
+\begin{equation}
+\begin{aligned}
+    \langle\eta_0(\mathbf r_1)\eta_0^\dagger(\mathbf r_2)\rangle
+       &=\delta^{(2)}(\mathbf r_1-\mathbf r_2),\\
+    \langle\eta_0^\dagger(\mathbf r_2)\eta_0(\mathbf r_1)\rangle
+       &=\langle\eta_0(\mathbf r_1)\eta_0(\mathbf r_2)\rangle=0.
+\end{aligned}
+\end{equation}
+Consequently the correlations are
+\begin{equation}
+\begin{aligned}
+    F(\mathbf r_1,\mathbf r_2;z)
+       &=A(\mathbf r_1)B(\mathbf r_2)\delta^{(2)}(\mathbf r_1-\mathbf r_2),\\
+    H(\mathbf r_1,\mathbf r_2;z)
+       &=B(\mathbf r_1)B^*(\mathbf r_2)\delta^{(2)}(\mathbf r_1-\mathbf r_2).
+\end{aligned}
+\end{equation}
+Substituting the coefficients gives
+\begin{equation}
+\begin{aligned}
+    F(\mathbf r_1,\mathbf r_2;z)
+       ={}&\left[-\frac{igz}{2k}-\left(\frac{gz}{2k}\right)^2I(\mathbf r_1)\right]\\
+       &\times\alpha_c^2(\mathbf r_1,z)\delta^{(2)}(\mathbf r_1-\mathbf r_2),\\
+    H(\mathbf r_1,\mathbf r_2;z)
+       ={}&\left(\frac{gz}{2k}\right)^2I^2(\mathbf r_1)
+                         \delta^{(2)}(\mathbf r_1-\mathbf r_2).
+\end{aligned}
+    \label{eq:nodiff_field_correlations}
+\end{equation}
+Using the main-text scaling, $\theta=Z|u|^2$ and $u_Z=u\exp(-iZ|u|^2)$, projection onto the detection modes yields
+\begin{equation}
+\begin{aligned}
+    f(v_1,v_2)={}&-iZ(v_1,v_2;u_Z,u_Z)\\
+                &-Z^2(v_1,v_2,u_Z;u_Z,u_Z,u_Z),\\
+    h(v_1,v_2)={}&Z^2(v_1,u_Z,u_Z;v_2,u_Z,u_Z).
+\end{aligned}
+    \label{eq:nodiff_mode_correlations}
+\end{equation}
+The phases in $h$ cancel, whereas those in $f$ retain the nonlinear classical evolution. Expanding Eq.~\eqref{eq:nodiff_mode_correlations} at small $Z$ recovers $f=-iZ(v_1,v_2;u,u)+O(Z^2)$ and $h=O(Z^2)$, in agreement with the first-order calculation in the main text. At finite distance, these expressions are exact only within the diffraction-free Bogoliubov approximation, not for the full quantum Kerr equation.
+
+The approximation requires negligible diffraction of the relevant transverse structures over the interaction length, as well as sufficiently small fluctuation interactions and backreaction on the classical field. A large pump Rayleigh range is a useful initial scale, but finer structure generated by the nonlinear phase can have shorter diffraction lengths. The derivation applies to any coherent input profile, including a coherent pump plus seeds.
+
+The Bogoliubov approximation also permits retaining diffraction in both the classical background and the linear fluctuation equations. Quantum correlations can then be computed numerically by propagating the corresponding Green functions~\cite{PhysRevA.62.033816, Eric_Lantz_2004}, or by back-propagating the detection functions with the adjoint fluctuation equations~\cite{PhysRevA.51.817, Ray_Kuang_Lee_2004} and evaluating their correlations in the known input state. Such a numerical treatment with diffraction lies beyond the scope of the present work, which uses the analytical diffraction-free solution above.
+
+\section{Coherent seeding and first-order selection rules}
+\label{app:coherent_seed}
+
+\subsection{Role of the seed in quadrature detection}
+
+For the single coherent pump $\alpha=A_pv_p$, with $v_p=LG_{0,l_p}(w)$, both terms in Eq.~\eqref{eq:seed_general_mean} with $\epsilon=0$ vanish for a detection mode of definite OAM $l_v\ne l_p$: the nonlinear mean-field source $|v_p|^2v_p$ carries the same OAM as the pump. Thus, within this first-order treatment, self-phase modulation changes the mean field only in the $l=l_p$ sector, including its radial structure.
+
+The two-mode correlations studied in the main text instead involve $l_1+l_2=2l_p$ with $l_2\ne l_p$, so neither detected mode has a coherent mean at this order. This does not prevent quadrature measurements with an external local oscillator, but a coherent amplitude in a detected mode can assist spatial alignment and phase control. The purpose of the seed is to supply such a reference while retaining, as closely as possible, the original entanglement correlations. Zero coherent mean should not be identified with exactly zero photon occupation: the centered population $h(v,v)$ starts beyond first order in distance.
+
+We consider mutually coherent, collinear pump and seed fields sharing the frequency, polarization, and temporal mode implicit in our scalar model. We first derive the first-order correlations for an arbitrary spatial seed, and then examine seeding only $v_2$ or directly seeding both detected OAM families. Throughout this appendix, ``first order'' in propagation refers to the coefficient linear in distance; terms linear and quadratic in seed amplitude are distinguished explicitly.
+
+\subsection{First-order corrections for an arbitrary coherent seed}
+
+Let the input profile be
+\begin{equation}
+    \alpha(\mathbf r,0)=A_p\bigl[v_p(\mathbf r)+\epsilon s(\mathbf r)\bigr],
+    \label{eq:seed_input}
+\end{equation}
+where $\|v_p\|=\|s\|=1$ and the complex parameter $\epsilon$ specifies the overall seed amplitude and phase relative to the pump. The normalized profile $s$ specifies its spatial composition; for example, $s=\sum_j c_jv_{s,j}$ in an orthonormal seed basis, with $\sum_j|c_j|^2=1$. We use the pump waist and occupation $N_p=A_p^2$ to define
 \begin{equation}
     \begin{aligned}
-        \mathcal{E}(\mathbf{r},z)
-        &= \exp\left[-\frac{iz}{2k}\int_{\mathbb{R}^2} g(\mathbf{s})
-        \bm{I}(\mathbf{r} - \mathbf{s}, z)\,d\mathbf{s}\right] \mathcal{E}(\mathbf{r},0) \\
-        &= :\!\exp\left[\int_{\mathbb{R}^2}\!\!\left(\!e^{-iz\frac{g(\mathbf{s})}{2k}}\!\!-1\right)\! \bm{I}(\mathbf{r} - \mathbf{s}, 0)\,d\mathbf{s}\right]\!\!:\! 
-        \mathcal{E}(\mathbf{r},0)\,.
+        U_p&=wv_p,\\
+        S&=ws,\\
+        U&=U_p+\epsilon S,\\
+        Z_p&=\frac{gzN_p}{2kw^2}.
     \end{aligned}
+    \label{eq:seed_normalization}
 \end{equation}
-%
-In the last line, we used an important result known as the normal ordering theorem \cite{PhysRevA.42.4102, Blow:91}. This allows us to simply calculate the expectation value for the field in an initial coherent state:
-%
-\begin{equation}
-    \label{eq:exp_val_field_just_nl}
-    \begin{aligned}
-        \expval{\mathcal{E}(\mathbf{r},z)}\!
-        &=\! \exp\!\left[\int_{\mathbb{R}^2}\!\!\left(\!e^{-iz\frac{g(\mathbf{s})}{2k}}\!\!-1\right)\!
-        \abs{\alpha(\mathbf{r}-\mathbf{s},0)}^2 d\mathbf{s}\right] \!\alpha(\mathbf{r},0)\,.
-    \end{aligned}
-\end{equation}
-%
-Therefore, Eq.\eqref{eq:exp_val_field} is a first order approximation of \eqref{eq:exp_val_field_just_nl} with $g(\mathbf{s}) = g_0 \delta(\mathbf{s})$. Nonetheless, we see that we get singularities in the full expression when using this form of $g\,$. Let us then choose $g$ as proportional to an approximation of the delta function.  For definiteness, let us define
-%
-\begin{equation}
-    \delta_0(x,a) = \frac{\Theta(a/2-\abs{x})}{a}\,,
-\end{equation}
-%
-which approximates the delta distribution as $a \to 0\,$. Here, $\Theta(x)$ is the step function. Let us denote $\delta_0(\mathbf{r}, a) = \delta_0(x, a) \delta_0(y, a)$ and choose $g(\mathbf{s}) = g_0 \delta_0(\mathbf{s})\,$.
+The profiles $U_p,S,U$ are dimensionless, and $Z_p$ is held fixed when comparing different seeds. Weak seeding means $|\epsilon|\ll1$; it need not imply a seed occupation smaller than one. If the seed is orthogonal to the pump, its occupation relative to the pump is $q=|\epsilon|^2$, and the main-text normalization is $u=U/\sqrt{1+q}$, $Z=(1+q)Z_p$. More generally, replace $1+q$ by $\|v_p+\epsilon s\|^2$. These conventions give the same product $Zu^2=Z_pU^2$.
 
-We will usually make the approximation that the support of the response function $g$ is much smaller than the characteristic distances of the field distribution $\alpha$. We can then make the approximation
-%
+The input remains a coherent state of a spatial field distribution. Therefore, the mean-field formula and the general correlation derivation apply directly to the combined profile. For example, in freely propagated detection modes, with the nonlinear overlap evaluated at the input plane,
 \begin{equation}
-    \expval{\mathcal{E}(\mathbf{r}, z)} \approx  \exp \left[G(z) \abs{\alpha(\mathbf{r}, 0)}^2\right] \alpha(\mathbf{r}, 0)\;,
+    \begin{aligned}
+        \langle a(v,z)\rangle
+        &=\frac{A_p}{w}\left[(v,U)
+          -iZ_p(v,U;U,U)\right]+O(Z_p^2).
+    \end{aligned}
+    \label{eq:seed_general_mean}
 \end{equation}
-%
+For orthonormal detection modes $v_1,v_2$, define
+\begin{equation}
+    \begin{aligned}
+        C_{12}&=(v_1,v_2;U_p,U_p),\\
+        \delta C_{12}^{(1)}&=2\epsilon(v_1,v_2;U_p,S),\\
+        \delta C_{12}^{(2)}&=\epsilon^2(v_1,v_2;S,S).
+    \end{aligned}
+\end{equation}
+The superscripts indicate order in seed amplitude, not distance. Expanding $U^2=(U_p+\epsilon S)^2$ gives
+\begin{equation}
+    \begin{aligned}
+        f(v_1,v_2)&=-iZ_p\left[C_{12}
+          +\delta C_{12}^{(1)}+\delta C_{12}^{(2)}\right]
+          +O(Z_p^2),\\
+        h(v_1,v_2)&=O(Z_p^2),\\
+        D_{\mathrm{opt}}&=1-2|Z_p|
+          \left|C_{12}+\delta C_{12}^{(1)}+\delta C_{12}^{(2)}\right|
+          +O(Z_p^2).
+    \end{aligned}
+    \label{eq:seed_first_order}
+\end{equation}
+This is the complete coefficient linear in distance for an arbitrary coherent seed. It contains no terms beyond quadratic order in seed amplitude. Because $f$ and $h$ are centered correlations, the seed's coherent displacement alone does not contribute to them; the corrections above arise from its participation in the nonlinear interaction.
+
+The angular content determines which corrections survive. Write
+\begin{equation}
+    U_p=R_p(r)e^{il_p\phi},\qquad
+    S=\sum_m S_m(r)e^{im\phi}.
+\end{equation}
+For detection OAM sum $L=l_1+l_2$, the pump--seed term requires $l_p+m=L$, and the seed--seed term requires $m+n=L$. In the original channel $L=2l_p$, the relevant harmonic is
+\begin{equation}
+    \begin{aligned}
+        [U^2]_{2l_p}
+        &=e^{2il_p\phi}\left[R_p^2+2\epsilon R_pS_{l_p}
+          +\epsilon^2\sum_m S_mS_{2l_p-m}\right].
+    \end{aligned}
+    \label{eq:seed_general_projection}
+\end{equation}
+Thus only a seed component with pump OAM can modify this channel linearly in seed amplitude. Quadratic corrections require complementary seed OAM values summing to $2l_p$. The radial overlaps must also be nonzero. In particular, a seed with pump OAM but a different radial profile can alter the radial rule at linear order in seed amplitude; a seed proportional to $v_p$ simply changes the combined pump amplitude.
+
+\subsection{Seeding only the mode $v_2$}
+
+Consider the same detection family as in the main text,
+\begin{equation}
+    \begin{aligned}
+        v_p&=LG_{0,l_p}(w),\\
+        v_2&=LG_{0,l_2}(w_2),\\
+        v_{1,p}&=LG_{p,l_1}(w_1),\\
+        l_1&=2l_p-l_2,\\
+        \frac{1}{w_1^2}&=\frac{2}{w^2}+\frac{1}{w_2^2},
+        \qquad l_2\ne l_p.
+    \end{aligned}
+    \label{eq:seed_detection_family}
+\end{equation}
+Here $l_p$ denotes pump OAM, whereas the index $p$ of $v_{1,p}$ denotes radial order. Set $s=v_2$, so $S=U_2$, where $U_2=wv_2$. The pump--seed and seed--seed terms carry OAM $l_p+l_2$ and $2l_2$, respectively. Neither equals $2l_p$, so both corrections vanish in the original channel. Defining $C_p=(v_{1,p},v_2;U_p,U_p)$ gives
+\begin{equation}
+    \begin{aligned}
+        f(v_{1,p},v_2)&=-iZ_pC_p+O(Z_p^2),\\
+        D_{\mathrm{opt}}&=1-2|Z_pC_p|+O(Z_p^2).
+    \end{aligned}
+    \label{eq:seed_protected_first_order}
+\end{equation}
+The coefficient linear in distance is independent of $\epsilon$, including its phase. Hence the original cutoff
+\begin{equation}
+    p_{\max}=|l_p|+\frac{|l_2|-|2l_p-l_2|}{2}
+\end{equation}
+is preserved exactly at this order for the detection profiles in \eqref{eq:seed_detection_family}: $C_p=0$ for $p>p_{\max}$. The seed does open other OAM channels, at orders $Z_p\epsilon$ and $Z_p\epsilon^2$, but these do not enter the selected pair's first-order coefficient.
+
+The mean-field benefit is twofold. The seeded mode has the input amplitude
+\begin{equation}
+    \langle a(v_2,0)\rangle=A_p\epsilon.
+\end{equation}
+Moreover, the nonlinear source $|U|^2U$ contains $\epsilon^*U_p^2U_2^*$, whose OAM is $2l_p-l_2=l_1$. Projection of \eqref{eq:seed_general_mean} therefore yields
+\begin{equation}
+    \langle a(v_{1,p},z)\rangle
+       =-iZ_pA_p\epsilon^*C_p+O(Z_p^2).
+    \label{eq:seed_stimulated_mean}
+\end{equation}
+A seed in $v_2$ can thus generate coherent references in its conjugate radial modes while preserving the original first-order correlations. These stimulated amplitudes are suppressed by $Z_p$, follow the radial coefficients $C_p$, and vanish at this order outside the cutoff. Whether they suffice for homodyne phase control depends on the experimental sensitivity.
+
+\subsection{Seeding both detected OAM families}
+\label{app:multimode_seed}
+
+To supply a direct coherent reference in every selected detection mode, including radial modes whose stimulated amplitudes are too small, take
+\begin{equation}
+    S=c_2U_2+
+       \sum_{p\in\mathcal S}c_{1,p}U_{1,p},
+    \label{eq:multiseed_input}
+\end{equation}
+where $U_{1,p}=wv_{1,p}$ and $\mathcal S$ is the finite set of seeded radial orders. The two OAM families and the pump are mutually orthogonal, as are the radial modes within the first family. Normalization of $s$ requires
+\begin{equation}
+    |c_2|^2+
+       \sum_{p\in\mathcal S}|c_{1,p}|^2=1,
+\end{equation}
+the seed power fraction is $q=|\epsilon|^2$, and the input means are $\langle a(v_2,0)\rangle=A_p\epsilon c_2$ and $\langle a(v_{1,p},0)\rangle=A_p\epsilon c_{1,p}$. These directly injected amplitudes are not suppressed by propagation distance.
+
+Neither seed family has pump OAM, so $\delta C^{(1)}$ still vanishes in the original channel. However, their OAM values are complementary: $l_1+l_2=2l_p$. Equation~\eqref{eq:seed_general_projection} now gives
+\begin{equation}
+    [U^2]_{2l_p}=U_p^2+
+       2\epsilon^2c_2\sum_{p\in\mathcal S}c_{1,p}U_2U_{1,p}.
+\end{equation}
+For a detected radial order $r$, define
+\begin{equation}
+    \begin{aligned}
+        K_{rp}&=(v_{1,r},v_2;U_2,U_{1,p})\\
+              &=w^2\int d^2\mathbf r\,
+                 v_{1,r}^*v_{1,p}|v_2|^2,\\
+        \delta C_r&=2\epsilon^2c_2
+                \sum_{p\in\mathcal S}c_{1,p}K_{rp}.
+    \end{aligned}
+\end{equation}
+The first-order correlations become
+\begin{equation}
+    \begin{aligned}
+        f(v_{1,r},v_2)&=-iZ_p(C_r+\delta C_r)+O(Z_p^2),\\
+        D_{\mathrm{opt}}&=1-2|Z_p|\,|C_r+\delta C_r|+O(Z_p^2).
+    \end{aligned}
+    \label{eq:multiseed_correlations}
+\end{equation}
+The correction is quadratic in seed amplitudes but remains linear in distance. Its phase relative to $C_r$ depends on the products $\epsilon^2c_2c_{1,p}$, so complementary seeds can enhance or reduce the magnitude of an allowed correlation.
+
+The weighted overlaps $K_{rp}$ need not obey the original radial cutoff. Orthogonality of radial LG modes uses an unweighted inner product, whereas the factor $|v_2|^2$ changes the radial weight and Gaussian envelope. In particular,
+\begin{equation}
+    K_{rr}=w^2\int d^2\mathbf r\,
+                 |v_{1,r}|^2|v_2|^2>0
+\end{equation}
+for overlapping LG profiles. Thus directly seeding $v_{1,r}$ and $v_2$ can remove a first-order zero even when $r>p_{\max}$ and $C_r=0$. Multiple radial seeds may interfere, with cancellation possible only for particular amplitudes and phases.
+
+For a fixed normalized seed profile, $\delta C_r=O(\epsilon^2)$ and $q=|\epsilon|^2$. The original radial rule is therefore preserved through linear order in seed amplitude, but generally modified at quadratic order in seed amplitude, or first order in seed power fraction at fixed seed composition. For an allowed pair, the condition
+\begin{equation}
+    |\delta C_r|\ll|C_r|
+\end{equation}
+ensures that its first-order correlation is approximately unchanged. For a forbidden pair, any nonzero $\delta C_r$ lifts the first-order zero, however small its absolute magnitude.
+
+Seeding only $v_2$ therefore preserves the original first-order radial rule exactly while relying on stimulated means in the complementary family. Seeding both families supplies independent input references in all selected modes, at the cost of quadratic seed corrections to that rule. These statements concern the first-order two-mode criterion; they do not establish a multipartite selection rule or a finite-distance witness violation. Beyond the small-distance regime, the combined input may be inserted directly into the correlation formulas of Appendix~\ref{app:no_diffraction}, within their stated assumptions.
+
+\section{Working note: pairwise and collective-mode witnesses for multimode bipartitions}
+\label{app:collective_witness_note}
+
+\textit{Purpose and scope.} This appendix is a detailed working argument for consideration, not proposed final manuscript text. It first shows that an individual entangled pair crossing a partition already proves entanglement of that partition, then constructs a collective-mode Duan witness as a quantitative refinement. Both statements are related to the radial selection rule. For the four-mode example in the main text, it proves small-distance entanglement across six bipartitions and explains why the seventh cannot have a linear witness violation. It does not prove the quadratic violation for the seventh partition, identify the numerically optimal witnesses, or by itself establish genuine multipartite entanglement of a mixed reduced state. Appendix~\ref{app:grouped_gme_note} adds a genuine multipartite conclusion for a pure global state with the unobserved modes assigned to one party.
+
+\subsection{Input assumptions and first-order correlations}
+
+Consider a finite set of orthonormal detection modes, with the coherent means subtracted when defining $f$ and $h$. The first-order calculation in the main text, Eq.~\eqref{eq:bg_first_correlations}, gives
+\begin{equation}
+    f(v_i,v_j)=-iZC_{ij}+O(Z^2),
+    \qquad h(v_i,v_j)=O(Z^2),
+    \label{eq:cw_first_order}
+\end{equation}
 where
-%
 \begin{equation}
-    \begin{aligned}
-        \!\!\!G(z) &= \!\int_{\mathbb{R}^2}\left(e^{-iz\frac{g(\mathbf{s})}{2k}}\!\! - 1 \right) d\mathbf{s} 
-        = a^2 \left(e^{-iz\frac{g_0}{2ka^2}}\!\! - 1 \right).
-    \end{aligned}
+    C_{ij}=(v_i,v_j;u,u)
+       =\int d^2\mathbf r\,v_i^*v_j^*u^2.
 \end{equation}
-%
-Note that, in the general case, this is quite dependent on the value of $a$. Nonetheless, when $z\abs{g_0}/2ka^2 \ll 1$, we get
-%
-\begin{equation}
-    G(z) \approx -\frac{izg_0}{2k},
-\end{equation}
-%
-which is independent of $a\,$. 
+The detection profiles and input shape are fixed as $Z\to0$. The dimensionless variable $Z$ is proportional to $z$ at fixed input and medium parameters. No finite-distance Bogoliubov approximation is required for the leading coefficient in Eq.~\eqref{eq:cw_first_order}: it follows from the first-order displaced quantum calculation for a coherent input. As elsewhere, continuum expressions are interpreted through finite, smooth mode projections within the effective model.
 
-Following the result of \cite{Blow:91} we can calculate
-%
-\begin{eqnarray}
-    \label{eq:first_expression_F}
-        F(\mathbf{r}_1, \mathbf{r}_2) &\approx& \alpha(\mathbf{r}_1, 0) \alpha(\mathbf{r}_2, 0)\\
-        &\times& \!\!\exp\left[ G(z)( \abs{\alpha(\mathbf{r}_1)}^2 + \abs{\alpha(\mathbf{r}_2)}^2 ) \right]\nonumber\\ 
-        &\times& \!\!\left[ e^{-ig(\mathbf{r}_1 - \mathbf{r}_2)z / 2k + \abs{\alpha(\mathbf{r}_1)}^2 G_1(\mathbf{r}_1 - \mathbf{r}_2)} - 1 \right]\,,
-        \nonumber
-\end{eqnarray}
-%
-where
-%
+For the unseeded example, the selected modes are
 \begin{equation}
-    \begin{aligned}
-        G_1(\mathbf{r}, z) &= \!\int_{\mathbb{R}^2}\!\! \left(e^{-iz\frac{g(\mathbf{s}-\mathbf{r})}{2k}}\!\! - 1\right) 
-        \left(e^{-iz\frac{g(\mathbf{s})}{2k}}\!\! - 1\right) d\mathbf{s} \\ 
-        &= a^4(e^{-iz\frac{g_0}{2ka^2}}\!\! - 1)^2\delta_1(\mathbf{r}, a) \\
-        &\approx -(g_0 z / 2k)^2\delta_1(\mathbf{r}, a)\,,
-    \end{aligned}
+\begin{aligned}
+    v_A&=LG_{0,1}(w),&v_B&=LG_{0,3}(w_1),\\
+    v_C&=LG_{1,3}(w_1),&v_D&=LG_{2,3}(w_1),
+\end{aligned}
 \end{equation}
-%
-and
-%
+with pump $LG_{0,2}(w)$, $w_1=w/\sqrt{3}$, and $p_{\max}=1$. Define
 \begin{equation}
-    \delta_1(x, a) = \left(\frac{a - \abs{x}}{a^2}\right)\Theta(a - \abs{x})\;.
+    c_B=C_{AB},\qquad c_C=C_{AC}.
 \end{equation}
-%
+The angular selection rule eliminates all entries among $B,C,D$, as well as $C_{AA}$; the radial rule gives $C_{AD}=0$. In the ordering $A,B,C,D$,
+\begin{equation}
+    C=\begin{pmatrix}
+        0&c_B&c_C&0\\
+        c_B&0&0&0\\
+        c_C&0&0&0\\
+        0&0&0&0
+    \end{pmatrix}.
+    \label{eq:cw_star}
+\end{equation}
+This statement concerns the first-order anomalous correlations of the selected modes. It does not assert that these modes form a closed subsystem of the full field.
 
-Let us use the corresponding two-dimensional function
-$\delta_1(\mathbf{r},a)=\delta_1(x,a)\delta_1(y,a)$, which is another approximation of the delta function.
-Note that the second line of \eqref{eq:first_expression_F} is essentially proportional to $\delta(\mathbf{r}_1 - \mathbf{r}_2)$ for modes with variation on a scale much larger than $a\,$, and we may write
-%
-\begin{equation}
-    F(\mathbf{r}_1, \mathbf{r}_2) \approx \alpha(\mathbf{r}_1, z)^2\, \overline{F}(\mathbf{r}_1, a) \delta(\mathbf{r}_1 - \mathbf{r}_2)\,,
-\end{equation}
-%
-where 
-%
-\begin{equation}
-    \alpha(\mathbf{r},z) = \alpha(\mathbf{r}, 0)e^{-i\frac{g_0 z}{2k}\abs{\alpha(\mathbf{r}, 0)}^2} 
-    = \alpha(\mathbf{r}, 0)e^{-i Z\abs{u(\mathbf{r}, 0)}^2} ,
-\end{equation}
-%
-is the evolved field under the classical Kerr interaction and
-%
-\begin{equation}
-    \begin{aligned}
-        \overline{F}(\mathbf{r},a)
-        &= \int_{\mathbb{R}^2}\left\{\exp\left[-i\frac{g_0z}{2k}\delta_0(\mathbf{s},a) \right. \right. \\
-        &\quad \left. \left.- \left(\frac{g_0z}{2k}\right)^2\delta_1(\mathbf{s},a)\abs{\alpha(\mathbf{r})}^2\right]
-        - 1\right\}\,d\mathbf{s}\;.
-    \end{aligned}
-\end{equation}
-%
-In general, this function presents a strong dependency on $a$. We seek instead a scale-separated regime in which $a$ is much smaller than the characteristic transverse scale of $\alpha$, while the response area contains a large mean occupation. In addition to $z\abs{g_0}/2ka^2 \ll 1$ and $z^2\abs{g_0}^2\abs{\alpha(\mathbf{r})}^2/4k^2a^2 \ll 1$, we therefore assume
-%
-\begin{equation}
-    \abs{\alpha(\mathbf{r})}^2a^2 \gg 1\;,
-\end{equation}
-%
-over the region where the field is appreciable. Expanding the exponential also produces the contact contribution 
-$-(g_0z/2\sqrt{2}ka)^2$, but the last condition makes it negligible compared with the retained term $-(g_0z/2k)^2\abs{\alpha(\mathbf{r})}^2$. Thus the leading expression throughout this range of response widths is
-%
-\begin{equation}
-    \overline{F}(\mathbf{r}, a) = -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right],
-\end{equation}
-%
-which does not depend on $a$. Substituting this result, we obtain
-%
-\begin{equation}
-    \begin{aligned}
-        F(\mathbf{r}_1, \mathbf{r}_2) &\approx -\frac{g_0 z}{2k}\left[i + \frac{g_0 \abs{\alpha(\mathbf{r})}^2 z}{2k}\right] \alpha(\mathbf{r}_1, z)^2  \delta(\mathbf{r}_1 - \mathbf{r}_2) \\&= -Z\left[i + Z \abs{u(\mathbf{r})}^2\right] u(\mathbf{r}_1, z)^2  \delta(\mathbf{r}_1 - \mathbf{r}_2)\,,
-    \end{aligned}
-\end{equation}
-%
-and
-%
-\begin{equation}
-    \begin{aligned}
-        f(v_1,v_2) &= -iZ\braket{v_1,v_2}{u(z),u(z)} \\
-        &\quad - Z^2\braket{v_1,v_2,u(z)}{u(z),u(z),u(z)}.
-    \end{aligned}
-\end{equation}
+\subsection{Simpler existence proof using an individual pair}
+\label{app:cw_pair_simplification}
 
-Once again, following \cite{Blow:91}, we calculate
-%
-\begin{equation}
-    H(\mathbf{r}_1, \mathbf{r}_2) = \alpha^*(\mathbf{r}_2, z) \alpha(\mathbf{r}_1, z)
-    \left(e^{\abs{\alpha(\mathbf{r}_2)}^2G_2(\mathbf{r}_2 - \mathbf{r}_1)}\!\! - 1\right)\,,
-\end{equation}
-%
-where
-%
-\begin{equation}
-    G_2(\mathbf{r}) = a^4 \abs{e^{ig_0z/2ka^2} - 1}^2\delta_1(\mathbf{r}, a) \approx \left(\frac{g_0z}{2k}\right)^2\delta_1(\mathbf{r}, a)\,.
-\end{equation}
-%
-Therefore,
+A collective mode is not needed to prove entanglement across a multimode bipartition. Fix a cut $S|T$ with $A\in S$, and suppose that one original detection mode $v_j\in T$ has $c_j=C_{Aj}\ne0$. The ordinary pairwise criterion gives
 \begin{equation}
     \begin{aligned}
-        H(\mathbf{r}_1, \mathbf{r}_2) &\approx \left( \frac{g_0z}{2k} \right)^2 \abs{\alpha(\mathbf{r}_1, z)}^4 \delta(\mathbf{r}_1-\mathbf{r}_2) \\
-        &= Z^2 \abs{u(\mathbf{r}_1, z)}^4 \delta(\mathbf{r}_1-\mathbf{r}_2)\,,
+        D_{A,j}&=1+h(v_A,v_A)+h(v_j,v_j)-2|f(v_A,v_j)|\\
+               &=1-2|Z|\,|c_j|+O(Z^2).
     \end{aligned}
+    \label{eq:cw_individual_pair}
 \end{equation}
-%
-and
-%
+It is therefore below one for sufficiently small nonzero $Z$. This is a linear violation with a second-order remainder, not a calculation of the violation through second order.
+
+If the full selected state were separable across $S|T$, tracing out all modes except $A,j$ would preserve separability across $A|j$. The observed pairwise violation contradicts this. Hence one entangled pair crossing the cut suffices to certify that cut. Neither purity of the selected state nor a change of detection basis is required.
+
+In the four-mode example, the $AB$ pair certifies $A|BCD$, $AD|BC$, $ACD|B$ and $AC|BD$. The $AC$ pair additionally certifies $ABD|C$ and $AB|CD$. Neither crosses $ABC|D$, so that cut remains undecided by the first-order pairwise argument.
+
+More generally, if a selected mode $A$ is entangled with every mode $B_1,\ldots,B_N$, every nontrivial bipartition of this selected set places at least one $B_j$ opposite $A$. The selected state is therefore entangled across every bipartition, a property called full inseparability. For a mixed reduced state this alone does not exclude mixtures of states separable across different cuts. Appendix~\ref{app:grouped_gme_note} explains how global purity establishes a genuine multipartite statement when the unobserved modes are included in one of the parties.
+
+The following collective-mode construction is an optional quantitative refinement. Among individual pairs crossing a cut, the strongest first-order Duan coefficient is
 \begin{equation}
-    h(v_1, v_2) = Z^2\left(v_1, u(z), u(z);\,v_2, u(z), u(z)\right)
+    G_{\mathrm{pair}}=\max_{j\in R}|c_j|,
 \end{equation}
-%
-Note that $h(v, v) \ge 0$, so it reduces both squeezing and the violation of Duan's inequality.
+where $R$ contains the opposite-side partners. Combining these correlations gives
+\begin{equation}
+    G_R=\sqrt{\sum_{j\in R}|c_j|^2}\ge G_{\mathrm{pair}}.
+\end{equation}
+The two constructions certify the same existence of small-distance entanglement whenever at least one coefficient is nonzero; the collective one gives a larger leading violation when more than one coefficient contributes. It is useful for quantitative comparison with witness curves, but is not logically necessary for the partition argument.
+
+\subsection{A collective mode on the opposite side of a partition}
+
+Fix a bipartition $S|T$, and label the sides so that $A\in S$. Let $R$ be the set of modes among $B,C$ that lie in $T$. Set
+\begin{equation}
+    G_R=\left(\sum_{j\in R}|c_j|^2\right)^{1/2}.
+\end{equation}
+If $G_R>0$, define
+\begin{equation}
+    v_R=\frac{1}{G_R}\sum_{j\in R}c_jv_j.
+    \label{eq:cw_collective_mode}
+\end{equation}
+Orthogonality of the original modes gives $(v_R;v_R)=1$ and $(v_A;v_R)=0$. The collective mode is supported entirely on party $T$. It can be completed to an orthonormal mode basis within that party, so replacing the original modes of $T$ by this basis is a local passive transformation relative to $S|T$.
+
+The complex conjugations matter. The annihilation operator is antilinear in its profile:
+\begin{equation}
+    a(v_R)=\frac{1}{G_R}\sum_{j\in R}c_j^*a(v_j).
+\end{equation}
+Therefore
+\begin{equation}
+\begin{aligned}
+    f(v_A,v_R)
+       &=\frac{1}{G_R}\sum_{j\in R}c_j^*f(v_A,v_j)\\
+       &=-iZG_R+O(Z^2).
+    \label{eq:cw_collective_f}
+\end{aligned}
+\end{equation}
+The phases of the profile coefficients have aligned the pair correlations constructively. Meanwhile,
+\begin{equation}
+    h(v_R,v_R)
+       =\frac{1}{G_R^2}\sum_{j,k\in R}c_j^*c_k h(v_j,v_k)
+       =O(Z^2).
+\end{equation}
+No assumption about the purity of the selected two-mode state is needed.
+
+Among normalized superpositions on these opposite-side modes, this choice maximizes the magnitude of the first-order correlation with $A$. Indeed, for $v_d=\sum_{j\in R}d_jv_j$ and $\sum_j|d_j|^2=1$, Cauchy--Schwarz gives
+\begin{equation}
+    \left|\sum_{j\in R}d_j^*c_j\right|\le G_R,
+\end{equation}
+with equality for the coefficients in Eq.~\eqref{eq:cw_collective_mode}, up to a common phase. This is optimality within this collective-mode construction, not a claim of optimality over all covariance witnesses.
+
+\subsection{An explicit entanglement certificate}
+
+For two orthogonal normalized modes, the phase-optimized Duan expression is
+\begin{equation}
+\begin{aligned}
+    D_{A,R}
+       &=1+h(v_A,v_A)+h(v_R,v_R)-2|f(v_A,v_R)|\\
+       &=1-2|Z|G_R+O(Z^2).
+    \label{eq:cw_duan}
+\end{aligned}
+\end{equation}
+The first equality is exact for the second moments of the state, including any correlations with unobserved modes. Self-squeezing and normal cross-correlations cancel in this particular sum of quadrature variances; their absence does not require additional assumptions about the state.
+
+For a fixed input and $G_R>0$, the nonzero linear decrease dominates the $O(Z^2)$ remainder at sufficiently small nonzero $Z$. Hence $D_{A,R}<1$ in a neighborhood of the input plane. This proves entanglement of the reduced pair $A,v_R$.
+
+It also proves entanglement across the original multimode partition. If the selected state were separable across $S|T$, a local change of mode basis within $T$ followed by discarding every mode except $A$ and $v_R$ would leave a separable two-mode state. Such a state cannot violate the Duan bound. Thus the constructed violation contradicts separability across $S|T$, regardless of correlations within either party or mixedness caused by tracing out other spatial modes.
+
+This is a constructive statement: it supplies a witness and proves its violation. A nonzero cross-correlation alone would not be an entanglement proof. Here the leading anomalous correlation is linear in $Z$, whereas the normal populations that enter the same criterion begin at $Z^2$.
+
+\subsection{The witness matrix and its relation to the partition}
+
+For the phase-adjusted pair, order the quadratures as $(X_A,P_A,X_R,P_R)$ and use the manuscript convention $\gamma_{jk}=\langle\{\Delta r_j,\Delta r_k\}\rangle$, with vacuum covariance $\mathbb I$. The Duan matrix is
+\begin{equation}
+    W_D=\frac14\begin{pmatrix}
+       1&0&1&0\\
+       0&1&0&-1\\
+       1&0&1&0\\
+       0&-1&0&1
+    \end{pmatrix}.
+\end{equation}
+A local phase of $v_A$ can be chosen to make $f(v_A,v_R)$ real and negative. At leading order, a fixed phase suffices for either fixed sign of $Z$; choosing the phase from the full $f$ gives the exact phase optimization in Eq.~\eqref{eq:cw_duan}.
+
+Let $L$ be the real matrix extracting these four quadratures from the full selected-mode quadrature vector after the local basis and phase changes. Then
+\begin{equation}
+    \gamma_{A,R}=L\gamma L^T,
+    \qquad \mathcal Z_{S|T}=L^TW_DL,
+\end{equation}
+and
+\begin{equation}
+    D_{A,R}=\operatorname{Tr}(\mathcal Z_{S|T}\gamma).
+\end{equation}
+For an explicit construction, a profile coefficient $d_j$ in $v=\sum_jd_jv_j$ contributes the block
+\begin{equation}
+    \begin{pmatrix}
+      \operatorname{Re}d_j&\operatorname{Im}d_j\\
+      -\operatorname{Im}d_j&\operatorname{Re}d_j
+    \end{pmatrix}
+\end{equation}
+to the rows extracting $(X(v),P(v))$. This fixes the phase convention and allows the analytical witness to be evaluated on the same covariance matrices as the numerical optimization.
+
+The matrix $\mathcal Z_{S|T}$ is positive semidefinite and has trace one, since the extracted modes are orthonormal and $LL^T=\mathbb I_4$. It generally has off-diagonal blocks across the partition: those blocks measure the correlations responsible for the violation. It may also have entries between original modes belonging to the same party, because $v_R$ is a superposition of those modes.
+
+If $w_{\mathrm{opt}}$ denotes minimization over the full valid witness class for the same partition and normalization, then
+\begin{equation}
+    w_{\mathrm{opt}}(Z)\le D_{A,R}(Z).
+\end{equation}
+This provides an explicit achievable witness value. Equality, including equality of the leading slopes, would require a separate optimality argument. In particular, the constructed witness should not be identified with the FullyWit output without comparison.
+
+\subsection{All seven bipartitions of the four-mode example}
+
+Assuming $c_B$ and $c_C$ are nonzero, the construction gives
+\begin{center}
+\begin{tabular}{lc}
+Partition & $G_R$\\
+\hline
+$A|BCD$ & $\sqrt{|c_B|^2+|c_C|^2}$\\
+$AD|BC$ & $\sqrt{|c_B|^2+|c_C|^2}$\\
+$ACD|B$ & $|c_B|$\\
+$AC|BD$ & $|c_B|$\\
+$ABD|C$ & $|c_C|$\\
+$AB|CD$ & $|c_C|$\\
+$ABC|D$ & $0$
+\end{tabular}
+\end{center}
+The first six rows have $D_{A,R}=1-2|Z|G_R+O(Z^2)$ and thus certify entanglement at sufficiently small nonzero distance. A row with $G_R=0$ does not define a collective mode through Eq.~\eqref{eq:cw_collective_mode}; it records that this first-order construction supplies no violation.
+
+The first four partitions in the strongest numerical group therefore have two distinct constructive slopes, not one. If $|c_B|$ is appreciably larger than $|c_C|$, the strengths $\sqrt{|c_B|^2+|c_C|^2}$ and $|c_B|$ are close. The next two partitions use only the $c_C$ coupling across their cut. This gives a quantitative explanation to test against the numerical curves, rather than assuming exact degeneracy within each visually identified group.
+
+The last partition places every first-order coupled mode on the same side. Its absence of a linear violation can be established for the full normalized witness class, as follows.
+
+\subsection{Why the excluded-mode cut has no linear violation}
+
+For $S=ABC$ and $T=D$, write the exact physical selected covariance as
+\begin{equation}
+    \gamma(Z)=\begin{pmatrix}\gamma_S(Z)&K(Z)\\K(Z)^T&\gamma_D(Z)\end{pmatrix}.
+\end{equation}
+Both anomalous and normal cross-correlations vanish at first order, so $K(Z)=O(Z^2)$. The matrix
+\begin{equation}
+    \gamma_{\mathrm{prod}}(Z)=\gamma_S(Z)\oplus\gamma_D(Z)
+\end{equation}
+is a physical covariance matrix of the product of the two actual marginal states. It is therefore separable across this cut, and every valid witness with threshold one satisfies
+\begin{equation}
+    \operatorname{Tr}(\mathcal Z\gamma_{\mathrm{prod}})\ge1.
+\end{equation}
+For a fixed finite witness,
+\begin{equation}
+\begin{aligned}
+    \operatorname{Tr}(\mathcal Z\gamma)
+       &=\operatorname{Tr}(\mathcal Z\gamma_{\mathrm{prod}})
+          +\operatorname{Tr}\!\left[\mathcal Z(\gamma-\gamma_{\mathrm{prod}})\right]\\
+       &\ge1-O(Z^2).
+\end{aligned}
+\end{equation}
+Internal $O(Z)$ correlations within $ABC$ do not evade this bound: they are already included in the product reference covariance.
+
+One must also consider whether an optimized witness depending on $Z$ could diverge and turn the small cross-block into a linear violation. Near the coherent input, $\gamma(0)=\mathbb I$, so $\gamma(Z)\ge\tfrac12\mathbb I$ for sufficiently small $|Z|$. For any positive semidefinite candidate witness that achieves $\operatorname{Tr}(\mathcal Z\gamma)\le1$,
+\begin{equation}
+    \tfrac12\operatorname{Tr}\mathcal Z
+        \le\operatorname{Tr}(\mathcal Z\gamma)\le1.
+\end{equation}
+Hence $\operatorname{Tr}\mathcal Z\le2$, uniformly in this neighborhood. The bound
+\begin{equation}
+    |\operatorname{Tr}(\mathcal Z\Delta\gamma)|
+       \le\operatorname{Tr}(\mathcal Z)\,\|\Delta\gamma\|_{\mathrm{op}}
+\end{equation}
+then establishes the same $O(Z^2)$ limit for any violating optimized witness. Candidates with value above one do not certify entanglement. Thus a linear onset of optimized violation is excluded as well.
+
+This result does not prove separability of $ABC|D$ at small nonzero $Z$. It only shows that any violation must begin at quadratic or higher order. It applies to the physical covariance family; treating its first-order truncation as an exact covariance matrix could violate the uncertainty relation and give misleading optimization results.
+
+\subsection{What is needed to establish the quadratic violation?}
+
+Within the diffraction-free Bogoliubov model, the coefficients required for a second-order analysis follow from Eq.~\eqref{eq:nodiff_mode_correlations}. Define
+\begin{equation}
+\begin{aligned}
+    Q_{ij}&=\int d^2\mathbf r\,v_i^*v_j^*|u|^2u^2,\\
+    R_{ij}&=\int d^2\mathbf r\,v_i^*v_j|u|^4.
+\end{aligned}
+\end{equation}
+Using $u_Z^2=u^2\exp(-2iZ|u|^2)$ gives
+\begin{equation}
+\begin{aligned}
+    f(v_i,v_j)&=-iZC_{ij}-3Z^2Q_{ij}+O(Z^3),\\
+    h(v_i,v_j)&=Z^2R_{ij}.
+    \label{eq:cw_second_order}
+\end{aligned}
+\end{equation}
+The $-3$ includes $-2$ from expanding the phase in the linear term and $-1$ from the explicit quadratic term. The expression for $h$ is exact within this diffraction-free linearized model, because its background phases cancel.
+
+For $A,D$, the leading coefficient $C_{AD}$ vanishes, but the additional radial weight in $Q_{AD}$ need not obey the original radial cutoff. The ordinary two-mode criterion would give
+\begin{equation}
+    D_{A,D}=1+Z^2\left(R_{AA}+R_{DD}-6|Q_{AD}|\right)+O(|Z|^3).
+\end{equation}
+A negative quadratic coefficient would already certify $ABC|D$ through the reduced pair. A nonnegative coefficient is inconclusive: correlations involving $B,C$ may allow another witness to detect entanglement of $ABC$ with $D$ even when this pairwise test fails.
+
+A full analysis of the seventh curve therefore requires the second-order covariance and either a suitable collective witness or a partial-transpose analysis. Normal correlations and populations must be included at the same order as $Q_{ij}$. The present appendix does not establish the sign of that optimized second-order contribution. Moreover, these second-order coefficients belong to the diffraction-free Bogoliubov model; they are not asserted to be the full second-order coefficients of the untruncated quantum equation with diffraction.
+
+\subsection{Generalization and limits of the argument}
+
+For a selected mode $v_A$ coupled to a larger radial family, the same proof uses
+\begin{equation}
+    G_R=\left(\sum_{p\in R}|(v_A,v_p;u,u)|^2\right)^{1/2}.
+\end{equation}
+Every partition placing at least one nonzero partner coefficient opposite $A$ admits the constructed first-order certificate. The OAM-dependent radial rule controls which coefficients can enter this sum, while their magnitudes determine the constructive witness slope. Modes excluded at first order can still acquire correlations and entanglement at higher orders. This statement does not require isolation from other spatial modes.
+
+More generally, for any cross-partition coefficient matrix $C_{ST}$, choose normalized collective profiles with coefficient vectors $x$ on $S$ and $y$ on $T$. Their leading anomalous correlation is $-iZx^\dagger C_{ST}y^*$. Maximizing its magnitude over the two normalized vectors gives the largest singular value $\sigma_{\max}(C_{ST})$. The same Duan construction yields
+\begin{equation}
+    D_{S,T}=1-2|Z|\sigma_{\max}(C_{ST})+O(Z^2).
+\end{equation}
+For the star matrix \eqref{eq:cw_star}, the cross block has rank at most one, and its nonzero singular value is precisely $G_R$. This provides a general first-order certificate whenever the cross-partition pair-creation coefficient is nonzero, under the coherent-input assumptions of Eq.~\eqref{eq:cw_first_order}.
+
+The collective transformation must remain local relative to the partition being tested. Combining modes that lie on opposite sides would change the parties and would not prove entanglement of the original partition. Different cuts generally use different collective modes and different witnesses.
+
+Finally, certifying all bipartitions with these separate witnesses is not a proof of genuine multipartite entanglement for a mixed selected state. A genuine multipartite witness must be valid for every biseparable decomposition simultaneously. A witness valid for that stronger task must, in particular, respect the $ABC|D$ bound, so it also cannot show a linear violation for the four-mode example. The first-order argument establishes the bipartite coupling structure and its witnesses. When the complete modeled field is pure, including the remaining modes in one party permits the genuine multipartite conclusion proved in Appendix~\ref{app:grouped_gme_note}. The MultiWit certification after those modes are discarded is a separate, stronger statement about the reduced selected state.
+
+\section{Working note: genuine multipartite entanglement with the remaining modes grouped into one party}
+\label{app:grouped_gme_note}
+
+\textit{Purpose and scope.} This working appendix develops an analytical consequence of the pairwise selection rules. If a mode $A$ is entangled with each of $N$ orthogonal modes $B_j$, and the entire modeled field is in a pure state, the field is genuinely multipartite entangled for an $N+1$-party grouping in which all remaining modes are assigned to one of those parties. This differs from genuine multipartite entanglement of the reduced state of the selected single modes. The latter can be certified by the numerical witnesses after the remaining modes are traced out. The discussion is for consideration and clarification, not final manuscript prose.
+
+\subsection{Selected modes, the complement, and the parties}
+
+Let the selected single-mode subsystems be
+\begin{equation}
+    S=\{A,B_1,\ldots,B_N\},\qquad N\ge2,
+\end{equation}
+with mutually orthonormal mode profiles. Denote their orthogonal spatial-mode complement by $\mathcal C$. Here $\mathcal C$ means all remaining modes, including the pump and any other radial or angular modes; it is not the individual mode labeled $C$ in the four-mode example of the main text.
+
+For the modeled bosonic field, the mode decomposition gives the Fock-space factorization
+\begin{equation}
+    \mathcal H
+       =\mathcal H_A\otimes
+          \bigotimes_{j=1}^{N}\mathcal H_{B_j}
+          \otimes\mathcal H_{\mathcal C}.
+\end{equation}
+The complement is defined as an orthogonal subspace, so one does not inadvertently include overlapping detection profiles as independent parties. A complete basis within the complement can be chosen arbitrarily.
+
+The proposed grouping has $N+1$ parties:
+\begin{equation}
+    A\;|\;B_1\;|\;\cdots\;|\;B_{N-1}\;|\;(B_N\mathcal C).
+    \label{eq:grouped_partition}
+\end{equation}
+The last party contains one selected radial mode and the entire complement. Grouping means assigning these subsystems to one party, not tracing them out or physically mixing their modes. In particular, every degree of freedom of the pure modeled field is still included.
+
+We assume the global state is pure,
+\begin{equation}
+    \rho_{S\mathcal C}(z)=|\Psi(z)\rangle\langle\Psi(z)|.
+\end{equation}
+This holds in an ideal closed, lossless unitary model with a pure coherent input and vacuum in the initially unoccupied modes. It also holds for the full fluctuation state evolved from vacuum by a lossless quadratic Bogoliubov Hamiltonian, within that approximation. It need not hold for an optical state after absorption, added medium noise or averaging over uncontrolled input parameters. Global purity is a separate premise, not something established by the pairwise witness values.
+
+\subsection{Pairwise premise and a common small-distance interval}
+
+Assume the reduced pair $AB_j$ is entangled for each $j$. In the first-order treatment, a sufficient condition is
+\begin{equation}
+    c_j=(v_A,v_{B_j};u,u)\ne0,
+\end{equation}
+since Eq.~\eqref{eq:cw_individual_pair} gives
+\begin{equation}
+    D_{A,B_j}(Z)=1-2|Z|\,|c_j|+O(Z^2)<1
+\end{equation}
+for sufficiently small nonzero $Z$. Each of these is a statement about the actual reduced pair of the global state; it does not require the other modes to be absent or uncorrelated.
+
+For a fixed finite number of nonzero coefficients, there is a common interval in which all these violations hold simultaneously. For example, if the remainder for pair $j$ has magnitude at most $M_j Z^2$ near the input, then $M_j|Z|<2|c_j|$ suffices for that pair. Taking a sufficiently small interval common to the finite set gives all pairwise entanglements at the same distance. The asymptotic argument does not determine how large this interval is, and a very small coefficient can restrict it substantially.
+
+The proof below only requires the pairwise premise. It remains valid at any distance where all the pairs are certified and the global state is pure, even if their entanglement is established using the full finite-distance covariance rather than a Taylor expansion.
+
+\subsection{Every bipartition of the grouped parties is entangled}
+
+Take any nontrivial bipartition $L|R$ of the parties in Eq.~\eqref{eq:grouped_partition}. Choose the notation so that the party $A$ lies in $L$. Since $R$ is nonempty, it contains at least one selected mode $B_j$: either as its own party or inside the enlarged party $B_N\mathcal C$.
+
+Suppose, for contradiction, that the global state were separable across this cut:
+\begin{equation}
+    \rho_{LR}=\sum_\lambda p_\lambda
+                   \rho_L^{(\lambda)}\otimes\rho_R^{(\lambda)}.
+\end{equation}
+Tracing out all subsystems except $A,B_j$ gives
+\begin{equation}
+    \rho_{AB_j}=\sum_\lambda p_\lambda
+                   \rho_A^{(\lambda)}\otimes\rho_{B_j}^{(\lambda)},
+\end{equation}
+which is separable. This contradicts the entanglement of that pair. Therefore the global state is entangled across every bipartition of the grouped parties.
+
+This part of the proof does not use purity. It follows only from the fact that partial traces within each party preserve separability. If $B_j=B_N$, discarding $\mathcal C$ is one of these local partial traces, so correlations involving the complement do not invalidate the argument.
+
+\subsection{Where purity establishes genuine multipartite entanglement}
+
+For a mixed state, entanglement across every fixed bipartition is not sufficient to exclude a biseparable decomposition
+\begin{equation}
+    \rho=\sum_\lambda p_\lambda\sigma_{\lambda},
+\end{equation}
+where $\sigma_{\lambda}$ is separable across a cut that may vary with $\lambda$. This is the distinction between full inseparability and genuine multipartite entanglement.
+
+A pure state does not have this freedom. Every positive component in a convex decomposition of the rank-one density matrix $|\Psi\rangle\langle\Psi|$ must have support in the same one-dimensional subspace. Consequently, if a pure state were biseparable, that pure state itself would be separable across at least one fixed bipartition. Since the preceding argument excludes every such bipartition, the pure global state is genuinely multipartite entangled with respect to Eq.~\eqref{eq:grouped_partition}.
+
+The resulting sufficient statement is:
+\begin{quote}
+For a pure state of the full modeled field, if $A$ is entangled with each of $N$ distinct modes $B_j$, then the state is genuinely multipartite entangled among the $N+1$ parties obtained by keeping $A,B_1,\ldots,B_{N-1}$ as individual parties and grouping $B_N$ with all remaining modes.
+\end{quote}
+Neither Gaussianity nor optimality of the pairwise witnesses is required for this logical implication. The small-distance expansion supplies one way to establish its pairwise premise. The theorem is applied to a physical pure-state family, not to a truncated density matrix that might fail positivity or normalization.
+
+\subsection{What the OAM-dependent radial rule establishes}
+
+In the unseeded configuration, $A$ can be the selected mode $LG_{0,l_2}(w_2)$ and the partners the allowed modes $LG_{p,l_1}(w_1)$, with $l_1=2l_0-l_2$ and the waist relation used in the main text. Let
+\begin{equation}
+    N=\#\{p:(v_A,v_{B_p};u,u)\ne0\}
+\end{equation}
+count the nonzero coefficients in the selected radial family. If every coefficient from $p=0$ through $p_{\max}$ is nonzero, then $N=p_{\max}+1$ and the grouped theorem certifies $p_{\max}+2$ parties. If an additional zero occurs, only the nonzero coefficients count toward this particular guarantee.
+
+Thus the magnitudes and relative signs of the OAM values control how many resolved radial modes can serve as distinct parties in this first-order certification. The waist choice remains part of the statement. The result is a guaranteed grouping, not a claim that the entire field contains exactly this number of entangled modes or that other modes are separable. Higher-order couplings can involve further radial orders, and the proof places no upper bound on the total entanglement structure.
+
+For the example $l_0=2$, $l_2=1$, the two nonzero partners are $B_1=LG_{0,3}(w_1)$ and $B_2=LG_{1,3}(w_1)$. Pairwise entanglement of $A$ with both partners and global purity establish genuine tripartite entanglement of
+\begin{equation}
+    A\;|\;B_1\;|\;(B_2\mathcal C).
+\end{equation}
+The mode $LG_{2,3}(w_1)$, denoted $D$ in the main text, belongs to $\mathcal C$ here, together with the pump and all other unselected modes. The absence of its first-order pairwise violation does not obstruct this three-party proof, because $D$ has not been introduced as a separate party. Certifying a grouping in which $D$ is a fourth distinct party would require an additional argument.
+
+\subsection{Freedom to assign the remaining modes}
+
+There is nothing special about placing the complement with $B_N$. It may instead be assigned to $A$ or any other $B_j$. More generally, its orthogonal mode subspaces may be distributed among the parties, provided the grouping includes the whole pure system and keeps each of $A,B_1,\ldots,B_N$ in a distinct party. Every nontrivial cut then still separates $A$ from at least one entangled partner, and the same proof applies.
+
+This freedom must not be confused with certifying genuine entanglement of every individual mode in the complement. Some of those modes may be in vacuum or uncorrelated with the selected set. A party can contain unentangled ancillary modes without invalidating genuine entanglement among the grouped parties. Conversely, making the entire complement an additional standalone party would introduce the cut $S|\mathcal C$, whose entanglement is not established by the selected pairwise data.
+
+\subsection{Discarding the complement: the separate numerical claim}
+
+The reduced state measured on the selected single modes is
+\begin{equation}
+    \rho_S=\operatorname{Tr}_{\mathcal C}
+                  |\Psi\rangle\langle\Psi|.
+\end{equation}
+It generally is mixed. The pairwise entanglements still prove that $\rho_S$ is entangled across every bipartition, but the pure-state step above can no longer be applied. Grouping the complement and discarding it are different operations:
+\begin{equation}
+\begin{aligned}
+    &A|B_1|\cdots|(B_N\mathcal C)
+       &&\text{includes the full pure state},\\
+    &A|B_1|\cdots|B_N
+       &&\text{uses the reduced state }\rho_S.
+\end{aligned}
+\end{equation}
+Tracing out $\mathcal C$ is a local operation on the enlarged last party. Such an operation cannot create genuine multipartite entanglement, but it can destroy it. The grouped theorem therefore does not guarantee that the reduced state is genuinely multipartite entangled.
+
+A valid MultiWit violation for the covariance of $\rho_S$ supplies precisely the missing certification: it excludes all biseparable mixtures of the selected modes, even though their state is mixed. In parameter ranges where that violation is found, the genuine multipartite entanglement remains after the complement is discarded. This is a stronger accessible-mode statement than the grouped theorem. It also establishes the grouped state's genuine entanglement without needing to infer it from purity, since a local partial trace cannot create it.
+
+The numerical result does not imply that $\mathcal C$ was uncorrelated, or that the reduced state became pure. It establishes robustness of the multipartite certification to discarding those modes. The analytical and numerical statements should be compared for the same selected set and at distances where their respective premises have been checked; the asymptotic pairwise proof alone does not establish the entire finite-distance interval of a numerical plot.
+
+\subsection{Limits and a possible role in the manuscript}
+
+Global purity refers to the complete system actually included in the claim. If the optical field is mixed because of losses or medium noise, placing the other optical modes into $\mathcal C$ does not restore purity. One could formally enlarge the system to include a purifying environment, but the last party would then include that environment, not just the spatial optical modes. That would be a different operational claim. The purely optical grouped theorem is therefore naturally a statement about the ideal lossless model; direct numerical witnesses of the reduced optical state remain the appropriate certification when additional noise is modeled.
+
+For the ideal model, the argument supplies a short route from the first-order selection rule to a genuine multipartite statement. The individual pairwise Duan violations establish all bipartitions of the grouped system, and purity excludes biseparable mixtures. The optional collective-mode construction in Appendix~\ref{app:collective_witness_note} can improve the quantitative bipartite witness but is not needed for this proof.
+
+A possible presentation would first establish the OAM-controlled pairwise radial support, then state the grouped pure-state consequence with its parties explicitly identified. The numerical multipartite section would ask the stronger question of whether the selected single modes remain genuinely multipartite entangled after all unselected modes are traced out. This organization connects the analytical selection rules to the numerical certification without claiming that pairwise entanglement alone proves genuine multipartite entanglement of an arbitrary mixed reduced state.
 
 \bibliography{refs}% Produces the bibliography via BibTeX.
 
