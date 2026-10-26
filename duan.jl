@@ -11,7 +11,7 @@ theme = merge(
     theme_latexfonts(),
     Theme(
         fontsize=13.333333,
-        linewidth=3,
+        linewidth=2,
         palette=(
             color=Makie.to_colormap(:Set2_5),
         ),
@@ -27,9 +27,10 @@ with_theme(theme) do
     for n ∈ eachindex(IndexCartesian(), ls)
         l₀, l₂ = ls[n]
         l₁ = 2l₀ - l₂
+        pmax = l₀ * l₂ <= 0 ? 0 : min(2abs(l₀), abs(l₂))
         u = _lg(rs, rs, l=l₀)
 
-        ax = Axis(fig[Tuple(n)...], xlabel=L"Z", ylabel="Duan Criterion", title=L"l_0 = %$l₀, l_2 = %$l₂")
+        ax = Axis(fig[Tuple(n)...], xlabel=L"Z", ylabel="Duan Criterion", title=L"l_0 = %$l₀, l_2 = %$l₂, p_{\max} = %$pmax")
 
         for p ∈ 0:3
             v2 = _lg(rs, rs, l=l₂) * √dA

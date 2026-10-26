@@ -9,7 +9,7 @@ theme = merge(
     theme_latexfonts(),
     Theme(
         fontsize=13.333333,
-        linewidth=3,
+        linewidth=2,
         palette=(
             color=Makie.to_colormap(:Set2_7),
         ),

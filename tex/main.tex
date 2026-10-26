@@ -38,8 +38,7 @@ orbital angular momentum (OAM). While OAM conservation is a trivial selection ru
 for entanglement, a less intuitive rule applies to the radial structure.
 Depending on the relative chirality of the interacting modes, entanglement can be 
 concentrated between two radial modes or distributed in a multiparty configuration 
-determined by the OAM values involved. This opens the possibility of generating and 
-controlling multipartite entanglement in the radial structure.
+determined by the OAM values involved. For the full pure field, the first-order correlations certify genuine multipartite entanglement when the remaining modes are grouped with one selected mode. Finite-distance Bogoliubov calculations and optimized witnesses further test entanglement of the reduced selected modes. This opens the possibility of generating and controlling multipartite entanglement in the radial structure.
 \end{abstract}
 
 %\keywords{Suggested keywords}%Use showkeys class option if keyword
@@ -72,9 +71,11 @@ While the OAM conservation selection rule has been demonstrated in different qua
 Self-phase modulation is a particularly interesting phenomenon, where the intensity of an optical beam alters the effective refraction index of a nonlinear medium, thus affecting the beam's phase evolution along propagation through the medium \cite{Cerda2010}. This effect can also be observed in Bose-Einstein condensates and atomic vapors \cite{BEC-RMP-1999,Mendonca2005,GLORIEUX2025}.
 In a previous work we investigated the formation of a radial structure in self-phase modulation driven by an OAM beam and determined the radial spectrum generated in terms of the topological charge of the input beam. This established an interesting radial-angular coupling promoted by the radial selection rules imposed on the nonlinear process \cite{Oliveira2023}.
 
-In the present work we investigate the consequence of radial-angular coupling and the associated selection rule to entanglement generation. In particular, we will discuss bipartite and multipartite entanglement generated in the process, which can server as a possible platform for quantum information protocols based on these resources. This platform is particularly interesting due to the wide range of experimental tools for its implementation, going from polariton superfluids to atomic vapors. 
+In the present work we investigate the consequence of radial-angular coupling and the associated selection rule to entanglement generation. In particular, we will discuss bipartite and multipartite entanglement generated in the process, which can serve as a possible platform for quantum information protocols based on these resources. This platform is particularly interesting due to the wide range of experimental tools for its implementation, going from polariton superfluids to atomic vapors. 
 
 
+
+Section~\ref{sec:Kerr} derives the first-order correlations from the full fluctuation equation. Section~\ref{sec:selection rules} establishes their radial selection rule and the resulting pairwise, multimode bipartite, and grouped pure-state entanglement. Section~\ref{sec:finite_distance} then uses the diffraction-free Bogoliubov solution and optimized witnesses to investigate finite propagation distances and the reduced selected modes.
 
 \section{Spatially Structured Bosonic Field}
 \label{sec:bosonfield}
@@ -135,11 +136,11 @@ The simplest entanglement criteria for bosonic systems are based on the field qu
 \end{equation}
 Here, $v$ is the corresponding field mode. The complementary quadrature is simply defined by shifting $v$ by a $\pi/2$ phase: $P(v) = X(iv)$.
 
-The corresponding covariance function is given by
+The covariance function is given by
 \begin{equation}
     \Gamma(v_1, v_2) = \expval{\acomm{\Delta X(v_1)}{\Delta X(v_2)}},
 \end{equation}
-where $\Delta X(v) = X(v) - \expval{X(v)}$ and $\acomm{\bullet}{\bullet}$ denotes the anticommutator. The calculation of this observable is simplified if we express it in terms of the field $\mathcal{E}$. For this, we introduce the normal correlation
+where $\Delta X(v) = X(v) - \expval{X(v)}$ and $\acomm{\bullet}{\bullet}$ denotes the anticommutator. The calculation of this observable is simplified if we express it in terms of the field $\mathcal{E}$. For this, we introduce the normal and anomalous correlations, given respectively by
 \begin{equation}
     \label{eq:FHdefinitions}
     H(\mathbf{r}_1, \mathbf{r}_2)
@@ -147,7 +148,6 @@ where $\Delta X(v) = X(v) - \expval{X(v)}$ and $\acomm{\bullet}{\bullet}$ denote
         - \expval{\mathcal{E}^\dagger(\mathbf{r}_2)}
            \expval{\mathcal{E}(\mathbf{r}_1)} \,,
 \end{equation}
-and the anomalous one
 \begin{equation}
     F(\mathbf{r}_1, \mathbf{r}_2)
         = \expval{\mathcal{E}(\mathbf{r}_1, z) \mathcal{E}(\mathbf{r}_2, z)}
@@ -260,8 +260,6 @@ will see, this creates a rich dynamics where energy and information exchange is 
 selection rules that impose a chiral relation that couples the radial and angular degrees of freedom 
 of the interacting modes and determine the formation of entangled clusters.
 
-\subsection{Heisenberg Equation for the Field and Linear Solution}
-
 We will assume that the field is propagating along the $z$ direction, 
 and satisfies the Heisenberg equation of motion
 %
@@ -270,7 +268,7 @@ and satisfies the Heisenberg equation of motion
     2ik \partial_z \mathcal{E}(\mathbf{r}, z) + \nabla^2 \mathcal{E}(\mathbf{r}, z) = g\, \mathcal{E}^\dagger(\mathbf{r}, z) \mathcal{E}^2 (\mathbf{r}, z)\,,
 \end{equation}
 %
-where $g$ is the Kerr nonlinear coupling constant and $\nabla^2$ denotes the laplacian in the transverse direction. We consider will two distinct approximations starting from the same field decomposition: a short-distance expansion retaining the full fluctuation equation, and a diffraction-free, linearized fluctuation treatment without a Taylor expansion in distance.
+where $g$ is the Kerr nonlinear coupling constant and $\nabla^2$ denotes the laplacian in the transverse direction. Here, we employ a short-distance expansion retaining the full fluctuation equation, which will form the basis of the derivation of our selection rules. Later, we introduce and a diffraction-free, linearized fluctuation treatment without a Taylor expansion in distance, which will allow us to check if the selection rules survive for longer propagation distances.
 
 To start our derivation, let $\alpha_c(\mathbf{r}, z)$ denote the solution of the classical equations of motion
 \begin{equation}
@@ -298,11 +296,11 @@ The correlation functions, which are our observables of interest, can also be co
 Next, we write the equation of motion
 \begin{equation}
 \label{eq:bg_full_fluctuation}
-    2ik\partial_z\eta+\nabla^2\eta=g\left(2|\alpha_c|^2\eta+\alpha_c^2\eta^\dagger+R\right)
+    2ik\partial_z\eta+\nabla^2\eta=g\left(2|\alpha_c|^2\eta+\alpha_c^2\eta^\dagger+\Omega\right)
 \end{equation}
 where the nonlinear fluctuation terms are
 \begin{equation}
-    R=\alpha_c^*\eta^2
+    \Omega=\alpha_c^*\eta^2
             +2\alpha_c\eta^\dagger\eta
             +\eta^\dagger\eta^2.
     \label{eq:bg_remainder}
@@ -349,8 +347,8 @@ Since the mean-subtraction terms do not contribute at first order, the correlati
 \begin{aligned}
     F(\mathbf r_1,\mathbf r_2;z)
       &=-\frac{igz}{2k}\alpha^2(\mathbf r_2)
-             \delta^{(2)}(\mathbf r_1-\mathbf r_2)+O(z^2),\\
-    H(\mathbf r_1,\mathbf r_2;z)&=O(z^2).
+             \delta^{(2)}(\mathbf r_1-\mathbf r_2)+\mathcal{O}(z^2),\\
+    H(\mathbf r_1,\mathbf r_2;z)&=\mathcal{O}(z^2).
 \end{aligned}
     \label{eq:bg_first_correlations}
 \end{equation}
@@ -362,20 +360,18 @@ Using the spatial overlap notation
 projection onto the modes $v_1$ and $v_2$ gives
 \begin{equation}
 \begin{aligned}
-    f(v_1,v_2)&=-\frac{igz}{2k}(v_1,v_2;\alpha,\alpha)+O(z^2),\\
-    h(v_1,v_2)&=O(z^2).
+    f(v_1,v_2)&=-\frac{igz}{2k}(v_1,v_2;\alpha,\alpha)+\mathcal{O}(z^2),\\
+    h(v_1,v_2)&=\mathcal{O}(z^2).
 \end{aligned}
 \end{equation}
 
-\subsection{Laguerre-Gaussian inputs and dimensionless form}
-
-We will consider coherent Laguerre-Gaussian modes as our input states, with
+To specify the input and introduce a natural transverse scale, we consider coherent Laguerre-Gaussian modes, with
 \begin{equation}
-    \alpha(\mathbf r,0)=\norm{\alpha}\,LG_{pl}(\mathbf r;w),
+    \alpha(\mathbf r)=\norm{\alpha}\,LG_{pl}(\mathbf r;w),
 \end{equation}
 where the waist-plane modes are
 \begin{equation}
-    LG_{pl}(\mathbf{r}; w) = (-1)^p\,\frac{\mathcal{N}_{pl}}{w}
+    LG_{pl}(\mathbf{r}; w) = \frac{(-1)^p\mathcal{N}_{pl}}{w}
     \left(\frac{2r^2}{w^2}\right)^{|l|/2}
     L_p^{|l|}\!\left(\frac{2r^2}{w^2}\right)
     e^{-r^2/w^2+il\phi},
@@ -393,45 +389,25 @@ Using these definitions, the first-order results take the dimensionless form
 \begin{equation}
     \begin{aligned}
         f(v_1,v_2)&\approx-iZ(v_1,v_2;u,u),\\
-        \Gamma(v_1,v_2)&=\Re(v_1;v_2)+2Z\Im(v_1,v_2;u,u),\\
-        \lambda_-&=1-2\left|Z(v,v;u,u)\right|,\\
-        D_{\mathrm{opt}}&=1-2\left|Z(v_1,v_2;u,u)\right|,\\
+        \Gamma(v_1,v_2)&=\Re(v_1;v_2)+2Z\Im(v_1,v_2;u,u)+\mathcal{O}(Z^2),\\
+        \lambda_-&=1-2\left|Z(v,v;u,u)\right|+\mathcal{O}(Z^2),\\
+        D_{\mathrm{opt}}&=1-2\left|Z(v_1,v_2;u,u)\right|+\mathcal{O}(Z^2).
     \end{aligned}
 \end{equation}
-For the input angular momentum $l_0$, we see that the angular integration requires $l_v=l_0$ for squeezing and $l_{v_1}+l_{v_2}=2l_0$ for entanglement. These OAM conditions are necessary; the corresponding radial overlap must also be nonzero.
+For an input angular momentum $l_0$, the angular integration at first order requires $l_v=l_0$ for squeezing and $l_{v_1}+l_{v_2}=2l_0$ for entanglement. These OAM conditions are necessary; the corresponding radial overlap must also be nonzero.
 
-\subsection{Diffraction-free Bogoliubov solution}
-
-The first-order expressions describe the initial generation of correlations, but extrapolating them to larger distances can give negative values of $\lambda_-$ or $D_{\mathrm{opt}}$. For finite-distance predictions, we return to the full equation for the same decomposition $\mathcal E=\alpha_c+\eta$ and adopt a different approximation: we neglect diffraction and discard the nonlinear fluctuation terms $R$ in Eq.~\eqref{eq:bg_full_fluctuation}, while retaining the full dependence on propagation distance. This linearization of the fluctuation dynamics is the Bogoliubov approximation, used to describe quantum fluctuations in paraxial propagation through Kerr media~\cite{PhysRevA.92.043802}. Appendix~\ref{app:no_diffraction} solves the diffraction-free Bogoliubov equations without a Taylor expansion in distance. The dimensionless classical field is then
-\begin{equation}
-    u_Z(\mathbf r)=u(\mathbf r)e^{-iZ|u(\mathbf r)|^2},
-\end{equation}
-and the mode correlations are
-\begin{equation}
-\begin{aligned}
-    f(v_1,v_2)={}&-iZ(v_1,v_2;u_Z,u_Z)\\
-                &-Z^2(v_1,v_2,u_Z;u_Z,u_Z,u_Z),\\
-    h(v_1,v_2)={}&Z^2(v_1,u_Z,u_Z;v_2,u_Z,u_Z).
-\end{aligned}
-\end{equation}
-These expressions agree with the preceding first-order result and are exact within the diffraction-free linearized fluctuation equations. Their use at finite distance requires negligible diffraction over the interaction region, which is a reasonable approximation for softly focused beams, as well as a small fluctuation backreaction. The numerical results below use these correlations under those assumptions.
-
-\section{Selection Rules for Laguerre-Gaussian inputs}
+\section{Short-distance entanglement structure}
 \label{sec:selection rules}
 
-We now specialize to the LG input $\alpha(\mathbf r,0)=\norm{\alpha}\,LG_{0,l_0}(\mathbf r;w)$ and analyze the selection rules for radial and angular mode coupling.
+We now specialize to the LG input $\alpha(\mathbf r)=\norm{\alpha}\,LG_{0,l_0}(\mathbf r;w)$ and analyze the selection rules for radial and angular mode coupling.
 
 Our previous work \cite{Oliveira2023} has shown that, in the classical regime, the first order treatment gives a selection rule for the generation of radial orders up to $\abs{l_0}$. The current quantum treatment clarifies that this was, in fact, a selection rule for the mean field value $\expval{\mathcal{E}}$ given by \eqref{eq:exp_val_field}, whose expression had already appeared on our earlier treatment.
 
-Now that we have developed a quantum theory for the considered process, we may analyze other types of selection rules, this time for bi- and multipartite entanglement. Beyond the obvious conservation law, orbital angular momentum also affects radial mode coupling through chiral relations between the interacting modes, as we will see in the remaining of this section.
+We now derive the radial selection rule for the first-order anomalous correlations and use it to establish pairwise and multimode entanglement at sufficiently small nonzero distances. All detection profiles and their waists are held fixed in this expansion.
 
-\subsection{Two mode entanglement}
+\subsection{Radial selection rules and two-mode entanglement}
 
-
-
-Consider the case where 
-%
-Furthermore, let $v_2 = LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l_0$. Now, define $l_1 = 2l_0-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
+Let $v_2 = LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l_0$. Now, define $l_1 = 2l_0-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
 %
 \begin{eqnarray}
         v_2^*(\mathbf{r})u^2(\mathbf{r})
@@ -450,6 +426,7 @@ Furthermore, let $v_2 = LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_
 where we have defined
 %
 \begin{eqnarray}
+    \label{eq:radial_cutoff}
     p_{\text{max}} &=& \abs{l_0}+\frac{\abs{l_2} - \abs{2l_0 - l_2}}{2} 
     \nonumber\\
     &=& \begin{cases}
@@ -468,30 +445,78 @@ Then, by expanding the monomial that is raised to the power of $p_{\text{max}}$ 
 where
 %
 \begin{equation}
+    \label{eq:radial_coefficients}
     C_p = \frac{p_{\text{max}}!\,\mathcal{N}_{0l_2} \,\mathcal{N}_{0l_0}^2 \,w_1^{2\abs{l_0} + \abs{l_2} + 1}}{\mathcal{N}_{pl_1}w_2^{\abs{l_2}+1}w^{2\abs{l_0}}} \binom{p_{\text{max}} + \abs{l_1}}{p_{\text{max}} - p}\;.
 \end{equation}
 %
 Therefore, setting $v_1 = LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogonal to $v_2$, and considering the two mode subsystem formed by $v_1, v_2$, we get an optimal Duan violation of
 %
 \begin{equation}
+    \label{eq:radial_duan}
     D_{\text{opt}} = \begin{cases}
-        1 - 2C_p \abs{Z}, & p \le p_{\text{max}} \\
-        1, & p > p_{\text{max}}
+        1 - 2C_p \abs{Z}+\mathcal{O}(Z^2), & p \le p_{\text{max}} \\
+        1+\mathcal{O}(Z^2), & p > p_{\text{max}}
     \end{cases}\;.
 \end{equation}
 %
-Therefore, for nonzero $Z$ within the first-order regime, when $p \le p_{\text{max}}$ we have bipartite entanglement in this two-mode subsystem. This selection rule was derived only for the two-mode Duan criterion and does not, by itself, imply a multipartite selection rule.
+For $0\le p\le p_{\max}$, the coefficients $C_p$ are positive with the chosen LG phase convention. Their linear contribution therefore dominates the $\mathcal{O}(Z^2)$ remainder for sufficiently small nonzero $Z$, establishing entanglement of each corresponding pair. For $p>p_{\max}$, only the linear coefficient vanishes: Eq.~\eqref{eq:radial_duan} does not decide whether higher-order correlations produce entanglement. The finite radial support is a property of this first-order coefficient in the specified waist basis.
+
+\subsection{Entanglement across multimode bipartitions}
+\label{sec:pairwise_partitions}
+
+Let $\mathcal A$ denote the mode $v_2$, and define the partner parties $\mathcal B_p$ as the modes $LG_{p,l_1}(w_1)$ for $p=0,\ldots,p_{\max}$. These detection modes are mutually orthonormal. Each reduced pair $\mathcal A|\mathcal B_p$ is entangled at sufficiently small nonzero $Z$. Because this set is finite, there is a common small-distance interval in which all these pairwise violations hold.
+
+Consider any bipartition $S|T$ placing $\mathcal A$ and at least one partner $\mathcal B_p$ on opposite sides. If the state were separable across this cut, tracing out all other modes would leave a separable state on $\mathcal A|\mathcal B_p$, contradicting the pairwise Duan violation. Thus a single entangled pair crossing a cut certifies entanglement across that cut. This conclusion also applies when either side contains additional modes, and requires no purity assumption.
+
+Every nontrivial bipartition of the selected set $\{\mathcal A,\mathcal B_0,\ldots,\mathcal B_{p_{\max}}\}$ separates $\mathcal A$ from at least one partner. The reduced state of this set is therefore entangled across every bipartition, or fully inseparable. For mixed states, full inseparability alone does not exclude a convex mixture of states separable across different cuts. A genuine multipartite conclusion requires a further argument.
+
+\subsection{Genuine multipartite entanglement of the full pure state}
+\label{sec:grouped_gme}
+
+For the ideal closed, lossless model with a coherent input, the complete field evolves in a pure state. Let $\mathcal R$ denote the orthogonal complement of the selected modes, including the pump and all remaining radial and angular modes. For $p_{\max}\ge1$, consider the $p_{\max}+2$ parties
+\begin{equation}
+    \mathcal A\;|\;\mathcal B_0\;|\;\cdots\;|\;\mathcal B_{p_{\max}-1}\;|\;(\mathcal B_{p_{\max}}\mathcal R).
+    \label{eq:main_grouped_parties}
+\end{equation}
+All degrees of freedom are included, so the state of these grouped parties is pure. Every bipartition separates $\mathcal A$ from at least one $\mathcal B_p$, possibly contained in the last party, and is therefore entangled by the preceding argument. A pure state is biseparable only if it is separable across at least one bipartition. Consequently, for $p_{\max}\ge1$, the state is genuinely multipartite entangled with respect to the grouping in Eq.~\eqref{eq:main_grouped_parties}. This conclusion holds at any propagation distance for which the complete state remains pure and all the specified reference--partner pairs are entangled; the small-$Z$ restriction applies only to our analytical certification of the pairwise entanglement.
+
+The $p_{\max}+1$ partner modes give a grouping of $p_{\max}+2$ parties at sufficiently small nonzero distance: bipartite when $p_{\max}=0$, with grouping $\mathcal A|(\mathcal B_0\mathcal R)$, and genuinely multipartite when $p_{\max}\ge1$. The number of guaranteed parties depends on the magnitudes and relative signs of the OAM values through Eq.~\eqref{eq:radial_cutoff}, for the specified detection waists. This is a lower bound on the number of entangled parties in this grouping, not an upper bound on the number of correlated field modes. The complement can instead be assigned to any one of the selected parties without changing the proof.
+
+The purity premise applies to the full modeled field. It does not apply automatically to the reduced selected state $\rho_{\mathrm{sel}}=\operatorname{Tr}_{\mathcal R}\rho$, which is generally mixed. Tracing out $\mathcal R$ can destroy genuine multipartite entanglement, so Eq.~\eqref{eq:main_grouped_parties} does not certify genuine entanglement of the selected single modes alone.
+
+Two questions remain: how far the entanglement structure persists beyond the short-distance regime, and whether genuine multipartite entanglement can be certified after the remaining modes are discarded. We address these questions through finite-distance covariance calculations and optimized witnesses.
+
+\section{Entanglement at finite propagation distances}
+\label{sec:finite_distance}
+
+\subsection{Diffraction-free Bogoliubov solution}
+
+The first-order expressions describe the initial generation of correlations, but extrapolating them to larger distances can give negative values of $\lambda_-$ or $D_{\mathrm{opt}}$. For finite-distance predictions, we return to the full equation for the same decomposition $\mathcal E=\alpha_c+\eta$ and adopt a different approximation: we neglect diffraction and discard the nonlinear fluctuation terms $\Omega$ in Eq.~\eqref{eq:bg_full_fluctuation}, while retaining the full dependence on propagation distance. This linearization of the fluctuation dynamics is the Bogoliubov approximation, used to describe quantum fluctuations in paraxial propagation through Kerr media~\cite{PhysRevA.92.043802}. Appendix~\ref{app:no_diffraction} solves the diffraction-free Bogoliubov equations without a Taylor expansion in distance. The dimensionless classical field is then
+\begin{equation}
+    u_Z(\mathbf r)=u(\mathbf r)e^{-iZ|u(\mathbf r)|^2},
+\end{equation}
+and the mode correlations are
+\begin{equation}
+\begin{aligned}
+    f(v_1,v_2)={}&-iZ(v_1,v_2;u_Z,u_Z)\\
+                &-Z^2(v_1,v_2,u_Z;u_Z,u_Z,u_Z),\\
+    h(v_1,v_2)={}&Z^2(v_1,u_Z,u_Z;v_2,u_Z,u_Z).
+\end{aligned}
+\end{equation}
+These expressions agree with the preceding first-order result and are exact within the diffraction-free linearized fluctuation equations. Their use at finite distance requires negligible diffraction over the interaction region, which is a reasonable approximation for softly focused beams, as well as a small fluctuation backreaction. The numerical results below use these correlations under those assumptions.
+
+\subsection{Two-mode entanglement}
 
 \begin{figure*}
     \centering
     \includegraphics[width=\linewidth]{../Plots/duan.pdf}
-    \caption{Duan Criterion Value}
+    \caption{Phase-optimized Duan quantity for the diffraction-free Bogoliubov solution. Values below one certify two-mode entanglement.}
     \label{fig:duan}
 \end{figure*}
 
-In Fig. \ref{fig:duan} we show the violation of the Duan criterion as a function of $Z$ for a few different combinations of $l_0$ and $l_2$. The selection rules can be clearly observed here: in all cases, the modes with $p > p_{\text{max}}$ fail to violate the entanglement criterion (which does not mean absence of entanglement).
+In Fig. \ref{fig:duan} we show the violation of the Duan criterion as a function of $Z$ for a few different combinations of $l_0$ and $l_2$. In the examples and distance range shown, the modes with $p>p_{\max}$ do not violate this criterion. This behavior is consistent with their vanishing first-order coupling, but does not establish an exact finite-distance cutoff or the absence of entanglement.
 
-\subsection{Multipartite entanglement}
+\subsection{Optimized witnesses and multimode bipartitions}
 
 The work published in Ref. \cite{hyllus2006optimal} introduces a generalized class of entanglement witnesses $\mathcal{Z}$. For a specified separability class, a witness is a real, symmetric, positive semidefinite matrix satisfying $\Tr \left(\mathcal{Z} \gamma_{\mathrm{sep}}\right) \geq 1$ for every covariance matrix $\gamma_{\mathrm{sep}}$ of a state in that class. Therefore, if $\Tr \left(\mathcal{Z} \gamma\right) < 1$, every state with covariance matrix $\gamma$ lies outside the specified separability class. A value greater than or equal to one is inconclusive and does not establish separability. The Duan criterion is a special case of a witness $\mathcal{Z}$ such that
 \begin{equation}
@@ -503,20 +528,8 @@ The work published in Ref. \cite{hyllus2006optimal} introduces a generalized cla
     \end{pmatrix}.
 \end{equation}
 
-Multipartite entanglement is a subtle topic, because separability becomes more complicated once there are more than two parties. To handle this, \cite{hyllus2006optimal} introduces two types of witnesses:
+The pairwise argument in Sec.~\ref{sec:pairwise_partitions} establishes entanglement across a cut whenever an entangled pair crosses it. To obtain stronger quantitative certificates and detect correlations missed by the two-mode Duan quantity, we optimize over covariance witnesses. For a fixed bipartition, the FullyWit routine of Ref.~\cite{hyllus2006optimal} minimizes $\operatorname{Tr}(\mathcal Z\gamma)$ over witnesses valid for separability across that cut. A value below one certifies entanglement, while a value at or above one is inconclusive.
 
-\begin{itemize}
-    \item \textit{Witness for entanglement with respect to a given partition} 
-    
-    Here, one fixes a partition and asks whether the state is separable according to this partition. There is a numerical routine called FullyWit that finds the optimal $\mathcal{Z}$ for a given covariance matrix, in the sense that the violation $1 - \Tr \left(\mathcal{Z} \gamma\right)$ is maximized. A positive violation rules out separability with respect to the selected partition.
-    
-    \item \textit{Witness for genuine multipartite entanglement}
-    
-    Suppose that now we have many parties and we want to decide if the state is separable with respect to these parties. One could then check individually all of the bipartitions with the previous method. For example, if we have three parties $A$, $B$ and $C$, one could check individually the bipartitions $AB|C$, $AC|B$ and $A|BC$. This is actually sufficient for pure states, but, for mixed ones, we could write a state as a mixture of biseparable ones, say $\rho = \frac{1}{3} \rho_{AB|C} + \frac{1}{3} \rho_{AC|B} + \frac{1}{3} \rho_{A|BC}$. The full state $\rho$ may not be separable with respect to any bipartition, but it is still a mixture of separable states. We then say that a state is genuine multipartite entangled if it cannot be written as a convex sum of bipartite separable states. The reference \cite{hyllus2006optimal} also introduces a routine, MultiWit, that finds an optimized witness for genuine multipartite entanglement. A positive violation returned by this routine rules out the entire class of biseparable states and thus certifies genuine multipartite entanglement.
-\end{itemize}
-
-Now we employ these types of optimal entanglement witnesses for our Kerr system.
-%
 \begin{figure*}
     \centering
     \includegraphics[width=\linewidth]{../Plots/optimal_two_modes.pdf}
@@ -529,35 +542,49 @@ In Fig. \ref{fig:optimal_two_modes} we consider the same setup as in Fig. \ref{f
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{../Plots/fully_wit.pdf}
-    \caption{Optimized witness value for bipartite entanglement over multiple modes with $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2l_0,l_2)=1\,$.}
+    \caption{Optimized witness value for bipartite entanglement over multiple modes with $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2\abs{l_0},\abs{l_2})=1\,$.}
     \label{fig:fully_wit}
 \end{figure}
 
-Now we turn to more parties. We set $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2l_0,l_2)=1\,$. Furthermore, we define the parties as $A = LG_{0, 1}(w_2=w)$, $B = LG_{0, 3}(w_1)$, $C = LG_{1, 3}(w_1)$ and $D = LG_{2, 3}(w_1)\,$, so that $D$ corresponds to a radial mode outside the set coupled by the radial-angular selection rule. According to the previous results, we only had entanglement between $A|B$ and $A|C$, while there were inconclusive results when considering $A|D$. In Fig. \ref{fig:fully_wit} we use the FullyWit routine to find optimized witnesses for all the bipartitions of these four modes. The lines seem to cluster in three groups
+Now we turn to more parties. We set $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2\abs{l_0},\abs{l_2})=1\,$. Furthermore, we define the modes as $\mathcal A = LG_{0, 1}(w_2=w)$, $\mathcal B_0 = LG_{0, 3}(w_1)$, $\mathcal B_1 = LG_{1, 3}(w_1)$ and $\mathcal C = LG_{2, 3}(w_1)\,$. Thus $\mathcal C$ is a radial mode outside the set coupled by the radial-angular selection rule. The short-distance calculation certifies the pairs $\mathcal A|\mathcal B_0$ and $\mathcal A|\mathcal B_1$, while it is inconclusive for $\mathcal A|\mathcal C$. By Sec.~\ref{sec:pairwise_partitions}, these two pairs already certify six of the seven bipartitions; the remaining cut is $\mathcal A\mathcal B_0\mathcal B_1|\mathcal C$. In Fig. \ref{fig:fully_wit} we use the FullyWit routine to find optimized witnesses for all the bipartitions of these four modes. The numerical curves form three groups
 \begin{itemize}
-    \item $ACD|B$, $AC|BD$, $AD|BC$ and $A|BCD$ show the lowest witness values and hence the largest margins below the separability threshold. These share the fact that $A$ and $B$ belong to different parties, giving a stronger second-moment entanglement certification across these partitions.
-    \item $ABD|C$ and $AB|CD$ show intermediate witness values, still maintaining a linear start. Here, $A$ and $B$ belong to the same party, while $C$ is in the other one.
-    \item $ABC|D$ shows the smallest margin below the separability threshold, starting with a quadratic fall. Here, all the modes that were bipartite entangled sit on the same party.
+    \item $\mathcal A\mathcal B_1\mathcal C|\mathcal B_0$, $\mathcal A\mathcal B_1|\mathcal B_0\mathcal C$, $\mathcal A\mathcal C|\mathcal B_0\mathcal B_1$ and $\mathcal A|\mathcal B_0\mathcal B_1\mathcal C$ show the lowest witness values and hence the largest margins below the separability threshold. These share the fact that $\mathcal A$ and $\mathcal B_0$ belong to different parties, giving a stronger second-moment entanglement certification across these partitions.
+    \item $\mathcal A\mathcal B_0\mathcal C|\mathcal B_1$ and $\mathcal A\mathcal B_0|\mathcal B_1\mathcal C$ show intermediate witness values, still maintaining a linear start. Here the entangled pair $\mathcal A|\mathcal B_1$ crosses the cut, while $\mathcal A$ and $\mathcal B_0$ belong to the same party.
+    \item $\mathcal A\mathcal B_0\mathcal B_1|\mathcal C$ shows the smallest margin below the separability threshold, with a numerical onset consistent with a quadratic fall. Here both first-order entangled pairs lie within $\mathcal A\mathcal B_0\mathcal B_1$, so the individual-pair argument gives no first-order certificate across this cut.
 \end{itemize}
 
+
+The crossing-pair argument explains why the first six cuts admit linear violations, but does not predict the optimized witness values or their near-degeneracies. The small violation for $\mathcal A\mathcal B_0\mathcal B_1|\mathcal C$ illustrates that modes outside the first-order radial support can nevertheless participate in entanglement at finite distance.
+
+\subsection{Genuine multipartite entanglement of selected modes}
+
+We now trace out the complement and ask whether the selected modes themselves are genuinely multipartite entangled. Their reduced state is generally mixed, even when the complete field is pure. Entanglement across every fixed bipartition is then insufficient: a biseparable state can have the form
+\begin{equation}
+    \rho_{\mathrm{bisep}}=\sum_\lambda p_\lambda\rho_{S_\lambda|T_\lambda},
+\end{equation}
+where each component is separable across a cut that can vary with $\lambda$. For example, a mixture of states separable across $\mathcal A\mathcal B_0|\mathcal B_1$, $\mathcal A\mathcal B_1|\mathcal B_0$, and $\mathcal A|\mathcal B_0\mathcal B_1$ need not be separable across any one fixed cut.
+
+The MultiWit routine of Ref.~\cite{hyllus2006optimal} optimizes a covariance witness valid for the entire class of biseparable states. A value below one therefore certifies genuine multipartite entanglement of the selected modes, addressing the question left open by the grouped pure-state argument of Sec.~\ref{sec:grouped_gme}.
 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{../Plots/multi_wit.pdf}
-    \caption{Optimized witness value for genuine multipartite entanglement with $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2l_0,l_2)=1\,$.}
+    \caption{Optimized witness value for genuine multipartite entanglement with $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2\abs{l_0},\abs{l_2})=1\,$.}
     \label{fig:multi_wit}
 \end{figure}
 
-Finally, we turn to the genuine multipartite case. In Fig. \ref{fig:multi_wit}, we show the witness for sets of the form $\{LG_{0, 1}(w_2 = w)\} \cup \{LG_{p, 3}(w_1) \ \vert \ p \le P\}$, with $P$ varying from $0$ to $3$, while maintaining $l_0 = 2$. Although no multipartite selection rule has been derived, the numerical results display a related pattern: the sets with $P \le p_{\text{max}} = 1$ have lower witness values and hence larger margins below the separability threshold. 
+In Fig. \ref{fig:multi_wit}, we show the witness for sets of the form $\{LG_{0, 1}(w_2 = w)\} \cup \{LG_{p, 3}(w_1) \ \vert \ p \le P\}$, with $P$ varying from $0$ to $3$, while maintaining $l_0 = 2$. The $P=0$ case is bipartite; for $P\ge1$, a violation certifies genuine multipartite entanglement. The numerical results display a pattern related to the first-order radial support: the sets with $P \le p_{\text{max}} = 1$ have lower witness values and hence larger margins below the separability threshold.
+
+In particular, for $P=1$ the analytical argument certifies the pure-state grouping $\mathcal A|\mathcal B_0|(\mathcal B_1\mathcal R)$, whereas a MultiWit violation certifies the reduced three-mode state on $\mathcal A|\mathcal B_0|\mathcal B_1$. The latter shows that genuine multipartite entanglement survives discarding the remaining field modes. Violations for larger selected sets, when present, involve modes outside the first-order support and are finite-distance results within the Bogoliubov approximation.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
 We studied bi- and multipartite entanglement properties in the radial structure of the modes generated by self-phase modulation 
 with orbital angular momentum beams. The evolution of the mode structure in the nonlinear interaction is governed by chiral 
-selection rules, which dictate the appearance of radial modes with in the mean field. Moreover, we show that the radial structure 
+first-order selection rules, which constrain the radial support of the mean field and anomalous correlations. Moreover, we show that the radial structure
 of other OAM components can exhibit bi- and multipartite entanglement, depending on the relative chirality of the interacting 
-modes. The first-order results are complemented by finite-distance calculations using the diffraction-free Bogoliubov solution, within the regime of negligible diffraction and small fluctuation backreaction. Our results can be investigated by current four-wave mixing and 
+modes. Pairwise violations establish entanglement across every bipartition of the coupled set. For the full pure field, including the remaining modes in one selected party yields a genuine multipartite certificate whose party count is controlled by the OAM values at the specified detection waists. The first-order results are complemented by finite-distance calculations using the diffraction-free Bogoliubov solution, within the regime of negligible diffraction and small fluctuation backreaction. Optimized witnesses further certify entanglement in reduced sets of detection modes, including genuine multipartite entanglement after the remaining field is discarded. Our results can be investigated by current four-wave mixing and
 self-phase modulation setups in the softly focused regime, where the Rayleigh distance is much larger than the nonlinear 
 interaction distance. This effect can be useful for building new quantum information platforms, where bi- and multipartite 
 entanglement are controlled by orbital angular momentum.
@@ -567,7 +594,7 @@ entanglement are controlled by orbital angular momentum.
 \section{Diffraction-free Bogoliubov evolution}
 \label{app:no_diffraction}
 
-The first-order calculation in the main text retains diffraction and all nonlinear fluctuation terms in Eq.~\eqref{eq:bg_full_fluctuation}. Here we start from the same full fluctuation equation and adopt a different approximation: we neglect diffraction over the interaction region and discard the quadratic and cubic fluctuation terms $R$ of Eq.~\eqref{eq:bg_remainder}, while retaining the full dependence on propagation distance. The resulting Bogoliubov equations are solved without expanding in the propagation distance or the accumulated classical nonlinear phase.
+The first-order calculation in the main text retains diffraction and all nonlinear fluctuation terms in Eq.~\eqref{eq:bg_full_fluctuation}. Here we start from the same full fluctuation equation and adopt a different approximation: we neglect diffraction over the interaction region and discard the quadratic and cubic fluctuation terms $\Omega$ of Eq.~\eqref{eq:bg_remainder}, while retaining the full dependence on propagation distance. The resulting Bogoliubov equations are solved without expanding in the propagation distance or the accumulated classical nonlinear phase.
 
 With the same decomposition $\mathcal E=\alpha_c+\eta$ and input $\alpha(\mathbf r)=\alpha_c(\mathbf r,0)$, these equations are
 \begin{equation}
@@ -664,7 +691,7 @@ Using the main-text scaling, $\theta=Z|u|^2$ and $u_Z=u\exp(-iZ|u|^2)$, projecti
 \end{aligned}
     \label{eq:nodiff_mode_correlations}
 \end{equation}
-The phases in $h$ cancel, whereas those in $f$ retain the nonlinear classical evolution. Expanding Eq.~\eqref{eq:nodiff_mode_correlations} at small $Z$ recovers $f=-iZ(v_1,v_2;u,u)+O(Z^2)$ and $h=O(Z^2)$, in agreement with the first-order calculation in the main text. At finite distance, these expressions are exact only within the diffraction-free Bogoliubov approximation, not for the full quantum Kerr equation.
+The phases in $h$ cancel, whereas those in $f$ retain the nonlinear classical evolution. Expanding Eq.~\eqref{eq:nodiff_mode_correlations} at small $Z$ recovers $f=-iZ(v_1,v_2;u,u)+\mathcal{O}(Z^2)$ and $h=\mathcal{O}(Z^2)$, in agreement with the first-order calculation in the main text. At finite distance, these expressions are exact only within the diffraction-free Bogoliubov approximation, not for the full quantum Kerr equation.
 
 The approximation requires negligible diffraction of the relevant transverse structures over the interaction length, as well as sufficiently small fluctuation interactions and backreaction on the classical field. A large pump Rayleigh range is a useful initial scale, but finer structure generated by the nonlinear phase can have shorter diffraction lengths. The derivation applies to any coherent input profile, including a coherent pump plus seeds.
 
@@ -843,419 +870,6 @@ For a fixed normalized seed profile, $\delta C_r=O(\epsilon^2)$ and $q=|\epsilon
 ensures that its first-order correlation is approximately unchanged. For a forbidden pair, any nonzero $\delta C_r$ lifts the first-order zero, however small its absolute magnitude.
 
 Seeding only $v_2$ therefore preserves the original first-order radial rule exactly while relying on stimulated means in the complementary family. Seeding both families supplies independent input references in all selected modes, at the cost of quadratic seed corrections to that rule. These statements concern the first-order two-mode criterion; they do not establish a multipartite selection rule or a finite-distance witness violation. Beyond the small-distance regime, the combined input may be inserted directly into the correlation formulas of Appendix~\ref{app:no_diffraction}, within their stated assumptions.
-
-\section{Working note: pairwise and collective-mode witnesses for multimode bipartitions}
-\label{app:collective_witness_note}
-
-\textit{Purpose and scope.} This appendix is a detailed working argument for consideration, not proposed final manuscript text. It first shows that an individual entangled pair crossing a partition already proves entanglement of that partition, then constructs a collective-mode Duan witness as a quantitative refinement. Both statements are related to the radial selection rule. For the four-mode example in the main text, it proves small-distance entanglement across six bipartitions and explains why the seventh cannot have a linear witness violation. It does not prove the quadratic violation for the seventh partition, identify the numerically optimal witnesses, or by itself establish genuine multipartite entanglement of a mixed reduced state. Appendix~\ref{app:grouped_gme_note} adds a genuine multipartite conclusion for a pure global state with the unobserved modes assigned to one party.
-
-\subsection{Input assumptions and first-order correlations}
-
-Consider a finite set of orthonormal detection modes, with the coherent means subtracted when defining $f$ and $h$. The first-order calculation in the main text, Eq.~\eqref{eq:bg_first_correlations}, gives
-\begin{equation}
-    f(v_i,v_j)=-iZC_{ij}+O(Z^2),
-    \qquad h(v_i,v_j)=O(Z^2),
-    \label{eq:cw_first_order}
-\end{equation}
-where
-\begin{equation}
-    C_{ij}=(v_i,v_j;u,u)
-       =\int d^2\mathbf r\,v_i^*v_j^*u^2.
-\end{equation}
-The detection profiles and input shape are fixed as $Z\to0$. The dimensionless variable $Z$ is proportional to $z$ at fixed input and medium parameters. No finite-distance Bogoliubov approximation is required for the leading coefficient in Eq.~\eqref{eq:cw_first_order}: it follows from the first-order displaced quantum calculation for a coherent input. As elsewhere, continuum expressions are interpreted through finite, smooth mode projections within the effective model.
-
-For the unseeded example, the selected modes are
-\begin{equation}
-\begin{aligned}
-    v_A&=LG_{0,1}(w),&v_B&=LG_{0,3}(w_1),\\
-    v_C&=LG_{1,3}(w_1),&v_D&=LG_{2,3}(w_1),
-\end{aligned}
-\end{equation}
-with pump $LG_{0,2}(w)$, $w_1=w/\sqrt{3}$, and $p_{\max}=1$. Define
-\begin{equation}
-    c_B=C_{AB},\qquad c_C=C_{AC}.
-\end{equation}
-The angular selection rule eliminates all entries among $B,C,D$, as well as $C_{AA}$; the radial rule gives $C_{AD}=0$. In the ordering $A,B,C,D$,
-\begin{equation}
-    C=\begin{pmatrix}
-        0&c_B&c_C&0\\
-        c_B&0&0&0\\
-        c_C&0&0&0\\
-        0&0&0&0
-    \end{pmatrix}.
-    \label{eq:cw_star}
-\end{equation}
-This statement concerns the first-order anomalous correlations of the selected modes. It does not assert that these modes form a closed subsystem of the full field.
-
-\subsection{Simpler existence proof using an individual pair}
-\label{app:cw_pair_simplification}
-
-A collective mode is not needed to prove entanglement across a multimode bipartition. Fix a cut $S|T$ with $A\in S$, and suppose that one original detection mode $v_j\in T$ has $c_j=C_{Aj}\ne0$. The ordinary pairwise criterion gives
-\begin{equation}
-    \begin{aligned}
-        D_{A,j}&=1+h(v_A,v_A)+h(v_j,v_j)-2|f(v_A,v_j)|\\
-               &=1-2|Z|\,|c_j|+O(Z^2).
-    \end{aligned}
-    \label{eq:cw_individual_pair}
-\end{equation}
-It is therefore below one for sufficiently small nonzero $Z$. This is a linear violation with a second-order remainder, not a calculation of the violation through second order.
-
-If the full selected state were separable across $S|T$, tracing out all modes except $A,j$ would preserve separability across $A|j$. The observed pairwise violation contradicts this. Hence one entangled pair crossing the cut suffices to certify that cut. Neither purity of the selected state nor a change of detection basis is required.
-
-In the four-mode example, the $AB$ pair certifies $A|BCD$, $AD|BC$, $ACD|B$ and $AC|BD$. The $AC$ pair additionally certifies $ABD|C$ and $AB|CD$. Neither crosses $ABC|D$, so that cut remains undecided by the first-order pairwise argument.
-
-More generally, if a selected mode $A$ is entangled with every mode $B_1,\ldots,B_N$, every nontrivial bipartition of this selected set places at least one $B_j$ opposite $A$. The selected state is therefore entangled across every bipartition, a property called full inseparability. For a mixed reduced state this alone does not exclude mixtures of states separable across different cuts. Appendix~\ref{app:grouped_gme_note} explains how global purity establishes a genuine multipartite statement when the unobserved modes are included in one of the parties.
-
-The following collective-mode construction is an optional quantitative refinement. Among individual pairs crossing a cut, the strongest first-order Duan coefficient is
-\begin{equation}
-    G_{\mathrm{pair}}=\max_{j\in R}|c_j|,
-\end{equation}
-where $R$ contains the opposite-side partners. Combining these correlations gives
-\begin{equation}
-    G_R=\sqrt{\sum_{j\in R}|c_j|^2}\ge G_{\mathrm{pair}}.
-\end{equation}
-The two constructions certify the same existence of small-distance entanglement whenever at least one coefficient is nonzero; the collective one gives a larger leading violation when more than one coefficient contributes. It is useful for quantitative comparison with witness curves, but is not logically necessary for the partition argument.
-
-\subsection{A collective mode on the opposite side of a partition}
-
-Fix a bipartition $S|T$, and label the sides so that $A\in S$. Let $R$ be the set of modes among $B,C$ that lie in $T$. Set
-\begin{equation}
-    G_R=\left(\sum_{j\in R}|c_j|^2\right)^{1/2}.
-\end{equation}
-If $G_R>0$, define
-\begin{equation}
-    v_R=\frac{1}{G_R}\sum_{j\in R}c_jv_j.
-    \label{eq:cw_collective_mode}
-\end{equation}
-Orthogonality of the original modes gives $(v_R;v_R)=1$ and $(v_A;v_R)=0$. The collective mode is supported entirely on party $T$. It can be completed to an orthonormal mode basis within that party, so replacing the original modes of $T$ by this basis is a local passive transformation relative to $S|T$.
-
-The complex conjugations matter. The annihilation operator is antilinear in its profile:
-\begin{equation}
-    a(v_R)=\frac{1}{G_R}\sum_{j\in R}c_j^*a(v_j).
-\end{equation}
-Therefore
-\begin{equation}
-\begin{aligned}
-    f(v_A,v_R)
-       &=\frac{1}{G_R}\sum_{j\in R}c_j^*f(v_A,v_j)\\
-       &=-iZG_R+O(Z^2).
-    \label{eq:cw_collective_f}
-\end{aligned}
-\end{equation}
-The phases of the profile coefficients have aligned the pair correlations constructively. Meanwhile,
-\begin{equation}
-    h(v_R,v_R)
-       =\frac{1}{G_R^2}\sum_{j,k\in R}c_j^*c_k h(v_j,v_k)
-       =O(Z^2).
-\end{equation}
-No assumption about the purity of the selected two-mode state is needed.
-
-Among normalized superpositions on these opposite-side modes, this choice maximizes the magnitude of the first-order correlation with $A$. Indeed, for $v_d=\sum_{j\in R}d_jv_j$ and $\sum_j|d_j|^2=1$, Cauchy--Schwarz gives
-\begin{equation}
-    \left|\sum_{j\in R}d_j^*c_j\right|\le G_R,
-\end{equation}
-with equality for the coefficients in Eq.~\eqref{eq:cw_collective_mode}, up to a common phase. This is optimality within this collective-mode construction, not a claim of optimality over all covariance witnesses.
-
-\subsection{An explicit entanglement certificate}
-
-For two orthogonal normalized modes, the phase-optimized Duan expression is
-\begin{equation}
-\begin{aligned}
-    D_{A,R}
-       &=1+h(v_A,v_A)+h(v_R,v_R)-2|f(v_A,v_R)|\\
-       &=1-2|Z|G_R+O(Z^2).
-    \label{eq:cw_duan}
-\end{aligned}
-\end{equation}
-The first equality is exact for the second moments of the state, including any correlations with unobserved modes. Self-squeezing and normal cross-correlations cancel in this particular sum of quadrature variances; their absence does not require additional assumptions about the state.
-
-For a fixed input and $G_R>0$, the nonzero linear decrease dominates the $O(Z^2)$ remainder at sufficiently small nonzero $Z$. Hence $D_{A,R}<1$ in a neighborhood of the input plane. This proves entanglement of the reduced pair $A,v_R$.
-
-It also proves entanglement across the original multimode partition. If the selected state were separable across $S|T$, a local change of mode basis within $T$ followed by discarding every mode except $A$ and $v_R$ would leave a separable two-mode state. Such a state cannot violate the Duan bound. Thus the constructed violation contradicts separability across $S|T$, regardless of correlations within either party or mixedness caused by tracing out other spatial modes.
-
-This is a constructive statement: it supplies a witness and proves its violation. A nonzero cross-correlation alone would not be an entanglement proof. Here the leading anomalous correlation is linear in $Z$, whereas the normal populations that enter the same criterion begin at $Z^2$.
-
-\subsection{The witness matrix and its relation to the partition}
-
-For the phase-adjusted pair, order the quadratures as $(X_A,P_A,X_R,P_R)$ and use the manuscript convention $\gamma_{jk}=\langle\{\Delta r_j,\Delta r_k\}\rangle$, with vacuum covariance $\mathbb I$. The Duan matrix is
-\begin{equation}
-    W_D=\frac14\begin{pmatrix}
-       1&0&1&0\\
-       0&1&0&-1\\
-       1&0&1&0\\
-       0&-1&0&1
-    \end{pmatrix}.
-\end{equation}
-A local phase of $v_A$ can be chosen to make $f(v_A,v_R)$ real and negative. At leading order, a fixed phase suffices for either fixed sign of $Z$; choosing the phase from the full $f$ gives the exact phase optimization in Eq.~\eqref{eq:cw_duan}.
-
-Let $L$ be the real matrix extracting these four quadratures from the full selected-mode quadrature vector after the local basis and phase changes. Then
-\begin{equation}
-    \gamma_{A,R}=L\gamma L^T,
-    \qquad \mathcal Z_{S|T}=L^TW_DL,
-\end{equation}
-and
-\begin{equation}
-    D_{A,R}=\operatorname{Tr}(\mathcal Z_{S|T}\gamma).
-\end{equation}
-For an explicit construction, a profile coefficient $d_j$ in $v=\sum_jd_jv_j$ contributes the block
-\begin{equation}
-    \begin{pmatrix}
-      \operatorname{Re}d_j&\operatorname{Im}d_j\\
-      -\operatorname{Im}d_j&\operatorname{Re}d_j
-    \end{pmatrix}
-\end{equation}
-to the rows extracting $(X(v),P(v))$. This fixes the phase convention and allows the analytical witness to be evaluated on the same covariance matrices as the numerical optimization.
-
-The matrix $\mathcal Z_{S|T}$ is positive semidefinite and has trace one, since the extracted modes are orthonormal and $LL^T=\mathbb I_4$. It generally has off-diagonal blocks across the partition: those blocks measure the correlations responsible for the violation. It may also have entries between original modes belonging to the same party, because $v_R$ is a superposition of those modes.
-
-If $w_{\mathrm{opt}}$ denotes minimization over the full valid witness class for the same partition and normalization, then
-\begin{equation}
-    w_{\mathrm{opt}}(Z)\le D_{A,R}(Z).
-\end{equation}
-This provides an explicit achievable witness value. Equality, including equality of the leading slopes, would require a separate optimality argument. In particular, the constructed witness should not be identified with the FullyWit output without comparison.
-
-\subsection{All seven bipartitions of the four-mode example}
-
-Assuming $c_B$ and $c_C$ are nonzero, the construction gives
-\begin{center}
-\begin{tabular}{lc}
-Partition & $G_R$\\
-\hline
-$A|BCD$ & $\sqrt{|c_B|^2+|c_C|^2}$\\
-$AD|BC$ & $\sqrt{|c_B|^2+|c_C|^2}$\\
-$ACD|B$ & $|c_B|$\\
-$AC|BD$ & $|c_B|$\\
-$ABD|C$ & $|c_C|$\\
-$AB|CD$ & $|c_C|$\\
-$ABC|D$ & $0$
-\end{tabular}
-\end{center}
-The first six rows have $D_{A,R}=1-2|Z|G_R+O(Z^2)$ and thus certify entanglement at sufficiently small nonzero distance. A row with $G_R=0$ does not define a collective mode through Eq.~\eqref{eq:cw_collective_mode}; it records that this first-order construction supplies no violation.
-
-The first four partitions in the strongest numerical group therefore have two distinct constructive slopes, not one. If $|c_B|$ is appreciably larger than $|c_C|$, the strengths $\sqrt{|c_B|^2+|c_C|^2}$ and $|c_B|$ are close. The next two partitions use only the $c_C$ coupling across their cut. This gives a quantitative explanation to test against the numerical curves, rather than assuming exact degeneracy within each visually identified group.
-
-The last partition places every first-order coupled mode on the same side. Its absence of a linear violation can be established for the full normalized witness class, as follows.
-
-\subsection{Why the excluded-mode cut has no linear violation}
-
-For $S=ABC$ and $T=D$, write the exact physical selected covariance as
-\begin{equation}
-    \gamma(Z)=\begin{pmatrix}\gamma_S(Z)&K(Z)\\K(Z)^T&\gamma_D(Z)\end{pmatrix}.
-\end{equation}
-Both anomalous and normal cross-correlations vanish at first order, so $K(Z)=O(Z^2)$. The matrix
-\begin{equation}
-    \gamma_{\mathrm{prod}}(Z)=\gamma_S(Z)\oplus\gamma_D(Z)
-\end{equation}
-is a physical covariance matrix of the product of the two actual marginal states. It is therefore separable across this cut, and every valid witness with threshold one satisfies
-\begin{equation}
-    \operatorname{Tr}(\mathcal Z\gamma_{\mathrm{prod}})\ge1.
-\end{equation}
-For a fixed finite witness,
-\begin{equation}
-\begin{aligned}
-    \operatorname{Tr}(\mathcal Z\gamma)
-       &=\operatorname{Tr}(\mathcal Z\gamma_{\mathrm{prod}})
-          +\operatorname{Tr}\!\left[\mathcal Z(\gamma-\gamma_{\mathrm{prod}})\right]\\
-       &\ge1-O(Z^2).
-\end{aligned}
-\end{equation}
-Internal $O(Z)$ correlations within $ABC$ do not evade this bound: they are already included in the product reference covariance.
-
-One must also consider whether an optimized witness depending on $Z$ could diverge and turn the small cross-block into a linear violation. Near the coherent input, $\gamma(0)=\mathbb I$, so $\gamma(Z)\ge\tfrac12\mathbb I$ for sufficiently small $|Z|$. For any positive semidefinite candidate witness that achieves $\operatorname{Tr}(\mathcal Z\gamma)\le1$,
-\begin{equation}
-    \tfrac12\operatorname{Tr}\mathcal Z
-        \le\operatorname{Tr}(\mathcal Z\gamma)\le1.
-\end{equation}
-Hence $\operatorname{Tr}\mathcal Z\le2$, uniformly in this neighborhood. The bound
-\begin{equation}
-    |\operatorname{Tr}(\mathcal Z\Delta\gamma)|
-       \le\operatorname{Tr}(\mathcal Z)\,\|\Delta\gamma\|_{\mathrm{op}}
-\end{equation}
-then establishes the same $O(Z^2)$ limit for any violating optimized witness. Candidates with value above one do not certify entanglement. Thus a linear onset of optimized violation is excluded as well.
-
-This result does not prove separability of $ABC|D$ at small nonzero $Z$. It only shows that any violation must begin at quadratic or higher order. It applies to the physical covariance family; treating its first-order truncation as an exact covariance matrix could violate the uncertainty relation and give misleading optimization results.
-
-\subsection{What is needed to establish the quadratic violation?}
-
-Within the diffraction-free Bogoliubov model, the coefficients required for a second-order analysis follow from Eq.~\eqref{eq:nodiff_mode_correlations}. Define
-\begin{equation}
-\begin{aligned}
-    Q_{ij}&=\int d^2\mathbf r\,v_i^*v_j^*|u|^2u^2,\\
-    R_{ij}&=\int d^2\mathbf r\,v_i^*v_j|u|^4.
-\end{aligned}
-\end{equation}
-Using $u_Z^2=u^2\exp(-2iZ|u|^2)$ gives
-\begin{equation}
-\begin{aligned}
-    f(v_i,v_j)&=-iZC_{ij}-3Z^2Q_{ij}+O(Z^3),\\
-    h(v_i,v_j)&=Z^2R_{ij}.
-    \label{eq:cw_second_order}
-\end{aligned}
-\end{equation}
-The $-3$ includes $-2$ from expanding the phase in the linear term and $-1$ from the explicit quadratic term. The expression for $h$ is exact within this diffraction-free linearized model, because its background phases cancel.
-
-For $A,D$, the leading coefficient $C_{AD}$ vanishes, but the additional radial weight in $Q_{AD}$ need not obey the original radial cutoff. The ordinary two-mode criterion would give
-\begin{equation}
-    D_{A,D}=1+Z^2\left(R_{AA}+R_{DD}-6|Q_{AD}|\right)+O(|Z|^3).
-\end{equation}
-A negative quadratic coefficient would already certify $ABC|D$ through the reduced pair. A nonnegative coefficient is inconclusive: correlations involving $B,C$ may allow another witness to detect entanglement of $ABC$ with $D$ even when this pairwise test fails.
-
-A full analysis of the seventh curve therefore requires the second-order covariance and either a suitable collective witness or a partial-transpose analysis. Normal correlations and populations must be included at the same order as $Q_{ij}$. The present appendix does not establish the sign of that optimized second-order contribution. Moreover, these second-order coefficients belong to the diffraction-free Bogoliubov model; they are not asserted to be the full second-order coefficients of the untruncated quantum equation with diffraction.
-
-\subsection{Generalization and limits of the argument}
-
-For a selected mode $v_A$ coupled to a larger radial family, the same proof uses
-\begin{equation}
-    G_R=\left(\sum_{p\in R}|(v_A,v_p;u,u)|^2\right)^{1/2}.
-\end{equation}
-Every partition placing at least one nonzero partner coefficient opposite $A$ admits the constructed first-order certificate. The OAM-dependent radial rule controls which coefficients can enter this sum, while their magnitudes determine the constructive witness slope. Modes excluded at first order can still acquire correlations and entanglement at higher orders. This statement does not require isolation from other spatial modes.
-
-More generally, for any cross-partition coefficient matrix $C_{ST}$, choose normalized collective profiles with coefficient vectors $x$ on $S$ and $y$ on $T$. Their leading anomalous correlation is $-iZx^\dagger C_{ST}y^*$. Maximizing its magnitude over the two normalized vectors gives the largest singular value $\sigma_{\max}(C_{ST})$. The same Duan construction yields
-\begin{equation}
-    D_{S,T}=1-2|Z|\sigma_{\max}(C_{ST})+O(Z^2).
-\end{equation}
-For the star matrix \eqref{eq:cw_star}, the cross block has rank at most one, and its nonzero singular value is precisely $G_R$. This provides a general first-order certificate whenever the cross-partition pair-creation coefficient is nonzero, under the coherent-input assumptions of Eq.~\eqref{eq:cw_first_order}.
-
-The collective transformation must remain local relative to the partition being tested. Combining modes that lie on opposite sides would change the parties and would not prove entanglement of the original partition. Different cuts generally use different collective modes and different witnesses.
-
-Finally, certifying all bipartitions with these separate witnesses is not a proof of genuine multipartite entanglement for a mixed selected state. A genuine multipartite witness must be valid for every biseparable decomposition simultaneously. A witness valid for that stronger task must, in particular, respect the $ABC|D$ bound, so it also cannot show a linear violation for the four-mode example. The first-order argument establishes the bipartite coupling structure and its witnesses. When the complete modeled field is pure, including the remaining modes in one party permits the genuine multipartite conclusion proved in Appendix~\ref{app:grouped_gme_note}. The MultiWit certification after those modes are discarded is a separate, stronger statement about the reduced selected state.
-
-\section{Working note: genuine multipartite entanglement with the remaining modes grouped into one party}
-\label{app:grouped_gme_note}
-
-\textit{Purpose and scope.} This working appendix develops an analytical consequence of the pairwise selection rules. If a mode $A$ is entangled with each of $N$ orthogonal modes $B_j$, and the entire modeled field is in a pure state, the field is genuinely multipartite entangled for an $N+1$-party grouping in which all remaining modes are assigned to one of those parties. This differs from genuine multipartite entanglement of the reduced state of the selected single modes. The latter can be certified by the numerical witnesses after the remaining modes are traced out. The discussion is for consideration and clarification, not final manuscript prose.
-
-\subsection{Selected modes, the complement, and the parties}
-
-Let the selected single-mode subsystems be
-\begin{equation}
-    S=\{A,B_1,\ldots,B_N\},\qquad N\ge2,
-\end{equation}
-with mutually orthonormal mode profiles. Denote their orthogonal spatial-mode complement by $\mathcal C$. Here $\mathcal C$ means all remaining modes, including the pump and any other radial or angular modes; it is not the individual mode labeled $C$ in the four-mode example of the main text.
-
-For the modeled bosonic field, the mode decomposition gives the Fock-space factorization
-\begin{equation}
-    \mathcal H
-       =\mathcal H_A\otimes
-          \bigotimes_{j=1}^{N}\mathcal H_{B_j}
-          \otimes\mathcal H_{\mathcal C}.
-\end{equation}
-The complement is defined as an orthogonal subspace, so one does not inadvertently include overlapping detection profiles as independent parties. A complete basis within the complement can be chosen arbitrarily.
-
-The proposed grouping has $N+1$ parties:
-\begin{equation}
-    A\;|\;B_1\;|\;\cdots\;|\;B_{N-1}\;|\;(B_N\mathcal C).
-    \label{eq:grouped_partition}
-\end{equation}
-The last party contains one selected radial mode and the entire complement. Grouping means assigning these subsystems to one party, not tracing them out or physically mixing their modes. In particular, every degree of freedom of the pure modeled field is still included.
-
-We assume the global state is pure,
-\begin{equation}
-    \rho_{S\mathcal C}(z)=|\Psi(z)\rangle\langle\Psi(z)|.
-\end{equation}
-This holds in an ideal closed, lossless unitary model with a pure coherent input and vacuum in the initially unoccupied modes. It also holds for the full fluctuation state evolved from vacuum by a lossless quadratic Bogoliubov Hamiltonian, within that approximation. It need not hold for an optical state after absorption, added medium noise or averaging over uncontrolled input parameters. Global purity is a separate premise, not something established by the pairwise witness values.
-
-\subsection{Pairwise premise and a common small-distance interval}
-
-Assume the reduced pair $AB_j$ is entangled for each $j$. In the first-order treatment, a sufficient condition is
-\begin{equation}
-    c_j=(v_A,v_{B_j};u,u)\ne0,
-\end{equation}
-since Eq.~\eqref{eq:cw_individual_pair} gives
-\begin{equation}
-    D_{A,B_j}(Z)=1-2|Z|\,|c_j|+O(Z^2)<1
-\end{equation}
-for sufficiently small nonzero $Z$. Each of these is a statement about the actual reduced pair of the global state; it does not require the other modes to be absent or uncorrelated.
-
-For a fixed finite number of nonzero coefficients, there is a common interval in which all these violations hold simultaneously. For example, if the remainder for pair $j$ has magnitude at most $M_j Z^2$ near the input, then $M_j|Z|<2|c_j|$ suffices for that pair. Taking a sufficiently small interval common to the finite set gives all pairwise entanglements at the same distance. The asymptotic argument does not determine how large this interval is, and a very small coefficient can restrict it substantially.
-
-The proof below only requires the pairwise premise. It remains valid at any distance where all the pairs are certified and the global state is pure, even if their entanglement is established using the full finite-distance covariance rather than a Taylor expansion.
-
-\subsection{Every bipartition of the grouped parties is entangled}
-
-Take any nontrivial bipartition $L|R$ of the parties in Eq.~\eqref{eq:grouped_partition}. Choose the notation so that the party $A$ lies in $L$. Since $R$ is nonempty, it contains at least one selected mode $B_j$: either as its own party or inside the enlarged party $B_N\mathcal C$.
-
-Suppose, for contradiction, that the global state were separable across this cut:
-\begin{equation}
-    \rho_{LR}=\sum_\lambda p_\lambda
-                   \rho_L^{(\lambda)}\otimes\rho_R^{(\lambda)}.
-\end{equation}
-Tracing out all subsystems except $A,B_j$ gives
-\begin{equation}
-    \rho_{AB_j}=\sum_\lambda p_\lambda
-                   \rho_A^{(\lambda)}\otimes\rho_{B_j}^{(\lambda)},
-\end{equation}
-which is separable. This contradicts the entanglement of that pair. Therefore the global state is entangled across every bipartition of the grouped parties.
-
-This part of the proof does not use purity. It follows only from the fact that partial traces within each party preserve separability. If $B_j=B_N$, discarding $\mathcal C$ is one of these local partial traces, so correlations involving the complement do not invalidate the argument.
-
-\subsection{Where purity establishes genuine multipartite entanglement}
-
-For a mixed state, entanglement across every fixed bipartition is not sufficient to exclude a biseparable decomposition
-\begin{equation}
-    \rho=\sum_\lambda p_\lambda\sigma_{\lambda},
-\end{equation}
-where $\sigma_{\lambda}$ is separable across a cut that may vary with $\lambda$. This is the distinction between full inseparability and genuine multipartite entanglement.
-
-A pure state does not have this freedom. Every positive component in a convex decomposition of the rank-one density matrix $|\Psi\rangle\langle\Psi|$ must have support in the same one-dimensional subspace. Consequently, if a pure state were biseparable, that pure state itself would be separable across at least one fixed bipartition. Since the preceding argument excludes every such bipartition, the pure global state is genuinely multipartite entangled with respect to Eq.~\eqref{eq:grouped_partition}.
-
-The resulting sufficient statement is:
-\begin{quote}
-For a pure state of the full modeled field, if $A$ is entangled with each of $N$ distinct modes $B_j$, then the state is genuinely multipartite entangled among the $N+1$ parties obtained by keeping $A,B_1,\ldots,B_{N-1}$ as individual parties and grouping $B_N$ with all remaining modes.
-\end{quote}
-Neither Gaussianity nor optimality of the pairwise witnesses is required for this logical implication. The small-distance expansion supplies one way to establish its pairwise premise. The theorem is applied to a physical pure-state family, not to a truncated density matrix that might fail positivity or normalization.
-
-\subsection{What the OAM-dependent radial rule establishes}
-
-In the unseeded configuration, $A$ can be the selected mode $LG_{0,l_2}(w_2)$ and the partners the allowed modes $LG_{p,l_1}(w_1)$, with $l_1=2l_0-l_2$ and the waist relation used in the main text. Let
-\begin{equation}
-    N=\#\{p:(v_A,v_{B_p};u,u)\ne0\}
-\end{equation}
-count the nonzero coefficients in the selected radial family. If every coefficient from $p=0$ through $p_{\max}$ is nonzero, then $N=p_{\max}+1$ and the grouped theorem certifies $p_{\max}+2$ parties. If an additional zero occurs, only the nonzero coefficients count toward this particular guarantee.
-
-Thus the magnitudes and relative signs of the OAM values control how many resolved radial modes can serve as distinct parties in this first-order certification. The waist choice remains part of the statement. The result is a guaranteed grouping, not a claim that the entire field contains exactly this number of entangled modes or that other modes are separable. Higher-order couplings can involve further radial orders, and the proof places no upper bound on the total entanglement structure.
-
-For the example $l_0=2$, $l_2=1$, the two nonzero partners are $B_1=LG_{0,3}(w_1)$ and $B_2=LG_{1,3}(w_1)$. Pairwise entanglement of $A$ with both partners and global purity establish genuine tripartite entanglement of
-\begin{equation}
-    A\;|\;B_1\;|\;(B_2\mathcal C).
-\end{equation}
-The mode $LG_{2,3}(w_1)$, denoted $D$ in the main text, belongs to $\mathcal C$ here, together with the pump and all other unselected modes. The absence of its first-order pairwise violation does not obstruct this three-party proof, because $D$ has not been introduced as a separate party. Certifying a grouping in which $D$ is a fourth distinct party would require an additional argument.
-
-\subsection{Freedom to assign the remaining modes}
-
-There is nothing special about placing the complement with $B_N$. It may instead be assigned to $A$ or any other $B_j$. More generally, its orthogonal mode subspaces may be distributed among the parties, provided the grouping includes the whole pure system and keeps each of $A,B_1,\ldots,B_N$ in a distinct party. Every nontrivial cut then still separates $A$ from at least one entangled partner, and the same proof applies.
-
-This freedom must not be confused with certifying genuine entanglement of every individual mode in the complement. Some of those modes may be in vacuum or uncorrelated with the selected set. A party can contain unentangled ancillary modes without invalidating genuine entanglement among the grouped parties. Conversely, making the entire complement an additional standalone party would introduce the cut $S|\mathcal C$, whose entanglement is not established by the selected pairwise data.
-
-\subsection{Discarding the complement: the separate numerical claim}
-
-The reduced state measured on the selected single modes is
-\begin{equation}
-    \rho_S=\operatorname{Tr}_{\mathcal C}
-                  |\Psi\rangle\langle\Psi|.
-\end{equation}
-It generally is mixed. The pairwise entanglements still prove that $\rho_S$ is entangled across every bipartition, but the pure-state step above can no longer be applied. Grouping the complement and discarding it are different operations:
-\begin{equation}
-\begin{aligned}
-    &A|B_1|\cdots|(B_N\mathcal C)
-       &&\text{includes the full pure state},\\
-    &A|B_1|\cdots|B_N
-       &&\text{uses the reduced state }\rho_S.
-\end{aligned}
-\end{equation}
-Tracing out $\mathcal C$ is a local operation on the enlarged last party. Such an operation cannot create genuine multipartite entanglement, but it can destroy it. The grouped theorem therefore does not guarantee that the reduced state is genuinely multipartite entangled.
-
-A valid MultiWit violation for the covariance of $\rho_S$ supplies precisely the missing certification: it excludes all biseparable mixtures of the selected modes, even though their state is mixed. In parameter ranges where that violation is found, the genuine multipartite entanglement remains after the complement is discarded. This is a stronger accessible-mode statement than the grouped theorem. It also establishes the grouped state's genuine entanglement without needing to infer it from purity, since a local partial trace cannot create it.
-
-The numerical result does not imply that $\mathcal C$ was uncorrelated, or that the reduced state became pure. It establishes robustness of the multipartite certification to discarding those modes. The analytical and numerical statements should be compared for the same selected set and at distances where their respective premises have been checked; the asymptotic pairwise proof alone does not establish the entire finite-distance interval of a numerical plot.
-
-\subsection{Limits and a possible role in the manuscript}
-
-Global purity refers to the complete system actually included in the claim. If the optical field is mixed because of losses or medium noise, placing the other optical modes into $\mathcal C$ does not restore purity. One could formally enlarge the system to include a purifying environment, but the last party would then include that environment, not just the spatial optical modes. That would be a different operational claim. The purely optical grouped theorem is therefore naturally a statement about the ideal lossless model; direct numerical witnesses of the reduced optical state remain the appropriate certification when additional noise is modeled.
-
-For the ideal model, the argument supplies a short route from the first-order selection rule to a genuine multipartite statement. The individual pairwise Duan violations establish all bipartitions of the grouped system, and purity excludes biseparable mixtures. The optional collective-mode construction in Appendix~\ref{app:collective_witness_note} can improve the quantitative bipartite witness but is not needed for this proof.
-
-A possible presentation would first establish the OAM-controlled pairwise radial support, then state the grouped pure-state consequence with its parties explicitly identified. The numerical multipartite section would ask the stronger question of whether the selected single modes remain genuinely multipartite entangled after all unselected modes are traced out. This organization connects the analytical selection rules to the numerical certification without claiming that pairwise entanglement alone proves genuine multipartite entanglement of an arbitrary mixed reduced state.
 
 \bibliography{refs}% Produces the bibliography via BibTeX.
 
