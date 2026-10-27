@@ -48,7 +48,7 @@ The quest for quantum devices based on optical resources is an intense and activ
 
 Entanglement provides a resource for quantum communication protocols involving two or more parties~\cite{vanloock2003detecting}. In a spatially structured optical field, orthogonal modes provide distinct subsystems whose quadratures can be addressed by mode-selective detection. Controlling how a nonlinear interaction distributes entanglement among these modes is therefore a step toward preparing spatial resources for quantum information. This requires identifying both the modes involved and the form of entanglement that can be certified: correlations between pairs, entanglement across groups of modes, and genuine multipartite entanglement are different statements about the generated state~\cite{teh2014criteria}.
 
-The possibility of shaping the phase and polarization distributions with spatial light modulators and q-plates has become a powerful tool for controlled generation of customized entangled states both in linear and nonlinear optics. These developments brought the orbital angular momentum (OAM) of light to the toolbox of quantum information technology. Its role in nonlinear processes has also been unveiled by a plethora of scientific papers devoted to the constraints imposed by OAM and vortex formation in nonlinear wave mixing. 
+The possibility of shaping the phase and polarization distributions with spatial light modulators and q-plates has become a powerful tool for controlled generation of customized entangled states both in linear and nonlinear optics. These developments brought the orbital angular momentum (OAM) of light to the toolbox of quantum information technology. Its role in nonlinear processes has also been unveiled by a plethora of scientific papers devoted to the constraints imposed by OAM and vortex formation in nonlinear wave mixing.
 In polariton superfluids, the interplay between phase, spin and flow gives rise to a rich variety of spatial structures, including quantized vortices, spin textures and vortex flows \cite{Bramati2016,Bramati2016-2,Bramati2019,Bramati2020,Guerrero2025}. A recent work has further demonstrated the spectroscopy of collective excitations associated with stationary, multiply quantized vortices, opening new possibilities for exploring vortex dynamics in driven-dissipative quantum fluids of light \cite{Guerrero2025}.
 
 A less exploited degree of freedom involves the radial structure of paraxial modes \cite{Pereira2017,Buono2020,Zhi-Han2020,Sonja2021,AOliveira2021,Kotlyar2022}. The Laguerre-Gaussian (LG) solutions of the paraxial wave equation are the natural basis for describing OAM and the radial structure, which are the suitable labels for their identification. These modes are characterized by two integer numbers, namely its topological charge and radial index. The topological charge corresponds to the azimuthal variation of the beam phase around the propagation direction and the radial index determines the number of intensity rings.
@@ -66,7 +66,7 @@ Section~\ref{sec:bosonfield} introduces the spatial mode operators and covarianc
 
 We first introduce the spatial mode operators and correlations used to describe the field. This formulation identifies the optical subsystems and provides the covariance matrix on which the entanglement criteria of Sec.~\ref{sec:entanglement} act.
 
-We start by considering the normalized positive frequency component of the quantized electromagnetic field 
+We start by considering the normalized positive frequency component of the quantized electromagnetic field
 $\mathcal{E}(\mathbf{r})$ satisfying the commutation relations
 %
 \begin{equation}
@@ -146,14 +146,14 @@ where
 \label{eq:fhdefinitions}
     \begin{aligned}
         h(v_1, v_2) &= \int v_1^*(\mathbf{r}_1) v_2(\mathbf{r}_2)
-           H(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2 \\ &= \expval{a^\dagger(v_2)a(v_1)} - \expval{a(v_2)}^* \expval{a(v_1)}
+           H(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2 \\ &= \expval{a^\dagger(v_2)a(v_1)} - \expval{a(v_2)}^* \expval{a(v_1)},
     \end{aligned}
 \end{equation}
 and
 \begin{equation}
     \begin{aligned}
         f(v_1, v_2) &= \int v_1^*(\mathbf{r}_2) v_2^*(\mathbf{r}_1)
-           F(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2 \\ &= \expval{a(v_1)a(v_2)} - \expval{a(v_1)} \expval{a(v_2)}
+           F(\mathbf{r}_1, \mathbf{r}_2)\,d\mathbf{r}_1\,d\mathbf{r}_2 \\ &= \expval{a(v_1)a(v_2)} - \expval{a(v_1)} \expval{a(v_2)}.
     \end{aligned}
 \end{equation}
 
@@ -163,7 +163,7 @@ We further note the following properties, which simplify the consideration of li
         f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3) \\
         f(v_1, v_2) &= f(v_2, v_1) \\
         h(v_1, v_2 + \lambda v_3) &= h(v_1, v_2) + \lambda h(v_1, v_3) \\
-        h(v_1, v_2) &= h(v_2, v_1)^*
+        h(v_1, v_2) &= h(v_2, v_1)^*.
     \end{aligned}
 \end{equation}
 These are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)$ is linear.
@@ -178,38 +178,19 @@ For $N$ orthonormal modes, define the quadrature vector and covariance matrix by
 \end{equation}
 Every entry follows from Eq.~\eqref{eq:quadrature_correlation}, using $P(v)=X(iv)$. With our normalization, $[X(v_j),P(v_k)]=i\delta_{jk}$, the vacuum variance of each quadrature is $1/2$, and the vacuum covariance matrix is $\mathbb 1_{2N}$. We express quadrature variances in shot-noise units (SNU), defining $V_{\mathrm{SNU}}(Q)=2\expval{(\Delta Q)^2}$, so that vacuum noise is one in these units.
 
-\subsection{Single-mode squeezing}
-
-For a single normalized mode $v$, the eigenvalues of the $2\times2$ covariance matrix are its principal quadrature variances in SNU. Since $h(v,v)\in\mathbb R$, Eq.~\eqref{eq:quadrature_correlation} gives
-%
-\begin{equation}
-%        \gamma = \left(1 + 2h(v,v)\right)\mathbb{1}_2 + 2\begin{pmatrix} \Re f(v,v) & \Im f(v,v) \\ \Im f(v,v) & -\Re f(v,v) \end{pmatrix}\,,
-        \gamma = \left(1 + 2h(v,v)\right)\mathbb{1}_2 + 2\Re f(v,v)\sigma_z + 2\Im f(v,v) \sigma_x\;,
-\end{equation}
-%
-where $\mathbb{1}_2$ is the $2\times 2$ identity, and $\sigma_x$ and $\sigma_z$ are the corresponding Pauli matrices.
-Notice that $f(e^{i\phi}v, e^{i\phi}v) = e^{-i2\phi} f(v, v)$. Therefore, we can diagonalize $\gamma$ by choosing $\phi = [\arg f(v, v) \pm \pi]/ 2$ and obtain the eigenvalues
-%
-\begin{equation}
-    \lambda_{\pm} = 1 + 2\left[\,h(v, v) \pm \abs{f(v, v)}\,\right]\,.
-\end{equation}
-%
-We then see that the quadrature rotated by $\phi$ has minimum variance $\lambda_-$ in SNU, while the one rotated by $\phi + \pi/2$ has maximum variance $\lambda_+\,$. Furthermore, we have squeezing if 
-$\abs{f(v, v)} > h(v, v)\,$.
-
 \section{Entanglement and covariance-based certification}
 \label{sec:entanglement}
 
 \subsection{Parties and separability}
 
-We take the parties to be specified orthogonal modes or disjoint groups of modes. Radial and OAM indices label the spatial profiles; the quantum subsystems are their associated Fock spaces. A bipartition $S|T$ divides the parties into two nonempty groups. A state is separable across that cut if it admits a decomposition
+We take the parties to be specified orthogonal modes or disjoint groups of modes. Radial and OAM indices label the spatial profiles; the quantum subsystems are their associated Fock spaces. A bipartition $S|T$ divides the parties $S$ and $T$ into two nonempty groups. A state $\rho$ is separable across that cut if it admits a decomposition
 \begin{equation}
-    \rho_{S|T}=\sum_\lambda p_\lambda
+    \rho=\sum_\lambda p_\lambda
         \rho_S^{(\lambda)}\otimes\rho_T^{(\lambda)},
     \qquad p_\lambda\ge0,\quad \sum_\lambda p_\lambda=1.
     \label{eq:cut_separable}
 \end{equation}
-Otherwise it is entangled across $S|T$. Full separability requires a convex mixture of products over all individual parties. Pairwise entanglement refers to the reduced state of two parties after the others have been traced out. Entanglement across a multimode cut can be present even when pairwise tests do not detect it.
+Here, $\rho_S^{(\lambda)}$ is a density operator belonging to party $S$, with an analogous convention for $T$. Otherwise, $\rho$ is entangled across $S|T$.
 
 A state is fully inseparable if it is entangled across every nontrivial bipartition of the specified parties. For mixed states, this does not exclude a biseparable decomposition
 \begin{equation}
@@ -223,12 +204,12 @@ where each component is separable as in Eq.~\eqref{eq:cut_separable}, but the cu
 
 The correlations introduced in Sec.~\ref{sec:bosonfield} allow entanglement to be certified from quadrature measurements. Following Hyllus and Eisert~\cite{hyllus2006optimal}, a covariance witness for a specified separability class is a real, symmetric, positive semidefinite matrix $\mathcal Z$ satisfying
 \begin{equation}
-    \operatorname{Tr}(\mathcal Z\gamma_{\mathrm{sep}})\ge1
+    \operatorname{Tr}(\mathcal Z\gamma_{\mathrm{sep}})\ge1,
     \label{eq:witness_bound}
 \end{equation}
 for every covariance matrix of a state in that class. Consequently,
 \begin{equation}
-    \operatorname{Tr}(\mathcal Z\gamma)<1
+    \operatorname{Tr}(\mathcal Z\gamma)<1,
     \label{eq:witness_violation}
 \end{equation}
 excludes that class for any state with covariance matrix $\gamma$. Choosing the class of states separable across a fixed cut tests entanglement across that cut; choosing the entire biseparable class tests GME. A value at or above one is inconclusive. The margin below one measures the violation of the chosen criterion and is not, by itself, an entanglement measure.
@@ -263,14 +244,14 @@ A phase rotation $v_1\mapsto e^{i\phi}v_1$, with $\phi=\arg f(v_1,v_2)\pm\pi$, m
     \label{eq:optimized_duan}
     D_{\mathrm{opt}}=1+h(v_1,v_1)+h(v_2,v_2)-2\abs{f(v_1,v_2)}.
 \end{equation}
-This optimization changes only the quadrature phases. It does not optimize over all covariance witnesses. Its simple dependence on the anomalous correlation makes it particularly suitable for deriving the short-distance selection rule below.
+We refer to $D_{\mathrm{opt}}$ as the phase-optimized Duan witness. This optimization changes only the quadrature phases. It does not optimize over all covariance witnesses. Its simple dependence on the anomalous correlation makes it particularly suitable for deriving the short-distance selection rule below.
 
 \subsection{Multimode certification and optimized witnesses}
 \label{sec:multimode_certification}
 
 Pairwise tests also constrain multimode separability: an entangled pair crossing a cut excludes separability across that cut, since tracing out other modes preserves separability. A collection of pairwise violations that crosses every bipartition therefore establishes full inseparability. This reasoning underlies the pairwise version of the criteria discussed by van Loock and Furusawa~\cite{vanloock2003detecting}; we use it below for a reference mode coupled to several radial partners. For mixed states, the additional exclusion of Eq.~\eqref{eq:biseparable_mixture} is needed to establish GME~\cite{teh2014criteria}.
 
-The van Loock--Furusawa criteria also allow quadratures of additional modes to enter with adjustable gains~\cite{vanloock2003detecting}. These collective observables can reveal entanglement across cuts when the reduced pairs fail the Duan test. More generally, Hyllus and Eisert optimize over covariance witnesses using semidefinite programming~\cite{hyllus2006optimal}. For the same separability class, optimization over a larger witness family can detect correlations missed by a restricted quadrature criterion.
+The van Loock--Furusawa criteria also allow quadratures of additional modes to enter with adjustable gains~\cite{vanloock2003detecting}. These collective observables can reveal entanglement across cuts when the reduced pairs fail the Duan test. More generally, Hyllus and Eisert optimize over covariance witnesses using semidefinite programming~\cite{hyllus2006optimal}.
 
 We use two such optimizations. For each specified bipartition, the FullyWit routine minimizes $\operatorname{Tr}(\mathcal Z\gamma)$ over witnesses valid for that cut. Violations for every cut establish full inseparability. The MultiWit routine instead imposes validity for all biseparable states, so a violation certifies GME of the selected parties. Both use the covariance matrix of the selected modes after the remaining field has been traced out. These established criteria provide the framework for interpreting the radial--angular coupling derived next.
 
@@ -280,7 +261,7 @@ We use two such optimizations. For each specified bipartition, the FullyWit rout
 
 We consider a monochromatic field propagating through a $\chi^{(3)}$ nonlinear medium, with a coherent spatial mode as input. The nonlinear interaction produces both a change in the mean field and correlations between mode fluctuations. We now calculate these correlations to first order in propagation distance and apply the criteria of Sec.~\ref{sec:entanglement}.
 
-We will assume that the field is propagating along the $z$ direction, 
+We will assume that the field is propagating along the $z$ direction,
 and satisfies the Heisenberg equation of motion
 %
 \begin{equation}
@@ -292,18 +273,18 @@ where $g$ is the Kerr nonlinear coupling constant and $\nabla^2$ denotes the tra
 
 To start our derivation, let $\alpha_c(\mathbf{r}, z)$ denote the solution of the classical equations of motion
 \begin{equation}
-    2ik \partial_z \alpha_c + \nabla^2 \alpha_c = g\, \abs{\alpha_c}^2 \alpha_c
+    2ik \partial_z \alpha_c + \nabla^2 \alpha_c = g\, \abs{\alpha_c}^2 \alpha_c,
 \end{equation}
 under the initial condition $\alpha_c(\mathbf{r}, 0) = \alpha(\mathbf{r})$, where $\ket{\alpha}$ is the input coherent state. Let us also define the fluctuation field
 \begin{equation}
-    \eta(\mathbf{r}, z) = \mathcal{E}(\mathbf{r}, z) - \alpha_c(\mathbf{r}, z)
+    \eta(\mathbf{r}, z) = \mathcal{E}(\mathbf{r}, z) - \alpha_c(\mathbf{r}, z).
 \end{equation}
 
 We observe that our initial state has vacuum like properties with respect to $\eta(\mathbf{r}, 0)$. For example, it is annihilated by it:
 \begin{equation}
-    \eta(\mathbf{r}, 0) \ket{\alpha} = 0
+    \eta(\mathbf{r}, 0) \ket{\alpha} = 0.
 \end{equation}
-Furthermore, any normally ordered monomial containing at least one fluctuation operator has zero expectation value at $z=0$. 
+Furthermore, any normally ordered monomial containing at least one fluctuation operator has zero expectation value at $z=0$.
 
 The correlation functions, which are our observables of interest, can also be compactly written in terms of $\eta$:
 \begin{equation}
@@ -315,8 +296,8 @@ The correlation functions, which are our observables of interest, can also be co
 
 Next, we write the equation of motion
 \begin{equation}
-\label{eq:bg_full_fluctuation}
-    2ik\partial_z\eta+\nabla^2\eta=g\left(2|\alpha_c|^2\eta+\alpha_c^2\eta^\dagger+\Omega\right)
+    \label{eq:bg_full_fluctuation}
+    2ik\partial_z\eta+\nabla^2\eta=g\left(2|\alpha_c|^2\eta+\alpha_c^2\eta^\dagger+\Omega\right),
 \end{equation}
 where the nonlinear fluctuation terms are
 \begin{equation}
@@ -330,7 +311,7 @@ We start by considering an approximation where only terms up to $\mathcal{O}(z)$
 \begin{equation}
     \expval{\eta(\mathbf{r}, z)} = \mathcal{O}(z^2),
 \end{equation}
-or, equivalently, 
+or, equivalently,
 \begin{equation}
     \expval{\mathcal{E}(\mathbf{r}, z)} = \alpha_c(\mathbf{r}, z) + \mathcal{O}(z^2).
     \label{eq:exp_val_field}
@@ -407,16 +388,15 @@ $z_R=kw^2/2$, the nonlinear interaction length $z_{NL}=4z_R/(g\norm{\alpha}^2)$,
 the dimensionless propagation distance $Z=z/z_{NL}=gz\norm{\alpha}^2/(2kw^2)$,
 and the dimensionless input profile $u(\mathbf r)=w\alpha(\mathbf r,0)/\norm{\alpha}$.
 
-Using these definitions, Eq.~\eqref{eq:quadrature_correlation} and the squeezing and Duan criteria give the first-order results
+Using these definitions, Eq.~\eqref{eq:quadrature_correlation} and the Duan criterion give the first-order results
 \begin{equation}
     \begin{aligned}
         f(v_1,v_2)&\approx-iZ(v_1,v_2;u,u),\\
         \Gamma(v_1,v_2)&=\Re(v_1;v_2)+2Z\Im(v_1,v_2;u,u)+\mathcal{O}(Z^2),\\
-        \lambda_-&=1-2\left|Z(v,v;u,u)\right|+\mathcal{O}(Z^2),\\
         D_{\mathrm{opt}}&=1-2\left|Z(v_1,v_2;u,u)\right|+\mathcal{O}(Z^2).
     \end{aligned}
 \end{equation}
-For an input angular momentum $l_0$, the angular integration requires $l_v=l_0$ for a linear squeezing contribution and $l_{v_1}+l_{v_2}=2l_0$ for a linear Duan violation. These OAM conditions are necessary for first-order certification; the corresponding radial overlap must also be nonzero.
+For an input angular momentum $l_0$, the angular integration requires $l_{v_1}+l_{v_2}=2l_0$ for a linear Duan violation. This OAM condition is necessary for first-order certification; the corresponding radial overlap must also be nonzero.
 
 \section{Chiral selection rule and entanglement certification}
 \label{sec:selection rules}
@@ -425,7 +405,7 @@ We now specialize to the LG input $\alpha(\mathbf r)=\norm{\alpha}\,LG_{0,l_0}(\
 
 Our previous work \cite{Oliveira2023} has shown that, in the classical regime, the first order treatment gives a selection rule for the generation of radial orders up to $\abs{l_0}$. The current quantum treatment clarifies that this was, in fact, a selection rule for the mean field value $\expval{\mathcal{E}}$ given by \eqref{eq:exp_val_field}, whose expression had already appeared on our earlier treatment.
 
-We now derive the radial selection rule for the first-order anomalous correlations and use it to establish pairwise and multimode entanglement at sufficiently small nonzero distances. All detection profiles and their waists are held fixed in this expansion.
+We now derive the radial selection rule for the first-order anomalous correlations and use it to establish pairwise and multimode entanglement at sufficiently small nonzero distances.
 
 \subsection{Radial selection rules and two-mode entanglement}
 
@@ -449,7 +429,7 @@ where we have defined
 %
 \begin{eqnarray}
     \label{eq:radial_cutoff}
-    p_{\text{max}} &=& \abs{l_0}+\frac{\abs{l_2} - \abs{2l_0 - l_2}}{2} 
+    p_{\text{max}} &=& \abs{l_0}+\frac{\abs{l_2} - \abs{2l_0 - l_2}}{2}
     \nonumber\\
     &=& \begin{cases}
         0, & l_0l_2 \le 0 \\
@@ -481,7 +461,18 @@ Therefore, setting $v_1 = LG_{pl_1}(\mathbf{r}; w_1)$, which is orthogonal to $v
     \end{cases}\;.
 \end{equation}
 %
-For $0\le p\le p_{\max}$, the coefficients $C_p$ are positive with the chosen LG phase convention. Their linear contribution therefore dominates the $\mathcal{O}(Z^2)$ remainder for sufficiently small nonzero $Z$, establishing entanglement of each corresponding pair. For $p>p_{\max}$, only the linear coefficient vanishes: Eq.~\eqref{eq:radial_duan} does not decide whether higher-order correlations produce entanglement. The finite radial support is a property of this first-order coefficient in the specified waist basis.
+For $0\le p\le p_{\max}$, the coefficients $C_p$ are positive with the chosen LG phase convention. Their linear contribution therefore dominates the $\mathcal{O}(Z^2)$ remainder for sufficiently small nonzero $Z$, establishing entanglement of each corresponding pair. For $p>p_{\max}$, the linear coefficient vanishes: Eq.~\eqref{eq:radial_duan} does not decide whether higher-order correlations produce entanglement. The finite radial support is a property of this first-order coefficient in the specified waist basis.
+
+Throughout the subsequent analysis, we set the reference-mode waist equal to the pump waist, $w_2=w$. The matching condition $1/w_1^2=2/w^2+1/w_2^2$ then fixes the partner-mode waist to $w_1=w/\sqrt{3}$.
+
+Figure~\ref{fig:selection_schematic} illustrates the mode selection for $l_0=2$ and $l_2=1$, for which $l_1=3$ and $p_{\max}=1$. This is the same input and mode family used in the multimode witness analysis that follows.
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.82\linewidth]{../Plots/radial_entanglement_schematic.pdf}
+    \caption{Schematic of radial--angular mode coupling and pairwise certification for an OAM pump with $l_0=2$. The nonlinear medium generates an output field containing the reference mode $\mathcal A=LG_{0,1}(w_2=w)$ and radial partners $\mathcal B_0=LG_{0,3}(w_1)$, $\mathcal B_1=LG_{1,3}(w_1)$, and $\mathcal C=LG_{2,3}(w_1)$. Here $l_2=1$, $l_1=3$, and $p_{\max}=1$. Solid links indicate the first-order Duan-violating pairs $\mathcal A|\mathcal B_p$ for $p=0,1$; the dashed link marks $\mathcal A|\mathcal C$ as inconclusive at first order, not as unentangled. Phase is encoded by hue and intensity by transparency in the mode profiles.}
+    \label{fig:selection_schematic}
+\end{figure*}
 
 \subsection{Consequences for multipartite certification}
 \label{sec:pairwise_partitions}
@@ -490,7 +481,7 @@ Let $\mathcal A$ denote the reference mode $v_2$, and let $\mathcal B_p$ denote 
 
 For the ideal closed, lossless model, purity of the complete field gives a further consequence. Denote the remaining field modes by $\mathcal R$. For $p_{\max}\ge1$, the grouping
 \begin{equation}
-    \mathcal A\;|\;\mathcal B_0\;|\;\cdots\;|\;\mathcal B_{p_{\max}-1}\;|\;(\mathcal B_{p_{\max}}\mathcal R)
+    \mathcal A\;|\;\mathcal B_0\;|\;\cdots\;|\;\mathcal B_{p_{\max}-1}\;|\;(\mathcal B_{p_{\max}}\mathcal R),
     \label{eq:main_grouped_parties}
 \end{equation}
 includes all degrees of freedom and is pure. The same pairs cross every bipartition, so these $p_{\max}+2$ grouped parties are genuinely multipartite entangled. For $p_{\max}=0$, the statement reduces to bipartite entanglement across $\mathcal A|(\mathcal B_0\mathcal R)$. This party count is a guaranteed grouping at the specified detection waists, not an upper bound on the number of entangled field modes. It also does not establish GME of the selected single modes after $\mathcal R$ is discarded.
@@ -502,7 +493,7 @@ We next ask how the certification pattern changes at finite distance and whether
 
 \subsection{Diffraction-free Bogoliubov solution}
 
-The first-order expressions describe the initial generation of correlations, but extrapolating them to larger distances can give negative values of $\lambda_-$ or $D_{\mathrm{opt}}$. For finite-distance predictions, we return to the full equation for the same decomposition $\mathcal E=\alpha_c+\eta$ and adopt a different approximation: we neglect diffraction and discard the nonlinear fluctuation terms $\Omega$ in Eq.~\eqref{eq:bg_full_fluctuation}, while retaining the full dependence on propagation distance. This linearization of the fluctuation dynamics is the Bogoliubov approximation, used to describe quantum fluctuations in paraxial propagation through Kerr media~\cite{PhysRevA.92.043802}. Appendix~\ref{app:no_diffraction} solves the diffraction-free Bogoliubov equations without a Taylor expansion in distance. The dimensionless classical field is then
+The first-order Duan expression describes the initial generation of correlations but cannot be extrapolated to finite distances: Eq. \eqref{eq:radial_duan} may become negative for large enough $\abs{Z}$. For finite-distance predictions, we return to the full equation for the same decomposition $\mathcal E=\alpha_c+\eta$ and adopt a different approximation: we neglect diffraction and discard the nonlinear fluctuation terms $\Omega$ in Eq.~\eqref{eq:bg_full_fluctuation}, while retaining the full dependence on propagation distance. This linearization of the fluctuation dynamics is the Bogoliubov approximation, used to describe quantum fluctuations in paraxial propagation through Kerr media~\cite{PhysRevA.92.043802}. Appendix~\ref{app:no_diffraction} solves the diffraction-free Bogoliubov equations without a Taylor expansion in distance. The dimensionless classical field is then
 \begin{equation}
     u_Z(\mathbf r)=u(\mathbf r)e^{-iZ|u(\mathbf r)|^2},
 \end{equation}
@@ -521,22 +512,11 @@ These expressions agree with the preceding first-order result and are exact with
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=\linewidth]{../Plots/duan.pdf}
-    \caption{Phase-optimized Duan quantity for the diffraction-free Bogoliubov solution. Values below one certify two-mode entanglement.}
+    \caption{Phase-optimized Duan witness $D_{\mathrm{opt}}$ for the diffraction-free Bogoliubov solution with fixed pump OAM $l_0=2$ and reference-mode OAM $l_2=-1,0,1,3$. Curves correspond to radial indices $p=0,\ldots,3$ of the partner mode, with $l_1=4-l_2$, $w_1=w/\sqrt{3}$, and $w_2=w$. Values below one certify two-mode entanglement.}
     \label{fig:duan}
 \end{figure*}
 
-Figure~\ref{fig:duan} compares the phase-optimized Duan quantity for several combinations of $l_0$ and $l_2$. The modes within the first-order support show the larger violations in these examples, while those outside it remain close to or above the separability threshold. In particular, for $l_0=0$ and $l_2=1$, the $p=1$ curve exhibits a small violation even though $p_{\max}=0$. The finite-distance results therefore retain a distinction in certification margins while allowing violations beyond the first-order cutoff.
-
-We next apply the fixed-cut covariance optimization introduced in Sec.~\ref{sec:multimode_certification} to each of the same two-mode reduced states. This compares the phase-optimized Duan test with a general covariance witness for the same bipartition.
-
-\begin{figure*}[!t]
-    \centering
-    \includegraphics[width=\linewidth]{../Plots/optimal_two_modes.pdf}
-    \caption{Optimized covariance witness for the same reduced two-mode states as in Fig.~\ref{fig:duan}. Values below one certify entanglement across the two-mode bipartition.}
-    \label{fig:optimal_two_modes}
-\end{figure*}
-%
-Figure~\ref{fig:optimal_two_modes} shows that the general optimization gives witness values close to the phase-optimized Duan values in Fig.~\ref{fig:duan}. Thus, for these configurations, phase optimization captures much of the available two-mode certification. This comparison concerns witness violations rather than a quantitative measure of entanglement.
+Figure~\ref{fig:duan} compares the phase-optimized Duan witness at fixed $l_0=2$ for $l_2=-1,0,1,3$. The corresponding first-order radial cutoffs are $p_{\max}=0,0,1,3$, respectively. The first two panels illustrate the single radial partner selected for opposite-sign or zero reference-mode OAM, while the latter two illustrate the larger radial support available for equal-sign OAM. In particular, all four plotted radial indices lie within the first-order support for $l_2=3$. The $l_2=1$ panel uses the same input and radial partners as the schematic in Fig. \ref{fig:selection_schematic} and the multimode witness analysis below.
 
 \subsection{Entanglement across multimode bipartitions}
 
@@ -557,7 +537,8 @@ Figure~\ref{fig:optimal_two_modes} shows that the general optimization gives wit
     \end{minipage}
 \end{figure*}
 
-Now we turn to more parties. We set $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2\abs{l_0},\abs{l_2})=1\,$. Furthermore, we define the modes as $\mathcal A = LG_{0, 1}(w_2=w)$, $\mathcal B_0 = LG_{0, 3}(w_1)$, $\mathcal B_1 = LG_{1, 3}(w_1)$ and $\mathcal C = LG_{2, 3}(w_1)\,$. Thus $\mathcal C$ is a radial mode outside the first-order support for coupling to $\mathcal A$. The short-distance calculation certifies the pairs $\mathcal A|\mathcal B_0$ and $\mathcal A|\mathcal B_1$, while it is inconclusive for $\mathcal A|\mathcal C$. By Sec.~\ref{sec:pairwise_partitions}, these two pairs already certify six of the seven bipartitions; the remaining cut is $\mathcal A\mathcal B_0\mathcal B_1|\mathcal C$. In Fig. \ref{fig:fully_wit} we apply FullyWit to the reduced covariance matrix of these four modes and optimize a witness separately for each bipartition. The numerical curves form three groups
+Now we turn to more parties. We set $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l_2=3$ and $p_{max}=\mathrm{min}(2\abs{l_0},\abs{l_2})=1\,$. Furthermore, we define the modes as $\mathcal A = LG_{0, 1}(w_2=w)$, $\mathcal B_0 = LG_{0, 3}(w_1)$, $\mathcal B_1 = LG_{1, 3}(w_1)$ and $\mathcal C = LG_{2, 3}(w_1)\,$. Thus $\mathcal C$ is a radial mode outside the first-order support for coupling to $\mathcal A$. The short-distance calculation certifies the pairs $\mathcal A|\mathcal B_0$ and $\mathcal A|\mathcal B_1$, while it is inconclusive for $\mathcal A|\mathcal C$. By Sec.~\ref{sec:pairwise_partitions}, these two pairs already certify six of the seven bipartitions; the remaining cut is $\mathcal A\mathcal B_0\mathcal B_1|\mathcal C$. In Fig. \ref{fig:fully_wit} we apply FullyWit to the reduced covariance matrix of these four modes and optimize a witness separately for each bipartition. The numerical curves form three groups:
+
 \begin{itemize}
     \item $\mathcal A\mathcal B_1\mathcal C|\mathcal B_0$, $\mathcal A\mathcal B_1|\mathcal B_0\mathcal C$, $\mathcal A\mathcal C|\mathcal B_0\mathcal B_1$ and $\mathcal A|\mathcal B_0\mathcal B_1\mathcal C$ show the lowest witness values and hence the largest margins below the separability threshold. These share the fact that $\mathcal A$ and $\mathcal B_0$ belong to different parties, giving a stronger second-moment entanglement certification across these partitions.
     \item $\mathcal A\mathcal B_0\mathcal C|\mathcal B_1$ and $\mathcal A\mathcal B_0|\mathcal B_1\mathcal C$ show intermediate witness values, still maintaining a linear start. Here the entangled pair $\mathcal A|\mathcal B_1$ crosses the cut, while $\mathcal A$ and $\mathcal B_0$ belong to the same party.
@@ -565,7 +546,7 @@ Now we turn to more parties. We set $l_0 = 2$ and $l_2 = 1$, so that $l_1=2l_0-l
 \end{itemize}
 
 
-The crossing-pair argument explains why the first six cuts admit linear violations, but does not predict the optimized witness values or their near-degeneracies. The small violation for $\mathcal A\mathcal B_0\mathcal B_1|\mathcal C$ illustrates that modes outside the first-order radial support can nevertheless participate in entanglement at finite distance.
+The crossing-pair argument explains why the first six cuts admit linear violations, but does not predict the optimized witness values. The small violation for $\mathcal A\mathcal B_0\mathcal B_1|\mathcal C$ illustrates that modes outside the first-order radial support can nevertheless participate in entanglement at finite distance.
 
 \subsection{Genuine multipartite entanglement of selected modes}
 
@@ -699,144 +680,138 @@ The Bogoliubov approximation also permits retaining diffraction in both the clas
 
 \subsection{Role of the seed in quadrature detection}
 
-For the single coherent pump $\alpha=A_pv_p$, with $v_p=LG_{0,l_p}(w)$, both terms in Eq.~\eqref{eq:seed_general_mean} with $\epsilon=0$ vanish for a detection mode of definite OAM $l_v\ne l_p$: the nonlinear mean-field source $|v_p|^2v_p$ carries the same OAM as the pump. Thus, within this first-order treatment, self-phase modulation changes the mean field only in the $l=l_p$ sector, including its radial structure.
+Coherent seeding can provide a mean field in the spatial modes whose entanglement is studied in the main text. To see why this is useful, consider an unseeded pump with profile $\alpha=\norm{\alpha}v_p$, where $v_p=LG_{0,l_0}(w)$ is normalized. Both the input profile and the nonlinear mean-field source $|v_p|^2v_p$ carry OAM $l_0$. Consequently, their projections onto a detection mode of definite OAM $l_v\ne l_0$ vanish. Within the first-order treatment of Sec.~\ref{sec:Kerr}, self-phase modulation therefore changes the mean field only in the $l=l_0$ sector, including its radial structure.
 
-The two-mode correlations studied in the main text instead involve $l_1+l_2=2l_p$ with $l_2\ne l_p$, so neither detected mode has a coherent mean at this order. This does not prevent quadrature measurements with an external local oscillator, but a coherent amplitude in a detected mode can assist spatial alignment and phase control. The purpose of the seed is to supply such a reference while retaining, as closely as possible, the original entanglement correlations. Zero coherent mean should not be identified with exactly zero photon occupation: the centered population $h(v,v)$ starts beyond first order in distance.
+The two-mode correlations studied in the main text instead involve $l_1+l_2=2l_0$ with $l_2\ne l_0$, so neither detected mode has a coherent mean at this order. This does not prevent quadrature measurements with an external local oscillator, but a coherent amplitude in a detected mode can assist spatial alignment and phase control. The purpose of the seed is to supply such a reference while retaining, as closely as possible, the original entanglement correlations. Zero coherent mean should not be identified with exactly zero photon occupation: the centered population $h(v,v)$ starts beyond first order in distance.
 
 We consider mutually coherent, collinear pump and seed fields sharing the frequency, polarization, and temporal mode implicit in our scalar model. We first derive the first-order correlations for an arbitrary spatial seed, and then examine seeding only $v_2$ or directly seeding both detected OAM families. Throughout this appendix, ``first order'' in propagation refers to the coefficient linear in distance; terms linear and quadratic in seed amplitude are distinguished explicitly.
 
 \subsection{First-order corrections for an arbitrary coherent seed}
 
-Let the input profile be
+We keep the total input occupation $\norm{\alpha}^2$ fixed and write
 \begin{equation}
-    \alpha(\mathbf r,0)=A_p\bigl[v_p(\mathbf r)+\epsilon s(\mathbf r)\bigr],
+    \alpha(\mathbf r,0)=\norm{\alpha}
+       \left[\sqrt{1-|\epsilon|^2}\,v_p(\mathbf r)
+                         +\epsilon s(\mathbf r)\right],
     \label{eq:seed_input}
 \end{equation}
-where $\|v_p\|=\|s\|=1$ and the complex parameter $\epsilon$ specifies the overall seed amplitude and phase relative to the pump. The normalized profile $s$ specifies its spatial composition; for example, $s=\sum_j c_jv_{s,j}$ in an orthonormal seed basis, with $\sum_j|c_j|^2=1$. We use the pump waist and occupation $N_p=A_p^2$ to define
+where $\|v_p\|=\|s\|=1$, $(v_p;s)=0$, and $|\epsilon|<1$. The seed power fraction is $q=|\epsilon|^2$, while the phase of $\epsilon$ sets its phase relative to the pump. The normalized profile $s$ specifies its spatial composition; for example, $s=\sum_j c_jv_{s,j}$ in an orthonormal seed basis, with $\sum_j|c_j|^2=1$. Orthogonality to the pump ensures that the bracketed profile is normalized. The pump and seed occupations are therefore $(1-q)\norm{\alpha}^2$ and $q\norm{\alpha}^2$, respectively. Weak seeding means $q\ll1$; it need not imply a seed occupation smaller than one.
+
+We use the same dimensionless profile and propagation coordinate as in the main text:
 \begin{equation}
-    \begin{aligned}
-        U_p&=wv_p,\\
-        S&=ws,\\
-        U&=U_p+\epsilon S,\\
-        Z_p&=\frac{gzN_p}{2kw^2}.
-    \end{aligned}
+    u=w\left[\sqrt{1-q}\,v_p+\epsilon s\right],
+    \qquad Z=\frac{gz\norm{\alpha}^2}{2kw^2}.
     \label{eq:seed_normalization}
 \end{equation}
-The profiles $U_p,S,U$ are dimensionless, and $Z_p$ is held fixed when comparing different seeds. Weak seeding means $|\epsilon|\ll1$; it need not imply a seed occupation smaller than one. If the seed is orthogonal to the pump, its occupation relative to the pump is $q=|\epsilon|^2$, and the main-text normalization is $u=U/\sqrt{1+q}$, $Z=(1+q)Z_p$. More generally, replace $1+q$ by $\|v_p+\epsilon s\|^2$. These conventions give the same product $Zu^2=Z_pU^2$.
-
-The input remains a coherent state of a spatial field distribution. Therefore, the mean-field formula and the general correlation derivation apply directly to the combined profile. For example, in freely propagated detection modes, with the nonlinear overlap evaluated at the input plane,
+Thus $Z$ is held fixed when comparing different seed fractions at a given propagation distance. The input remains a coherent state, so the mean-field formula and the general correlation derivation apply directly to this combined profile. In freely propagated detection modes, with the nonlinear overlap evaluated at the input plane,
 \begin{equation}
-    \begin{aligned}
-        \langle a(v,z)\rangle
-        &=\frac{A_p}{w}\left[(v,U)
-          -iZ_p(v,U;U,U)\right]+O(Z_p^2).
-    \end{aligned}
+    \langle a(v,z)\rangle
+        =\frac{\norm{\alpha}}{w}\left[(v;u)
+          -iZ(v,u;u,u)\right]+O(Z^2).
     \label{eq:seed_general_mean}
 \end{equation}
-For orthonormal detection modes $v_1,v_2$, define
+For orthonormal detection modes $v_1,v_2$, define the unseeded overlap and its seeded counterpart by
 \begin{equation}
     \begin{aligned}
-        C_{12}&=(v_1,v_2;U_p,U_p),\\
-        \delta C_{12}^{(1)}&=2\epsilon(v_1,v_2;U_p,S),\\
-        \delta C_{12}^{(2)}&=\epsilon^2(v_1,v_2;S,S).
+        C_{12}&=w^2(v_1,v_2;v_p,v_p),\\
+        C_{12}(\epsilon)&=(v_1,v_2;u,u)\\
+          &=(1-q)C_{12}
+            +2\epsilon\sqrt{1-q}\,w^2(v_1,v_2;v_p,s)\\
+          &\quad+\epsilon^2w^2(v_1,v_2;s,s).
     \end{aligned}
+    \label{eq:seed_overlap}
 \end{equation}
-The superscripts indicate order in seed amplitude, not distance. Expanding $U^2=(U_p+\epsilon S)^2$ gives
+The first-order correlations and witness are then
 \begin{equation}
     \begin{aligned}
-        f(v_1,v_2)&=-iZ_p\left[C_{12}
-          +\delta C_{12}^{(1)}+\delta C_{12}^{(2)}\right]
-          +O(Z_p^2),\\
-        h(v_1,v_2)&=O(Z_p^2),\\
-        D_{\mathrm{opt}}&=1-2|Z_p|
-          \left|C_{12}+\delta C_{12}^{(1)}+\delta C_{12}^{(2)}\right|
-          +O(Z_p^2).
+        f(v_1,v_2)&=-iZC_{12}(\epsilon)+O(Z^2),\\
+        h(v_1,v_2)&=O(Z^2),\\
+        D_{\mathrm{opt}}&=1-2|Z|\,|C_{12}(\epsilon)|+O(Z^2).
     \end{aligned}
     \label{eq:seed_first_order}
 \end{equation}
-This is the complete coefficient linear in distance for an arbitrary coherent seed. It contains no terms beyond quadratic order in seed amplitude. Because $f$ and $h$ are centered correlations, the seed's coherent displacement alone does not contribute to them; the corrections above arise from its participation in the nonlinear interaction.
+Equation~\eqref{eq:seed_overlap} retains the exact seed dependence of the coefficient linear in distance. For weak seeding, the pump--seed term starts at linear order in $\epsilon$, while the seed--seed term and the reduction of the pump contribution start at quadratic order. Because $f$ and $h$ are centered correlations, a coherent displacement alone does not contribute to them; the changes above arise from the modified input to the nonlinear interaction.
 
-The angular content determines which corrections survive. Write
+The angular content determines which overlap terms survive. Write
 \begin{equation}
-    U_p=R_p(r)e^{il_p\phi},\qquad
-    S=\sum_m S_m(r)e^{im\phi}.
+    v_p=R_p(r)e^{il_0\phi},\qquad
+    s=\sum_m s_m(r)e^{im\phi}.
 \end{equation}
-For detection OAM sum $L=l_1+l_2$, the pump--seed term requires $l_p+m=L$, and the seed--seed term requires $m+n=L$. In the original channel $L=2l_p$, the relevant harmonic is
+For detection OAM sum $L=l_1+l_2$, the pump--seed term requires $l_0+m=L$, and the seed--seed term requires $m+n=L$. In the original channel $L=2l_0$, the relevant harmonic is
 \begin{equation}
     \begin{aligned}
-        [U^2]_{2l_p}
-        &=e^{2il_p\phi}\left[R_p^2+2\epsilon R_pS_{l_p}
-          +\epsilon^2\sum_m S_mS_{2l_p-m}\right].
+        \bigl[u^2\bigr]_{2l_0}
+        &=w^2e^{2il_0\phi}\bigg[(1-q)R_p^2\\
+        &\quad+2\epsilon\sqrt{1-q}\,R_ps_{l_0}
+          +\epsilon^2\sum_m s_ms_{2l_0-m}\bigg].
     \end{aligned}
-    \label{eq:seed_general_projection}
+    \label{eq:seed_general_0rojection}
 \end{equation}
-Thus only a seed component with pump OAM can modify this channel linearly in seed amplitude. Quadratic corrections require complementary seed OAM values summing to $2l_p$. The radial overlaps must also be nonzero. In particular, a seed with pump OAM but a different radial profile can alter the radial rule at linear order in seed amplitude; a seed proportional to $v_p$ simply changes the combined pump amplitude.
+Thus only a seed component with pump OAM can modify this channel linearly in seed amplitude. Such a component can be orthogonal to the pump through its radial profile. The seed--seed contribution requires complementary seed OAM values summing to $2l_0$. In both cases the radial overlaps must also be nonzero. The factor $1-q$ reduces the original pump contribution without changing its radial support.
 
 \subsection{Seeding only the mode $v_2$}
 
-Consider the same detection family as in the main text,
+Consider the same detection family and waist convention as in the main text,
 \begin{equation}
     \begin{aligned}
-        v_p&=LG_{0,l_p}(w),\\
-        v_2&=LG_{0,l_2}(w_2),\\
-        v_{1,p}&=LG_{p,l_1}(w_1),\\
-        l_1&=2l_p-l_2,\\
-        \frac{1}{w_1^2}&=\frac{2}{w^2}+\frac{1}{w_2^2},
-        \qquad l_2\ne l_p.
+        v_p&=LG_{0,l_0}(w),\\
+        v_2&=LG_{0,l_2}(w),\\
+        v_{1,p}&=LG_{p,l_1}(w/\sqrt{3}),\\
+        l_1&=2l_0-l_2,\qquad l_2\ne l_0.
     \end{aligned}
     \label{eq:seed_detection_family}
 \end{equation}
-Here $l_p$ denotes pump OAM, whereas the index $p$ of $v_{1,p}$ denotes radial order. Set $s=v_2$, so $S=U_2$, where $U_2=wv_2$. The pump--seed and seed--seed terms carry OAM $l_p+l_2$ and $2l_2$, respectively. Neither equals $2l_p$, so both corrections vanish in the original channel. Defining $C_p=(v_{1,p},v_2;U_p,U_p)$ gives
+Here $l_0$ denotes pump OAM, whereas the index $p$ of $v_{1,p}$ denotes radial order. Set $s=v_2$. The pump--seed and seed--seed terms carry OAM $l_0+l_2$ and $2l_2$, respectively. Neither equals $2l_0$, so both overlap terms vanish in the original channel. With $C_p=w^2(v_{1,p},v_2;v_p,v_p)$, the unseeded coefficient used in the main text, we obtain
 \begin{equation}
     \begin{aligned}
-        f(v_{1,p},v_2)&=-iZ_pC_p+O(Z_p^2),\\
-        D_{\mathrm{opt}}&=1-2|Z_pC_p|+O(Z_p^2).
+        f(v_{1,p},v_2)&=-iZ(1-q)C_p+O(Z^2),\\
+        D_{\mathrm{opt}}&=1-2|Z|(1-q)|C_p|+O(Z^2).
     \end{aligned}
     \label{eq:seed_protected_first_order}
 \end{equation}
-The coefficient linear in distance is independent of $\epsilon$, including its phase. Hence the original cutoff
+At fixed total occupation, seeding reduces the original linear coefficient by the pump fraction $1-q$, independently of the seed phase. Its radial support is unchanged: the original cutoff is
 \begin{equation}
-    p_{\max}=|l_p|+\frac{|l_2|-|2l_p-l_2|}{2}
+    p_{\max}=|l_0|+\frac{|l_2|-|2l_0-l_2|}{2},
 \end{equation}
-is preserved exactly at this order for the detection profiles in \eqref{eq:seed_detection_family}: $C_p=0$ for $p>p_{\max}$. The seed does open other OAM channels, at orders $Z_p\epsilon$ and $Z_p\epsilon^2$, but these do not enter the selected pair's first-order coefficient.
+with $C_p=0$ for $p>p_{\max}$. The seed opens other OAM channels through terms proportional to $Z\epsilon\sqrt{1-q}$ and $Z\epsilon^2$, but these do not enter the selected pair's first-order coefficient.
 
 The mean-field benefit is twofold. The seeded mode has the input amplitude
 \begin{equation}
-    \langle a(v_2,0)\rangle=A_p\epsilon.
+    \langle a(v_2,0)\rangle=\norm{\alpha}\epsilon.
 \end{equation}
-Moreover, the nonlinear source $|U|^2U$ contains $\epsilon^*U_p^2U_2^*$, whose OAM is $2l_p-l_2=l_1$. Projection of \eqref{eq:seed_general_mean} therefore yields
+Moreover, the nonlinear source $|u|^2u$ contains $w^3(1-q)\epsilon^*v_p^2v_2^*$, whose OAM is $2l_0-l_2=l_1$. Projection of Eq.~\eqref{eq:seed_general_mean} therefore yields
 \begin{equation}
     \langle a(v_{1,p},z)\rangle
-       =-iZ_pA_p\epsilon^*C_p+O(Z_p^2).
+       =-iZ\norm{\alpha}(1-q)\epsilon^*C_p+O(Z^2).
     \label{eq:seed_stimulated_mean}
 \end{equation}
-A seed in $v_2$ can thus generate coherent references in its conjugate radial modes while preserving the original first-order correlations. These stimulated amplitudes are suppressed by $Z_p$, follow the radial coefficients $C_p$, and vanish at this order outside the cutoff. Whether they suffice for homodyne phase control depends on the experimental sensitivity.
+A seed in $v_2$ can thus generate coherent references in its conjugate radial modes while preserving the first-order radial selection rule. These stimulated amplitudes follow the radial coefficients $C_p$, and vanish at this order outside the cutoff. Whether they suffice for homodyne phase control depends on the experimental sensitivity.
 
 \subsection{Seeding both detected OAM families}
 \label{app:multimode_seed}
 
 To supply a direct coherent reference in every selected detection mode, including radial modes whose stimulated amplitudes are too small, take
 \begin{equation}
-    S=c_2U_2+
-       \sum_{p\in\mathcal S}c_{1,p}U_{1,p},
+    s=c_2v_2+
+       \sum_{p\in\mathcal S}c_{1,p}v_{1,p},
     \label{eq:multiseed_input}
 \end{equation}
-where $U_{1,p}=wv_{1,p}$ and $\mathcal S$ is the finite set of seeded radial orders. The two OAM families and the pump are mutually orthogonal, as are the radial modes within the first family. Normalization of $s$ requires
+where $\mathcal S$ is the finite set of seeded radial orders. The two OAM families and the pump are mutually orthogonal, as are the radial modes within the first family. Normalization of $s$ requires
 \begin{equation}
     |c_2|^2+
-       \sum_{p\in\mathcal S}|c_{1,p}|^2=1,
+       \sum_{p\in\mathcal S}|c_{1,p}|^2=1.
 \end{equation}
-the seed power fraction is $q=|\epsilon|^2$, and the input means are $\langle a(v_2,0)\rangle=A_p\epsilon c_2$ and $\langle a(v_{1,p},0)\rangle=A_p\epsilon c_{1,p}$. These directly injected amplitudes are not suppressed by propagation distance.
+The input means are $\langle a(v_2,0)\rangle=\norm{\alpha}\epsilon c_2$ and $\langle a(v_{1,p},0)\rangle=\norm{\alpha}\epsilon c_{1,p}$. 
 
-Neither seed family has pump OAM, so $\delta C^{(1)}$ still vanishes in the original channel. However, their OAM values are complementary: $l_1+l_2=2l_p$. Equation~\eqref{eq:seed_general_projection} now gives
+Neither seed family has pump OAM, so the pump--seed overlap still vanishes in the original channel. However, their OAM values are complementary: $l_1+l_2=2l_0$. Equation~\eqref{eq:seed_general_0rojection} now gives
 \begin{equation}
-    [U^2]_{2l_p}=U_p^2+
-       2\epsilon^2c_2\sum_{p\in\mathcal S}c_{1,p}U_2U_{1,p}.
+    \bigl[u^2\bigr]_{2l_0}=w^2\left[(1-q)v_p^2+
+       2\epsilon^2c_2\sum_{p\in\mathcal S}c_{1,p}v_2v_{1,p}\right].
 \end{equation}
 For a detected radial order $r$, define
 \begin{equation}
     \begin{aligned}
-        K_{rp}&=(v_{1,r},v_2;U_2,U_{1,p})\\
+        K_{rp}&=w^2(v_{1,r},v_2;v_2,v_{1,p})\\
               &=w^2\int d^2\mathbf r\,
                  v_{1,r}^*v_{1,p}|v_2|^2,\\
         \delta C_r&=2\epsilon^2c_2
@@ -846,27 +821,45 @@ For a detected radial order $r$, define
 The first-order correlations become
 \begin{equation}
     \begin{aligned}
-        f(v_{1,r},v_2)&=-iZ_p(C_r+\delta C_r)+O(Z_p^2),\\
-        D_{\mathrm{opt}}&=1-2|Z_p|\,|C_r+\delta C_r|+O(Z_p^2).
+        f(v_{1,r},v_2)&=-iZ\bigl[(1-q)C_r+\delta C_r\bigr]+O(Z^2),\\
+        D_{\mathrm{opt}}&=1-2|Z|\,|(1-q)C_r+\delta C_r|+O(Z^2).
     \end{aligned}
     \label{eq:multiseed_correlations}
 \end{equation}
-The correction is quadratic in seed amplitudes but remains linear in distance. Its phase relative to $C_r$ depends on the products $\epsilon^2c_2c_{1,p}$, so complementary seeds can enhance or reduce the magnitude of an allowed correlation.
+Both the reduction of the pump term and the additional overlap $\delta C_r$ are quadratic in seed amplitude but remain linear in distance. The phase of $\delta C_r$ relative to $C_r$ depends on the products $\epsilon^2c_2c_{1,p}$, so complementary seeds can enhance or reduce the magnitude of the surviving pump contribution.
 
 The weighted overlaps $K_{rp}$ need not obey the original radial cutoff. Orthogonality of radial LG modes uses an unweighted inner product, whereas the factor $|v_2|^2$ changes the radial weight and Gaussian envelope. In particular,
 \begin{equation}
     K_{rr}=w^2\int d^2\mathbf r\,
-                 |v_{1,r}|^2|v_2|^2>0
+                 |v_{1,r}|^2|v_2|^2>0,
 \end{equation}
 for overlapping LG profiles. Thus directly seeding $v_{1,r}$ and $v_2$ can remove a first-order zero even when $r>p_{\max}$ and $C_r=0$. Multiple radial seeds may interfere, with cancellation possible only for particular amplitudes and phases.
 
-For a fixed normalized seed profile, $\delta C_r=O(\epsilon^2)$ and $q=|\epsilon|^2$. The original radial rule is therefore preserved through linear order in seed amplitude, but generally modified at quadratic order in seed amplitude, or first order in seed power fraction at fixed seed composition. For an allowed pair, the condition
+For a fixed normalized seed profile, $\delta C_r=O(|\epsilon|^2)$. The original radial rule is therefore preserved through linear order in seed amplitude, but generally modified at quadratic order in seed amplitude, or first order in seed power fraction. For an allowed pair, its first-order correlation is approximately unchanged provided that
 \begin{equation}
-    |\delta C_r|\ll|C_r|
-\end{equation}
-ensures that its first-order correlation is approximately unchanged. For a forbidden pair, any nonzero $\delta C_r$ lifts the first-order zero, however small its absolute magnitude.
+    q\ll1,\qquad |\delta C_r|\ll|C_r|.
+\end{equation} For a forbidden pair, any nonzero $\delta C_r$ lifts the first-order zero, however small its absolute magnitude.
 
-Seeding only $v_2$ therefore preserves the original first-order radial rule exactly while relying on stimulated means in the complementary family. Seeding both families supplies independent input references in all selected modes, at the cost of quadratic seed corrections to that rule. These statements concern the first-order two-mode criterion; they do not establish a multipartite selection rule or a finite-distance witness violation. Beyond the small-distance regime, the combined input may be inserted directly into the correlation formulas of Appendix~\ref{app:no_diffraction}, within their stated assumptions.
+Seeding only $v_2$ therefore preserves the original first-order radial rule exactly while reducing its nonzero coefficients by the pump fraction and relying on stimulated means in the complementary family. Seeding both families supplies independent input references in all selected modes, at the cost of quadratic seed corrections to that rule. These statements concern the first-order two-mode criterion; they do not establish a multipartite selection rule or a finite-distance witness violation. Beyond the small-distance regime, the normalized combined input $u$ may be inserted directly into the correlation formulas of Appendix~\ref{app:no_diffraction}, within their stated assumptions.
+
+\subsection{Finite-distance comparison with weak seeding}
+
+To examine the effect of weak seeding beyond the first-order expansion, we evaluate the diffraction-free Bogoliubov correlations of Appendix~\ref{app:no_diffraction} using the normalized input in Eq.~\eqref{eq:seed_input}. Figure~\ref{fig:duan_seeded} uses the same pump and detection-mode parameters as Fig.~\ref{fig:duan}, with the reference mode and all radial partners in the first-order support seeded simultaneously. We choose equal amplitudes and phases,
+\begin{equation}
+    s=\frac{v_2+\sum_{p=0}^{p_{\max}}v_{1,p}}{\sqrt{p_{\max}+2}},
+\end{equation}
+so the fixed seed fraction $|\epsilon|^2$ is shared equally among $p_{\max}+2$ orthogonal modes. The total input occupation, and hence the definition of $Z$, is held fixed. All radial curves within a panel describe the same input state, including the curves for unseeded partners outside the first-order support.
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=\linewidth]{../Plots/duan_seeded.pdf}
+    \caption{Phase-optimized Duan witness with simultaneous coherent seeding of the reference mode and all radial partners $p=0,\ldots,p_{\max}$, with $\epsilon=0.1$ and equal coefficients $c_2=c_{1,p}=1/\sqrt{p_{\max}+2}$. The pump OAM is $l_0=2$, and the detection modes and waists match Fig.~\ref{fig:duan}. All curves within each panel use the same seeded input. Values below one certify two-mode entanglement within the diffraction-free Bogoliubov model.}
+    \label{fig:duan_seeded}
+\end{figure*}
+
+Compared with the unseeded results in Fig.~\ref{fig:duan}, weak seeding leaves the overall certification pattern largely unchanged. Pairs with substantial unseeded violations retain clear violations, and the relative behavior of the radial curves remains similar. The small shifts can nevertheless affect pairs close to the separability threshold. For example, the $l_2=3$, $p=3$ pair ceases to violate the witness near the end of the plotted interval, although it remains certified at shorter distances. Failure to violate the witness there is inconclusive about entanglement.
+
+These examples show that direct coherent references can be introduced simultaneously into all modes selected by the first-order rule with only modest changes to the finite-distance witness curves for the seed strength and phases considered. This agrees qualitatively with the weak-seed analysis above, while the near-threshold changes emphasize that preserving the dominant pattern does not imply an exact finite-distance selection rule.
 
 \bibliography{refs}% Produces the bibliography via BibTeX.
 
