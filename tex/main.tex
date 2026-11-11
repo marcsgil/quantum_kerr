@@ -160,9 +160,9 @@ and
 We further note the following properties, which simplify the consideration of linear combination of modes:
 \begin{equation}
     \begin{aligned}
-        f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3) \\
-        f(v_1, v_2) &= f(v_2, v_1) \\
-        h(v_1, v_2 + \lambda v_3) &= h(v_1, v_2) + \lambda h(v_1, v_3) \\
+        f(v_1, v_2 + \lambda v_3) &= f(v_1, v_2) + \lambda^* f(v_1, v_3); \\
+        f(v_1, v_2) &= f(v_2, v_1); \\
+        h(v_1, v_2 + \lambda v_3) &= h(v_1, v_2) + \lambda h(v_1, v_3); \\
         h(v_1, v_2) &= h(v_2, v_1)^*.
     \end{aligned}
 \end{equation}
@@ -171,8 +171,8 @@ These are a reflection of the fact that $a(v)$ is antilinear while $a^\dagger(v)
 For $N$ orthonormal modes, define the quadrature vector and covariance matrix by
 \begin{equation}
     \begin{aligned}
-        \mathbf Z&=\bigl(X(v_1),P(v_1),\ldots,X(v_N),P(v_N)\bigr),\\
-        \gamma_{jk}&=\expval{\acomm{\Delta Z_j}{\Delta Z_k}}.
+        \mathbf R&=\bigl(X(v_1),P(v_1),\ldots,X(v_N),P(v_N)\bigr),\\
+        \gamma_{jk}&=\expval{\acomm{\Delta R_j}{\Delta R_k}}.
     \end{aligned}
     \label{eq:multimode_covariance}
 \end{equation}
@@ -217,7 +217,7 @@ excludes that class for any state with covariance matrix $\gamma$. Choosing the 
 \subsection{Two-mode Duan criterion}
 \label{sec:duan}
 
-For two orthonormal modes $v_1,v_2$, the Duan criterion~\cite{duan2000inseparability} certifies entanglement of their reduced state when
+For two orthonormal modes $v_1,v_2$, the Duan criterion~\cite{duan2000inseparability, PhysRevLett.84.2726} certifies entanglement of their reduced state when
 \begin{equation}
     \begin{aligned}
         D &= \frac{1}{2}\expval{\left[\Delta X(v_1)+\Delta X(v_2)\right]^2}\\
@@ -325,7 +325,7 @@ Now we turn to the correlation functions. For compactness, we write $\eta_{j,z} 
 \end{equation}
 Both terms vanish: the first average has an annihilation operator on the right, and the second has its conjugate on the left.
 
-Turning, to the anomalous case, we have that
+Turning to the anomalous case, we have that
 \begin{equation}
 \begin{aligned}
         \left.\partial_z\langle\eta_{1,z}\eta_{2,z}\rangle\right|_0
@@ -409,7 +409,7 @@ We now derive the radial selection rule for the first-order anomalous correlatio
 
 \subsection{Radial selection rules and two-mode entanglement}
 
-Let $v_2 = LG_{0,l_2}(\mathbf{r}; w_2)$ where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l_0$. Now, define $l_1 = 2l_0-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
+Let $v_2 = LG_{0,l_2}(\mathbf{r}; w_2)$ be our reference mode, where $w_2$ is free and $l_2$ is only constrained by $l_2 \ne l_0$. Now, define $l_1 = 2l_0-l_2$ and $1/w_1^2 = 2/w^2 + 1 /w_2^2$. We then have that
 %
 \begin{eqnarray}
         v_2^*(\mathbf{r})u^2(\mathbf{r})
