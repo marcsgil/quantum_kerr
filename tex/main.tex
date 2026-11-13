@@ -558,6 +558,47 @@ In Fig. \ref{fig:multi_wit}, we show the witness for sets of the form $\{LG_{0, 
 
 In particular, for $P=1$ Eq.~\eqref{eq:main_grouped_parties} certifies the pure-state grouping $\mathcal A|\mathcal B_0|(\mathcal B_1\mathcal R)$, whereas a MultiWit violation certifies the reduced three-mode state on $\mathcal A|\mathcal B_0|\mathcal B_1$. The latter shows that genuine multipartite entanglement survives discarding the remaining field modes. Violations for larger selected sets, when present, involve modes outside the first-order support and are finite-distance results within the Bogoliubov approximation.
 
+\section{Experimental Implementation}
+\label{sec:experimental_implementation}
+
+\begin{figure*}[!t]
+    \centering
+    % The panel labels (a) and (b) are included in the source illustrations.
+    \includegraphics[width=0.75\textwidth]{../illustrations/local_characterization.png}\\[1ex]
+    \includegraphics[width=\textwidth]{../illustrations/mode_distribution.png}
+    \caption{Experimental implementation schemes. (a) Local characterization by balanced homodyne detection with a spatially shaped local oscillator in mode $v$. (b) Mode distribution using a Laguerre--Gaussian (LG) mode sorter, followed by balanced homodyne detection of the separated modes with their respective local oscillators. In both schemes, a spatial light modulator (SLM) shapes the pump before the $\chi^{(3)}$ nonlinear medium. LO denotes the local oscillator.}
+    \label{fig:experimental_implementation}
+\end{figure*}
+
+Figure~\ref{fig:experimental_implementation} outlines two complementary implementations of the proposed entanglement scheme: local characterization of the covariance matrix and spatial distribution of the correlated modes. In both cases, a spatial light modulator (SLM) prepares an LG pump that propagates through a $\chi^{(3)}$ nonlinear medium. The interaction generates correlations between transverse modes, which are subsequently probed by balanced homodyne detection with a spatially shaped local oscillator (LO).
+
+For this preparation stage, the required interaction strength can be assessed through the accumulated nonlinear phase. Fontaine et al.~\cite{Fontaine2020Bogoliubov} investigated a propagating fluid of light in a hot rubidium vapor cell of length $L=7.5\,\mathrm{cm}$ at a wavelength $\lambda=780\,\mathrm{nm}$, finding a nonlinear index change proportional to the intensity, consistent with an unsaturated Kerr response. Taking $|\Delta n|\simeq5\times10^{-6}$ as a representative value within their experimental range gives the effective phase estimate
+\begin{equation}
+    \Phi_{\mathrm{NL}}\simeq\frac{2\pi}{\lambda}L|\Delta n|
+    \simeq 3.0\,\mathrm{rad}.
+\end{equation}
+In our diffraction-free model, the local phase magnitude is $|Z||u(\mathbf r)|^2$. For an $LG_{0,l}$ pump, its peak value is
+\begin{equation}
+    \Phi_{\mathrm{pk}}=|Z|\frac{2}{\pi}
+    \frac{|l|^{|l|}e^{-|l|}}{|l|!},
+\end{equation}
+where the last fraction is unity for $l=0$. At $|Z|=1$, the peak phases are approximately $0.64$, $0.23$, and $0.17\,\mathrm{rad}$ for $|l|=0$, $1$, and $2$, respectively. Their smallness relative to the experimental phase scale supports the accessibility of $|Z|=1$, where our finite-distance calculations already predict entanglement signatures.
+
+Transferring this estimate to the proposed setup requires accounting for the power delivered to the medium after LG preparation and filtering, as well as the change in peak intensity associated with the selected spatial profile. Preparation losses can in principle be compensated by a more powerful input laser: for an efficiency $\eta$, maintaining the same power at the cell requires increasing the source power by a factor $1/\eta$. The comparison therefore provides an estimate of a feasible interaction strength, while the observable entanglement also depends on propagation and detection losses and noise from the medium.
+
+To characterize the resulting state locally, the arrangement in Fig.~\ref{fig:experimental_implementation}(a) uses a Mach--Zehnder interferometer. One arm contains the pump preparation and nonlinear medium, while the other supplies the LO, shaped by a second SLM into a configurable mode $v$. Balanced homodyne detection measures $\Gamma(v,v)$, giving the diagonal covariance elements. The off-diagonal elements follow from
+\begin{equation}
+\begin{aligned}
+        \Gamma(v_1,v_2) = &\Gamma\left(\frac{v_1+v_2}{\sqrt{2}},\frac{v_1+v_2}{\sqrt{2}}\right) \\&- \frac{1}{2}\left[ \Gamma(v_1,v_1) + \Gamma(v_2,v_2) \right],
+\end{aligned}
+\end{equation}
+which requires an additional measurement with the LO prepared in the superposition $(v_1+v_2)/\sqrt{2}$. These measurements provide the covariance information needed to evaluate the entanglement criteria discussed above.
+
+Coherent seeds collinear with the pump can assist the phase control required for these measurements by populating the selected modes $\mathcal{A},\mathcal{B}_0,\dots$. Appendix~\ref{app:coherent_seed} examines this possibility and shows that, for the configurations considered, a seed fraction of $1\%$ of the total input power produces only modest changes in the finite-distance witness curves. The usefulness of the resulting coherent references depends on the experimental sensitivity.
+
+Beyond local characterization, the correlated modes can be distributed to separate parties using the arrangement in Fig.~\ref{fig:experimental_implementation}(b). An LG mode sorter~\cite{fontaine_laguerre_gaussian_2019,bearne_diffractive_2026,mirhosseini_efficient_2013,berkhout_efficient_2010,jia_vector_2023} spatially separates the output components, allowing each party to perform balanced homodyne detection with an appropriate LO. The two arrangements thus address both the covariance measurements needed to certify the generated entanglement and the spatial separation needed to make its modes individually accessible.
+
+
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -675,185 +716,64 @@ The approximation requires negligible diffraction of the relevant transverse str
 
 The Bogoliubov approximation also permits retaining diffraction in both the classical background and the linear fluctuation equations. Quantum correlations can then be computed numerically by propagating the corresponding Green functions~\cite{PhysRevA.62.033816, Eric_Lantz_2004}, or by back-propagating the detection functions with the adjoint fluctuation equations~\cite{PhysRevA.51.817, Ray_Kuang_Lee_2004} and evaluating their correlations in the known input state. Such a numerical treatment with diffraction lies beyond the scope of the present work, which uses the analytical diffraction-free solution above.
 
-\section{Coherent seeding and first-order selection rules}
+\section{Coherent seeding of the selected modes}
 \label{app:coherent_seed}
 
-\subsection{Role of the seed in quadrature detection}
+The homodyne schemes of Sec.~\ref{sec:experimental_implementation} can benefit from coherent references in all selected detection modes for alignment and phase control. An unseeded pump with OAM $l_0$ has no coherent mean in the detected OAM families $l_1+l_2=2l_0$, with $l_2\ne l_0$, although these modes can be correlated and measured with an external local oscillator. Here we add weak coherent seeds directly to the reference mode and every radial partner selected by the first-order rule, and assess their effect on the entanglement witnesses.
 
-Coherent seeding can provide a mean field in the spatial modes whose entanglement is studied in the main text. To see why this is useful, consider an unseeded pump with profile $\alpha=\norm{\alpha}v_p$, where $v_p=LG_{0,l_0}(w)$ is normalized. Both the input profile and the nonlinear mean-field source $|v_p|^2v_p$ carry OAM $l_0$. Consequently, their projections onto a detection mode of definite OAM $l_v\ne l_0$ vanish. Within the first-order treatment of Sec.~\ref{sec:Kerr}, self-phase modulation therefore changes the mean field only in the $l=l_0$ sector, including its radial structure.
-
-The two-mode correlations studied in the main text instead involve $l_1+l_2=2l_0$ with $l_2\ne l_0$, so neither detected mode has a coherent mean at this order. This does not prevent quadrature measurements with an external local oscillator, but a coherent amplitude in a detected mode can assist spatial alignment and phase control. The purpose of the seed is to supply such a reference while retaining, as closely as possible, the original entanglement correlations. Zero coherent mean should not be identified with exactly zero photon occupation: the centered population $h(v,v)$ starts beyond first order in distance.
-
-We consider mutually coherent, collinear pump and seed fields sharing the frequency, polarization, and temporal mode implicit in our scalar model. We first derive the first-order correlations for an arbitrary spatial seed, and then examine seeding only $v_2$ or directly seeding both detected OAM families. Throughout this appendix, ``first order'' in propagation refers to the coefficient linear in distance; terms linear and quadratic in seed amplitude are distinguished explicitly.
-
-\subsection{First-order corrections for an arbitrary coherent seed}
-
-We keep the total input occupation $\norm{\alpha}^2$ fixed and write
+We retain the mode definitions of Sec.~\ref{sec:selection rules}: the pump profile is $LG_{0,l_0}(\mathbf r;w)$, the reference mode is $v_2=LG_{0,l_2}(\mathbf r;w_2)$, and a radial partner is $v_1=LG_{p,l_1}(\mathbf r;w_1)$, with
 \begin{equation}
-    \alpha(\mathbf r,0)=\norm{\alpha}
-       \left[\sqrt{1-|\epsilon|^2}\,v_p(\mathbf r)
-                         +\epsilon s(\mathbf r)\right],
+    l_1=2l_0-l_2,\qquad
+    \frac{1}{w_1^2}=\frac{2}{w^2}+\frac{1}{w_2^2}.
+    \label{eq:seed_detection_family}
+\end{equation}
+We seed the reference mode $\mathcal A$ and all radial partners $\mathcal B_p$, $p=0,\ldots,p_{\max}$, with the cutoff defined in Eq.~\eqref{eq:radial_cutoff}.
+Choosing equal amplitudes and phases gives the normalized seed profile
+\begin{equation}
+    s=\frac{v_2+\sum_{p=0}^{p_{\max}}LG_{p,l_1}(\mathbf r;w_1)}{\sqrt{N_s}},
+    \qquad N_s=p_{\max}+2.
+    \label{eq:multiseed_input}
+\end{equation}
+The seed modes are mutually orthogonal and orthogonal to the pump. For mutually coherent, collinear fields with the same frequency, polarization, and temporal mode, we therefore write
+\begin{equation}
+    \alpha(\mathbf r)=\norm{\alpha}
+    \left[\sqrt{1-\epsilon^2}\,LG_{0,l_0}(\mathbf r;w)+\epsilon\,s(\mathbf r)\right],
     \label{eq:seed_input}
 \end{equation}
-where $\|v_p\|=\|s\|=1$, $(v_p;s)=0$, and $|\epsilon|<1$. The seed power fraction is $q=|\epsilon|^2$, while the phase of $\epsilon$ sets its phase relative to the pump. The normalized profile $s$ specifies its spatial composition; for example, $s=\sum_j c_jv_{s,j}$ in an orthonormal seed basis, with $\sum_j|c_j|^2=1$. Orthogonality to the pump ensures that the bracketed profile is normalized. The pump and seed occupations are therefore $(1-q)\norm{\alpha}^2$ and $q\norm{\alpha}^2$, respectively. Weak seeding means $q\ll1$; it need not imply a seed occupation smaller than one.
-
-We use the same dimensionless profile and propagation coordinate as in the main text:
+where $0\le\epsilon<1$ is the seed amplitude parameter and $\epsilon^2$ is the fraction of the total input power assigned to the seed. Each selected mode then has the input mean amplitude $\norm{\alpha}\epsilon/\sqrt{N_s}$. We hold the total occupation $\norm{\alpha}^2$ fixed, so the comparison with the unseeded case uses the same propagation coordinate,
 \begin{equation}
-    u=w\left[\sqrt{1-q}\,v_p+\epsilon s\right],
+    u=w\left[\sqrt{1-\epsilon^2}\,LG_{0,l_0}(\mathbf r;w)+\epsilon\,s\right],
     \qquad Z=\frac{gz\norm{\alpha}^2}{2kw^2}.
     \label{eq:seed_normalization}
 \end{equation}
-Thus $Z$ is held fixed when comparing different seed fractions at a given propagation distance. The input remains a coherent state, so the mean-field formula and the general correlation derivation apply directly to this combined profile. In freely propagated detection modes, with the nonlinear overlap evaluated at the input plane,
-\begin{equation}
-    \langle a(v,z)\rangle
-        =\frac{\norm{\alpha}}{w}\left[(v;u)
-          -iZ(v,u;u,u)\right]+O(Z^2).
-    \label{eq:seed_general_mean}
-\end{equation}
-For orthonormal detection modes $v_1,v_2$, define the unseeded overlap and its seeded counterpart by
+
+The leading change in the selected correlations follows directly from their nonlinear overlap. Since neither seed family has OAM $l_0$, the pump--seed terms in $u^2$ cannot contribute to the channel $l_1+l_2=2l_0$. The two seed families do have complementary OAM, however, and their product contributes at order $\epsilon^2$. For a detected partner $v_1=LG_{p,l_1}(\mathbf r;w_1)$, let $C_p$ denote the unseeded coefficient defined in the main text. Its seeded counterpart is
 \begin{equation}
     \begin{aligned}
-        C_{12}&=w^2(v_1,v_2;v_p,v_p),\\
-        C_{12}(\epsilon)&=(v_1,v_2;u,u)\\
-          &=(1-q)C_{12}
-            +2\epsilon\sqrt{1-q}\,w^2(v_1,v_2;v_p,s)\\
-          &\quad+\epsilon^2w^2(v_1,v_2;s,s).
+        C_p(\epsilon)&=(v_1,v_2;u,u)\\
+        &=(1-\epsilon^2)C_p+
+                    \frac{2\epsilon^2}{N_s}\sum_{p'=0}^{p_{\max}}K_{pp'},\\
+        K_{pp'}&=w^2\bigl(v_1,v_2;v_2,LG_{p',l_1}(w_1)\bigr).
     \end{aligned}
     \label{eq:seed_overlap}
 \end{equation}
-The first-order correlations and witness are then
+Here $p'$ labels the seeded radial partners, and $K_{pp'}$ uses the spatial overlap notation of the main text, with spatial arguments suppressed.
+The first-order anomalous correlation and phase-optimized Duan witness are consequently
 \begin{equation}
     \begin{aligned}
-        f(v_1,v_2)&=-iZC_{12}(\epsilon)+O(Z^2),\\
-        h(v_1,v_2)&=O(Z^2),\\
-        D_{\mathrm{opt}}&=1-2|Z|\,|C_{12}(\epsilon)|+O(Z^2).
-    \end{aligned}
-    \label{eq:seed_first_order}
-\end{equation}
-Equation~\eqref{eq:seed_overlap} retains the exact seed dependence of the coefficient linear in distance. For weak seeding, the pump--seed term starts at linear order in $\epsilon$, while the seed--seed term and the reduction of the pump contribution start at quadratic order. Because $f$ and $h$ are centered correlations, a coherent displacement alone does not contribute to them; the changes above arise from the modified input to the nonlinear interaction.
-
-The angular content determines which overlap terms survive. Write
-\begin{equation}
-    v_p=R_p(r)e^{il_0\phi},\qquad
-    s=\sum_m s_m(r)e^{im\phi}.
-\end{equation}
-For detection OAM sum $L=l_1+l_2$, the pump--seed term requires $l_0+m=L$, and the seed--seed term requires $m+n=L$. In the original channel $L=2l_0$, the relevant harmonic is
-\begin{equation}
-    \begin{aligned}
-        \bigl[u^2\bigr]_{2l_0}
-        &=w^2e^{2il_0\phi}\bigg[(1-q)R_p^2\\
-        &\quad+2\epsilon\sqrt{1-q}\,R_ps_{l_0}
-          +\epsilon^2\sum_m s_ms_{2l_0-m}\bigg].
-    \end{aligned}
-    \label{eq:seed_general_0rojection}
-\end{equation}
-Thus only a seed component with pump OAM can modify this channel linearly in seed amplitude. Such a component can be orthogonal to the pump through its radial profile. The seed--seed contribution requires complementary seed OAM values summing to $2l_0$. In both cases the radial overlaps must also be nonzero. The factor $1-q$ reduces the original pump contribution without changing its radial support.
-
-\subsection{Seeding only the mode $v_2$}
-
-Consider the same detection family and waist convention as in the main text,
-\begin{equation}
-    \begin{aligned}
-        v_p&=LG_{0,l_0}(w),\\
-        v_2&=LG_{0,l_2}(w),\\
-        v_{1,p}&=LG_{p,l_1}(w/\sqrt{3}),\\
-        l_1&=2l_0-l_2,\qquad l_2\ne l_0.
-    \end{aligned}
-    \label{eq:seed_detection_family}
-\end{equation}
-Here $l_0$ denotes pump OAM, whereas the index $p$ of $v_{1,p}$ denotes radial order. Set $s=v_2$. The pump--seed and seed--seed terms carry OAM $l_0+l_2$ and $2l_2$, respectively. Neither equals $2l_0$, so both overlap terms vanish in the original channel. With $C_p=w^2(v_{1,p},v_2;v_p,v_p)$, the unseeded coefficient used in the main text, we obtain
-\begin{equation}
-    \begin{aligned}
-        f(v_{1,p},v_2)&=-iZ(1-q)C_p+O(Z^2),\\
-        D_{\mathrm{opt}}&=1-2|Z|(1-q)|C_p|+O(Z^2).
-    \end{aligned}
-    \label{eq:seed_protected_first_order}
-\end{equation}
-At fixed total occupation, seeding reduces the original linear coefficient by the pump fraction $1-q$, independently of the seed phase. Its radial support is unchanged: the original cutoff is
-\begin{equation}
-    p_{\max}=|l_0|+\frac{|l_2|-|2l_0-l_2|}{2},
-\end{equation}
-with $C_p=0$ for $p>p_{\max}$. The seed opens other OAM channels through terms proportional to $Z\epsilon\sqrt{1-q}$ and $Z\epsilon^2$, but these do not enter the selected pair's first-order coefficient.
-
-The mean-field benefit is twofold. The seeded mode has the input amplitude
-\begin{equation}
-    \langle a(v_2,0)\rangle=\norm{\alpha}\epsilon.
-\end{equation}
-Moreover, the nonlinear source $|u|^2u$ contains $w^3(1-q)\epsilon^*v_p^2v_2^*$, whose OAM is $2l_0-l_2=l_1$. Projection of Eq.~\eqref{eq:seed_general_mean} therefore yields
-\begin{equation}
-    \langle a(v_{1,p},z)\rangle
-       =-iZ\norm{\alpha}(1-q)\epsilon^*C_p+O(Z^2).
-    \label{eq:seed_stimulated_mean}
-\end{equation}
-A seed in $v_2$ can thus generate coherent references in its conjugate radial modes while preserving the first-order radial selection rule. These stimulated amplitudes follow the radial coefficients $C_p$, and vanish at this order outside the cutoff. Whether they suffice for homodyne phase control depends on the experimental sensitivity.
-
-\subsection{Seeding both detected OAM families}
-\label{app:multimode_seed}
-
-To supply a direct coherent reference in every selected detection mode, including radial modes whose stimulated amplitudes are too small, take
-\begin{equation}
-    s=c_2v_2+
-       \sum_{p\in\mathcal S}c_{1,p}v_{1,p},
-    \label{eq:multiseed_input}
-\end{equation}
-where $\mathcal S$ is the finite set of seeded radial orders. The two OAM families and the pump are mutually orthogonal, as are the radial modes within the first family. Normalization of $s$ requires
-\begin{equation}
-    |c_2|^2+
-       \sum_{p\in\mathcal S}|c_{1,p}|^2=1.
-\end{equation}
-The input means are $\langle a(v_2,0)\rangle=\norm{\alpha}\epsilon c_2$ and $\langle a(v_{1,p},0)\rangle=\norm{\alpha}\epsilon c_{1,p}$. 
-
-Neither seed family has pump OAM, so the pump--seed overlap still vanishes in the original channel. However, their OAM values are complementary: $l_1+l_2=2l_0$. Equation~\eqref{eq:seed_general_0rojection} now gives
-\begin{equation}
-    \bigl[u^2\bigr]_{2l_0}=w^2\left[(1-q)v_p^2+
-       2\epsilon^2c_2\sum_{p\in\mathcal S}c_{1,p}v_2v_{1,p}\right].
-\end{equation}
-For a detected radial order $r$, define
-\begin{equation}
-    \begin{aligned}
-        K_{rp}&=w^2(v_{1,r},v_2;v_2,v_{1,p})\\
-              &=w^2\int d^2\mathbf r\,
-                 v_{1,r}^*v_{1,p}|v_2|^2,\\
-        \delta C_r&=2\epsilon^2c_2
-                \sum_{p\in\mathcal S}c_{1,p}K_{rp}.
-    \end{aligned}
-\end{equation}
-The first-order correlations become
-\begin{equation}
-    \begin{aligned}
-        f(v_{1,r},v_2)&=-iZ\bigl[(1-q)C_r+\delta C_r\bigr]+O(Z^2),\\
-        D_{\mathrm{opt}}&=1-2|Z|\,|(1-q)C_r+\delta C_r|+O(Z^2).
+        f(v_1,v_2)&=-iZC_p(\epsilon)+\mathcal{O}(Z^2),\\
+        D_{\mathrm{opt}}&=1-2|Z|\,|C_p(\epsilon)|+\mathcal{O}(Z^2).
     \end{aligned}
     \label{eq:multiseed_correlations}
 \end{equation}
-Both the reduction of the pump term and the additional overlap $\delta C_r$ are quadratic in seed amplitude but remain linear in distance. The phase of $\delta C_r$ relative to $C_r$ depends on the products $\epsilon^2c_2c_{1,p}$, so complementary seeds can enhance or reduce the magnitude of the surviving pump contribution.
+Thus the selected overlap coefficients change by $\mathcal{O}(\epsilon^2)$, with no correction linear in $\epsilon$. These changes arise because the seed participates in the nonlinear interaction; a coherent displacement alone does not change centered correlations. The weighted overlaps $K_{pp'}$ need not vanish beyond the original radial cutoff, so weak seeding preserves the dominant correlation pattern without preserving every first-order zero exactly. Small absolute corrections can also matter for pairs close to a witness threshold.
 
-The weighted overlaps $K_{rp}$ need not obey the original radial cutoff. Orthogonality of radial LG modes uses an unweighted inner product, whereas the factor $|v_2|^2$ changes the radial weight and Gaussian envelope. In particular,
-\begin{equation}
-    K_{rr}=w^2\int d^2\mathbf r\,
-                 |v_{1,r}|^2|v_2|^2>0,
-\end{equation}
-for overlapping LG profiles. Thus directly seeding $v_{1,r}$ and $v_2$ can remove a first-order zero even when $r>p_{\max}$ and $C_r=0$. Multiple radial seeds may interfere, with cancellation possible only for particular amplitudes and phases.
-
-For a fixed normalized seed profile, $\delta C_r=O(|\epsilon|^2)$. The original radial rule is therefore preserved through linear order in seed amplitude, but generally modified at quadratic order in seed amplitude, or first order in seed power fraction. For an allowed pair, its first-order correlation is approximately unchanged provided that
-\begin{equation}
-    q\ll1,\qquad |\delta C_r|\ll|C_r|.
-\end{equation} For a forbidden pair, any nonzero $\delta C_r$ lifts the first-order zero, however small its absolute magnitude.
-
-Seeding only $v_2$ therefore preserves the original first-order radial rule exactly while reducing its nonzero coefficients by the pump fraction and relying on stimulated means in the complementary family. Seeding both families supplies independent input references in all selected modes, at the cost of quadratic seed corrections to that rule. These statements concern the first-order two-mode criterion; they do not establish a multipartite selection rule or a finite-distance witness violation. Beyond the small-distance regime, the normalized combined input $u$ may be inserted directly into the correlation formulas of Appendix~\ref{app:no_diffraction}, within their stated assumptions.
-
-\subsection{Finite-distance comparison with weak seeding}
-
-To examine the effect of weak seeding beyond the first-order expansion, we evaluate the diffraction-free Bogoliubov correlations of Appendix~\ref{app:no_diffraction} using the normalized input in Eq.~\eqref{eq:seed_input}. Figure~\ref{fig:duan_seeded} uses the same pump and detection-mode parameters as Fig.~\ref{fig:duan}, with the reference mode and all radial partners in the first-order support seeded simultaneously. We choose equal amplitudes and phases,
-\begin{equation}
-    s=\frac{v_2+\sum_{p=0}^{p_{\max}}v_{1,p}}{\sqrt{p_{\max}+2}},
-\end{equation}
-so the fixed seed fraction $|\epsilon|^2$ is shared equally among $p_{\max}+2$ orthogonal modes. The total input occupation, and hence the definition of $Z$, is held fixed. All radial curves within a panel describe the same input state, including the curves for unseeded partners outside the first-order support.
+To assess the effect at finite distance, we insert Eq.~\eqref{eq:seed_normalization} into the diffraction-free Bogoliubov correlation formulas of Appendix~\ref{app:no_diffraction}. Figure~\ref{fig:duan_seeded} uses the same pump and detection parameters as Fig.~\ref{fig:duan}, with $w_2=w$, $w_1=w/\sqrt{3}$, and $\epsilon=0.1$: one percent of the total input power is shared equally among all $N_s$ selected modes. Every curve within a panel describes this same seeded input state, including curves for unseeded radial partners outside the first-order support.
 
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=\linewidth]{../Plots/duan_seeded.pdf}
-    \caption{Phase-optimized Duan witness with simultaneous coherent seeding of the reference mode and all radial partners $p=0,\ldots,p_{\max}$, with $\epsilon=0.1$ and equal coefficients $c_2=c_{1,p}=1/\sqrt{p_{\max}+2}$. The pump OAM is $l_0=2$, and the detection modes and waists match Fig.~\ref{fig:duan}. All curves within each panel use the same seeded input. Values below one certify two-mode entanglement within the diffraction-free Bogoliubov model.}
+    \caption{Phase-optimized Duan witness with simultaneous coherent seeding of the reference mode and all radial partners $p=0,\ldots,p_{\max}$, with seed amplitude $\epsilon=0.1$ (power fraction $\epsilon^2=0.01$) and equal amplitudes and phases as in Eq.~\eqref{eq:multiseed_input}. The pump OAM is $l_0=2$, and the detection modes and waists match Fig.~\ref{fig:duan}. All curves within each panel use the same seeded input. Values below one certify two-mode entanglement within the diffraction-free Bogoliubov model.}
     \label{fig:duan_seeded}
 \end{figure*}
 
